@@ -15,66 +15,38 @@
  ****************************************************************************************/
 
 /**
- * @file station.cpp
- * @short Implementation of PublicTransportation::Station
+ * @internal
+ * @file tests/tests/main.cpp
+ * @short Entry point of the tests
  */
 
-#include "station.h"
+#include <QtCore/QCoreApplication>
+#include <QtTest/QtTest>
 
-#include "journey.h"
-
-namespace PublicTransportation
-{
+#include "testbase.h"
+#include "testdbus.h"
 
 /**
  * @internal
- * @brief Private class for PublicTransportation::Station
+ * @short Main
+ *
+ * Entry point of the test application
+ * that tests public transportation.
+ *
+ * @param argc argc.
+ * @param argv argv.
+ * @return exit code.
  */
-class StationPrivate: public TransportationObjectPrivate
+int main(int argc, char **argv)
 {
-public:
-    /**
-     * @internal
-     * @brief Journey
-     */
-    Journey journey;
-};
+    QCoreApplication app (argc, argv);
+    Q_UNUSED(app)
 
-////// End of private class //////
+    TestBase testBase;
+    QTest::qExec(&testBase, argc, argv);
 
+    TestDBus testDBus;
+    QTest::qExec(&testDBus, argc, argv);
 
-Station::Station() :
-    TransportationObject(* new StationPrivate)
-{
-}
-
-Station::Station(const QVariantMap &disambiguation, const QString &name,
-                 const Journey &journey, const QVariantMap &properties):
-    TransportationObject(* new StationPrivate)
-{
-    Q_D(Station);
-    d->disambiguation = disambiguation;
-    d->name = name;
-    d->properties = properties;
-
-    setJourney(journey);
-}
-
-Station::~Station()
-{
-}
-
-Journey Station::journey() const
-{
-    Q_D(const Station);
-    return d->journey;
-}
-
-void Station::setJourney(const Journey &journey)
-{
-    Q_D(Station);
-    d->journey = journey;
-    d->journey.addStation(*this);
-}
-
+    return 0;
 }

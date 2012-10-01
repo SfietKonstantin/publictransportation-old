@@ -14,67 +14,54 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-/**
- * @file station.cpp
- * @short Implementation of PublicTransportation::Station
- */
+#include "dbusobject.h"
+#include <QtCore/QDebug>
 
-#include "station.h"
-
-#include "journey.h"
-
-namespace PublicTransportation
-{
-
-/**
- * @internal
- * @brief Private class for PublicTransportation::Station
- */
-class StationPrivate: public TransportationObjectPrivate
-{
-public:
-    /**
-     * @internal
-     * @brief Journey
-     */
-    Journey journey;
-};
-
-////// End of private class //////
-
-
-Station::Station() :
-    TransportationObject(* new StationPrivate)
+DBusObject::DBusObject(QObject *parent) :
+    QObject(parent)
 {
 }
 
-Station::Station(const QVariantMap &disambiguation, const QString &name,
-                 const Journey &journey, const QVariantMap &properties):
-    TransportationObject(* new StationPrivate)
+PublicTransportation::Company DBusObject::company() const
 {
-    Q_D(Station);
-    d->disambiguation = disambiguation;
-    d->name = name;
-    d->properties = properties;
-
-    setJourney(journey);
+    return m_company;
 }
 
-Station::~Station()
+PublicTransportation::Line DBusObject::line() const
 {
+    return m_line;
 }
 
-Journey Station::journey() const
+PublicTransportation::Journey DBusObject::journey() const
 {
-    Q_D(const Station);
-    return d->journey;
+    return m_journey;
 }
 
-void Station::setJourney(const Journey &journey)
+PublicTransportation::Station DBusObject::station() const
 {
-    Q_D(Station);
-    d->journey = journey;
-    d->journey.addStation(*this);
+    return m_station;
 }
 
+void DBusObject::receiveCompany(const PublicTransportation::Company &company)
+{
+    qDebug() << "Company received";
+    m_company = company;
+}
+
+void DBusObject::receiveLine(const PublicTransportation::Line &line)
+{
+    qDebug() << "Line received";
+    m_line = line;
+}
+
+void DBusObject::receiveJourney(const PublicTransportation::Journey &journey)
+{
+    qDebug() << "Journey received";
+    m_journey = journey;
+}
+
+void DBusObject::receiveStation(const PublicTransportation::Station &station)
+{
+    qDebug() << "Station received";
+    m_station = station;
 }

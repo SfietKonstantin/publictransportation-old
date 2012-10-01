@@ -14,67 +14,21 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-/**
- * @file station.cpp
- * @short Implementation of PublicTransportation::Station
- */
+#ifndef GENERATOR_H
+#define GENERATOR_H
 
-#include "station.h"
+#include <QtCore/QVariantMap>
 
-#include "journey.h"
-
-namespace PublicTransportation
-{
-
-/**
- * @internal
- * @brief Private class for PublicTransportation::Station
- */
-class StationPrivate: public TransportationObjectPrivate
+class Generator
 {
 public:
-    /**
-     * @internal
-     * @brief Journey
-     */
-    Journey journey;
+    static void initRand();
+    static int rand();
+    static bool generateRandomBool();
+    static int generateRandomNumber();
+    static double generateRandomDouble();
+    static QString generateRandomString();
+    static QVariantMap generateRandomVariantMap();
 };
 
-////// End of private class //////
-
-
-Station::Station() :
-    TransportationObject(* new StationPrivate)
-{
-}
-
-Station::Station(const QVariantMap &disambiguation, const QString &name,
-                 const Journey &journey, const QVariantMap &properties):
-    TransportationObject(* new StationPrivate)
-{
-    Q_D(Station);
-    d->disambiguation = disambiguation;
-    d->name = name;
-    d->properties = properties;
-
-    setJourney(journey);
-}
-
-Station::~Station()
-{
-}
-
-Journey Station::journey() const
-{
-    Q_D(const Station);
-    return d->journey;
-}
-
-void Station::setJourney(const Journey &journey)
-{
-    Q_D(Station);
-    d->journey = journey;
-    d->journey.addStation(*this);
-}
-
-}
+#endif // GENERATOR_H

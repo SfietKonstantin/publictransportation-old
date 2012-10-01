@@ -50,7 +50,7 @@ int Generator::generateRandomNumber()
     }
 }
 
-float Generator::generateRandomFloat()
+double Generator::generateRandomDouble()
 {
     int randomInt = rand();
     int numberOfDigits = log(randomInt);
@@ -81,7 +81,7 @@ QVariantMap Generator::generateRandomVariantMap()
     QVariantMap data;
     data.insert("someBool", generateRandomBool());
     data.insert("someInt", generateRandomNumber());
-    data.insert("someFloat", generateRandomFloat());
+    data.insert("someDouble", generateRandomDouble());
     data.insert("someString", generateRandomString());
     return data;
 }

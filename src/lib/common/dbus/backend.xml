@@ -1,0 +1,56 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+    <interface name="org.SfietKonstantin.publictransportation">
+        <signal name="listCompaniesRequested" />
+        <signal name="listLinesRequested">
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="const PublicTransportation::Company &amp;"/>
+            <arg name="company" type="(a{sv}sa{sv})" direction="out" />
+        </signal>
+        <signal name="listJourneysRequested">
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="const PublicTransportation::Company &amp;"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="const PublicTransportation::Line &amp;"/>
+            <arg name="company" type="(a{sv}sa{sv})" direction="out" />
+            <arg name="line" type="(a{sv}sa{sv})" direction="out" />
+        </signal>
+        <signal name="listStationsRequested">
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="const PublicTransportation::Company &amp;"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="const PublicTransportation::Line &amp;"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="const PublicTransportation::Journey &amp;"/>
+            <arg name="company" type="(a{sv}sa{sv})" direction="out" />
+            <arg name="line" type="(a{sv}sa{sv})" direction="out" />
+            <arg name="journey" type="(a{sv}sa{sv})" direction="out" />
+        </signal>
+        <method name="registerBackend">
+            <arg name="capabilities" type="as" direction="in"/>
+        </method>
+        <method name="registerListedCompanies">
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="const QList&lt;PublicTransportation::Company&gt; &amp;"/>
+            <arg name="companies" type="a(a{sv}sa{sv})" direction="in"/>
+        </method>
+        <method name="registerListedLines">
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="const PublicTransportation::Company &amp;"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="const QList&lt;PublicTransportation::Line&gt; &amp;"/>
+            <arg name="company" type="(a{sv}sa{sv})" direction="in"/>
+            <arg name="lines" type="a(a{sv}sa{sv})" direction="in"/>
+        </method>
+        <method name="registerListedJourneys">
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="const PublicTransportation::Company &amp;"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="const PublicTransportation::Line &amp;"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="const QList&lt;PublicTransportation::Journey&gt; &amp;"/>
+            <arg name="company" type="(a{sv}sa{sv})" direction="in"/>
+            <arg name="line" type="(a{sv}sa{sv})" direction="in"/>
+            <arg name="journeys" type="a(a{sv}sa{sv})" direction="in"/>
+        </method>
+        <method name="registerListedStations">
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="const PublicTransportation::Company &amp;"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="const PublicTransportation::Line &amp;"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="const PublicTransportation::Journey &amp;"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In3" value="const QList&lt;PublicTransportation::Station&gt; &amp;"/>
+            <arg name="company" type="(a{sv}sa{sv})" direction="in"/>
+            <arg name="line" type="(a{sv}sa{sv})" direction="in"/>
+            <arg name="journey" type="(a{sv}sa{sv})" direction="in"/>
+            <arg name="stations" type="a(a{sv}sa{sv})" direction="in"/>
+        </method>
+    </interface>
+</node>

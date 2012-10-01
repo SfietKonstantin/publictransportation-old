@@ -14,21 +14,17 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef GENERATOR_H
-#define GENERATOR_H
+#ifndef TESTDBUS_H
+#define TESTDBUS_H
 
-#include <QtCore/QVariantMap>
+#include <QtCore/QObject>
 
-class Generator
+class TestDBus : public QObject
 {
-public:
-    static void initRand();
-    static int rand();
-    static bool generateRandomBool();
-    static int generateRandomNumber();
-    static float generateRandomFloat();
-    static QString generateRandomString();
-    static QVariantMap generateRandomVariantMap();
+    Q_OBJECT
+private slots:
+    void testSimpleReceive();
+
 };
 
-#endif // GENERATOR_H
+#endif // TESTDBUS_H

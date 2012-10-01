@@ -14,36 +14,44 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-/**
- * @internal
- * @file tests/main.cpp
- * @short Entry point of the tests
- */
-
 #include <QtCore/QCoreApplication>
-#include <QtTest/QtTest>
+#include <QtCore/QDebug>
+#include <QtDBus/QDBusInterface>
 
-#include "testbase.h"
-#include "testbackendmanagement.h"
+#include "common/company.h"
+#include "common/line.h"
+#include "common/journey.h"
+#include "common/station.h"
+#include "common/dbus/dbusconstants.h"
+#include "common/dbus/dbushelper.h"
 
-/**
- * @internal
- * @short Main
- *
- * Entry point of the test application
- * that tests base widgets QML plugin.
- *
- * @param argc argc.
- * @param argv argv.
- * @return exit code.
- */
 int main(int argc, char **argv)
 {
     QCoreApplication app (argc, argv);
     Q_UNUSED(app)
 
-    TestBase testBase;
-    QTest::qExec(&testBase, argc, argv);
+    PublicTransportation::registerDBusTypes();
 
-    return 0;
+
+    QVariantMap disambiguation;
+    disambiguation.insert("test1", 12345);
+    disambiguation.insert("test2", "abcde");
+
+    QVariantMap properties;
+    properties.insert("property1", 67890);
+    properties.insert("property2", "fghij");
+    PublicTransportation::Company company (disambiguation, "testCompany", "some copyright",
+                                           properties);
+
+    QDBusInterface interface (DBUS_SERVICE, "/");
+    interface.call("receiveCompany", QVariant::fromValue(company));
+
+    PublicTransportation::Line line (disambiguation, "testLine", company, properties);
+    interface.call("receiveLine", QVariant::fromValue(line));
+
+    PublicTransportation::Journey journey (disambiguation, "testJourney", line, properties);
+    interface.call("receiveJourney", QVariant::fromValue(journey));
+
+    PublicTransportation::Station station (disambiguation, "testStation", journey, properties);
+    interface.call("receiveStation", QVariant::fromValue(station));
 }

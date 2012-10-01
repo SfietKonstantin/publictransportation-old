@@ -14,67 +14,36 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-/**
- * @file station.cpp
- * @short Implementation of PublicTransportation::Station
- */
+#ifndef DBUSOBJECT_H
+#define DBUSOBJECT_H
 
-#include "station.h"
+#include <QtCore/QObject>
+#include "common/company.h"
+#include "common/line.h"
+#include "common/journey.h"
+#include "common/station.h"
 
-#include "journey.h"
-
-namespace PublicTransportation
+class DBusObject : public QObject
 {
-
-/**
- * @internal
- * @brief Private class for PublicTransportation::Station
- */
-class StationPrivate: public TransportationObjectPrivate
-{
+    Q_OBJECT
+    Q_CLASSINFO("D-Bus Interface", "org.SfietKonstantin.publictransportation")
 public:
-    /**
-     * @internal
-     * @brief Journey
-     */
-    Journey journey;
+    explicit DBusObject(QObject *parent = 0);
+    PublicTransportation::Company company() const;
+    PublicTransportation::Line line() const;
+    PublicTransportation::Journey journey() const;
+    PublicTransportation::Station station() const;
+public slots:
+    void receiveCompany(const PublicTransportation::Company &company);
+    void receiveLine(const PublicTransportation::Line &line);
+    void receiveJourney(const PublicTransportation::Journey &journey);
+    void receiveStation(const PublicTransportation::Station &station);
+private:
+    PublicTransportation::Company m_company;
+    PublicTransportation::Line m_line;
+    PublicTransportation::Journey m_journey;
+    PublicTransportation::Station m_station;
+
 };
 
-////// End of private class //////
-
-
-Station::Station() :
-    TransportationObject(* new StationPrivate)
-{
-}
-
-Station::Station(const QVariantMap &disambiguation, const QString &name,
-                 const Journey &journey, const QVariantMap &properties):
-    TransportationObject(* new StationPrivate)
-{
-    Q_D(Station);
-    d->disambiguation = disambiguation;
-    d->name = name;
-    d->properties = properties;
-
-    setJourney(journey);
-}
-
-Station::~Station()
-{
-}
-
-Journey Station::journey() const
-{
-    Q_D(const Station);
-    return d->journey;
-}
-
-void Station::setJourney(const Journey &journey)
-{
-    Q_D(Station);
-    d->journey = journey;
-    d->journey.addStation(*this);
-}
-
-}
+#endif // DBUSOBJECT_H
