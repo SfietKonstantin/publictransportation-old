@@ -14,21 +14,26 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+/**
+ * @file generator.cpp
+ * @short Implementation of Generator
+ */
+
 #include "generator.h"
 
 #include <QtCore/QDateTime>
 #include <math.h>
 
+/**
+ * @brief LETTERS
+ *
+ * Used in Generator.
+ */
 static const char *LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 void Generator::initRand()
 {
     qsrand(QDateTime::currentDateTime().currentMSecsSinceEpoch());
-}
-
-int Generator::rand()
-{
-    return qrand();
 }
 
 bool Generator::generateRandomBool()
@@ -84,4 +89,9 @@ QVariantMap Generator::generateRandomVariantMap()
     data.insert("someDouble", generateRandomDouble());
     data.insert("someString", generateRandomString());
     return data;
+}
+
+int Generator::rand()
+{
+    return qrand();
 }

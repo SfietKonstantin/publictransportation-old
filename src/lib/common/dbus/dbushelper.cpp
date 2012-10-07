@@ -14,6 +14,11 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+/**
+ * @file dbushelper.cpp
+ * @short Implementation of helper functions used by DBus interface
+ */
+
 #include "dbushelper.h"
 
 #include <QtDBus/QtDBus>

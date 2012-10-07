@@ -17,7 +17,22 @@
 #ifndef PUBLICTRANSPORTATION_DBUSSERVICECONSTANTS_H
 #define PUBLICTRANSPORTATION_DBUSSERVICECONSTANTS_H
 
+/**
+ * @file dbusconstants.h
+ * @short Definition of constants used by DBus interface
+ */
+
+/**
+ * @short DBUS_SERVICE
+ *
+ * DBus service name
+ */
 #define DBUS_SERVICE "org.SfietKonstantin.publictransportation"
+/**
+ * @short DBUS_BACKEND_PATH_PREFIX
+ *
+ * Prefix for DBus path that points to backends
+ */
 #define DBUS_BACKEND_PATH_PREFIX "/backend/"
 
 #endif // PUBLICTRANSPORTATION_DBUSSERVICECONSTANTS_H

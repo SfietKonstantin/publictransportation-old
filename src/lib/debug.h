@@ -17,23 +17,58 @@
 #ifndef PUBLICTRANSPORTATION_DEBUG_H
 #define PUBLICTRANSPORTATION_DEBUG_H
 
+/**
+ * @file debug.h
+ * @short Debug methods
+ */
+
 #include <QtCore/QDebug>
 
 namespace PublicTransportation
 {
 
+/**
+ * @brief Debug
+ *
+ * This method outputs a debug trace, that
+ * is prefixed with the name of the component to debug.
+ *
+ * @param prefix prefix.
+ * @return a QDebug object used for debugging.
+ */
 inline QDebug debug(const QByteArray &prefix)
 {
     QByteArray truePrefix = "  [" + prefix + "]";
     return (QDebug(QtDebugMsg) << truePrefix.constData());
 }
 
+/**
+ * @brief Warning
+ *
+ * This method outputs a warning, that
+ * is prefixed with the name of the component to debug.
+ *
+ * @param prefix prefix.
+ * @return a QDebug object used for warning.
+ */
 inline QDebug warning(const QByteArray &prefix)
 {
     QByteArray truePrefix = "W [" + prefix + "]";
     return (QDebug(QtWarningMsg) << truePrefix.constData());
 }
 
+/**
+ * @brief Fatal
+ *
+ * This method outputs a fatal message, that
+ * is prefixed with the name of the component to debug.
+ *
+ * Most of the time, a fatal message interrupts the
+ * program.
+ *
+ * @param prefix prefix.
+ * @return a QDebug object used for debugging.
+ */
 inline QDebug fatal(const QByteArray &prefix)
 {
     QByteArray truePrefix = "! [" + prefix + "]";

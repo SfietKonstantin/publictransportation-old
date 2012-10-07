@@ -17,7 +17,10 @@
 #ifndef PUBLICTRANSPORTATION_DBUSHELPER_H
 #define PUBLICTRANSPORTATION_DBUSHELPER_H
 
-#include <QtCore/QList>
+/**
+ * @file dbushelper.h
+ * @short Definition of helper functions used by DBus interface
+ */
 
 class QDBusArgument;
 namespace PublicTransportation
@@ -29,20 +32,105 @@ class Line;
 class Journey;
 class Station;
 
+/**
+ * @brief Marshall a transportation object to a DBus argument
+ *
+ * This method is used to marshall a transportation object
+ * to a DBus argument, making it transportable through DBus.
+ *
+ * A transportation object is marshalled as (a{sv}sa{sv}), where
+ * the first map contains the disambiguation parametrs, the string
+ * contains the name, and the second variant map contains the
+ * properties.
+ *
+ * @param[out] argument DBus argument.
+ * @param[in] transportationObject transportation object.
+ * @return DBus argument containing the transportation object.
+ */
 QDBusArgument & transportationObjectToDBus(QDBusArgument &argument,
                                            const TransportationObject &transportationObject);
+/**
+ * @brief Demarshall a transportation object from a DBus argument
+ *
+ * This method is used to demarshall a transportation object
+ * from a DBus argument.
+ *
+ * A transportation object is demarshalled from (a{sv}sa{sv}), where
+ * the first map contains the disambiguation parametrs, the string
+ * contains the name, and the second variant map contains the
+ * properties.
+ *
+ * @param[in] argument DBus argument.
+ * @param[out] transportationObject transportation object.
+ * @return DBus argument without the transportation object.
+ */
 const QDBusArgument & transportationObjectFromDBus(const QDBusArgument &argument,
                                                    TransportationObject &transportationObject);
 
+/**
+ * @brief Marshall a company
+ * @param[out] argument DBus argument.
+ * @param[in] company company.
+ * @return DBus argument containing the company.
+ */
 QDBusArgument & operator<<(QDBusArgument &argument, const Company &company);
+/**
+ * @brief Demarshall a company
+ * @param[in] argument DBus argument.
+ * @param[out] company company.
+ * @return DBus argument without the company.
+ */
 const QDBusArgument & operator>>(const QDBusArgument &argument, Company &company);
+/**
+ * @brief Marshall a line
+ * @param[out] argument DBus argument.
+ * @param[in] line line.
+ * @return DBus argument containing the line.
+ */
 QDBusArgument & operator<<(QDBusArgument &argument, const Line &line);
+/**
+ * @brief Demarshall a line
+ * @param[in] argument DBus argument.
+ * @param[out] line line.
+ * @return DBus argument without the line.
+ */
 const QDBusArgument & operator>>(const QDBusArgument &argument, Line &line);
+/**
+ * @brief Marshall a journey
+ * @param[out] argument DBus argument.
+ * @param[in] journey journey.
+ * @return DBus argument containing the journey.
+ */
 QDBusArgument & operator<<(QDBusArgument &argument, const Journey &journey);
+/**
+ * @brief Demarshall a journey
+ * @param[in] argument DBus argument.
+ * @param[out] journey journey.
+ * @return DBus argument without the journey.
+ */
 const QDBusArgument & operator>>(const QDBusArgument &argument, Journey &journey);
+/**
+ * @brief Marshall a station
+ * @param[out] argument DBus argument.
+ * @param[in] station station.
+ * @return DBus argument containing the station.
+ */
 QDBusArgument & operator<<(QDBusArgument &argument, const Station &station);
+/**
+ * @brief Demarshall a station
+ * @param[in] argument DBus argument.
+ * @param[out] station station.
+ * @return DBus argument without the station.
+ */
 const QDBusArgument & operator>>(const QDBusArgument &argument, Station &station);
 
+/**
+ * @brief Register DBus types
+ *
+ * This method is used to register complex types to the
+ * DBus type system. This method should be called before
+ * making any DBus call involving these complex types.
+ */
 void registerDBusTypes();
 }
 

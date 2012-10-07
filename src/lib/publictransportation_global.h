@@ -17,6 +17,11 @@
 #ifndef PUBLICTRANSPORTATION_GLOBAL_H
 #define PUBLICTRANSPORTATION_GLOBAL_H
 
+/**
+ * @file publictransportation_global.h
+ * @short Global publictransportation library header
+ */
+
 #include <QtCore/qglobal.h>
 
 /**
@@ -58,6 +63,11 @@
 /**
  * @namespace PublicTransportation
  * @short Namespace for libpublictransportation
+ */
+
+/**
+ * \def PUBLICTRANSPORTATION_EXPORT
+ * @short Library export or import
  */
 
 #if defined(PUBLICTRANSPORTATION_LIBRARY)
