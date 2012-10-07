@@ -122,7 +122,7 @@ struct BackendInfoPrivate: public QSharedData
  *\b Exec should provide the executable name. It can provide either a script,
  * or use the provider loader to load C++ plugin. In that case, you should use
  * $PROVIDER to replace the path of the provider. Please note that, while being
- * executed, one more parameter, that is "--identifier someidentifier" is passed
+ * executed, one more parameter, that is "\-\-identifier someidentifier" is passed
  * to the executable. This identifier is used to communicate between the backend
  * and the backend manager.
  *

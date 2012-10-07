@@ -14,21 +14,31 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef TEST_H
-#define TEST_H
+#ifndef PUBLICTRANSPORTATION_PROVIDERPLUGINTESTHELPER_H
+#define PUBLICTRANSPORTATION_PROVIDERPLUGINTESTHELPER_H
 
 #include <QtCore/QObject>
+#include "provider/providerpluginobject.h"
 
-class Test : public QObject
+namespace PublicTransportation
+{
+
+class ProviderPluginTestHelper : public ProviderPluginObject
 {
     Q_OBJECT
-private slots:
-    void testBaseCommonEntities();
-    void testBaseSharedEntities();
-    void testDBusSimpleReceive();
-    void testBackendInfo();
-    void testDBusBackend();
-    void testDBusProvider();
+    Q_INTERFACES(PublicTransportation::ProviderPluginInterface)
+public:
+    explicit ProviderPluginTestHelper(QObject *parent = 0);
+    virtual ~ProviderPluginTestHelper();
+    virtual QStringList capabilities() const;
+    virtual QList<PublicTransportation::Company> listCompanies() const;
+    virtual QList<Line> listLines(const Company &company) const;
+    virtual QList<Journey> listJourneys(const Company &company, const Line &line) const;
+    virtual QList<Station> listStations(const Company &company, const Line &line,
+                                        const Journey &journey) const;
 };
 
-#endif // TEST_H
+}
+
+
+#endif // PUBLICTRANSPORTATION_PROVIDERPLUGINTESTHELPER_H

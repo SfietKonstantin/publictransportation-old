@@ -12,6 +12,4 @@ SOURCES +=  main.cpp \
 
 # Deployment
 target.path = $${TEST_FOLDER}/helpers
-export(target.path)
-
 INSTALLS += target

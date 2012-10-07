@@ -182,7 +182,7 @@ void DBusBackendWrapper::launch()
     setStatus(Launching);
     d->process->setWorkingDirectory(APPLICATION_FOLDER);
     QString trueExecutable = executable();
-    trueExecutable.replace("$PROVIDER", "./publictransportation-provider --plugin ");
+    trueExecutable.replace("$PROVIDER", QString(PROVIDER_PATH) + " --plugin ");
     trueExecutable.append(QString(" --identifier %1 ").arg(dbusIdentifier));
 
     d->process->start(trueExecutable);
