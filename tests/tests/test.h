@@ -27,6 +27,7 @@ private slots:
     void testBaseSharedEntities();
     void testDBusSimpleReceive();
     void testBackendInfo();
+    void testDBusBackend();
 };
 
 #endif // TEST_H

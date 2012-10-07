@@ -1,2 +1,2 @@
 TEMPLATE = subdirs
-SUBDIRS += dbustesthelper
+SUBDIRS += dbustesthelper dbuswrappertesthelper

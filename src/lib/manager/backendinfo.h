@@ -17,6 +17,11 @@
 #ifndef PUBLICTRANSPORTATION_BACKENDINFO_H
 #define PUBLICTRANSPORTATION_BACKENDINFO_H
 
+/**
+ * @file backendinfo.h
+ * @short Definition of PublicTransportation::BackendInfo
+ */
+
 #include <QtCore/QtCore>
 #include <QtCore/QExplicitlySharedDataPointer>
 #include <QtCore/QString>

@@ -21,6 +21,10 @@ HEADERS =   publictransportation_global.h \
             common/dbus/dbushelper.h \
             manager/desktopfileparser_p.h \
             manager/backendinfo.h \
+            manager/abstractbackendwrapper.h \
+            manager/abstractbackendwrapper_p.h \
+            manager/dbus/dbusbackendwrapper.h \
+            manager/dbus/dbusbackendwrapperadaptor.h \
 
 SOURCES +=  common/transportationobject.cpp \
             common/company.cpp \
@@ -30,6 +34,9 @@ SOURCES +=  common/transportationobject.cpp \
             common/dbus/dbushelper.cpp \
             manager/desktopfileparser_p.cpp \
             manager/backendinfo.cpp \
+            manager/abstractbackendwrapper.cpp \
+            manager/dbus/dbusbackendwrapper.cpp \
+            manager/dbus/dbusbackendwrapperadaptor.cpp \
 
 # Deployment
 target.path = $${LIBDIR}

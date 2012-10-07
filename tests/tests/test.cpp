@@ -28,6 +28,7 @@
 #include "common/dbus/dbushelper.h"
 #include "common/dbus/dbusconstants.h"
 #include "manager/backendinfo.h"
+#include "manager/dbus/dbusbackendwrapper.h"
 
 #include "generator.h"
 #include "dbusobject.h"
@@ -271,6 +272,9 @@ void Test::testDBusSimpleReceive()
     QCOMPARE(dbusObject->station().properties().count(), 2);
     QCOMPARE(dbusObject->station().properties().value("property1"), QVariant(67890));
     QCOMPARE(dbusObject->station().properties().value("property2"), QVariant("fghij"));
+
+    QDBusConnection::sessionBus().unregisterObject("/");
+    QDBusConnection::sessionBus().unregisterService(DBUS_SERVICE);
 }
 
 void Test::testBackendInfo()
@@ -366,5 +370,70 @@ void Test::testBackendInfo()
     QCOMPARE(backendInfo3.isValid(), false);
 }
 
+
+void Test::testDBusBackend()
+{
+    QDBusConnection::sessionBus().registerService(DBUS_SERVICE);
+
+    DBusBackendWrapper wrapper ("test", QString(HELPER_FOLDER) + "/dbuswrappertesthelper",
+                                QMap<QString, QString>());
+    wrapper.launch();
+    QTest::qWait(300);
+    wrapper.stop();
+    QTest::qWait(300);
+    wrapper.kill();
+    QDBusConnection::sessionBus().unregisterService(DBUS_SERVICE);
+
+    QList<Company> companies = wrapper.companies();
+    QCOMPARE(companies.count(), 1);
+
+    Company company = companies.at(0);
+    QCOMPARE(company.name(), QString("testCompany"));
+    QCOMPARE(company.copyright(), QString("some copyright"));
+    QCOMPARE(company.disambiguation().count(), 2);
+    QCOMPARE(company.disambiguation().value("test1"), QVariant(12345));
+    QCOMPARE(company.disambiguation().value("test2"), QVariant("abcde"));
+    QCOMPARE(company.properties().count(), 3);
+    QCOMPARE(company.properties().value("property1"), QVariant(67890));
+    QCOMPARE(company.properties().value("property2"), QVariant("fghij"));
+
+    QList<Line> lines = wrapper.lines(company);
+    QCOMPARE(lines.count(), 1);
+
+    Line line = lines.at(0);
+    QCOMPARE(line.name(), QString("testLine"));
+    QCOMPARE(line.disambiguation().count(), 2);
+    QCOMPARE(line.disambiguation().value("test1"), QVariant(12345));
+    QCOMPARE(line.disambiguation().value("test2"), QVariant("abcde"));
+    QCOMPARE(line.properties().count(), 2);
+    QCOMPARE(line.properties().value("property1"), QVariant(67890));
+    QCOMPARE(line.properties().value("property2"), QVariant("fghij"));
+
+    QList<Journey> journeys = wrapper.journeys(company, line);
+    QCOMPARE(journeys.count(), 1);
+
+    Journey journey = journeys.at(0);
+    QCOMPARE(journey.name(), QString("testJourney"));
+    QCOMPARE(journey.disambiguation().count(), 2);
+    QCOMPARE(journey.disambiguation().value("test1"), QVariant(12345));
+    QCOMPARE(journey.disambiguation().value("test2"), QVariant("abcde"));
+    QCOMPARE(journey.properties().count(), 2);
+    QCOMPARE(journey.properties().value("property1"), QVariant(67890));
+    QCOMPARE(journey.properties().value("property2"), QVariant("fghij"));
+
+    QList<Station> stations = wrapper.stations(company, line, journey);
+    QCOMPARE(stations.count(), 1);
+
+    Station station = stations.at(0);
+    QCOMPARE(station.name(), QString("testStation"));
+    QCOMPARE(station.disambiguation().count(), 2);
+    QCOMPARE(station.disambiguation().value("test1"), QVariant(12345));
+    QCOMPARE(station.disambiguation().value("test2"), QVariant("abcde"));
+    QCOMPARE(station.properties().count(), 2);
+    QCOMPARE(station.properties().value("property1"), QVariant(67890));
+    QCOMPARE(station.properties().value("property2"), QVariant("fghij"));
+
+
+}
 
 QTEST_MAIN(Test)

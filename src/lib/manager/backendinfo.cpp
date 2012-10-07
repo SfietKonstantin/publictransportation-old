@@ -14,6 +14,11 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+/**
+ * @file backendinfo.cpp
+ * @short Implementation of PublicTransportation::BackendInfo
+ */
+
 #include "backendinfo.h"
 #include "desktopfileparser_p.h"
 

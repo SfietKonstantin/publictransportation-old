@@ -15,7 +15,6 @@
  ****************************************************************************************/
 
 #include <QtCore/QCoreApplication>
-#include <QtCore/QDebug>
 #include <QtDBus/QDBusInterface>
 
 #include "common/company.h"
