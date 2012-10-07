@@ -23,8 +23,10 @@ HEADERS =   publictransportation_global.h \
             manager/backendinfo.h \
             manager/abstractbackendwrapper.h \
             manager/abstractbackendwrapper_p.h \
+            manager/abstractbackendmanager.h \
             manager/dbus/dbusbackendwrapper.h \
             manager/dbus/dbusbackendwrapperadaptor.h \
+            manager/dbus/dbusbackendmanager.h \
             provider/providerplugininterface.h \
             provider/providerpluginobject.h \
             provider/dbus/backenddbusproxy.h \
@@ -39,8 +41,10 @@ SOURCES +=  common/transportationobject.cpp \
             manager/desktopfileparser_p.cpp \
             manager/backendinfo.cpp \
             manager/abstractbackendwrapper.cpp \
+            manager/abstractbackendmanager.cpp \
             manager/dbus/dbusbackendwrapper.cpp \
             manager/dbus/dbusbackendwrapperadaptor.cpp \
+            manager/dbus/dbusbackendmanager.cpp \
             provider/dbus/backenddbusproxy.cpp \
             provider/dbus/providerplugindbuswrapper.cpp \
 

@@ -17,11 +17,29 @@
 #ifndef PUBLICTRANSPORTATION_COMMONHELPER_H
 #define PUBLICTRANSPORTATION_COMMONHELPER_H
 
+/**
+ * @file commonhelper.h
+ * @short Helper functions widely used
+ */
+
 #include <QtCore/QList>
 
 namespace PublicTransportation
 {
 
+/**
+ * @short Shared copy
+ *
+ * This function is used to get the shared copy
+ * version of an implicitely shared object in a list.
+ *
+ * This function can then identify objects that are not
+ * shared, but are equal, and retrieve a shared copy instead.
+ *
+ * @param entry shared entry to search.
+ * @param list list of shared entries to search.
+ * @return the shared version of the provided entry.
+ */
 template<class T> inline T sharedCopy(const T &entry, const QList<T> list)
 {
     if (list.contains(entry)) {

@@ -19,7 +19,7 @@
 
 /**
  * @file dbusbackendwrapper.h
- * @short Definition of PublicTransportation::DBusBackendWrapperPrivate
+ * @short Definition of PublicTransportation::DBusBackendWrapper
  */
 
 #include "publictransportation_global.h"

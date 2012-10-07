@@ -14,22 +14,42 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef TEST_H
-#define TEST_H
+/**
+ * @file dbusbackendmanager.cpp
+ * @short Implementation of PublicTransportation::DBusBackendManager
+ */
 
-#include <QtCore/QObject>
+#include "dbusbackendmanager.h"
 
-class Test : public QObject
+#include <QtDBus/QDBusConnection>
+
+#include "common/dbus/dbusconstants.h"
+#include "dbusbackendwrapper.h"
+
+namespace PublicTransportation
 {
-    Q_OBJECT
-private slots:
-    void testBaseCommonEntities();
-    void testBaseSharedEntities();
-    void testDBusSimpleReceive();
-    void testBackendInfo();
-    void testDBusBackend();
-    void testDBusProvider();
-    void testDBusBackendManager();
-};
 
-#endif // TEST_H
+DBusBackendManager::DBusBackendManager(QObject *parent) :
+    AbstractBackendManager(parent)
+{
+}
+
+AbstractBackendWrapper * DBusBackendManager::createBackend(const QString &identifier,
+                                                           const QString &executable,
+                                                           const QMap<QString, QString> &attributes,
+                                                           QObject *parent) const
+{
+    return new DBusBackendWrapper(identifier, executable, attributes, parent);
+}
+
+bool DBusBackendManager::registerDBusService()
+{
+    return QDBusConnection::sessionBus().registerService(DBUS_SERVICE);
+}
+
+bool DBusBackendManager::unregisterDBusService()
+{
+    return QDBusConnection::sessionBus().unregisterService(DBUS_SERVICE);
+}
+
+}

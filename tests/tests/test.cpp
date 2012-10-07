@@ -29,6 +29,7 @@
 #include "common/dbus/dbusconstants.h"
 #include "manager/backendinfo.h"
 #include "manager/dbus/dbusbackendwrapper.h"
+#include "manager/dbus/dbusbackendmanager.h"
 
 #include "generator.h"
 #include "dbusobject.h"
@@ -375,16 +376,16 @@ void Test::testDBusBackend()
 {
     QDBusConnection::sessionBus().registerService(DBUS_SERVICE);
 
-    DBusBackendWrapper wrapper ("test", QString(HELPER_FOLDER) + "/dbuswrappertesthelper",
+    DBusBackendWrapper backend ("test", QString(HELPER_FOLDER) + "/dbuswrappertesthelper",
                                 QMap<QString, QString>());
-    wrapper.launch();
+    backend.launch();
     QTest::qWait(300);
-    wrapper.stop();
+    backend.stop();
     QTest::qWait(300);
-    wrapper.kill();
+    backend.kill();
     QDBusConnection::sessionBus().unregisterService(DBUS_SERVICE);
 
-    QList<Company> companies = wrapper.companies();
+    QList<Company> companies = backend.companies();
     QCOMPARE(companies.count(), 1);
 
     Company company = companies.at(0);
@@ -397,7 +398,7 @@ void Test::testDBusBackend()
     QCOMPARE(company.properties().value("property1"), QVariant(67890));
     QCOMPARE(company.properties().value("property2"), QVariant("fghij"));
 
-    QList<Line> lines = wrapper.lines(company);
+    QList<Line> lines = backend.lines(company);
     QCOMPARE(lines.count(), 1);
 
     Line line = lines.at(0);
@@ -409,7 +410,7 @@ void Test::testDBusBackend()
     QCOMPARE(line.properties().value("property1"), QVariant(67890));
     QCOMPARE(line.properties().value("property2"), QVariant("fghij"));
 
-    QList<Journey> journeys = wrapper.journeys(company, line);
+    QList<Journey> journeys = backend.journeys(company, line);
     QCOMPARE(journeys.count(), 1);
 
     Journey journey = journeys.at(0);
@@ -421,7 +422,7 @@ void Test::testDBusBackend()
     QCOMPARE(journey.properties().value("property1"), QVariant(67890));
     QCOMPARE(journey.properties().value("property2"), QVariant("fghij"));
 
-    QList<Station> stations = wrapper.stations(company, line, journey);
+    QList<Station> stations = backend.stations(company, line, journey);
     QCOMPARE(stations.count(), 1);
 
     Station station = stations.at(0);
@@ -437,16 +438,16 @@ void Test::testDBusBackend()
 void Test::testDBusProvider()
 {
     QDBusConnection::sessionBus().registerService(DBUS_SERVICE);
-    DBusBackendWrapper wrapper ("test", QString("$PROVIDER ") + HELPER_FOLDER
+    DBusBackendWrapper backend ("test", QString("$PROVIDER ") + HELPER_FOLDER
                                         + "/libproviderplugintesthelper.so",
                                 QMap<QString, QString>());
-    wrapper.launch();
+    backend.launch();
     QTest::qWait(300);
 
-    wrapper.requestListCompanies();
+    backend.requestListCompanies();
     QTest::qWait(300);
 
-    QList<Company> companies = wrapper.companies();
+    QList<Company> companies = backend.companies();
     QCOMPARE(companies.count(), 1);
 
     Company company = companies.at(0);
@@ -460,10 +461,10 @@ void Test::testDBusProvider()
     QCOMPARE(company.properties().value("property2"), QVariant("fghij"));
 
 
-    wrapper.requestListLines(company);
+    backend.requestListLines(company);
     QTest::qWait(300);
 
-    QList<Line> lines = wrapper.lines(company);
+    QList<Line> lines = backend.lines(company);
     QCOMPARE(lines.count(), 1);
 
     Line line = lines.at(0);
@@ -476,10 +477,10 @@ void Test::testDBusProvider()
     QCOMPARE(line.properties().value("property2"), QVariant("fghij"));
 
 
-    wrapper.requestListJourneys(company, line);
+    backend.requestListJourneys(company, line);
     QTest::qWait(300);
 
-    QList<Journey> journeys = wrapper.journeys(company, line);
+    QList<Journey> journeys = backend.journeys(company, line);
     QCOMPARE(journeys.count(), 1);
 
     Journey journey = journeys.at(0);
@@ -492,10 +493,10 @@ void Test::testDBusProvider()
     QCOMPARE(journey.properties().value("property2"), QVariant("fghij"));
 
 
-    wrapper.requestListStations(company, line, journey);
+    backend.requestListStations(company, line, journey);
     QTest::qWait(300);
 
-    QList<Station> stations = wrapper.stations(company, line, journey);
+    QList<Station> stations = backend.stations(company, line, journey);
     QCOMPARE(stations.count(), 1);
 
     Station station = stations.at(0);
@@ -507,10 +508,99 @@ void Test::testDBusProvider()
     QCOMPARE(station.properties().value("property1"), QVariant(67890));
     QCOMPARE(station.properties().value("property2"), QVariant("fghij"));
 
-    wrapper.stop();
+    backend.stop();
     QTest::qWait(300);
-    wrapper.kill();
+    backend.kill();
     QDBusConnection::sessionBus().unregisterService(DBUS_SERVICE);
+}
+
+void Test::testDBusBackendManager()
+{
+    DBusBackendManager::registerDBusService();
+
+    DBusBackendManager manager;
+    manager.addBackend("test", QString("$PROVIDER ") + HELPER_FOLDER
+                               + "/libproviderplugintesthelper.so",
+                       QMap<QString, QString>());
+
+    QCOMPARE(manager.haveBackend("test"), true);
+
+    manager.launchBackend("test");
+    QTest::qWait(300);
+
+    AbstractBackendWrapper *backend = manager.backend("test");
+
+    backend->requestListCompanies();
+    QTest::qWait(300);
+
+    QList<Company> companies = backend->companies();
+    QCOMPARE(companies.count(), 1);
+
+    Company company = companies.at(0);
+    QCOMPARE(company.name(), QString("testCompany"));
+    QCOMPARE(company.copyright(), QString("some copyright"));
+    QCOMPARE(company.disambiguation().count(), 2);
+    QCOMPARE(company.disambiguation().value("test1"), QVariant(12345));
+    QCOMPARE(company.disambiguation().value("test2"), QVariant("abcde"));
+    QCOMPARE(company.properties().count(), 3);
+    QCOMPARE(company.properties().value("property1"), QVariant(67890));
+    QCOMPARE(company.properties().value("property2"), QVariant("fghij"));
+
+
+    backend->requestListLines(company);
+    QTest::qWait(300);
+
+    QList<Line> lines = backend->lines(company);
+    QCOMPARE(lines.count(), 1);
+
+    Line line = lines.at(0);
+    QCOMPARE(line.name(), QString("testLine"));
+    QCOMPARE(line.disambiguation().count(), 2);
+    QCOMPARE(line.disambiguation().value("test1"), QVariant(12345));
+    QCOMPARE(line.disambiguation().value("test2"), QVariant("abcde"));
+    QCOMPARE(line.properties().count(), 2);
+    QCOMPARE(line.properties().value("property1"), QVariant(67890));
+    QCOMPARE(line.properties().value("property2"), QVariant("fghij"));
+
+
+    backend->requestListJourneys(company, line);
+    QTest::qWait(300);
+
+    QList<Journey> journeys = backend->journeys(company, line);
+    QCOMPARE(journeys.count(), 1);
+
+    Journey journey = journeys.at(0);
+    QCOMPARE(journey.name(), QString("testJourney"));
+    QCOMPARE(journey.disambiguation().count(), 2);
+    QCOMPARE(journey.disambiguation().value("test1"), QVariant(12345));
+    QCOMPARE(journey.disambiguation().value("test2"), QVariant("abcde"));
+    QCOMPARE(journey.properties().count(), 2);
+    QCOMPARE(journey.properties().value("property1"), QVariant(67890));
+    QCOMPARE(journey.properties().value("property2"), QVariant("fghij"));
+
+
+    backend->requestListStations(company, line, journey);
+    QTest::qWait(300);
+
+    QList<Station> stations = backend->stations(company, line, journey);
+    QCOMPARE(stations.count(), 1);
+
+    Station station = stations.at(0);
+    QCOMPARE(station.name(), QString("testStation"));
+    QCOMPARE(station.disambiguation().count(), 2);
+    QCOMPARE(station.disambiguation().value("test1"), QVariant(12345));
+    QCOMPARE(station.disambiguation().value("test2"), QVariant("abcde"));
+    QCOMPARE(station.properties().count(), 2);
+    QCOMPARE(station.properties().value("property1"), QVariant(67890));
+    QCOMPARE(station.properties().value("property2"), QVariant("fghij"));
+
+    manager.stopBackend("test");
+    QTest::qWait(300);
+    manager.killBackend("test");
+    manager.removeBackend("test");
+    QCOMPARE(manager.haveBackend("test"), false);
+
+    DBusBackendManager::unregisterDBusService();
 }
 
 QTEST_MAIN(Test)
