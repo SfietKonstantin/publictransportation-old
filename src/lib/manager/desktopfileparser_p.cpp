@@ -24,7 +24,7 @@
 /**
  * @internal
  * @file desktopfileparser_p.cpp
- * @short Implementation of Widgets::Provider::PackageManager::DesktopFileParser
+ * @short Implementation of PublicTransportation::DesktopFileParser
  */
 
 #include "desktopfileparser_p.h"

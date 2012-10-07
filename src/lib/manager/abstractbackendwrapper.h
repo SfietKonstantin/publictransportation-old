@@ -332,13 +332,13 @@ protected:
     void setCompanies(const QList<Company> &companies);
     /**
      * @brief Set lines
-     * @param company company for which the line should be listed.
+     * @param company company for which the lines should be listed.
      * @param lines lines to set.
      */
     void setLines(const Company &company, const QList<Line> &lines);
     /**
      * @brief Set journeys
-     * @param company company for which the journey should be listed.
+     * @param company company for which the journeys should be listed.
      * @param line line for which the journey should be listed.
      * @param journeys journeys to set.
      */

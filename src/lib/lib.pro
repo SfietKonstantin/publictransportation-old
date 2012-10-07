@@ -25,6 +25,8 @@ HEADERS =   publictransportation_global.h \
             manager/abstractbackendwrapper_p.h \
             manager/dbus/dbusbackendwrapper.h \
             manager/dbus/dbusbackendwrapperadaptor.h \
+            provider/providerplugininterface.h \
+            provider/providerpluginobject.h \
 
 SOURCES +=  common/transportationobject.cpp \
             common/company.cpp \
