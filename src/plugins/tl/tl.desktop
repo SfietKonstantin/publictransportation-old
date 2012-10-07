@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Transports lausannois
+Comment=Provides information about TL
+Icon=
+Type=Service
+Exec=$PROVIDER libtl.so
+X-PublicTransportation-BackendInfo-Id=org.SfietKonstantin.publictransportation.tl
+X-PublicTransportation-BackendInfo-Author=Lucien XU
+X-PublicTransportation-BackendInfo-Email=sfietkonstantin@free.fr
+X-PublicTransportation-BackendInfo-Website=
+X-PublicTransportation-BackendInfo-Version=1.0.0
