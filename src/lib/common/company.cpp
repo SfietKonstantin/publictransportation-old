@@ -30,6 +30,7 @@ namespace PublicTransportation
 {
 
 /**
+ * @internal
  * @brief COPYRIGHT_KEY
  *
  * Used in PublicTransportation::Company.

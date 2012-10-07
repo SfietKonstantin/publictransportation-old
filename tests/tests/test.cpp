@@ -14,20 +14,28 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#include "testbase.h"
+#include "test.h"
 
+#include <QtCore/QProcess>
+#include <QtCore/QTemporaryFile>
+#include <QtDBus/QDBusConnection>
 #include <QtTest/QtTest>
 
 #include "common/company.h"
 #include "common/line.h"
 #include "common/journey.h"
 #include "common/station.h"
+#include "common/dbus/dbushelper.h"
+#include "common/dbus/dbusconstants.h"
+#include "manager/backendinfo.h"
 
 #include "generator.h"
+#include "dbusobject.h"
+
 
 using namespace PublicTransportation;
 
-void TestBase::testCommonEntities()
+void Test::testBaseCommonEntities()
 {
     Generator::initRand();
 
@@ -157,7 +165,7 @@ void TestBase::testCommonEntities()
 
 }
 
-void TestBase::testSharedEntities()
+void Test::testBaseSharedEntities()
 {
     Generator::initRand();
 
@@ -214,3 +222,149 @@ void TestBase::testSharedEntities()
     Journey journey3 = journey1;
     QCOMPARE(journey1.stations() == journey3.stations(), true);
 }
+
+void Test::testDBusSimpleReceive()
+{
+    PublicTransportation::registerDBusTypes();
+
+    DBusObject *dbusObject = new DBusObject(this);
+    QDBusConnection::sessionBus().registerService(DBUS_SERVICE);
+    QDBusConnection::sessionBus().registerObject("/", dbusObject,
+                                                 QDBusConnection::ExportAllContents);
+
+    QProcess *helperProcess = new QProcess(this);
+    helperProcess->startDetached(QString(HELPER_FOLDER) + "/dbustesthelper");
+    QTest::qWait(300);
+
+    QCOMPARE(dbusObject->company().name(), QString("testCompany"));
+    QCOMPARE(dbusObject->company().copyright(), QString("some copyright"));
+    QCOMPARE(dbusObject->company().disambiguation().count(), 2);
+    QCOMPARE(dbusObject->company().disambiguation().value("test1"), QVariant(12345));
+    QCOMPARE(dbusObject->company().disambiguation().value("test2"), QVariant("abcde"));
+    QCOMPARE(dbusObject->company().properties().count(), 3);
+    QCOMPARE(dbusObject->company().properties().value("property1"), QVariant(67890));
+    QCOMPARE(dbusObject->company().properties().value("property2"), QVariant("fghij"));
+
+    QCOMPARE(dbusObject->line().name(), QString("testLine"));
+    QCOMPARE(dbusObject->line().company().isNull(), true);
+    QCOMPARE(dbusObject->line().disambiguation().count(), 2);
+    QCOMPARE(dbusObject->line().disambiguation().value("test1"), QVariant(12345));
+    QCOMPARE(dbusObject->line().disambiguation().value("test2"), QVariant("abcde"));
+    QCOMPARE(dbusObject->line().properties().count(), 2);
+    QCOMPARE(dbusObject->line().properties().value("property1"), QVariant(67890));
+    QCOMPARE(dbusObject->line().properties().value("property2"), QVariant("fghij"));
+
+    QCOMPARE(dbusObject->journey().name(), QString("testJourney"));
+    QCOMPARE(dbusObject->journey().line().isNull(), true);
+    QCOMPARE(dbusObject->journey().disambiguation().count(), 2);
+    QCOMPARE(dbusObject->journey().disambiguation().value("test1"), QVariant(12345));
+    QCOMPARE(dbusObject->journey().disambiguation().value("test2"), QVariant("abcde"));
+    QCOMPARE(dbusObject->journey().properties().count(), 2);
+    QCOMPARE(dbusObject->journey().properties().value("property1"), QVariant(67890));
+    QCOMPARE(dbusObject->journey().properties().value("property2"), QVariant("fghij"));
+
+    QCOMPARE(dbusObject->station().name(), QString("testStation"));
+    QCOMPARE(dbusObject->station().journey().isNull(), true);
+    QCOMPARE(dbusObject->station().disambiguation().count(), 2);
+    QCOMPARE(dbusObject->station().disambiguation().value("test1"), QVariant(12345));
+    QCOMPARE(dbusObject->station().disambiguation().value("test2"), QVariant("abcde"));
+    QCOMPARE(dbusObject->station().properties().count(), 2);
+    QCOMPARE(dbusObject->station().properties().value("property1"), QVariant(67890));
+    QCOMPARE(dbusObject->station().properties().value("property2"), QVariant("fghij"));
+}
+
+void Test::testBackendInfo()
+{
+    // Check a good desktop file
+    QTemporaryFile desktopFile1;
+    if (!desktopFile1.open()) {
+        return;
+    }
+
+    QString name = Generator::generateRandomString();
+    QString comment = Generator::generateRandomString();
+    QString icon = Generator::generateRandomString();
+    QString exec = Generator::generateRandomString();
+    QString id = Generator::generateRandomString();
+    QString author = Generator::generateRandomString();
+    QString email = Generator::generateRandomString();
+    QString website = Generator::generateRandomString();
+    QString version = Generator::generateRandomString();
+
+    QTextStream outStream1(&desktopFile1);
+
+    outStream1 << "[Desktop Entry]\n";
+    outStream1 << QString("Name=%1\n").arg(name);
+    outStream1 << QString("Comment=%1\n").arg(comment);
+    outStream1 << QString("Icon=%1\n").arg(icon);
+    outStream1 << QString("Type=Service\n");
+    outStream1 << QString("Exec=%1\n").arg(exec);
+    outStream1 << QString("X-PublicTransportation-BackendInfo-Id=%1\n").arg(id);
+    outStream1 << QString("X-PublicTransportation-BackendInfo-Author=%1\n").arg(author);
+    outStream1 << QString("X-PublicTransportation-BackendInfo-Email=%1\n").arg(email);
+    outStream1 << QString("X-PublicTransportation-BackendInfo-Website=%1\n").arg(website);
+    outStream1 << QString("X-PublicTransportation-BackendInfo-Version=%1").arg(version);
+    desktopFile1.close();
+    BackendInfo backendInfo1 (desktopFile1.fileName());
+    QCOMPARE(backendInfo1.isValid(), true);
+    QCOMPARE(backendInfo1.name(), name);
+    QCOMPARE(backendInfo1.description(), comment);
+    QCOMPARE(backendInfo1.icon(), icon);
+    QCOMPARE(backendInfo1.executable(), exec);
+    QCOMPARE(backendInfo1.backendIdentifier(), id);
+    QCOMPARE(backendInfo1.backendAuthor(), author);
+    QCOMPARE(backendInfo1.backendEmail(), email);
+    QCOMPARE(backendInfo1.backendWebsite(), website);
+    QCOMPARE(backendInfo1.backendVersion(), version);
+
+    // Test a bad desktop file
+    QTemporaryFile desktopFile2;
+    if (!desktopFile2.open()) {
+        return;
+    }
+
+    QString type = Generator::generateRandomString();
+
+    QTextStream outStream2(&desktopFile2);
+
+    outStream2 << "[Desktop Entry]\n";
+    outStream2 << QString("Name=%1\n").arg(name);
+    outStream2 << QString("Comment=%1\n").arg(comment);
+    outStream2 << QString("Icon=%1\n").arg(icon);
+    outStream2 << QString("Type=%1\n").arg(type);
+    outStream2 << QString("Exec=%1\n").arg(exec);
+    outStream2 << QString("X-PublicTransportation-BackendInfo-Id=%1\n").arg(id);
+    outStream2 << QString("X-PublicTransportation-BackendInfo-Author=%1\n").arg(author);
+    outStream2 << QString("X-PublicTransportation-BackendInfo-Email=%1\n").arg(email);
+    outStream2 << QString("X-PublicTransportation-BackendInfo-Website=%1\n").arg(website);
+    outStream2 << QString("X-PublicTransportation-BackendInfo-Version=%1").arg(version);
+    desktopFile2.close();
+    BackendInfo backendInfo2 (desktopFile2.fileName());
+    QCOMPARE(backendInfo2.isValid(), false);
+
+    // Test another bad desktop file
+    QTemporaryFile desktopFile3;
+    if (!desktopFile3.open()) {
+        return;
+    }
+
+    QTextStream outStream3(&desktopFile3);
+
+    outStream3 << "[Desktop Entry]\n";
+    outStream3 << QString("Name=%1\n").arg(name);
+    outStream3 << QString("Comment=%1\n").arg(comment);
+    outStream3 << QString("Icon=%1\n").arg(icon);
+    outStream3 << QString("Type=Service\n");
+    outStream3 << QString("Exec=\n");
+    outStream3 << QString("X-PublicTransportation-BackendInfo-Id=%1\n").arg(id);
+    outStream3 << QString("X-PublicTransportation-BackendInfo-Author=%1\n").arg(author);
+    outStream3 << QString("X-PublicTransportation-BackendInfo-Email=%1\n").arg(email);
+    outStream3 << QString("X-PublicTransportation-BackendInfo-Website=%1\n").arg(website);
+    outStream3 << QString("X-PublicTransportation-BackendInfo-Version=%1").arg(version);
+    desktopFile3.close();
+    BackendInfo backendInfo3 (desktopFile3.fileName());
+    QCOMPARE(backendInfo3.isValid(), false);
+}
+
+
+QTEST_MAIN(Test)

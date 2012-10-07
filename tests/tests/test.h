@@ -14,17 +14,19 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef TESTDBUS_H
-#define TESTDBUS_H
+#ifndef TEST_H
+#define TEST_H
 
 #include <QtCore/QObject>
 
-class TestDBus : public QObject
+class Test : public QObject
 {
     Q_OBJECT
 private slots:
-    void testSimpleReceive();
-
+    void testBaseCommonEntities();
+    void testBaseSharedEntities();
+    void testDBusSimpleReceive();
+    void testBackendInfo();
 };
 
-#endif // TESTDBUS_H
+#endif // TEST_H

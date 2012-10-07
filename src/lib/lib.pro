@@ -18,14 +18,18 @@ HEADERS =   publictransportation_global.h \
             common/journey.h \
             common/station.h \
             common/dbus/dbusconstants.h \
-            common/dbus/dbushelper.h
+            common/dbus/dbushelper.h \
+            manager/desktopfileparser_p.h \
+            manager/backendinfo.h \
 
 SOURCES +=  common/transportationobject.cpp \
             common/company.cpp \
             common/line.cpp \
             common/journey.cpp \
             common/station.cpp \
-            common/dbus/dbushelper.cpp
+            common/dbus/dbushelper.cpp \
+            manager/desktopfileparser_p.cpp \
+            manager/backendinfo.cpp \
 
 # Deployment
 target.path = $${LIBDIR}

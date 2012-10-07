@@ -9,15 +9,12 @@ LIBS += -L../../src/lib/ -l$${NAME}
 DEFINES += 'HELPER_FOLDER=\'\"$${TEST_FOLDER}/helpers\"\''
 
 HEADERS +=  generator.h \
-            testbase.h \
             dbusobject.h \
-            testdbus.h \
+            test.h \
 
-SOURCES +=  main.cpp \
-            generator.cpp \
-            testbase.cpp \
+SOURCES +=  generator.cpp \
             dbusobject.cpp \
-            testdbus.cpp \
+            test.cpp \
 
 # Deployment
 target.path = $${TEST_FOLDER}
