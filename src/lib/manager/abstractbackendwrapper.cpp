@@ -128,6 +128,10 @@ QList<Station> AbstractBackendWrapper::stations(const Company &company, const Li
     return sharedJourney.stations();
 }
 
+void AbstractBackendWrapper::waitForStopped()
+{
+}
+
 QString AbstractBackendWrapper::executable() const
 {
     Q_D(const AbstractBackendWrapper);

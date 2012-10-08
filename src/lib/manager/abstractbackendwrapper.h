@@ -232,6 +232,13 @@ public Q_SLOTS:
      */
     virtual void stop() = 0;
     /**
+     * @brief Wait for stopped
+     *
+     * This method can be reimplemented to wait for the backend
+     * to finish cleanly.
+     */
+    virtual void waitForStopped();
+    /**
      * @brief Kill the backend
      *
      * Kills the backend. The backend should be immediately

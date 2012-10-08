@@ -14,41 +14,52 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_COMMONHELPER_H
-#define PUBLICTRANSPORTATION_COMMONHELPER_H
+#include <QtCore/QCoreApplication>
+#include <QtCore/QStringList>
+#include <QtDBus/QDBusConnection>
 
-/**
- * @file commonhelper.h
- * @short Widely used helper functions
- */
+#include "debug.h"
+#include "manager/dbus/dbusbackendmanager.h"
 
-#include <QtCore/QList>
+#include "dbushandle.h"
 
-namespace PublicTransportation
+using namespace PublicTransportation;
+
+#ifdef Q_OS_UNIX
+#include <signal.h>
+
+void signalhandler(int signal)
 {
-
-/**
- * @short Shared copy
- *
- * This function is used to get the shared copy
- * version of an implicitely shared object in a list.
- *
- * This function can then identify objects that are not
- * shared, but are equal, and retrieve a shared copy instead.
- *
- * @param entry shared entry to search.
- * @param list list of shared entries to search.
- * @return the shared version of the provided entry.
- */
-template<class T> inline T sharedCopy(const T &entry, const QList<T> list)
-{
-    if (list.contains(entry)) {
-        return list[list.indexOf(entry)];
-    } else {
-        return T();
+    debug("main") << "Interrupted";
+    debug("main") << "Need to do some cleanup";
+    if(signal == SIGINT || signal == SIGTERM) {
+        QCoreApplication::instance()->quit();
     }
 }
+#endif
 
+int main(int argc, char **argv)
+{
+    QCoreApplication app (argc, argv);
+
+    // Connect to UNIX signals
+#ifdef Q_OS_UNIX
+    signal(SIGINT, signalhandler);
+    signal(SIGTERM, signalhandler);
+#endif
+
+    // Register DBus
+    if (!DBusBackendManager::registerDBusService()) {
+        debug("main") << "Unable to register the service on DBus";
+        debug("main") << "Another instance of publictransportation might be running";
+        return 0;
+    }
+
+    DBusBackendManager manager;
+    DBusHandle handle;
+    handle.setBackendManager(&manager);
+
+    QDBusConnection::sessionBus().registerObject("/", &handle, QDBusConnection::ExportAllSlots);
+
+    return app.exec();
 }
-
-#endif // PUBLICTRANSPORTATION_COMMONHELPER_H

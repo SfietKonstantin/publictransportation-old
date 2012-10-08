@@ -14,41 +14,54 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_COMMONHELPER_H
-#define PUBLICTRANSPORTATION_COMMONHELPER_H
-
-/**
- * @file commonhelper.h
- * @short Widely used helper functions
- */
-
-#include <QtCore/QList>
+#include "backendlistmanager.h"
+#include "debug.h"
 
 namespace PublicTransportation
 {
 
-/**
- * @short Shared copy
- *
- * This function is used to get the shared copy
- * version of an implicitely shared object in a list.
- *
- * This function can then identify objects that are not
- * shared, but are equal, and retrieve a shared copy instead.
- *
- * @param entry shared entry to search.
- * @param list list of shared entries to search.
- * @return the shared version of the provided entry.
- */
-template<class T> inline T sharedCopy(const T &entry, const QList<T> list)
+class BackendListManagerPrivate
 {
-    if (list.contains(entry)) {
-        return list[list.indexOf(entry)];
-    } else {
-        return T();
+public:
+    QList<BackendInfo> backendList;
+};
+
+////// End of private class //////
+
+BackendListManager::BackendListManager(QObject *parent) :
+    QObject(parent), d_ptr(new BackendListManagerPrivate())
+{
+}
+
+BackendListManager::~BackendListManager()
+{
+}
+
+QList<BackendInfo> BackendListManager::backendList() const
+{
+    Q_D(const BackendListManager);
+    return d->backendList;
+}
+
+void BackendListManager::reload()
+{
+    Q_D(BackendListManager);
+    d->backendList.clear();
+
+    QDir pluginDir = QDir(PLUGIN_FOLDER);
+    QStringList nameFilters;
+    nameFilters.append("*.desktop");
+
+    foreach (QString file, pluginDir.entryList(nameFilters, QDir::Files)) {
+        BackendInfo info (pluginDir.absoluteFilePath(file));
+        if (info.isValid()) {
+            d->backendList.append(info);
+        }
     }
+
+    debug("backend-list-manager") << "Backend list reloaded";
+    debug("backend-list-manager") << "Number of backends:" << d->backendList.count();
+    emit backendListChanged();
 }
 
 }
-
-#endif // PUBLICTRANSPORTATION_COMMONHELPER_H

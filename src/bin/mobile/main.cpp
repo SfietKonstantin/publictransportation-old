@@ -14,41 +14,40 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_COMMONHELPER_H
-#define PUBLICTRANSPORTATION_COMMONHELPER_H
+#include <QtGui/QApplication>
+#include <QtDeclarative/QtDeclarative>
+#include <QtDeclarative/QDeclarativeContext>
+#include <QtDeclarative/QDeclarativeView>
 
-/**
- * @file commonhelper.h
- * @short Widely used helper functions
- */
+#include "manager/dbus/dbusbackendmanager.h"
+#include "backendmodel.h"
+#include "companiesmodel.h"
 
-#include <QtCore/QList>
+#include "manager/backendlistmanager.h"
 
-namespace PublicTransportation
+using namespace PublicTransportation;
+
+int main(int argc, char **argv)
 {
+    QApplication app(argc, argv);
 
-/**
- * @short Shared copy
- *
- * This function is used to get the shared copy
- * version of an implicitely shared object in a list.
- *
- * This function can then identify objects that are not
- * shared, but are equal, and retrieve a shared copy instead.
- *
- * @param entry shared entry to search.
- * @param list list of shared entries to search.
- * @return the shared version of the provided entry.
- */
-template<class T> inline T sharedCopy(const T &entry, const QList<T> list)
-{
-    if (list.contains(entry)) {
-        return list[list.indexOf(entry)];
-    } else {
-        return T();
-    }
+    DBusBackendManager::registerDBusService();
+    BackendModel backendModel;
+    CompaniesModel companiesModel;
+    DBusBackendManager dbusBackendManager;
+    backendModel.setBackendManager(&dbusBackendManager);
+    backendModel.reload();
+    companiesModel.setBackendManager(&dbusBackendManager);
+
+    qmlRegisterUncreatableType<BackendModel>("org.SfietKonstantin.publictransportation",
+                                             1, 0, "BackendModel",
+                                             "BackendModel cannot be created");
+
+    QDeclarativeView view;
+    view.rootContext()->setContextProperty("BackendModelInstance", &backendModel);
+    view.rootContext()->setContextProperty("CompaniesModelInstance", &companiesModel);
+    view.setSource(QUrl(MAIN_QML_FILE));
+    view.showFullScreen();
+
+    return app.exec();
 }
-
-}
-
-#endif // PUBLICTRANSPORTATION_COMMONHELPER_H

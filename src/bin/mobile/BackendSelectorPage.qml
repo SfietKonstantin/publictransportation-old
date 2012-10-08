@@ -14,41 +14,35 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_COMMONHELPER_H
-#define PUBLICTRANSPORTATION_COMMONHELPER_H
+import QtQuick 1.1
+import com.nokia.meego 1.0
 
-/**
- * @file commonhelper.h
- * @short Widely used helper functions
- */
+AbstractPage {
+    headerColor: "#006E29"
+    headerLabelColor: "white"
+    title: qsTr("Manage information sources")
+    tools: ToolBarLayout {
+        ToolIcon {
+            iconId: "toolbar-back"
+            onClicked: window.pageStack.pop()
+        }
+    }
 
-#include <QtCore/QList>
-
-namespace PublicTransportation
-{
-
-/**
- * @short Shared copy
- *
- * This function is used to get the shared copy
- * version of an implicitely shared object in a list.
- *
- * This function can then identify objects that are not
- * shared, but are equal, and retrieve a shared copy instead.
- *
- * @param entry shared entry to search.
- * @param list list of shared entries to search.
- * @return the shared version of the provided entry.
- */
-template<class T> inline T sharedCopy(const T &entry, const QList<T> list)
-{
-    if (list.contains(entry)) {
-        return list[list.indexOf(entry)];
-    } else {
-        return T();
+    content: ListView {
+        id: view
+        clip: true
+        anchors.fill: parent
+        model: BackendModelInstance
+        delegate: BackendEntry {
+            text: model.name
+            status: model.status
+            onChecked: {
+                if (checked) {
+                    BackendModelInstance.runBackend(model.identifier, model.executable)
+                } else {
+                    BackendModelInstance.stopBackend(model.identifier)
+                }
+            }
+        }
     }
 }
-
-}
-
-#endif // PUBLICTRANSPORTATION_COMMONHELPER_H

@@ -24,6 +24,7 @@ HEADERS =   publictransportation_global.h \
             manager/abstractbackendwrapper.h \
             manager/abstractbackendwrapper_p.h \
             manager/abstractbackendmanager.h \
+            manager/backendlistmanager.h \
             manager/dbus/dbusbackendwrapper.h \
             manager/dbus/dbusbackendwrapperadaptor.h \
             manager/dbus/dbusbackendmanager.h \
@@ -42,6 +43,7 @@ SOURCES +=  common/transportationobject.cpp \
             manager/backendinfo.cpp \
             manager/abstractbackendwrapper.cpp \
             manager/abstractbackendmanager.cpp \
+            manager/backendlistmanager.cpp \
             manager/dbus/dbusbackendwrapper.cpp \
             manager/dbus/dbusbackendwrapperadaptor.cpp \
             manager/dbus/dbusbackendmanager.cpp \

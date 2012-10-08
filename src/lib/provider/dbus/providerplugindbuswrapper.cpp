@@ -80,6 +80,8 @@ ProviderPluginDBusWrapper::ProviderPluginDBusWrapper(const QString &identifier, 
     QObject(parent), d_ptr(new ProviderPluginDBusWrapperPrivate)
 {
     Q_D(ProviderPluginDBusWrapper);
+    registerDBusTypes();
+
     d->dbusObjectPath = QString(DBUS_BACKEND_PATH_PREFIX) + identifier;
     d->provider = 0;
     d->proxy = new OrgSfietKonstantinPublictransportationInterface(DBUS_SERVICE, d->dbusObjectPath,
@@ -90,7 +92,6 @@ ProviderPluginDBusWrapper::ProviderPluginDBusWrapper(const QString &identifier, 
                                       QDBusServiceWatcher::WatchForUnregistration, this);
     connect(watcher, SIGNAL(serviceUnregistered(QString)),
             this, SLOT(slotServiceUnregistered(QString)));
-    registerDBusTypes();
 }
 
 ProviderPluginDBusWrapper::~ProviderPluginDBusWrapper()

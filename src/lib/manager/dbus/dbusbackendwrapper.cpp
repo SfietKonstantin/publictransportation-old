@@ -137,6 +137,8 @@ DBusBackendWrapper::DBusBackendWrapper(const QString &identifier, const QString 
     AbstractBackendWrapper(*(new DBusBackendWrapperPrivate(this)), parent)
 {
     Q_D(DBusBackendWrapper);
+    registerDBusTypes();
+
     d->identifier = identifier;
     d->executable = executable;
     d->arguments = arguments;
@@ -200,6 +202,13 @@ void DBusBackendWrapper::stop()
 
     setStatus(Stopping);
     d->process->terminate();
+}
+
+void DBusBackendWrapper::waitForStopped()
+{
+    Q_D(DBusBackendWrapper);
+    d->process->waitForFinished(5000);
+    return;
 }
 
 void DBusBackendWrapper::kill()

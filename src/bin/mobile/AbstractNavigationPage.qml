@@ -1,5 +1,5 @@
 /****************************************************************************************
- * Copyright (C) 2012 Lucien XU <sfietkonstantin@free.fr>                               *
+ * Copyright (C) 2011 Lucien XU <sfietkonstantin@free.fr>                               *
  *                                                                                      *
  * This program is free software; you can redistribute it and/or modify it under        *
  * the terms of the GNU General Public License as published by the Free Software        *
@@ -14,41 +14,23 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_COMMONHELPER_H
-#define PUBLICTRANSPORTATION_COMMONHELPER_H
+import QtQuick 1.1
 
-/**
- * @file commonhelper.h
- * @short Widely used helper functions
- */
+AbstractPage {
+    id: container
+    signal show(string page)
+    property variant model
 
-#include <QtCore/QList>
-
-namespace PublicTransportation
-{
-
-/**
- * @short Shared copy
- *
- * This function is used to get the shared copy
- * version of an implicitely shared object in a list.
- *
- * This function can then identify objects that are not
- * shared, but are equal, and retrieve a shared copy instead.
- *
- * @param entry shared entry to search.
- * @param list list of shared entries to search.
- * @return the shared version of the provided entry.
- */
-template<class T> inline T sharedCopy(const T &entry, const QList<T> list)
-{
-    if (list.contains(entry)) {
-        return list[list.indexOf(entry)];
-    } else {
-        return T();
+    content: Item {
+        anchors.fill: parent
+        ListView {
+            anchors.fill: parent
+            model: container.model
+            clip: true
+            delegate: ClickableEntry {
+                text: qsTranslate("", model.text)
+                onClicked: container.show(model.identifier)
+            }
+        }
     }
 }
-
-}
-
-#endif // PUBLICTRANSPORTATION_COMMONHELPER_H

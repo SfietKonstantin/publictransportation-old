@@ -18,6 +18,7 @@
 #define PUBLICTRANSPORTATION_DEBUG_H
 
 /**
+ * @internal
  * @file debug.h
  * @short Debug methods
  */
@@ -28,6 +29,7 @@ namespace PublicTransportation
 {
 
 /**
+ * @internal
  * @brief Debug
  *
  * This method outputs a debug trace, that
@@ -43,6 +45,7 @@ inline QDebug debug(const QByteArray &prefix)
 }
 
 /**
+ * @internal
  * @brief Warning
  *
  * This method outputs a warning, that
@@ -58,6 +61,7 @@ inline QDebug warning(const QByteArray &prefix)
 }
 
 /**
+ * @internal
  * @brief Fatal
  *
  * This method outputs a fatal message, that

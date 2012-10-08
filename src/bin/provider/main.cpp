@@ -23,6 +23,7 @@
 #include <QtDBus/QDBusInterface>
 
 #include "debug.h"
+#include "common/dbus/dbushelper.h"
 #include "provider/dbus/providerplugindbuswrapper.h"
 
 using namespace std;

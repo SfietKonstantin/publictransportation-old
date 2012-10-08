@@ -14,41 +14,36 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_COMMONHELPER_H
-#define PUBLICTRANSPORTATION_COMMONHELPER_H
+#ifndef PUBLICTRANSPORTATION_BACKENDLISTMANAGER_H
+#define PUBLICTRANSPORTATION_BACKENDLISTMANAGER_H
 
-/**
- * @file commonhelper.h
- * @short Widely used helper functions
- */
+#include "publictransportation_global.h"
 
-#include <QtCore/QList>
+#include <QtCore/QObject>
+
+#include "backendinfo.h"
 
 namespace PublicTransportation
 {
 
-/**
- * @short Shared copy
- *
- * This function is used to get the shared copy
- * version of an implicitely shared object in a list.
- *
- * This function can then identify objects that are not
- * shared, but are equal, and retrieve a shared copy instead.
- *
- * @param entry shared entry to search.
- * @param list list of shared entries to search.
- * @return the shared version of the provided entry.
- */
-template<class T> inline T sharedCopy(const T &entry, const QList<T> list)
+class BackendListManagerPrivate;
+class PUBLICTRANSPORTATION_EXPORT BackendListManager : public QObject
 {
-    if (list.contains(entry)) {
-        return list[list.indexOf(entry)];
-    } else {
-        return T();
-    }
-}
+    Q_OBJECT
+public:
+    explicit BackendListManager(QObject *parent = 0);
+    virtual ~BackendListManager();
+    QList<BackendInfo> backendList() const;
+public Q_SLOTS:
+    void reload();
+Q_SIGNALS:
+    void backendListChanged();
+protected:
+    QScopedPointer<BackendListManagerPrivate> d_ptr;
+private:
+    Q_DECLARE_PRIVATE(BackendListManager)
+};
 
 }
 
-#endif // PUBLICTRANSPORTATION_COMMONHELPER_H
+#endif // PUBLICTRANSPORTATION_BACKENDLISTMANAGER_H

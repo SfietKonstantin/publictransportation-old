@@ -66,6 +66,10 @@ public Q_SLOTS:
      */
     virtual void stop();
     /**
+     * @brief Wait for stopped
+     */
+    virtual void waitForStopped();
+    /**
      * @brief Kill the backend
      */
     virtual void kill();
