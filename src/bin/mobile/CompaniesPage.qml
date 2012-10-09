@@ -39,7 +39,7 @@ AbstractPage {
                 subText: model.description
                 onClicked: {
                     window.pageStack.push(linesPage)
-                    CompaniesModelInstance.requestCompany(model.index)
+                    CompaniesModelInstance.requestLines(model.index)
                 }
             }
         }

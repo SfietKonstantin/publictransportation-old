@@ -37,6 +37,10 @@ AbstractPage {
             delegate: ClickableEntry {
                 text: model.name
                 subText: model.description
+                onClicked: {
+                    window.pageStack.push(stationsPage)
+                    JourneysModelInstance.requestStations(model.index)
+                }
             }
         }
 
@@ -47,4 +51,6 @@ AbstractPage {
             running: visible
         }
     }
+
+    StationsPage {id: stationsPage}
 }

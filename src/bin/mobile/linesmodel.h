@@ -17,6 +17,11 @@
 #ifndef PUBLICTRANSPORTATION_LINESMODEL_H
 #define PUBLICTRANSPORTATION_LINESMODEL_H
 
+/**
+ * @file linesmodel.h
+ * @short Definition of PublicTransportation::LinesModel
+ */
+
 #include <QtCore/QAbstractListModel>
 #include "manager/abstractbackendwrapper.h"
 
@@ -25,9 +30,28 @@ namespace PublicTransportation
 
 class AbstractBackendManager;
 class LinesModelPrivate;
+
+/**
+ * @brief A model for lines
+ *
+ * This class provides a model for QML that contains
+ * a list of lines. It lists all the lines of
+ * a given company.
+ *
+ * This class is populated by calling
+ * displayLines().
+ *
+ * This class also provides a method for QML context,
+ * that is requestJourneys(), and that is used to ask for
+ * getting informations on journeys. This method is used to
+ * emit journeysRequested() signal.
+ */
 class LinesModel: public QAbstractListModel
 {
     Q_OBJECT
+    /**
+     * @short If the model is updating
+     */
     Q_PROPERTY(bool updating READ isUpdating NOTIFY updatingChanged)
     /**
      * @short Count
@@ -42,6 +66,9 @@ public:
          * @short Name role
          */
         NameRole = Qt::UserRole + 1,
+        /**
+         * @short Description role
+         */
         DescriptionRole
     };
     /**
@@ -65,6 +92,10 @@ public:
      * @return the number of rows in this model.
      */
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    /**
+     * @brief If the model is updating
+     * @return if the model is updating.
+     */
     bool isUpdating() const;
     /**
      * @short Count
@@ -80,18 +111,36 @@ public:
      */
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 public Q_SLOTS:
+    /**
+     * @brief Display lines
+     * @param backendIdentifier backend identifier.
+     * @param company company for which the lines is requested.
+     */
     void displayLines(const QString &backendIdentifier,
                       const PublicTransportation::Company &company);
-    void requestLine(int index);
+    /**
+     * @brief Request journeys of a given line
+     * @param index index of the line.
+     */
+    void requestJourneys(int index);
 Q_SIGNALS:
+    /**
+     * @brief Updating changed
+     */
     void updatingChanged();
     /**
      * @short Count changed
      */
     void countChanged();
-    void displayJourneys(const QString &backendIdentifier,
-                         const PublicTransportation::Company &company,
-                         const PublicTransportation::Line &line);
+    /**
+     * @brief Journeys requested
+     * @param backendIdentifier backend identifier.
+     * @param company company for which the journeys are requested.
+     * @param line line for which the journeys are requested.
+     */
+    void journeysRequested(const QString &backendIdentifier,
+                           const PublicTransportation::Company &company,
+                           const PublicTransportation::Line &line);
 protected:
     /**
      * @short D-pointer

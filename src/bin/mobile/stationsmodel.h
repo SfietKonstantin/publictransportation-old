@@ -14,12 +14,12 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_JOURNEYSMODEL_H
-#define PUBLICTRANSPORTATION_JOURNEYSMODEL_H
+#ifndef PUBLICTRANSPORTATION_STATIONSMODEL_H
+#define PUBLICTRANSPORTATION_STATIONSMODEL_H
 
 /**
- * @file journeysmodel.h
- * @short Definition of PublicTransportation::JourneysModel
+ * @file stationsmodel.h
+ * @short Definition of PublicTransportation::StationsModel
  */
 
 #include <QtCore/QAbstractListModel>
@@ -29,24 +29,19 @@ namespace PublicTransportation
 {
 
 class AbstractBackendManager;
-class JourneysModelPrivate;
+class StationsModelPrivate;
 
 /**
- * @brief A model for journeys
+ * @brief A model for stations
  *
  * This class provides a model for QML that contains
- * a list of journeys. It lists all the journeys of
- * a given line.
+ * a list of stations. It lists all the lines of
+ * a given journey.
  *
  * This class is populated by calling
- * displayJourneys().
- *
- * This class also provides a method for QML context,
- * that is requestStations(), and that is used to ask for
- * getting informations on stations. This method is used to
- * emit stationsRequested() signal.
+ * displayStations().
  */
-class JourneysModel: public QAbstractListModel
+class StationsModel: public QAbstractListModel
 {
     Q_OBJECT
     /**
@@ -61,7 +56,7 @@ public:
     /**
      * @short Model roles
      */
-    enum JourneysModelRole {
+    enum StationsModelRole {
         /**
          * @short Name role
          */
@@ -75,11 +70,11 @@ public:
      * @short Default constructor
      * @param parent parent object.
      */
-    explicit JourneysModel(QObject *parent = 0);
+    explicit StationsModel(QObject *parent = 0);
     /**
      * @short Destructor
      */
-    virtual ~JourneysModel();
+    virtual ~StationsModel();
     /**
      * @brief Set backend manager
      * @param backendManager backend manager to set.
@@ -112,19 +107,16 @@ public:
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 public Q_SLOTS:
     /**
-     * @brief Display journeys
+     * @brief Display stations
      * @param backendIdentifier backend identifier.
-     * @param company company for which the journey is requested.
-     * @param line line for which the journey is requested.
+     * @param company company for which the stations is requested.
+     * @param line line for which the stations is requested.
+     * @param journey journey for which the stations is requested.
      */
-    void displayJourneys(const QString &backendIdentifier,
+    void displayStations(const QString &backendIdentifier,
                          const PublicTransportation::Company &company,
-                         const PublicTransportation::Line &line);
-    /**
-     * @brief Request stations of a given journey
-     * @param index index of the journey.
-     */
-    void requestStations(int index);
+                         const PublicTransportation::Line &line,
+                         const PublicTransportation::Journey &journey);
 Q_SIGNALS:
     /**
      * @brief Updating changed
@@ -134,29 +126,19 @@ Q_SIGNALS:
      * @short Count changed
      */
     void countChanged();
-    /**
-     * @brief Stations requested
-     * @param backendIdentifier backend identifier.
-     * @param company company for which the stations are requested.
-     * @param line line for which the stations are requested.
-     * @param journey journey for which the stations are requested.
-     */
-    void stationsRequested(const QString &backendIdentifier,
-                           const PublicTransportation::Company &company,
-                           const PublicTransportation::Line &line,
-                           const PublicTransportation::Journey &journey);
 protected:
     /**
      * @short D-pointer
      */
-    const QScopedPointer<JourneysModelPrivate> d_ptr;
+    const QScopedPointer<StationsModelPrivate> d_ptr;
 private:
-    Q_DECLARE_PRIVATE(JourneysModel)
-    Q_PRIVATE_SLOT(d_func(), void slotJourneysChanged(PublicTransportation::Company,
-                                                      PublicTransportation::Line))
+    Q_DECLARE_PRIVATE(StationsModel)
+    Q_PRIVATE_SLOT(d_func(), void slotStationsChanged(PublicTransportation::Company,
+                                                      PublicTransportation::Line,
+                                                      PublicTransportation::Journey))
 
 };
 
 }
 
-#endif // PUBLICTRANSPORTATION_JOURNEYSMODEL_H
+#endif // PUBLICTRANSPORTATION_STATIONSMODEL_H

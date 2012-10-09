@@ -13,12 +13,14 @@ HEADERS +=      backendmodel.h \
                 companiesmodel.h \
                 linesmodel.h \
                 journeysmodel.h \
+                stationsmodel.h \
 
 SOURCES +=      main.cpp \
                 backendmodel.cpp \
                 companiesmodel.cpp \
                 linesmodel.cpp \
                 journeysmodel.cpp \
+                stationsmodel.cpp \
 
 OTHER_FILES +=  main.qml \
                 UiConstants.js \
@@ -31,7 +33,8 @@ OTHER_FILES +=  main.qml \
                 BackendSelectorPage.qml \
                 CompaniesPage.qml \
                 LinesPage.qml \
-    JourneysPage.qml
+                JourneysPage.qml \
+                StationsPage.qml
 
 # deployment
 target.path = $${APPLICATION_FOLDER}

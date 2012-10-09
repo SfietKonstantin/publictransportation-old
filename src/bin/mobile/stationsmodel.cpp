@@ -15,11 +15,11 @@
  ****************************************************************************************/
 
 /**
- * @file journeysmodel.cpp
- * @short Implementation of PublicTransportation::JourneysModel
+ * @file stationsmodel.cpp
+ * @short Implementation of PublicTransportation::StationsModel
  */
 
-#include "journeysmodel.h"
+#include "stationsmodel.h"
 
 #include "manager/abstractbackendmanager.h"
 
@@ -28,9 +28,9 @@ namespace PublicTransportation
 
 /**
  * @internal
- * @short Private class for PublicTransportation::JourneysModel
+ * @short Private class for PublicTransportation::StationsModel
  */
-class JourneysModelPrivate
+class StationsModelPrivate
 {
 public:
     /**
@@ -38,21 +38,23 @@ public:
      * @short Default constructor
      * @param q Q-pointer.
      */
-    JourneysModelPrivate(JourneysModel *q);
+    StationsModelPrivate(StationsModel *q);
     /**
      * @internal
-     * @brief Slot for journeys change
+     * @brief Slot for stations change
      * @param company company.
      * @param line line.
+     * @param journey journey.
      */
-    void slotJourneysChanged(const PublicTransportation::Company &company,
-                          const PublicTransportation::Line &line);
+    void slotStationsChanged(const PublicTransportation::Company &company,
+                             const PublicTransportation::Line &line,
+                             const PublicTransportation::Journey &journey);
     /**
      * @internal
      * @brief Update the model
-     * @param journeys journeys to set.
+     * @param stations stations to set.
      */
-    void update(const QList<Journey> &journeys);
+    void update(const QList<Station> &stations);
     /**
      * @internal
      * @brief Backend manager
@@ -62,12 +64,11 @@ public:
      * @internal
      * @short Data
      */
-    QList<Journey> data;
+    QList<Station> data;
     /**
      * @internal
      * @brief Updating
      */
-    bool updating;
     /**
      * @internal
      * @brief Backend identifier
@@ -83,25 +84,31 @@ public:
      * @brief Line
      */
     Line line;
+    /**
+     * @internal
+     * @brief Journey
+     */
+    Journey journey;
 private:
     /**
      * @internal
      * @brief Q-pointer
      */
-    JourneysModel * const q_ptr;
-    Q_DECLARE_PUBLIC(JourneysModel)
+    StationsModel * const q_ptr;
+    Q_DECLARE_PUBLIC(StationsModel)
 };
 
-JourneysModelPrivate::JourneysModelPrivate(JourneysModel *q):
+StationsModelPrivate::StationsModelPrivate(StationsModel *q):
     q_ptr(q)
 {
     backendManager = 0;
     updating = false;
 }
 
-void JourneysModelPrivate::slotJourneysChanged(const Company &company, const Line &line)
+void StationsModelPrivate::slotStationsChanged(const Company &company, const Line &line,
+                                               const Journey &journey)
 {
-    Q_Q(JourneysModel);
+    Q_Q(StationsModel);
 
     AbstractBackendWrapper *backend = qobject_cast<AbstractBackendWrapper *>(q->sender());
     if (!backend) {
@@ -111,26 +118,28 @@ void JourneysModelPrivate::slotJourneysChanged(const Company &company, const Lin
     updating = false;
     emit q->updatingChanged();
 
-    QObject::disconnect(backend, SIGNAL(journeysChanged(PublicTransportation::Company,
-                                                        PublicTransportation::Line)),
-                        q, SLOT(slotJourneysChanged(PublicTransportation::Company,
-                                                    PublicTransportation::Line)));
+    QObject::disconnect(backend, SIGNAL(stationsChanged(PublicTransportation::Company,
+                                                        PublicTransportation::Line,
+                                                        PublicTransportation::Journey)),
+                        q, SLOT(slotStationsChanged(PublicTransportation::Company,
+                                                    PublicTransportation::Line,
+                                                    PublicTransportation::Journey)));
 
-    update(backend->journeys(company, line));
+    update(backend->stations(company, line, journey));
 }
 
-void JourneysModelPrivate::update(const QList<Journey> &journeys)
+void StationsModelPrivate::update(const QList<Station> &stations)
 {
-    Q_Q(JourneysModel);
+    Q_Q(StationsModel);
 
     q->beginRemoveRows(QModelIndex(), 0, q->rowCount() - 1);
     data.clear();
     q->endRemoveRows();
 
 
-    if (journeys.count() != 0) {
-        q->beginInsertRows(QModelIndex(), 0, journeys.count() - 1);
-        data = journeys;
+    if (stations.count() != 0) {
+        q->beginInsertRows(QModelIndex(), 0, stations.count() - 1);
+        data = stations;
         emit q->countChanged();
         q->endInsertRows();
     }
@@ -138,9 +147,9 @@ void JourneysModelPrivate::update(const QList<Journey> &journeys)
 
 ////// End of private class //////
 
-JourneysModel::JourneysModel(QObject *parent):
+StationsModel::StationsModel(QObject *parent):
     QAbstractListModel(parent),
-    d_ptr(new JourneysModelPrivate(this))
+    d_ptr(new StationsModelPrivate(this))
 {
     // Definition of roles
     QHash <int, QByteArray> roles;
@@ -149,13 +158,13 @@ JourneysModel::JourneysModel(QObject *parent):
     setRoleNames(roles);
 }
 
-JourneysModel::~JourneysModel()
+StationsModel::~StationsModel()
 {
 }
 
-void JourneysModel::setBackendManager(AbstractBackendManager *backendManager)
+void StationsModel::setBackendManager(AbstractBackendManager *backendManager)
 {
-    Q_D(JourneysModel);
+    Q_D(StationsModel);
     if (d->backendManager != backendManager) {
         if (d->backendManager) {
             d->backendManager->disconnect(this);
@@ -165,38 +174,38 @@ void JourneysModel::setBackendManager(AbstractBackendManager *backendManager)
     }
 }
 
-int  JourneysModel::rowCount(const QModelIndex &parent) const
+int  StationsModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
-    Q_D(const JourneysModel);
+    Q_D(const StationsModel);
     return d->data.count();
 }
 
-bool JourneysModel::isUpdating() const
+bool StationsModel::isUpdating() const
 {
-    Q_D(const JourneysModel);
+    Q_D(const StationsModel);
     return d->updating;
 }
 
-int JourneysModel::count() const
+int StationsModel::count() const
 {
     return rowCount();
 }
 
-QVariant JourneysModel::data(const QModelIndex &index, int role) const
+QVariant StationsModel::data(const QModelIndex &index, int role) const
 {
-    Q_D(const JourneysModel);
+    Q_D(const StationsModel);
     if (index.row() < 0 or index.row() >= rowCount()) {
         return QVariant();
     }
-    Journey journey = d->data.at(index.row());
+    Station station = d->data.at(index.row());
 
     switch(role) {
     case NameRole:
-        return journey.name();
+        return station.name();
         break;
     case DescriptionRole:
-        return journey.properties().value("description").toString();
+        return station.properties().value("description").toString();
         break;
     default:
         return QVariant();
@@ -204,10 +213,10 @@ QVariant JourneysModel::data(const QModelIndex &index, int role) const
     }
 }
 
-void JourneysModel::displayJourneys(const QString &backendIdentifier, const Company &company,
-                                    const Line &line)
+void StationsModel::displayStations(const QString &backendIdentifier, const Company &company,
+                                    const Line &line, const Journey &journey)
 {
-    Q_D(JourneysModel);
+    Q_D(StationsModel);
     if (!d->backendManager) {
         return;
     }
@@ -221,39 +230,27 @@ void JourneysModel::displayJourneys(const QString &backendIdentifier, const Comp
     d->backendIdentifier = backendIdentifier;
     d->company = company;
     d->line = line;
-    QList<Journey> journeys = backend->journeys(company, line);
+    d->journey = journey;
+    QList<Station> stations = backend->stations(company, line, journey);
 
 
-    if (journeys.isEmpty()) {
+    if (stations.isEmpty()) {
         d->updating = true;
         emit updatingChanged();
 
-        connect(backend, SIGNAL(journeysChanged(PublicTransportation::Company,
-                                                PublicTransportation::Line)),
-                this, SLOT(slotJourneysChanged(PublicTransportation::Company,
-                                               PublicTransportation::Line)));
+        connect(backend, SIGNAL(stationsChanged(PublicTransportation::Company,
+                                                PublicTransportation::Line,
+                                                PublicTransportation::Journey)),
+                this, SLOT(slotStationsChanged(PublicTransportation::Company,
+                                               PublicTransportation::Line,
+                                               PublicTransportation::Journey)));
 
-        backend->requestListJourneys(company, line);
+        backend->requestListStations(company, line, journey);
     } else {
-        d->update(journeys);
+        d->update(stations);
     }
-}
-
-void JourneysModel::requestStations(int index)
-{
-    Q_D(JourneysModel);
-    if (d->company.isNull() || d->line.isNull()) {
-        return;
-    }
-
-    if (index < 0 or index >= rowCount()) {
-        return;
-    }
-    Journey journey = d->data.at(index);
-
-    emit stationsRequested(d->backendIdentifier, d->company, d->line, journey);
 }
 
 }
 
-#include "moc_journeysmodel.cpp"
+#include "moc_stationsmodel.cpp"

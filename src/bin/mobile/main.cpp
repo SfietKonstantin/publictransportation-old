@@ -14,6 +14,11 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+/**
+ * @file mobile/main.cpp
+ * @short Entry point of the mobile application
+ */
+
 #include <QtCore/QSettings>
 #include <QtGui/QApplication>
 #include <QtDeclarative/QtDeclarative>
@@ -25,36 +30,60 @@
 #include "companiesmodel.h"
 #include "linesmodel.h"
 #include "journeysmodel.h"
+#include "stationsmodel.h"
 
 using namespace PublicTransportation;
 
+/**
+ * @brief Main
+ *
+ * Entry point of the mobile application.
+ *
+ * @param argc argc.
+ * @param argv argv.
+ * @return exit code.
+ */
 int main(int argc, char **argv)
 {
+    // Setup applications
     QApplication app(argc, argv);
     app.setOrganizationName("SfietKonstantin");
     app.setApplicationName("PublicTransportation");
 
+    // Setup DBus
     DBusBackendManager::registerDBusService();
+
+    // Setup models and manager
     BackendModel backendModel;
     CompaniesModel companiesModel;
     LinesModel linesModel;
     JourneysModel journeysModel;
+    StationsModel stationsModel;
 
     DBusBackendManager dbusBackendManager;
     backendModel.setBackendManager(&dbusBackendManager);
     companiesModel.setBackendManager(&dbusBackendManager);
     linesModel.setBackendManager(&dbusBackendManager);
     journeysModel.setBackendManager(&dbusBackendManager);
+    stationsModel.setBackendManager(&dbusBackendManager);
 
-    QObject::connect(&companiesModel, SIGNAL(displayLines(QString,PublicTransportation::Company)),
+    QObject::connect(&companiesModel, SIGNAL(linesRequested(QString,PublicTransportation::Company)),
                      &linesModel, SLOT(displayLines(QString,PublicTransportation::Company)));
-    QObject::connect(&linesModel, SIGNAL(displayJourneys(QString,PublicTransportation::Company,
-                                                         PublicTransportation::Line)),
+    QObject::connect(&linesModel, SIGNAL(journeysRequested(QString,PublicTransportation::Company,
+                                                           PublicTransportation::Line)),
                      &journeysModel, SLOT(displayJourneys(QString,PublicTransportation::Company,
                                                           PublicTransportation::Line)));
+    QObject::connect(&journeysModel, SIGNAL(stationsRequested(QString,PublicTransportation::Company,
+                                                              PublicTransportation::Line,
+                                                              PublicTransportation::Journey)),
+                     &stationsModel, SLOT(displayStations(QString,PublicTransportation::Company,
+                                                          PublicTransportation::Line,
+                                                          PublicTransportation::Journey)));
 
+    // Load backend list
     backendModel.reload();
 
+    // Set QML context
     qmlRegisterUncreatableType<BackendModel>("org.SfietKonstantin.publictransportation",
                                              1, 0, "BackendModel",
                                              "BackendModel cannot be created");
@@ -71,6 +100,9 @@ int main(int argc, char **argv)
     view.rootContext()->setContextProperty("CompaniesModelInstance", &companiesModel);
     view.rootContext()->setContextProperty("LinesModelInstance", &linesModel);
     view.rootContext()->setContextProperty("JourneysModelInstance", &journeysModel);
+    view.rootContext()->setContextProperty("StationsModelInstance", &stationsModel);
+
+    // Launch application
     view.setSource(QUrl(MAIN_QML_FILE));
     view.showFullScreen();
 

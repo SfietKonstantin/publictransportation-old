@@ -14,27 +14,73 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#include "linesmodel.h"
+/**
+ * @file linesmodel.cpp
+ * @short Implementation of PublicTransportation::LinesModel
+ */
 
-#include <QtCore/QDebug>
+#include "linesmodel.h"
 
 #include "manager/abstractbackendmanager.h"
 
 namespace PublicTransportation
 {
 
+/**
+ * @internal
+ * @short Private class for PublicTransportation::LinesModel
+ */
 class LinesModelPrivate
 {
 public:
+    /**
+     * @internal
+     * @short Default constructor
+     * @param q Q-pointer.
+     */
     LinesModelPrivate(LinesModel *q);
+    /**
+     * @internal
+     * @brief Slot for lines change
+     * @param company company.
+     */
     void slotLinesChanged(const PublicTransportation::Company &company);
+    /**
+     * @internal
+     * @brief Update the model
+     * @param lines lines to set.
+     */
     void update(const QList<Line> &lines);
+    /**
+     * @internal
+     * @brief Backend manager
+     */
     AbstractBackendManager *backendManager;
-    bool updating;
-    QString backendIdentifier;
-    Company company;
+    /**
+     * @internal
+     * @short Data
+     */
     QList<Line> data;
+    /**
+     * @internal
+     * @brief Updating
+     */
+    bool updating;
+    /**
+     * @internal
+     * @brief Backend identifier
+     */
+    QString backendIdentifier;
+    /**
+     * @internal
+     * @brief Company
+     */
+    Company company;
 private:
+    /**
+     * @internal
+     * @brief Q-pointer
+     */
     LinesModel * const q_ptr;
     Q_DECLARE_PUBLIC(LinesModel)
 };
@@ -180,7 +226,7 @@ void LinesModel::displayLines(const QString &backendIdentifier, const Company &c
     }
 }
 
-void LinesModel::requestLine(int index)
+void LinesModel::requestJourneys(int index)
 {
     Q_D(LinesModel);
     if (d->company.isNull()) {
@@ -192,7 +238,7 @@ void LinesModel::requestLine(int index)
     }
     Line line = d->data.at(index);
 
-    emit displayJourneys(d->backendIdentifier, d->company, line);
+    emit journeysRequested(d->backendIdentifier, d->company, line);
 }
 
 }

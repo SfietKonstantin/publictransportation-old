@@ -20,7 +20,7 @@ import com.nokia.meego 1.0
 AbstractPage {
     headerColor: "#006E29"
     headerLabelColor: "white"
-    title: qsTr("Lines")
+    title: qsTr("Stations")
     tools: ToolBarLayout {
         ToolIcon {
             iconId: "toolbar-back"
@@ -33,24 +33,18 @@ AbstractPage {
         ListView {
             clip: true
             anchors.fill: parent
-            model: LinesModelInstance
+            model: StationsModelInstance
             delegate: ClickableEntry {
                 text: model.name
                 subText: model.description
-                onClicked: {
-                    window.pageStack.push(journeysPage)
-                    LinesModelInstance.requestJourneys(model.index)
-                }
             }
         }
 
         BusyIndicator {
             anchors.centerIn: parent
-            visible: LinesModelInstance.updating
+            visible: StationsModelInstance.updating
             platformStyle: BusyIndicatorStyle { size: "large" }
             running: visible
         }
     }
-
-    JourneysPage {id: journeysPage}
 }

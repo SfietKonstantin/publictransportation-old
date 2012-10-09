@@ -45,9 +45,27 @@ public:
      * @param q Q-pointer.
      */
     BackendModelPrivate(BackendModel *q);
+    /**
+     * @internal
+     * @brief Status
+     * @param backendInfo backend to get the status.
+     * @return status of the backend.
+     */
     BackendModel::BackendStatus status(const BackendInfo &backendInfo) const;
+    /**
+     * @internal
+     * @brief Slot for status changed
+     */
     void slotStatusChanged();
-    BackendListManager *backendList;
+    /**
+     * @internal
+     * @brief Backend list manager
+     */
+    BackendListManager *backendListManager;
+    /**
+     * @internal
+     * @brief Backend manager
+     */
     AbstractBackendManager *backendManager;
     /**
      * @internal
@@ -67,7 +85,7 @@ BackendModelPrivate::BackendModelPrivate(BackendModel *q):
     q_ptr(q)
 {
     backendManager = 0;
-    backendList = new BackendListManager(q);
+    backendListManager = new BackendListManager(q);
 }
 
 BackendModel::BackendStatus BackendModelPrivate::status(const BackendInfo &backendInfo) const
@@ -190,13 +208,13 @@ QVariant BackendModel::data(const QModelIndex &index, int role) const
 void BackendModel::reload()
 {
     Q_D(BackendModel);
-    d->backendList->reload();
+    d->backendListManager->reload();
 
     beginRemoveRows(QModelIndex(), 0, rowCount() - 1);
     d->data.clear();
     endRemoveRows();
 
-    QList<BackendInfo> availableBackendList = d->backendList->backendList();
+    QList<BackendInfo> availableBackendList = d->backendListManager->backendList();
     beginInsertRows(QModelIndex(), 0, availableBackendList.count() - 1);
     d->data = availableBackendList;
     endInsertRows();

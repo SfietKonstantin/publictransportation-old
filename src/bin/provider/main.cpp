@@ -14,6 +14,11 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+/**
+ * @file provider/main.cpp
+ * @short Entry point of the provider
+ */
+
 #include <iostream>
 #include <signal.h>
 
@@ -29,6 +34,9 @@
 using namespace std;
 using namespace PublicTransportation;
 
+/**
+ * @brief Display help
+ */
 void displayHelp()
 {
     QString version = QString("%1.%2.%3").arg(QString::number(VERSION_MAJOR),
@@ -47,6 +55,11 @@ use the provided DBus identifier to communicate with"
          << endl;
 }
 
+/**
+ * @brief Get the argument corresponding to the plugin
+ * @param arguments argument list.
+ * @return plugin.
+ */
 QString getPlugin(const QStringList &arguments)
 {
     if (arguments.at(1) == "--plugin") {
@@ -57,6 +70,11 @@ QString getPlugin(const QStringList &arguments)
     return QString();
 }
 
+/**
+ * @brief Get the argument corresponding to the DBus identifier
+ * @param arguments argument list.
+ * @return DBus identifier.
+ */
 QString getDBusIdentifier(const QStringList &arguments)
 {
     if (arguments.at(1) == "--identifier") {
@@ -67,6 +85,10 @@ QString getDBusIdentifier(const QStringList &arguments)
     return QString();
 }
 
+/**
+ * @brief UNIX signal handler
+ * @param signal signal.
+ */
 void signalHandler(int signal)
 {
     switch(signal) {
@@ -77,6 +99,15 @@ void signalHandler(int signal)
     }
 }
 
+/**
+ * @brief Main
+ *
+ * Entry point of the provider.
+ *
+ * @param argc argc.
+ * @param argv argv.
+ * @return exit code.
+ */
 int main(int argc, char **argv)
 {
     // Check argument count

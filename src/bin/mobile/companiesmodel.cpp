@@ -21,12 +21,9 @@
 
 #include "companiesmodel.h"
 
-#include <QtCore/QCryptographicHash>
-
 #include "common/capabilitiesconstants.h"
 #include "manager/abstractbackendmanager.h"
 #include "manager/backendinfo.h"
-#include "debug.h"
 
 namespace PublicTransportation
 {
@@ -39,9 +36,25 @@ namespace PublicTransportation
 class CompaniesModelPrivate
 {
 public:
+    /**
+     * @internal
+     * @brief Enumeration used to describe update status
+     */
     enum UpdateStatus {
+        /**
+         * @internal
+         * @short Need update
+         */
         NeedUpdate,
+        /**
+         * @internal
+         * @short Updating
+         */
         Updating,
+        /**
+         * @internal
+         * @short Updated
+         */
         Updated
     };
 
@@ -51,20 +64,63 @@ public:
      * @param q Q-pointer.
      */
     CompaniesModelPrivate(CompaniesModel *q);
+    /**
+     * @internal
+     * @brief Check the status of the update
+     */
     void checkUpdating();
+    /**
+     * @internal
+     * @brief Slot for backend being added
+     * @param identifier backend identifier.
+     * @param backend backend.
+     */
     void slotBackendAdded(const QString &identifier, AbstractBackendWrapper *backend);
+    /**
+     * @internal
+     * @brief Slot for backend being removed
+     * @param identifier backend identifier.
+     */
     void slotBackendRemoved(const QString &identifier);
+    /**
+     * @internal
+     * @brief Slot for status change
+     */
     void slotStatusChanged();
+    /**
+     * @internal
+     * @brief Slot for companies change
+     */
     void slotCompaniesChanged();
+    /**
+     * @internal
+     * @brief Update the model
+     */
     void update();
+    /**
+     * @internal
+     * @brief Backend manager
+     */
     AbstractBackendManager *backendManager;
     /**
      * @internal
      * @short Data
      */
     QList<Company> data;
+    /**
+     * @internal
+     * @brief Map mapping backend company to the backend they belong
+     */
     QMap<Company, QString> backendFromCompany;
+    /**
+     * @internal
+     * @brief Updating
+     */
     bool updating;
+    /**
+     * @internal
+     * @brief Map mapping backend to the update status
+     */
     QMap<QString, UpdateStatus> updateTrackerMap;
 private:
     /**
@@ -258,7 +314,7 @@ QVariant CompaniesModel::data(const QModelIndex &index, int role) const
     }
 }
 
-void CompaniesModel::requestCompany(int index)
+void CompaniesModel::requestLines(int index)
 {
     Q_D(const CompaniesModel);
     if (index < 0 or index >= rowCount()) {
@@ -267,7 +323,7 @@ void CompaniesModel::requestCompany(int index)
     Company company = d->data.at(index);
     QString identifier = d->backendFromCompany.value(company);
 
-    emit displayLines(identifier, company);
+    emit linesRequested(identifier, company);
 }
 
 }

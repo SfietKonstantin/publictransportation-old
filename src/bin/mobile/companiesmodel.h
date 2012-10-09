@@ -31,9 +31,30 @@ namespace PublicTransportation
 class AbstractBackendManager;
 class CompaniesModelPrivate;
 
+/**
+ * @brief A model for companies
+ *
+ * This class provides a model for QML that contains
+ * a list of companies. It groups the companies of all
+ * the backends that provides capabilities of listing
+ * companies.
+ *
+ * When a backend is started, this classes asks for
+ * companies and wait for them to load. when a backend
+ * is stopped, this class is also update, in order to
+ * remove the unused companies.
+ *
+ * This class also provides a method for QML context,
+ * that is requestLines(), and that is used to ask for
+ * getting informations on lines. This method is used to
+ * emit linesRequested() signal.
+ */
 class CompaniesModel: public QAbstractListModel
 {
     Q_OBJECT
+    /**
+     * @short If the model is updating
+     */
     Q_PROPERTY(bool updating READ isUpdating NOTIFY updatingChanged)
     /**
      * @short Count
@@ -74,6 +95,10 @@ public:
      * @return the number of rows in this model.
      */
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    /**
+     * @brief If the model is updating
+     * @return if the model is updating.
+     */
     bool isUpdating() const;
     /**
      * @short Count
@@ -89,15 +114,27 @@ public:
      */
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 public Q_SLOTS:
-    void requestCompany(int index);
+    /**
+     * @brief Request lines of a given company
+     * @param index index of the company.
+     */
+    void requestLines(int index);
 Q_SIGNALS:
+    /**
+     * @brief Updating changed
+     */
     void updatingChanged();
     /**
      * @short Count changed
      */
     void countChanged();
-    void displayLines(const QString &backendIdentifier,
-                      const PublicTransportation::Company &company);
+    /**
+     * @brief Lines requested
+     * @param backendIdentifier backend identifier.
+     * @param company company for which the lines are requested.
+     */
+    void linesRequested(const QString &backendIdentifier,
+                        const PublicTransportation::Company &company);
 protected:
     /**
      * @short D-pointer
