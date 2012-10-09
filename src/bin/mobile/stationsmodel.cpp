@@ -69,6 +69,7 @@ public:
      * @internal
      * @brief Updating
      */
+    bool updating;
     /**
      * @internal
      * @brief Backend identifier

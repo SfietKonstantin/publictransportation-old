@@ -16,7 +16,7 @@
 
 /**
  * @file dbusbackendwrapper.cpp
- * @short Implementation of PublicTransportation::DBusBackendWrapperPrivate
+ * @short Implementation of PublicTransportation::DBusBackendWrapper
  */
 
 #include "dbusbackendwrapper.h"
