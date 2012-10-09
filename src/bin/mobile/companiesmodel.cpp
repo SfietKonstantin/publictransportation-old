@@ -39,23 +39,33 @@ namespace PublicTransportation
 class CompaniesModelPrivate
 {
 public:
+    enum UpdateStatus {
+        NeedUpdate,
+        Updating,
+        Updated
+    };
+
     /**
      * @internal
      * @short Default constructor
      * @param q Q-pointer.
      */
     CompaniesModelPrivate(CompaniesModel *q);
+    void checkUpdating();
     void slotBackendAdded(const QString &identifier, AbstractBackendWrapper *backend);
     void slotBackendRemoved(const QString &identifier);
     void slotStatusChanged();
     void slotCompaniesChanged();
-    bool needUpdate;
+    void update();
     AbstractBackendManager *backendManager;
     /**
      * @internal
      * @short Data
      */
     QList<Company> data;
+    QMap<Company, QString> backendFromCompany;
+    bool updating;
+    QMap<QString, UpdateStatus> updateTrackerMap;
 private:
     /**
      * @internal
@@ -69,7 +79,26 @@ CompaniesModelPrivate::CompaniesModelPrivate(CompaniesModel *q):
     q_ptr(q)
 {
     backendManager = 0;
-    needUpdate = false;
+    updating = false;
+}
+
+void CompaniesModelPrivate::checkUpdating()
+{
+    Q_Q(CompaniesModel);
+    bool currentUpdating = false;
+    foreach (QString identifier, updateTrackerMap.keys()) {
+        if (updateTrackerMap.value(identifier) != Updated) {
+            currentUpdating = true;
+        }
+    }
+
+    if (updating != currentUpdating) {
+        updating = currentUpdating;
+
+        update();
+
+        emit q->updatingChanged();
+    }
 }
 
 void CompaniesModelPrivate::slotBackendAdded(const QString &identifier,
@@ -78,15 +107,17 @@ void CompaniesModelPrivate::slotBackendAdded(const QString &identifier,
     Q_Q(CompaniesModel);
     Q_UNUSED(identifier)
     QObject::connect(backend, SIGNAL(statusChanged()), q, SLOT(slotStatusChanged()));
+    QObject::connect(backend, SIGNAL(companiesChanged()), q, SLOT(slotCompaniesChanged()));
 
-    needUpdate = true;
+    updateTrackerMap.insert(identifier, NeedUpdate);
+    checkUpdating();
 }
 
 void CompaniesModelPrivate::slotBackendRemoved(const QString &identifier)
 {
-    Q_Q(CompaniesModel);
     Q_UNUSED(identifier)
-    needUpdate = true;
+    updateTrackerMap.remove(identifier);
+    update();
 }
 
 void CompaniesModelPrivate::slotStatusChanged()
@@ -99,42 +130,60 @@ void CompaniesModelPrivate::slotStatusChanged()
 
     if (backend->status() == AbstractBackendWrapper::Launched
         || backend->status() == AbstractBackendWrapper::Stopping) {
-        needUpdate = true;
+
+        QString identifier = backend->identifier();
+        if (updateTrackerMap.value(identifier) == NeedUpdate) {
+            backend->requestListCompanies();
+            updateTrackerMap.insert(identifier, Updating);
+            checkUpdating();
+        } else {
+            update();
+        }
     }
 }
 
 void CompaniesModelPrivate::slotCompaniesChanged()
 {
-    qDebug() << "test";
+    Q_Q(CompaniesModel);
+    QObject *sender = q->sender();
+    AbstractBackendWrapper * backend = qobject_cast<AbstractBackendWrapper *>(sender);
+    if (!backend) {
+        return;
+    }
 
-//    Q_Q(CompaniesModel);
-//    QObject *sender = q->sender();
-//    AbstractBackendWrapper * backendWrapper = qobject_cast<AbstractBackendWrapper *>(sender);
-//    if (!backendWrapper) {
-//        return;
-//    }
+    QString identifier = backend->identifier();
+    if (!updateTrackerMap.contains(identifier)) {
+        return;
+    }
 
-//    if (!loadedBackendWrappers.contains(backendWrapper)) {
-//        return;
-//    }
+    updateTrackerMap.insert(identifier, Updated);
+    checkUpdating();
+}
 
-//    loadedBackendWrappers.insert(backendWrapper, true);
+void CompaniesModelPrivate::update()
+{
+    Q_Q(CompaniesModel);
 
-//    // Everything is loaded
-//    if (!loadedBackendWrappers.values().contains(false)) {
-//        q->beginRemoveRows(QModelIndex(), 0, q->rowCount() - 1);
-//        data.clear();
-//        q->endRemoveRows();
+    q->beginRemoveRows(QModelIndex(), 0, q->rowCount() - 1);
+    data.clear();
+    backendFromCompany.clear();
+    q->endRemoveRows();
 
-//        foreach (AbstractBackendWrapper *backendWrapper, loadedBackendWrappers.keys()) {
-//            data.append(backendWrapper->companies());
-//        }
-//        q->beginInsertRows(QModelIndex(), 0, data.count());
-//        qSort(data);
-//        emit q->countChanged();
-//        q->endInsertRows();
-//        setLoading(false);
-//    }
+    foreach (AbstractBackendWrapper *backend, backendManager->backends()) {
+        if (backend->status() == AbstractBackendWrapper::Launched) {
+            data.append(backend->companies());
+            foreach(Company company, backend->companies()) {
+                backendFromCompany.insert(company, backend->identifier());
+            }
+        }
+    }
+
+    if (data.count() != 0) {
+        q->beginInsertRows(QModelIndex(), 0, data.count() - 1);
+        qSort(data);
+        emit q->countChanged();
+        q->endInsertRows();
+    }
 }
 
 ////// End of private class //////
@@ -146,6 +195,7 @@ CompaniesModel::CompaniesModel(QObject *parent):
     // Definition of roles
     QHash <int, QByteArray> roles;
     roles.insert(NameRole, "name");
+    roles.insert(DescriptionRole, "description");
     setRoleNames(roles);
 }
 
@@ -176,6 +226,12 @@ int  CompaniesModel::rowCount(const QModelIndex &parent) const
     return d->data.count();
 }
 
+bool CompaniesModel::isUpdating() const
+{
+    Q_D(const CompaniesModel);
+    return d->updating;
+}
+
 int CompaniesModel::count() const
 {
     return rowCount();
@@ -184,14 +240,17 @@ int CompaniesModel::count() const
 QVariant CompaniesModel::data(const QModelIndex &index, int role) const
 {
     Q_D(const CompaniesModel);
-    if (index.row() < 0 or index.row() > rowCount()) {
+    if (index.row() < 0 or index.row() >= rowCount()) {
         return QVariant();
     }
     Company company = d->data.at(index.row());
 
     switch(role) {
     case NameRole:
-        return company .name();
+        return company.name();
+        break;
+    case DescriptionRole:
+        return company.properties().value("description").toString();
         break;
     default:
         return QVariant();
@@ -199,25 +258,16 @@ QVariant CompaniesModel::data(const QModelIndex &index, int role) const
     }
 }
 
-void CompaniesModel::update()
+void CompaniesModel::requestCompany(int index)
 {
-    qDebug() << "update";
-
-    Q_D(CompaniesModel);
-    if (!d->backendManager) {
+    Q_D(const CompaniesModel);
+    if (index < 0 or index >= rowCount()) {
         return;
     }
+    Company company = d->data.at(index);
+    QString identifier = d->backendFromCompany.value(company);
 
-    foreach (AbstractBackendWrapper *backend, d->backendManager->backends()) {
-        if (backend->status() == AbstractBackendWrapper::Launched) {
-            if (backend->capabilities().contains(CAPABILITY_LIST_COMPANIES)) {
-                disconnect(backend, SIGNAL(capabilitiesChanged()),
-                           this, SLOT(slotCompaniesChanged()));
-                connect(backend, SIGNAL(companiesChanged()), this, SLOT(slotCompaniesChanged()));
-                backend->requestListCompanies();
-            }
-        }
-    }
+    emit displayLines(identifier, company);
 }
 
 }

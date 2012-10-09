@@ -14,15 +14,28 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+/**
+ * @file backendlistmanager.cpp
+ * @short Implementation of PublicTransportation::BackendListManager
+ */
+
 #include "backendlistmanager.h"
 #include "debug.h"
 
 namespace PublicTransportation
 {
 
-class BackendListManagerPrivate
+/**
+ * @internal
+ * @brief Private class for PublicTransportation::BackendListManager
+ */
+struct BackendListManagerPrivate
 {
 public:
+    /**
+     * @internal
+     * @brief List of backends
+     */
     QList<BackendInfo> backendList;
 };
 

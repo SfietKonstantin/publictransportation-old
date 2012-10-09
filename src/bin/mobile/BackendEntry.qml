@@ -31,6 +31,18 @@ Item
 
     height: Ui.LIST_ITEM_HEIGHT_DEFAULT
     width: parent.width
+    onStatusChanged: {
+        if (status == BackendModel.Launched) {
+            controlSwitch.humanInteraction = false
+            controlSwitch.checked = true
+            controlSwitch.humanInteraction = true
+        }
+        if (status == BackendModel.Stopped) {
+            controlSwitch.humanInteraction = false
+            controlSwitch.checked = false
+            controlSwitch.humanInteraction = true
+        }
+    }
 
     BorderImage {
         id: background
@@ -106,8 +118,13 @@ Item
 
     Switch {
         id: controlSwitch
+        property bool humanInteraction: true
         anchors.right: parent.right; anchors.rightMargin: Ui.MARGIN_DEFAULT
         anchors.verticalCenter: parent.verticalCenter
-        onCheckedChanged: container.checked(controlSwitch.checked)
+        onCheckedChanged: {
+            if (humanInteraction) {
+                container.checked(controlSwitch.checked)
+            }
+        }
     }
 }

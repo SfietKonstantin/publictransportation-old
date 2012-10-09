@@ -353,7 +353,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363796.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363796");
-        properties.insert("description", QString::fromUtf8("R-CFF > FLON"));
         properties.insert("from", QString::fromUtf8("Renens-Gare"));
         properties.insert("to", QString::fromUtf8("Lausanne-Flon"));
         journey2533279085363796.setProperties(properties);
@@ -363,7 +362,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363804.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363804");
-        properties.insert("description", QString::fromUtf8("FLON > R-CFF"));
         properties.insert("from", QString::fromUtf8("Lausanne-Flon"));
         properties.insert("to", QString::fromUtf8("Renens-Gare"));
         journey2533279085363804.setProperties(properties);
@@ -376,7 +374,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085382764.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085382764");
-        properties.insert("description", QString::fromUtf8("280"));
         properties.insert("from", QString::fromUtf8("Ouchy"));
         properties.insert("to", QString::fromUtf8("Croisettes"));
         journey2533279085382764.setProperties(properties);
@@ -386,7 +383,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085382767.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085382767");
-        properties.insert("description", QString::fromUtf8("281"));
         properties.insert("from", QString::fromUtf8("Croisettes"));
         properties.insert("to", QString::fromUtf8("Ouchy"));
         journey2533279085382767.setProperties(properties);
@@ -399,7 +395,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378050.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378050");
-        properties.insert("description", QString::fromUtf8("MALAD > BLECH"));
         properties.insert("from", QString::fromUtf8("Maladière"));
         properties.insert("to", QString::fromUtf8("Blécherette"));
         journey2533279085378050.setProperties(properties);
@@ -409,7 +404,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378063.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378063");
-        properties.insert("description", QString::fromUtf8("BLECH > MALAD"));
         properties.insert("from", QString::fromUtf8("Blécherette"));
         properties.insert("to", QString::fromUtf8("Maladière"));
         journey2533279085378063.setProperties(properties);
@@ -422,7 +416,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378143.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378143");
-        properties.insert("description", QString::fromUtf8("MALAD > DST"));
         properties.insert("from", QString::fromUtf8("Maladière-Lac"));
         properties.insert("to", QString::fromUtf8("Désert"));
         journey2533279085378143.setProperties(properties);
@@ -432,7 +425,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378157.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378157");
-        properties.insert("description", QString::fromUtf8("DST > MALAD"));
         properties.insert("from", QString::fromUtf8("Désert"));
         properties.insert("to", QString::fromUtf8("Maladière-Lac"));
         journey2533279085378157.setProperties(properties);
@@ -445,7 +437,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378218.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378218");
-        properties.insert("description", QString::fromUtf8("GARE > BELVO"));
         properties.insert("from", QString::fromUtf8("Lausanne-Gare"));
         properties.insert("to", QString::fromUtf8("Bellevaux"));
         journey2533279085378218.setProperties(properties);
@@ -455,7 +446,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378225.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378225");
-        properties.insert("description", QString::fromUtf8("BELVO > GARE"));
         properties.insert("from", QString::fromUtf8("Bellevaux"));
         properties.insert("to", QString::fromUtf8("Lausanne-Gare"));
         journey2533279085378225.setProperties(properties);
@@ -468,7 +458,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378270.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378270");
-        properties.insert("description", QString::fromUtf8("PLY-G > CDRAI"));
         properties.insert("from", QString::fromUtf8("Pully-Gare"));
         properties.insert("to", QString::fromUtf8("Coudraie"));
         journey2533279085378270.setProperties(properties);
@@ -478,7 +467,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378286.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378286");
-        properties.insert("description", QString::fromUtf8("CDRAI > PLY-G"));
         properties.insert("from", QString::fromUtf8("Coudraie"));
         properties.insert("to", QString::fromUtf8("Pully-Gare"));
         journey2533279085378286.setProperties(properties);
@@ -491,7 +479,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378354.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378354");
-        properties.insert("description", QString::fromUtf8("MALAD > VALMT"));
         properties.insert("from", QString::fromUtf8("Maladière"));
         properties.insert("to", QString::fromUtf8("Valmont"));
         journey2533279085378354.setProperties(properties);
@@ -501,7 +488,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378368.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378368");
-        properties.insert("description", QString::fromUtf8("VALMT > MALAD"));
         properties.insert("from", QString::fromUtf8("Valmont"));
         properties.insert("to", QString::fromUtf8("Maladière"));
         journey2533279085378368.setProperties(properties);
@@ -514,7 +500,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378439.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378439");
-        properties.insert("description", QString::fromUtf8("R-14A > VVERT"));
         properties.insert("from", QString::fromUtf8("Renens-14 Avril"));
         properties.insert("to", QString::fromUtf8("Val-Vert"));
         journey2533279085378439.setProperties(properties);
@@ -524,7 +509,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378448.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378448");
-        properties.insert("description", QString::fromUtf8("VVERT > R-14A"));
         properties.insert("from", QString::fromUtf8("Val-Vert"));
         properties.insert("to", QString::fromUtf8("Renens-14 Avril"));
         journey2533279085378448.setProperties(properties);
@@ -537,7 +521,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378531.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378531");
-        properties.insert("description", QString::fromUtf8("VERRI > GMONT"));
         properties.insert("from", QString::fromUtf8("Verrière"));
         properties.insert("to", QString::fromUtf8("Grand-Mont"));
         journey2533279085378531.setProperties(properties);
@@ -547,7 +530,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378551.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378551");
-        properties.insert("description", QString::fromUtf8("GMONT > VERRI"));
         properties.insert("from", QString::fromUtf8("Grand-Mont"));
         properties.insert("to", QString::fromUtf8("Verrière"));
         journey2533279085378551.setProperties(properties);
@@ -560,7 +542,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378570.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378570");
-        properties.insert("description", QString::fromUtf8("LUTRY > PRY"));
         properties.insert("from", QString::fromUtf8("Lutry-Corniche"));
         properties.insert("to", QString::fromUtf8("Prilly-Eglise"));
         journey2533279085378570.setProperties(properties);
@@ -570,7 +551,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378585.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378585");
-        properties.insert("description", QString::fromUtf8("PRY > LUTRY"));
         properties.insert("from", QString::fromUtf8("Prilly-Eglise"));
         properties.insert("to", QString::fromUtf8("Lutry-Corniche"));
         journey2533279085378585.setProperties(properties);
@@ -583,7 +563,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085370567.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085370567");
-        properties.insert("description", QString::fromUtf8("MBNON > FAVER"));
         properties.insert("from", QString::fromUtf8("Montbenon"));
         properties.insert("to", QString::fromUtf8("Faverges"));
         journey2533279085370567.setProperties(properties);
@@ -593,7 +572,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363239.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363239");
-        properties.insert("description", QString::fromUtf8("FAVER > MBNON"));
         properties.insert("from", QString::fromUtf8("Faverges"));
         properties.insert("to", QString::fromUtf8("Montbenon"));
         journey2533279085363239.setProperties(properties);
@@ -606,7 +584,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378091.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378091");
-        properties.insert("description", QString::fromUtf8("PROVN > VDEIL"));
         properties.insert("from", QString::fromUtf8("Provence Nord"));
         properties.insert("to", QString::fromUtf8("Verdeil"));
         journey2533279085378091.setProperties(properties);
@@ -616,7 +593,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378099.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378099");
-        properties.insert("description", QString::fromUtf8("VDEIL > PROVN"));
         properties.insert("from", QString::fromUtf8("Verdeil"));
         properties.insert("to", QString::fromUtf8("Provence Nord"));
         journey2533279085378099.setProperties(properties);
@@ -629,7 +605,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363286.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363286");
-        properties.insert("description", QString::fromUtf8("GVENN > MBNON"));
         properties.insert("from", QString::fromUtf8("Grand Vennes"));
         properties.insert("to", QString::fromUtf8("Montbenon"));
         journey2533279085363286.setProperties(properties);
@@ -639,7 +614,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363278.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363278");
-        properties.insert("description", QString::fromUtf8("MBNON > GVENN"));
         properties.insert("from", QString::fromUtf8("Montbenon"));
         properties.insert("to", QString::fromUtf8("Grand Vennes"));
         journey2533279085363278.setProperties(properties);
@@ -652,7 +626,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378116.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378116");
-        properties.insert("description", QString::fromUtf8("GTE > CPEAG"));
         properties.insert("from", QString::fromUtf8("Georgette"));
         properties.insert("to", QString::fromUtf8("Croix-Péage"));
         journey2533279085378116.setProperties(properties);
@@ -662,7 +635,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378124.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378124");
-        properties.insert("description", QString::fromUtf8("CPEAG > GTE"));
         properties.insert("from", QString::fromUtf8("Croix-Péage"));
         properties.insert("to", QString::fromUtf8("Georgette"));
         journey2533279085378124.setProperties(properties);
@@ -675,7 +647,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378131.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378131");
-        properties.insert("description", QString::fromUtf8("FLON > TIMON"));
         properties.insert("from", QString::fromUtf8("Lausanne-Flon"));
         properties.insert("to", QString::fromUtf8("Timonet"));
         journey2533279085378131.setProperties(properties);
@@ -685,7 +656,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378138.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378138");
-        properties.insert("description", QString::fromUtf8("TIMON > FLON"));
         properties.insert("from", QString::fromUtf8("Timonet"));
         properties.insert("to", QString::fromUtf8("Lausanne-Flon"));
         journey2533279085378138.setProperties(properties);
@@ -698,7 +668,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363380.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363380");
-        properties.insert("description", QString::fromUtf8("BLECH > GARE"));
         properties.insert("from", QString::fromUtf8("Blécherette"));
         properties.insert("to", QString::fromUtf8("Lausanne-Gare"));
         journey2533279085363380.setProperties(properties);
@@ -708,7 +677,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363369.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363369");
-        properties.insert("description", QString::fromUtf8("GARE > BLECH"));
         properties.insert("from", QString::fromUtf8("Lausanne-Gare"));
         properties.insert("to", QString::fromUtf8("Blécherette"));
         journey2533279085363369.setProperties(properties);
@@ -721,7 +689,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378190.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378190");
-        properties.insert("description", QString::fromUtf8("FLON > CLOCH"));
         properties.insert("from", QString::fromUtf8("Lausanne-Flon"));
         properties.insert("to", QString::fromUtf8("Clochatte"));
         journey2533279085378190.setProperties(properties);
@@ -731,7 +698,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378197.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378197");
-        properties.insert("description", QString::fromUtf8("CLOCH > FLON"));
         properties.insert("from", QString::fromUtf8("Clochatte"));
         properties.insert("to", QString::fromUtf8("Lausanne-Flon"));
         journey2533279085378197.setProperties(properties);
@@ -744,7 +710,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085379728.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085379728");
-        properties.insert("description", QString::fromUtf8("FORET > MAIFR"));
         properties.insert("from", QString::fromUtf8("Forêt"));
         properties.insert("to", QString::fromUtf8("Maillefer"));
         journey2533279085379728.setProperties(properties);
@@ -754,7 +719,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085379730.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085379730");
-        properties.insert("description", QString::fromUtf8("MAIFR > FORET"));
         properties.insert("from", QString::fromUtf8("Maillefer"));
         properties.insert("to", QString::fromUtf8("Forêt"));
         journey2533279085379730.setProperties(properties);
@@ -767,7 +731,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363416.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363416");
-        properties.insert("description", QString::fromUtf8("PLY-G > BNETT"));
         properties.insert("from", QString::fromUtf8("Pully-Gare"));
         properties.insert("to", QString::fromUtf8("Bourdonnette"));
         journey2533279085363416.setProperties(properties);
@@ -777,7 +740,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363405.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363405");
-        properties.insert("description", QString::fromUtf8("BNETT > PLY-G"));
         properties.insert("from", QString::fromUtf8("Bourdonnette"));
         properties.insert("to", QString::fromUtf8("Pully-Gare"));
         journey2533279085363405.setProperties(properties);
@@ -790,7 +752,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085394915.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085394915");
-        properties.insert("description", QString::fromUtf8("VENOS > RCFFS"));
         properties.insert("from", QString::fromUtf8("Venoge sud"));
         properties.insert("to", QString::fromUtf8("Renens-Gare sud"));
         journey2533279085394915.setProperties(properties);
@@ -803,7 +764,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085379530.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085379530");
-        properties.insert("description", QString::fromUtf8("GALIC > TIMON"));
         properties.insert("from", QString::fromUtf8("Galicien"));
         properties.insert("to", QString::fromUtf8("Timonet"));
         journey2533279085379530.setProperties(properties);
@@ -813,7 +773,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363470.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363470");
-        properties.insert("description", QString::fromUtf8("TIMON > GALIC"));
         properties.insert("from", QString::fromUtf8("Timonet"));
         properties.insert("to", QString::fromUtf8("Galicien"));
         journey2533279085363470.setProperties(properties);
@@ -826,7 +785,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363487.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363487");
-        properties.insert("description", QString::fromUtf8("MGOUL > PICAR"));
         properties.insert("from", QString::fromUtf8("Mont-Goulin"));
         properties.insert("to", QString::fromUtf8("Piccard"));
         journey2533279085363487.setProperties(properties);
@@ -836,7 +794,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363478.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363478");
-        properties.insert("description", QString::fromUtf8("PICAR > MGOUL"));
         properties.insert("from", QString::fromUtf8("Piccard"));
         properties.insert("to", QString::fromUtf8("Mont-Goulin"));
         journey2533279085363478.setProperties(properties);
@@ -849,7 +806,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363499.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363499");
-        properties.insert("description", QString::fromUtf8("CERY > MGOUL"));
         properties.insert("from", QString::fromUtf8("Cery-Gériatrie"));
         properties.insert("to", QString::fromUtf8("Mont-Goulin"));
         journey2533279085363499.setProperties(properties);
@@ -859,7 +815,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363497.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363497");
-        properties.insert("description", QString::fromUtf8("MGOUL > CERY"));
         properties.insert("from", QString::fromUtf8("Mont-Goulin"));
         properties.insert("to", QString::fromUtf8("Cery-Gériatrie"));
         journey2533279085363497.setProperties(properties);
@@ -872,7 +827,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363503.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363503");
-        properties.insert("description", QString::fromUtf8("MMM > RCFFN"));
         properties.insert("from", QString::fromUtf8("Closalet"));
         properties.insert("to", QString::fromUtf8("Renens-Gare nord"));
         journey2533279085363503.setProperties(properties);
@@ -882,7 +836,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363501.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363501");
-        properties.insert("description", QString::fromUtf8("RCFFN > MMM"));
         properties.insert("from", QString::fromUtf8("Renens-Gare nord"));
         properties.insert("to", QString::fromUtf8("Closalet"));
         journey2533279085363501.setProperties(properties);
@@ -895,7 +848,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085394961.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085394961");
-        properties.insert("description", QString::fromUtf8("RCFFN > PRY"));
         properties.insert("from", QString::fromUtf8("Renens-Gare nord"));
         properties.insert("to", QString::fromUtf8("Prilly-Eglise"));
         journey2533279085394961.setProperties(properties);
@@ -905,7 +857,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085394962.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085394962");
-        properties.insert("description", QString::fromUtf8("PRY > RCFFN"));
         properties.insert("from", QString::fromUtf8("Prilly-Eglise"));
         properties.insert("to", QString::fromUtf8("Renens-Gare nord"));
         journey2533279085394962.setProperties(properties);
@@ -918,7 +869,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378299.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378299");
-        properties.insert("description", QString::fromUtf8("MONTO > PSECH"));
         properties.insert("from", QString::fromUtf8("Montolieu"));
         properties.insert("to", QString::fromUtf8("Praz-Séchaud"));
         journey2533279085378299.setProperties(properties);
@@ -928,7 +878,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378305.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378305");
-        properties.insert("description", QString::fromUtf8("PSECH > MONTO"));
         properties.insert("from", QString::fromUtf8("Praz-Séchaud"));
         properties.insert("to", QString::fromUtf8("Montolieu"));
         journey2533279085378305.setProperties(properties);
@@ -941,7 +890,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378041.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378041");
-        properties.insert("description", QString::fromUtf8("SALA > FOYER"));
         properties.insert("from", QString::fromUtf8("Sallaz"));
         properties.insert("to", QString::fromUtf8("Foyer"));
         journey2533279085378041.setProperties(properties);
@@ -951,7 +899,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085378042.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085378042");
-        properties.insert("description", QString::fromUtf8("FOYER > SALA"));
         properties.insert("from", QString::fromUtf8("Foyer"));
         properties.insert("to", QString::fromUtf8("Sallaz"));
         journey2533279085378042.setProperties(properties);
@@ -964,7 +911,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085370573.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085370573");
-        properties.insert("description", QString::fromUtf8("CHT > BMURA"));
         properties.insert("from", QString::fromUtf8("Chalet-à-Gobet"));
         properties.insert("to", QString::fromUtf8("Bois Murat"));
         journey2533279085370573.setProperties(properties);
@@ -974,7 +920,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085370572.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085370572");
-        properties.insert("description", QString::fromUtf8("BMURA > CHT"));
         properties.insert("from", QString::fromUtf8("Bois Murat"));
         properties.insert("to", QString::fromUtf8("Chalet-à-Gobet"));
         journey2533279085370572.setProperties(properties);
@@ -987,7 +932,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363584.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363584");
-        properties.insert("description", QString::fromUtf8("BALLE > BMURA"));
         properties.insert("from", QString::fromUtf8("Ballègue"));
         properties.insert("to", QString::fromUtf8("Bois Murat"));
         journey2533279085363584.setProperties(properties);
@@ -997,7 +941,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363578.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363578");
-        properties.insert("description", QString::fromUtf8("BMURA > BALLE"));
         properties.insert("from", QString::fromUtf8("Bois Murat"));
         properties.insert("to", QString::fromUtf8("Ballègue"));
         journey2533279085363578.setProperties(properties);
@@ -1010,7 +953,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085384514.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085384514");
-        properties.insert("description", QString::fromUtf8("GRAVX > PPORT"));
         properties.insert("from", QString::fromUtf8("Grandvaux"));
         properties.insert("to", QString::fromUtf8("Pully-Port"));
         journey2533279085384514.setProperties(properties);
@@ -1020,7 +962,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085381389.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085381389");
-        properties.insert("description", QString::fromUtf8("PPORT > GRAVX"));
         properties.insert("from", QString::fromUtf8("Pully-Port"));
         properties.insert("to", QString::fromUtf8("Grandvaux"));
         journey2533279085381389.setProperties(properties);
@@ -1033,7 +974,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085383040.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085383040");
-        properties.insert("description", QString::fromUtf8("CLERG > DTTES"));
         properties.insert("from", QString::fromUtf8("Pully-Clergère"));
         properties.insert("to", QString::fromUtf8("Daillettes"));
         journey2533279085383040.setProperties(properties);
@@ -1043,7 +983,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085383047.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085383047");
-        properties.insert("description", QString::fromUtf8("DTTES > CLERG"));
         properties.insert("from", QString::fromUtf8("Daillettes"));
         properties.insert("to", QString::fromUtf8("Pully-Clergère"));
         journey2533279085383047.setProperties(properties);
@@ -1056,7 +995,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085376941.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085376941");
-        properties.insert("description", QString::fromUtf8("CRISS > RICHA"));
         properties.insert("from", QString::fromUtf8("Crissier-Centre"));
         properties.insert("to", QString::fromUtf8("Richardaz"));
         journey2533279085376941.setProperties(properties);
@@ -1066,7 +1004,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085376942.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085376942");
-        properties.insert("description", QString::fromUtf8("RICHA > CRISS"));
         properties.insert("from", QString::fromUtf8("Richardaz"));
         properties.insert("to", QString::fromUtf8("Crissier-Centre"));
         journey2533279085376942.setProperties(properties);
@@ -1079,7 +1016,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085377482.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085377482");
-        properties.insert("description", QString::fromUtf8("FROIL > FLON    via Bottens"));
         properties.insert("from", QString::fromUtf8("Laiterie"));
         properties.insert("via", QString::fromUtf8("Bottens"));
         properties.insert("to", QString::fromUtf8("Lausanne-Flon"));
@@ -1090,7 +1026,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085377483.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085377483");
-        properties.insert("description", QString::fromUtf8("FLON > FROIL    via Bottens"));
         properties.insert("from", QString::fromUtf8("Lausanne-Flon"));
         properties.insert("via", QString::fromUtf8("Bottens"));
         properties.insert("to", QString::fromUtf8("Laiterie"));
@@ -1101,7 +1036,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085377486.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085377486");
-        properties.insert("description", QString::fromUtf8("FLON > FROIL    via Montheron"));
         properties.insert("from", QString::fromUtf8("Lausanne-Flon"));
         properties.insert("via", QString::fromUtf8("Montheron"));
         properties.insert("to", QString::fromUtf8("Laiterie"));
@@ -1112,7 +1046,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085377487.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085377487");
-        properties.insert("description", QString::fromUtf8("FROIL > FLON    via Montheron"));
         properties.insert("from", QString::fromUtf8("Laiterie"));
         properties.insert("via", QString::fromUtf8("Montheron"));
         properties.insert("to", QString::fromUtf8("Lausanne-Flon"));
@@ -1126,7 +1059,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363707.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363707");
-        properties.insert("description", QString::fromUtf8("MOUD > CROIS    via La Râpe"));
         properties.insert("from", QString::fromUtf8("Moudon-Gare"));
         properties.insert("via", QString::fromUtf8("La Râpe"));
         properties.insert("to", QString::fromUtf8("Croisettes"));
@@ -1137,7 +1069,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363699.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363699");
-        properties.insert("description", QString::fromUtf8("CROIS > MOUD    via La Râpe"));
         properties.insert("from", QString::fromUtf8("Croisettes"));
         properties.insert("via", QString::fromUtf8("La Râpe"));
         properties.insert("to", QString::fromUtf8("Moudon-Gare"));
@@ -1148,7 +1079,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363696.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363696");
-        properties.insert("description", QString::fromUtf8("CROIS > MOUD"));
         properties.insert("from", QString::fromUtf8("Croisettes"));
         properties.insert("to", QString::fromUtf8("Moudon-Gare"));
         journey2533279085363696.setProperties(properties);
@@ -1158,7 +1088,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085379036.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085379036");
-        properties.insert("description", QString::fromUtf8("MOUD > CROIS"));
         properties.insert("from", QString::fromUtf8("Moudon-Gare"));
         properties.insert("to", QString::fromUtf8("Croisettes"));
         journey2533279085379036.setProperties(properties);
@@ -1171,7 +1100,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363711.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363711");
-        properties.insert("description", QString::fromUtf8("CROIS > CHT"));
         properties.insert("from", QString::fromUtf8("Croisettes"));
         properties.insert("to", QString::fromUtf8("Chalet-à-Gobet"));
         journey2533279085363711.setProperties(properties);
@@ -1181,7 +1109,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363716.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363716");
-        properties.insert("description", QString::fromUtf8("CHT > CROIS"));
         properties.insert("from", QString::fromUtf8("Chalet-à-Gobet"));
         properties.insert("to", QString::fromUtf8("Croisettes"));
         journey2533279085363716.setProperties(properties);
@@ -1194,7 +1121,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363728.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363728");
-        properties.insert("description", QString::fromUtf8("SERV > SALA"));
         properties.insert("from", QString::fromUtf8("Servion-Poste"));
         properties.insert("to", QString::fromUtf8("Sallaz"));
         journey2533279085363728.setProperties(properties);
@@ -1204,7 +1130,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363722.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363722");
-        properties.insert("description", QString::fromUtf8("SALA > SERV"));
         properties.insert("from", QString::fromUtf8("Sallaz"));
         properties.insert("to", QString::fromUtf8("Servion-Poste"));
         journey2533279085363722.setProperties(properties);
@@ -1217,7 +1142,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363750.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363750");
-        properties.insert("description", QString::fromUtf8("GRAVX > MBNON"));
         properties.insert("from", QString::fromUtf8("Grandvaux"));
         properties.insert("to", QString::fromUtf8("Montbenon"));
         journey2533279085363750.setProperties(properties);
@@ -1227,7 +1151,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363738.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363738");
-        properties.insert("description", QString::fromUtf8("MBNON > GRAVX"));
         properties.insert("from", QString::fromUtf8("Montbenon"));
         properties.insert("to", QString::fromUtf8("Grandvaux"));
         journey2533279085363738.setProperties(properties);
@@ -1240,7 +1163,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363757.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363757");
-        properties.insert("description", QString::fromUtf8("CROIX > LPORT"));
         properties.insert("from", QString::fromUtf8("Croix/Lutry"));
         properties.insert("to", QString::fromUtf8("Lutry-Port"));
         journey2533279085363757.setProperties(properties);
@@ -1250,7 +1172,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363754.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363754");
-        properties.insert("description", QString::fromUtf8("LPORT > CROIX"));
         properties.insert("from", QString::fromUtf8("Lutry-Port"));
         properties.insert("to", QString::fromUtf8("Croix/Lutry"));
         journey2533279085363754.setProperties(properties);
@@ -1263,7 +1184,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363763.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363763");
-        properties.insert("description", QString::fromUtf8("CROIX > LPORT"));
         properties.insert("from", QString::fromUtf8("Croix/Lutry"));
         properties.insert("to", QString::fromUtf8("Lutry-Port"));
         journey2533279085363763.setProperties(properties);
@@ -1273,7 +1193,6 @@ QList<Journey> TlList::journeys(const Line &line)
         journey2533279085363760.setDisambiguation(disambiguation);
         properties.clear();
         properties.insert("id", "2533279085363760");
-        properties.insert("description", QString::fromUtf8("LPORT > CROIX"));
         properties.insert("from", QString::fromUtf8("Lutry-Port"));
         properties.insert("to", QString::fromUtf8("Croix/Lutry"));
         journey2533279085363760.setProperties(properties);

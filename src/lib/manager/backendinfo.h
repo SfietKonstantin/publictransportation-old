@@ -133,6 +133,10 @@ class BackendInfo
 {
 public:
     /**
+     * @brief Invalid constructor
+     */
+    explicit BackendInfo();
+    /**
      * @brief Default constructor
      * @param file file to parse.
      */

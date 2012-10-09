@@ -65,7 +65,7 @@ public:
      */
     virtual ~AbstractBackendManager();
     /**
-     * @brief Have backend
+     * @brief Contains
      *
      * This method is used to check if the backend manager
      * have a backend corresponding to a given identifier.
@@ -73,7 +73,7 @@ public:
      * @param identifier identifier.
      * @return if the backend manager have the backend.
      */
-    bool haveBackend(const QString &identifier);
+    bool contains(const QString &identifier);
     /**
      * @brief Identifiers
      *

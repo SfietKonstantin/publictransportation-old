@@ -14,52 +14,43 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QStringList>
-#include <QtDBus/QDBusConnection>
+import QtQuick 1.1
+import com.nokia.meego 1.0
 
-#include "debug.h"
-#include "manager/dbus/dbusbackendmanager.h"
-
-#include "dbushandle.h"
-
-using namespace PublicTransportation;
-
-#ifdef Q_OS_UNIX
-#include <signal.h>
-
-void signalhandler(int signal)
-{
-    debug("main") << "Interrupted";
-    debug("main") << "Need to do some cleanup";
-    if(signal == SIGINT || signal == SIGTERM) {
-        QCoreApplication::instance()->quit();
+AbstractPage {
+    headerColor: "#006E29"
+    headerLabelColor: "white"
+    title: qsTr("Companies")
+    tools: ToolBarLayout {
+        ToolIcon {
+            iconId: "toolbar-back"
+            onClicked: window.pageStack.pop()
+        }
     }
-}
-#endif
+    content: Item {
+        anchors.fill: parent
 
-int main(int argc, char **argv)
-{
-    QCoreApplication app (argc, argv);
+        ListView {
+            clip: true
+            anchors.fill: parent
+            model: CompaniesModelInstance
+            delegate: ClickableEntry {
+                text: model.name
+                subText: model.description
+                onClicked: {
+                    window.pageStack.push(linesPage)
+                    CompaniesModelInstance.requestCompany(model.index)
+                }
+            }
+        }
 
-    // Connect to UNIX signals
-#ifdef Q_OS_UNIX
-    signal(SIGINT, signalhandler);
-    signal(SIGTERM, signalhandler);
-#endif
-
-    // Register DBus
-    if (!DBusBackendManager::registerDBusService()) {
-        debug("main") << "Unable to register the service on DBus";
-        debug("main") << "Another instance of publictransportation might be running";
-        return 0;
+        BusyIndicator {
+            anchors.centerIn: parent
+            visible: CompaniesModelInstance.updating
+            platformStyle: BusyIndicatorStyle { size: "large" }
+            running: visible
+        }
     }
 
-    DBusBackendManager manager;
-    DBusHandle handle;
-    handle.setBackendManager(&manager);
-
-    QDBusConnection::sessionBus().registerObject("/", &handle, QDBusConnection::ExportAllSlots);
-
-    return app.exec();
+    LinesPage {id: linesPage}
 }

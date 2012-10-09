@@ -36,7 +36,7 @@ namespace PublicTransportation
 
 /**
  * @internal
- * @brief Private class for Widgets::Provider::PackageManager::DesktopFileParser
+ * @brief Private class for PublicTransportation::DesktopFileParser
  */
 class DesktopFileParserPrivate
 {

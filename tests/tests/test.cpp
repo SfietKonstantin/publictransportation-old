@@ -523,7 +523,7 @@ void Test::testDBusBackendManager()
                                + "/libproviderplugintesthelper.so",
                        QMap<QString, QString>());
 
-    QCOMPARE(manager.haveBackend("test"), true);
+    QCOMPARE(manager.contains("test"), true);
 
     manager.launchBackend("test");
     QTest::qWait(300);
@@ -598,7 +598,7 @@ void Test::testDBusBackendManager()
     QTest::qWait(300);
     manager.killBackend("test");
     manager.removeBackend("test");
-    QCOMPARE(manager.haveBackend("test"), false);
+    QCOMPARE(manager.contains("test"), false);
 
     DBusBackendManager::unregisterDBusService();
 }

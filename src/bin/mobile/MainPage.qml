@@ -18,6 +18,11 @@ import QtQuick 1.1
 import com.nokia.meego 1.0
 
 AbstractNavigationPage {
+
+    function showConfigureBackend() {
+        window.pageStack.push(backendSelectorPage)
+    }
+
     headerColor: "#006E29"
     headerLabelColor: "white"
     title: qsTr("Public transportation")
@@ -25,22 +30,35 @@ AbstractNavigationPage {
         ToolIcon {
             iconId: "toolbar-view-menu"
             anchors.right: parent.right
-            onClicked: window.pageStack.push(providerSelectorPage)
+            onClicked: mainMenu.open()
         }
     }
     onShow: {
-            if(page == "showCompaniesList") {
-                CompaniesModelInstance.update()
-//                window.pageStack.push(companiesPage)
+        if(page == "showCompaniesList") {
+            window.pageStack.push(companiesPage)
+        }
+    }
+    model: ListModel {
+        ListElement {
+            identifier: "showCompaniesList"
+            text: QT_TR_NOOP("Companies list")
+        }
+    }
+
+    Menu {
+        id: mainMenu
+
+        MenuItem {
+            text: qsTr("Manage information source")
+            onClicked: {
+                window.pageStack.push(backendSelectorPage)
+                mainMenu.close()
             }
         }
-        model: ListModel {
-            ListElement {
-                identifier: "showCompaniesList"
-                text: QT_TR_NOOP("Companies list")
-            }
-        }
+    }
+
+    CompaniesPage {id: companiesPage}
+    BackendSelectorPage {id: backendSelectorPage}
 
 
-    BackendSelectorPage {id: providerSelectorPage}
 }

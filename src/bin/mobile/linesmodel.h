@@ -1,5 +1,5 @@
 /****************************************************************************************
- * Copyright (C) 2011 Lucien XU <sfietkonstantin@free.fr>                               *
+ * Copyright (C) 2012 Lucien XU <sfietkonstantin@free.fr>                               *
  *                                                                                      *
  * This program is free software; you can redistribute it and/or modify it under        *
  * the terms of the GNU General Public License as published by the Free Software        *
@@ -14,13 +14,8 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-/**
- * @file companiesmodel.h
- * @short Definition of PublicTransportation::CompaniesModel
- */
-
-#ifndef PUBLICTRANSPORTATION_COMPANIESMODEL_H
-#define PUBLICTRANSPORTATION_COMPANIESMODEL_H
+#ifndef PUBLICTRANSPORTATION_LINESMODEL_H
+#define PUBLICTRANSPORTATION_LINESMODEL_H
 
 #include <QtCore/QAbstractListModel>
 #include "manager/abstractbackendwrapper.h"
@@ -29,9 +24,8 @@ namespace PublicTransportation
 {
 
 class AbstractBackendManager;
-class CompaniesModelPrivate;
-
-class CompaniesModel: public QAbstractListModel
+class LinesModelPrivate;
+class LinesModel: public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(bool updating READ isUpdating NOTIFY updatingChanged)
@@ -43,25 +37,22 @@ public:
     /**
      * @short Model roles
      */
-    enum CompaniesModelRole {
+    enum LinesModelRole {
         /**
          * @short Name role
          */
         NameRole = Qt::UserRole + 1,
-        /**
-         * @short Description role
-         */
         DescriptionRole
     };
     /**
      * @short Default constructor
      * @param parent parent object.
      */
-    explicit CompaniesModel(QObject *parent = 0);
+    explicit LinesModel(QObject *parent = 0);
     /**
      * @short Destructor
      */
-    virtual ~CompaniesModel();
+    virtual ~LinesModel();
     /**
      * @brief Set backend manager
      * @param backendManager backend manager to set.
@@ -89,31 +80,29 @@ public:
      */
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 public Q_SLOTS:
-    void requestCompany(int index);
+    void displayLines(const QString &backendIdentifier,
+                      const PublicTransportation::Company &company);
+    void requestLine(int index);
 Q_SIGNALS:
     void updatingChanged();
     /**
      * @short Count changed
      */
     void countChanged();
-    void displayLines(const QString &backendIdentifier,
-                      const PublicTransportation::Company &company);
+    void displayJourneys(const QString &backendIdentifier,
+                         const PublicTransportation::Company &company,
+                         const PublicTransportation::Line &line);
 protected:
     /**
      * @short D-pointer
      */
-    const QScopedPointer<CompaniesModelPrivate> d_ptr;
+    const QScopedPointer<LinesModelPrivate> d_ptr;
 private:
-    Q_DECLARE_PRIVATE(CompaniesModel)
-    /// \cond buggy-doxygen-doc
-    Q_PRIVATE_SLOT(d_func(), void slotBackendAdded(QString,AbstractBackendWrapper*))
-    Q_PRIVATE_SLOT(d_func(), void slotBackendRemoved(QString))
-    Q_PRIVATE_SLOT(d_func(), void slotStatusChanged())
-    Q_PRIVATE_SLOT(d_func(), void slotCompaniesChanged())
-    /// \endcond
+    Q_DECLARE_PRIVATE(LinesModel)
+    Q_PRIVATE_SLOT(d_func(), void slotLinesChanged(PublicTransportation::Company))
 
 };
 
 }
 
-#endif // PUBLICTRANSPORTATION_COMPANIESMODEL_H
+#endif // PUBLICTRANSPORTATION_LINESMODEL_H

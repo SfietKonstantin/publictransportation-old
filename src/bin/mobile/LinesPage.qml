@@ -17,26 +17,40 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
 
-PageStackWindow {
-    id: window
-    initialPage: mainPage
+AbstractPage {
+    headerColor: "#006E29"
+    headerLabelColor: "white"
+    title: qsTr("Lines")
+    tools: ToolBarLayout {
+        ToolIcon {
+            iconId: "toolbar-back"
+            onClicked: window.pageStack.pop()
+        }
+    }
+    content: Item {
+        anchors.fill: parent
 
-    Component.onCompleted: {
-        if (BACKEND_FIRST_TIME) {
-            firstTimeConfigureDialog.open()
+        ListView {
+            clip: true
+            anchors.fill: parent
+            model: LinesModelInstance
+            delegate: ClickableEntry {
+                text: model.name
+                subText: model.description
+                onClicked: {
+                    window.pageStack.push(journeysPage)
+                    LinesModelInstance.requestLine(model.index)
+                }
+            }
+        }
+
+        BusyIndicator {
+            anchors.centerIn: parent
+            visible: LinesModelInstance.updating
+            platformStyle: BusyIndicatorStyle { size: "large" }
+            running: visible
         }
     }
 
-    MainPage {id: mainPage}
-
-    QueryDialog {
-        id: firstTimeConfigureDialog
-        titleText: qsTr("Configure information sources")
-        message: qsTr("Do you want to configure the information sources now? \
-Informations sources are used to provide informations about the public transport you are using.")
-        acceptButtonText: qsTr("Yes")
-        rejectButtonText: qsTr("No")
-
-        onAccepted: mainPage.showConfigureBackend()
-    }
+    JourneysPage {id: journeysPage}
 }

@@ -111,6 +111,11 @@ static const char *DESKTOP_FILE_BACKENDINFO_WEBSITE = "X-PublicTransportation-Ba
  */
 static const char *DESKTOP_FILE_BACKENDINFO_VERSION = "X-PublicTransportation-BackendInfo-Version";
 
+BackendInfo::BackendInfo():
+    d_ptr(new BackendInfoPrivate)
+{
+}
+
 BackendInfo::BackendInfo(const QString &file):
     d_ptr(new BackendInfoPrivate)
 {

@@ -14,31 +14,37 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef DBUSHANDLE_H
-#define DBUSHANDLE_H
+import QtQuick 1.1
+import com.nokia.meego 1.0
 
-#include <QtCore/QObject>
-#include "manager/abstractbackendmanager.h"
-#include "manager/backendlistmanager.h"
+AbstractPage {
+    headerColor: "#006E29"
+    headerLabelColor: "white"
+    title: qsTr("Journeys")
+    tools: ToolBarLayout {
+        ToolIcon {
+            iconId: "toolbar-back"
+            onClicked: window.pageStack.pop()
+        }
+    }
+    content: Item {
+        anchors.fill: parent
 
-class DBusHandle : public QObject
-{
-    Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.SfietKonstantin.publictransportation")
-public:
-    explicit DBusHandle(QObject *parent = 0);
-    void setBackendManager(PublicTransportation::AbstractBackendManager *manager);
-public slots:
-    void listBackends();
-    void runBackend(int backendIndex);
-    void listCapabilities(int backendIndex);
-    void requestCompanies(int backendIndex);
-//    void requestLines();
-//    void requestJourneys(const QString &lineName);
-//    void requestStations(const QString &lineName, int journeyIndex);
-private:
-    PublicTransportation::AbstractBackendManager *m_manager;
-    PublicTransportation::BackendListManager *m_list;
-};
+        ListView {
+            clip: true
+            anchors.fill: parent
+            model: JourneysModelInstance
+            delegate: ClickableEntry {
+                text: model.name
+                subText: model.description
+            }
+        }
 
-#endif // DBUSHANDLE_H
+        BusyIndicator {
+            anchors.centerIn: parent
+            visible: JourneysModelInstance.updating
+            platformStyle: BusyIndicatorStyle { size: "large" }
+            running: visible
+        }
+    }
+}

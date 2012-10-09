@@ -286,20 +286,23 @@ Q_SIGNALS:
      * @brief Lines changed
      * @param company company for which the lines should be listed.
      */
-    void linesChanged(const Company &company);
+    void linesChanged(const PublicTransportation::Company &company);
     /**
      * @brief Journeys changed
      * @param company company for which the journeys should be listed.
      * @param line line for which the journeys should be listed.
      */
-    void journeysChanged(const Company &company, const Line &line);
+    void journeysChanged(const PublicTransportation::Company &company,
+                         const PublicTransportation::Line &line);
     /**
      * @brief Stations changed
      * @param company company for which the stations should be listed.
      * @param line line for which the stations should be listed.
      * @param journey journey for which the stations should be listed.
      */
-    void stationsChanged(const Company &company, const Line &line, const Journey &journey);
+    void stationsChanged(const PublicTransportation::Company &company,
+                         const PublicTransportation::Line &line,
+                         const PublicTransportation::Journey &journey);
 protected:
     /**
      * @brief D-pointer based constructor

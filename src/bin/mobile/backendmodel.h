@@ -23,6 +23,7 @@
 #define PUBLICTRANSPORTATION_BACKENDMODEL_H
 
 #include <QtCore/QAbstractListModel>
+#include <QtCore/QSettings>
 #include "manager/abstractbackendwrapper.h"
 
 namespace PublicTransportation
@@ -30,6 +31,25 @@ namespace PublicTransportation
 
 class AbstractBackendManager;
 class BackendModelPrivate;
+
+/**
+ * @brief A model for available backends
+ *
+ * This class provides a model for QML that contains
+ * the available backends. It also provides control
+ * over the backends, as well as feedback on backend
+ * status.
+ *
+ * It mostly mirrors PublicTransportation::AbstractBackendManager,
+ * adding only a feature, that is starting previously started
+ * backend when reloading the backend list.
+ *
+ * When a backend have been previously started, and not
+ * stopped, it is considered as useful, and should be
+ * restart. When the list of backends are reloaded, these
+ * backends are then restarted automatically (that happen,
+ * for example, while the application is launched again).
+ */
 class BackendModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -39,11 +59,29 @@ class BackendModel : public QAbstractListModel
      */
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 public:
+    /**
+     * @brief Enumeration describing backend status
+     */
     enum BackendStatus {
+        /**
+         * @short The backend is stopped
+         */
         Stopped = AbstractBackendWrapper::Stopped,
+        /**
+         * @short The backend is launching
+         */
         Launching = AbstractBackendWrapper::Launching,
+        /**
+         * @short The backend is launched
+         */
         Launched = AbstractBackendWrapper::Launched,
+        /**
+         * @short The backend is stopping
+         */
         Stopping = AbstractBackendWrapper::Stopping,
+        /**
+         * @short The backend is in an invalid state
+         */
         Invalid = AbstractBackendWrapper::Invalid
     };
 
@@ -52,12 +90,24 @@ public:
      */
     enum BackendModelRole {
         /**
-         * @short Widget role
+         * @short Name role
          */
         NameRole = Qt::UserRole + 1,
+        /**
+         * @short Description role
+         */
         DescriptionRole,
+        /**
+         * @short Status role
+         */
         StatusRole,
+        /**
+         * @short Identifier role
+         */
         IdentifierRole,
+        /**
+         * @short Executable role
+         */
         ExecutableRole
     };
     /**
@@ -95,8 +145,22 @@ public:
      */
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 public Q_SLOTS:
+    /**
+     * @brief Reload
+     *
+     * Reload the backend list.
+     */
     void reload();
+    /**
+     * @brief Run a backend
+     * @param identifier backend identifier.
+     * @param executable backend executable.
+     */
     void runBackend(const QString &identifier, const QString &executable);
+    /**
+     * @brief Stop a backend.
+     * @param identifier backend identifier.
+     */
     void stopBackend(const QString &identifier);
 Q_SIGNALS:
     /**

@@ -41,7 +41,9 @@ TransportLausannois::TransportLausannois(QObject *parent) :
     ProviderPluginObject(parent), d_ptr(new TransportLausannoisPrivate)
 {
     Q_D(TransportLausannois);
-    Company tl (QVariantMap(), "tl", QString(), QVariantMap());
+    QVariantMap properties;
+    properties.insert("description", QString::fromUtf8("Transports de la région de Lausanne"));
+    Company tl (QVariantMap(), "tl", QString(), properties);
     d->companies.append(tl);
 }
 

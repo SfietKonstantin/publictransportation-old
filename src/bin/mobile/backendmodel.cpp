@@ -74,7 +74,7 @@ BackendModel::BackendStatus BackendModelPrivate::status(const BackendInfo &backe
 {
     QString identifier = backendInfo.backendIdentifier();
 
-    if (!backendManager->haveBackend(identifier)) {
+    if (!backendManager->contains(identifier)) {
         return BackendModel::Stopped;
     }
 
@@ -160,7 +160,7 @@ int BackendModel::count() const
 QVariant BackendModel::data(const QModelIndex &index, int role) const
 {
     Q_D(const BackendModel);
-    if (index.row() < 0 or index.row() > rowCount()) {
+    if (index.row() < 0 or index.row() >= rowCount()) {
         return QVariant();
     }
     BackendInfo backendInfo = d->data.at(index.row());
@@ -202,6 +202,26 @@ void BackendModel::reload()
     endInsertRows();
 
     debug("backend-model") << "Reloaded information in the model. Number of rows:" << rowCount();
+
+    QSettings settings;
+    settings.beginGroup("backend");
+    QStringList keys = settings.allKeys();
+
+    QMap<QString, BackendInfo> identifierToBackend;
+    foreach (BackendInfo backendInfo, availableBackendList) {
+        identifierToBackend.insert(backendInfo.backendIdentifier(), backendInfo);
+    }
+
+    foreach (QString key, keys) {
+        if (key.startsWith("run-")) {
+            QString identifier = key.right(key.size() - 4);
+            if (identifierToBackend.contains(identifier)) {
+                runBackend(identifier, identifierToBackend.value(identifier).executable());
+            }
+        }
+    }
+
+    settings.endGroup();
 }
 
 void BackendModel::runBackend(const QString &identifier, const QString &executable)
@@ -211,7 +231,7 @@ void BackendModel::runBackend(const QString &identifier, const QString &executab
         return;
     }
 
-    if (d->backendManager->haveBackend(identifier)) {
+    if (d->backendManager->contains(identifier)) {
         AbstractBackendWrapper *backend = d->backendManager->backend(identifier);
 
         if (backend->status() == AbstractBackendWrapper::Stopped) {
@@ -223,6 +243,9 @@ void BackendModel::runBackend(const QString &identifier, const QString &executab
             return;
         }
     }
+
+    QSettings settings;
+    settings.setValue(QString("backend/run-") + identifier, QVariant(true));
 
     d->backendManager->addBackend(identifier, executable, QMap<QString, QString>());
 
@@ -239,10 +262,12 @@ void BackendModel::stopBackend(const QString &identifier)
         return;
     }
 
-    if (!d->backendManager->haveBackend(identifier)) {
+    if (!d->backendManager->contains(identifier)) {
         return;
     }
 
+    QSettings settings;
+    settings.remove(QString("backend/run-") + identifier);
     d->backendManager->stopBackend(identifier);
 }
 

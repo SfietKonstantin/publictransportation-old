@@ -57,7 +57,7 @@ AbstractBackendManager::~AbstractBackendManager()
     }
 }
 
-bool AbstractBackendManager::haveBackend(const QString &identifier)
+bool AbstractBackendManager::contains(const QString &identifier)
 {
     Q_D(const AbstractBackendManager);
     return d->backends.contains(identifier);
@@ -100,7 +100,7 @@ void AbstractBackendManager::addBackend(const QString &identifier, const QString
 
 bool AbstractBackendManager::launchBackend(const QString &identifier)
 {
-    if (!haveBackend(identifier)) {
+    if (!contains(identifier)) {
         return false;
     }
 
@@ -128,7 +128,7 @@ bool AbstractBackendManager::killBackend(const QString &identifier)
 bool AbstractBackendManager::removeBackend(const QString &identifier)
 {
     Q_D(AbstractBackendManager);
-    if (!haveBackend(identifier)) {
+    if (!contains(identifier)) {
         return false;
     }
 
