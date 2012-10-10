@@ -1,2 +1,0 @@
-2533279085370573::Chalet-à-Gobet::Bois Murat::CHT > BMURA
-2533279085370572::Bois Murat::Chalet-à-Gobet::BMURA > CHT

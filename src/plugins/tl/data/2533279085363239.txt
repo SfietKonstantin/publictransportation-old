@@ -1,8 +1,0 @@
-3377704015495540::Lausanne::Faverges
-3377704015495311::Lausanne::Chemin du Cap
-3377704015495532::Lausanne::Bonne-Espérance
-3377704015495652::Lausanne::Avenue du Léman
-3377704015495507::Lausanne::Eglantine
-3377704015495616::Lausanne::Georgette
-3377704015495979::Lausanne::St-François
-3377704015495698::Lausanne::Montbenon

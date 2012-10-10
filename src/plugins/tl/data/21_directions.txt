@@ -1,2 +1,0 @@
-2533279085363380::Blécherette::Lausanne-Gare::BLECH > GARE
-2533279085363369::Lausanne-Gare::Blécherette::GARE > BLECH

@@ -154,11 +154,6 @@ void BackendModel::setBackendManager(AbstractBackendManager *backendManager)
 {
     Q_D(BackendModel);
     if (d->backendManager != backendManager) {
-        if (d->backendManager) {
-            disconnect(d->backendManager, SIGNAL(availableBackendListChanged()),
-                       this, SLOT(reload()));
-        }
-
         d->backendManager = backendManager;
     }
 }

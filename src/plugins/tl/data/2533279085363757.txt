@@ -1,9 +1,0 @@
-3377704015495455::Lausanne::Croix/Lutry
-3377704015495969::Lausanne::Savoie
-3377704015495291::Lausanne::Brélaz
-3377704015495621::Lausanne::Gravesse
-3377704015495971::Lausanne::Savuit-Place
-3377704015495385::Lausanne::Ciblerie
-3377704015495343::Lausanne::Les Champs
-3377704015496032::Lausanne::Taillepied
-3377704015495666::Lausanne::Lutry-Port

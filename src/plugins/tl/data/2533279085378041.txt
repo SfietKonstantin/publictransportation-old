@@ -1,8 +1,0 @@
-3377704015495954::Lausanne::Sallaz
-3377704015495457::Lausanne::Champ Rond
-3377704015495472::Lausanne::Devin
-3377704015495809::Lausanne::Pont de Chailly
-3377704015495941::Lausanne::Rozavère
-3377704015495645::Lausanne::Les Chavannes
-3377704015495434::Lausanne::Craivavers
-3377704015495568::Lausanne::Foyer

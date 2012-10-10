@@ -1,2 +1,0 @@
-2533279085378190::Lausanne-Flon::Clochatte::FLON > CLOCH
-2533279085378197::Clochatte::Lausanne-Flon::CLOCH > FLON

@@ -1,4 +1,0 @@
-2533279085377482::Laiterie::Lausanne-Flon::FROIL > FLON    via Bottens
-2533279085377483::Lausanne-Flon::Laiterie::FLON > FROIL    via Bottens
-2533279085377486::Lausanne-Flon::Laiterie::FLON > FROIL    via Montheron
-2533279085377487::Laiterie::Lausanne-Flon::FROIL > FLON    via Montheron

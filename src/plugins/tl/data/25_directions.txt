@@ -1,2 +1,0 @@
-2533279085363416::Pully-Gare::Bourdonnette::PLY-G > BNETT
-2533279085363405::Bourdonnette::Pully-Gare::BNETT > PLY-G

@@ -5,9 +5,9 @@ TEMPLATE = lib
 QT = core network
 CONFIG += plugin
 INCLUDEPATH += ../../lib/
-INCLUDEPATH += ../../3rdparty/qjson/src
+#INCLUDEPATH += ../../3rdparty/qjson/src
 LIBS += -L../../lib/ -l$${NAME}
-LIBS += -L../../3rdparty/qjson/ -lqjson
+#LIBS += -L../../3rdparty/qjson/ -lqjson
 
 HEADERS +=      transportlausannois.h \
 

@@ -27,10 +27,7 @@
 
 #include "manager/dbus/dbusbackendmanager.h"
 #include "backendmodel.h"
-#include "companiesmodel.h"
-#include "linesmodel.h"
-#include "journeysmodel.h"
-#include "stationsmodel.h"
+#include "searchstationmodel.h"
 
 using namespace PublicTransportation;
 
@@ -55,30 +52,11 @@ int main(int argc, char **argv)
 
     // Setup models and manager
     BackendModel backendModel;
-    CompaniesModel companiesModel;
-    LinesModel linesModel;
-    JourneysModel journeysModel;
-    StationsModel stationsModel;
+    SearchStationModel searchStationModel;
 
     DBusBackendManager dbusBackendManager;
     backendModel.setBackendManager(&dbusBackendManager);
-    companiesModel.setBackendManager(&dbusBackendManager);
-    linesModel.setBackendManager(&dbusBackendManager);
-    journeysModel.setBackendManager(&dbusBackendManager);
-    stationsModel.setBackendManager(&dbusBackendManager);
-
-    QObject::connect(&companiesModel, SIGNAL(linesRequested(QString,PublicTransportation::Company)),
-                     &linesModel, SLOT(displayLines(QString,PublicTransportation::Company)));
-    QObject::connect(&linesModel, SIGNAL(journeysRequested(QString,PublicTransportation::Company,
-                                                           PublicTransportation::Line)),
-                     &journeysModel, SLOT(displayJourneys(QString,PublicTransportation::Company,
-                                                          PublicTransportation::Line)));
-    QObject::connect(&journeysModel, SIGNAL(stationsRequested(QString,PublicTransportation::Company,
-                                                              PublicTransportation::Line,
-                                                              PublicTransportation::Journey)),
-                     &stationsModel, SLOT(displayStations(QString,PublicTransportation::Company,
-                                                          PublicTransportation::Line,
-                                                          PublicTransportation::Journey)));
+    searchStationModel.setBackendManager(&dbusBackendManager);
 
     // Load backend list
     backendModel.reload();
@@ -97,10 +75,7 @@ int main(int argc, char **argv)
     QDeclarativeView view;
     view.rootContext()->setContextProperty("BACKEND_FIRST_TIME", QVariant(backendFirstTime));
     view.rootContext()->setContextProperty("BackendModelInstance", &backendModel);
-    view.rootContext()->setContextProperty("CompaniesModelInstance", &companiesModel);
-    view.rootContext()->setContextProperty("LinesModelInstance", &linesModel);
-    view.rootContext()->setContextProperty("JourneysModelInstance", &journeysModel);
-    view.rootContext()->setContextProperty("StationsModelInstance", &stationsModel);
+    view.rootContext()->setContextProperty("SearchStationModelInstance", &searchStationModel);
 
     // Launch application
     view.setSource(QUrl(MAIN_QML_FILE));

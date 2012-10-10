@@ -1,2 +1,0 @@
-2533279085378570::Lutry-Corniche::Prilly-Eglise::LUTRY > PRY
-2533279085378585::Prilly-Eglise::Lutry-Corniche::PRY > LUTRY

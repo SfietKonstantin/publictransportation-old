@@ -1,2 +1,0 @@
-2533279085378218::Lausanne-Gare::Bellevaux::GARE > BELVO
-2533279085378225::Bellevaux::Lausanne-Gare::BELVO > GARE

@@ -10,17 +10,11 @@ INCLUDEPATH += ../../lib/
 LIBS += -L../../lib/ -l$${NAME}
 
 HEADERS +=      backendmodel.h \
-                companiesmodel.h \
-                linesmodel.h \
-                journeysmodel.h \
-                stationsmodel.h \
+                searchstationmodel.h \
 
 SOURCES +=      main.cpp \
                 backendmodel.cpp \
-                companiesmodel.cpp \
-                linesmodel.cpp \
-                journeysmodel.cpp \
-                stationsmodel.cpp \
+                searchstationmodel.cpp \
 
 OTHER_FILES +=  main.qml \
                 UiConstants.js \
@@ -31,10 +25,7 @@ OTHER_FILES +=  main.qml \
                 MainPage.qml \
                 BackendEntry.qml \
                 BackendSelectorPage.qml \
-                CompaniesPage.qml \
-                LinesPage.qml \
-                JourneysPage.qml \
-                StationsPage.qml
+                SearchStationPage.qml
 
 # deployment
 target.path = $${APPLICATION_FOLDER}

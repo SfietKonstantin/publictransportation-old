@@ -33,15 +33,9 @@ class TransportLausannois : public ProviderPluginObject
     Q_INTERFACES(PublicTransportation::ProviderPluginInterface)
 public:
     explicit TransportLausannois(QObject *parent = 0);
-    virtual ~TransportLausannois();
     virtual QStringList capabilities() const;
-    virtual QList<Company> listCompanies() const;
-    virtual QList<Line> listLines(const Company &company) const;
-    virtual QList<Journey> listJourneys(const Company &company, const Line &line) const;
-    virtual QList<Station> listStations(const Company &company, const Line &line,
-                                        const Journey &journey) const;
-    virtual void getWaitingTime(const Company &company, const Line &line,
-                                const Journey &journey, const Station &station);
+public Q_SLOTS:
+    virtual void retrieveSuggestedStations(int request, const QString &partialStation);
 protected:
     QScopedPointer<TransportLausannoisPrivate> d_ptr;
 private:

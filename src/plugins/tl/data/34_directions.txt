@@ -1,2 +1,0 @@
-2533279085363499::Cery-Gériatrie::Mont-Goulin::CERY > MGOUL
-2533279085363497::Mont-Goulin::Cery-Gériatrie::MGOUL > CERY

@@ -1,2 +1,0 @@
-2533279085363728::Servion-Poste::Sallaz::SERV > SALA
-2533279085363722::Sallaz::Servion-Poste::SALA > SERV

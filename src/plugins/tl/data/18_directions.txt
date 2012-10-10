@@ -1,2 +1,0 @@
-2533279085378131::Lausanne-Flon::Timonet::FLON > TIMON
-2533279085378138::Timonet::Lausanne-Flon::TIMON > FLON

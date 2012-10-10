@@ -1,2 +1,0 @@
-2533279085363796::Renens-Gare::Lausanne-Flon::R-CFF > FLON
-2533279085363804::Lausanne-Flon::Renens-Gare::FLON > R-CFF

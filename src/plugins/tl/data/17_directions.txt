@@ -1,2 +1,0 @@
-2533279085378116::Georgette::Croix-Péage::GTE > CPEAG
-2533279085378124::Croix-Péage::Georgette::CPEAG > GTE

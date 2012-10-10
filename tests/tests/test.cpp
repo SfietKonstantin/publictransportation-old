@@ -30,7 +30,7 @@
 #include "common/dbus/dbusconstants.h"
 #include "manager/backendinfo.h"
 #include "manager/dbus/dbusbackendwrapper.h"
-//#include "manager/dbus/dbusbackendmanager.h"
+#include "manager/dbus/dbusbackendmanager.h"
 
 #include "generator.h"
 #include "dbusobject.h"
@@ -230,7 +230,6 @@ void Test::testDBusProvider()
 {
     SignalReceiver signalReceiver;
 
-
     QDBusConnection::sessionBus().registerService(DBUS_SERVICE);
     DBusBackendWrapper backend ("test", QString("$PROVIDER ") + HELPER_FOLDER
                                         + "/libproviderplugintesthelper.so",
@@ -257,93 +256,43 @@ void Test::testDBusProvider()
     QDBusConnection::sessionBus().unregisterService(DBUS_SERVICE);
 }
 
-//void Test::testDBusBackendManager()
-//{
-//    DBusBackendManager::registerDBusService();
+void Test::testDBusBackendManager()
+{
+    SignalReceiver signalReceiver;
 
-//    DBusBackendManager manager;
-//    manager.addBackend("test", QString("$PROVIDER ") + HELPER_FOLDER
-//                               + "/libproviderplugintesthelper.so",
-//                       QMap<QString, QString>());
+    DBusBackendManager::registerDBusService();
 
-//    QCOMPARE(manager.contains("test"), true);
+    DBusBackendManager manager;
+    manager.addBackend("test", QString("$PROVIDER ") + HELPER_FOLDER
+                               + "/libproviderplugintesthelper.so",
+                       QMap<QString, QString>());
 
-//    manager.launchBackend("test");
-//    QTest::qWait(300);
+    QCOMPARE(manager.contains("test"), true);
 
-//    AbstractBackendWrapper *backend = manager.backend("test");
+    manager.launchBackend("test");
+    QTest::qWait(300);
 
-//    backend->requestListCompanies();
-//    QTest::qWait(300);
+    AbstractBackendWrapper *backend = manager.backend("test");
+    connect(backend, SIGNAL(suggestedStationsRegistered(int,QStringList)),
+            &signalReceiver, SLOT(slotSuggestedStationsRegistered(int,QStringList)));
 
-//    QList<Company> companies = backend->companies();
-//    QCOMPARE(companies.count(), 1);
+    QString partialStation = Generator::generateRandomString();
+    backend->requestSuggestStations(partialStation);
+    QTest::qWait(300);
 
-//    Company company = companies.at(0);
-//    QCOMPARE(company.name(), QString("testCompany"));
-//    QCOMPARE(company.copyright(), QString("some copyright"));
-//    QCOMPARE(company.disambiguation().count(), 2);
-//    QCOMPARE(company.disambiguation().value("test1"), QVariant(12345));
-//    QCOMPARE(company.disambiguation().value("test2"), QVariant("abcde"));
-//    QCOMPARE(company.properties().count(), 3);
-//    QCOMPARE(company.properties().value("property1"), QVariant(67890));
-//    QCOMPARE(company.properties().value("property2"), QVariant("fghij"));
+    QStringList suggestedStations = signalReceiver.suggestedStations();
+    QCOMPARE(suggestedStations.count(), 3);
+    QCOMPARE(suggestedStations.at(0), partialStation);
+    QCOMPARE(suggestedStations.at(1), partialStation.repeated(2));
+    QCOMPARE(suggestedStations.at(2), partialStation.repeated(3));
 
+    manager.stopBackend("test");
+    QTest::qWait(300);
+    manager.killBackend("test");
+    manager.removeBackend("test");
+    QCOMPARE(manager.contains("test"), false);
 
-//    backend->requestListLines(company);
-//    QTest::qWait(300);
-
-//    QList<Line> lines = backend->lines(company);
-//    QCOMPARE(lines.count(), 1);
-
-//    Line line = lines.at(0);
-//    QCOMPARE(line.name(), QString("testLine"));
-//    QCOMPARE(line.disambiguation().count(), 2);
-//    QCOMPARE(line.disambiguation().value("test1"), QVariant(12345));
-//    QCOMPARE(line.disambiguation().value("test2"), QVariant("abcde"));
-//    QCOMPARE(line.properties().count(), 2);
-//    QCOMPARE(line.properties().value("property1"), QVariant(67890));
-//    QCOMPARE(line.properties().value("property2"), QVariant("fghij"));
-
-
-//    backend->requestListJourneys(company, line);
-//    QTest::qWait(300);
-
-//    QList<Journey> journeys = backend->journeys(company, line);
-//    QCOMPARE(journeys.count(), 1);
-
-//    Journey journey = journeys.at(0);
-//    QCOMPARE(journey.name(), QString("testJourney"));
-//    QCOMPARE(journey.disambiguation().count(), 2);
-//    QCOMPARE(journey.disambiguation().value("test1"), QVariant(12345));
-//    QCOMPARE(journey.disambiguation().value("test2"), QVariant("abcde"));
-//    QCOMPARE(journey.properties().count(), 2);
-//    QCOMPARE(journey.properties().value("property1"), QVariant(67890));
-//    QCOMPARE(journey.properties().value("property2"), QVariant("fghij"));
-
-
-//    backend->requestListStations(company, line, journey);
-//    QTest::qWait(300);
-
-//    QList<Station> stations = backend->stations(company, line, journey);
-//    QCOMPARE(stations.count(), 1);
-
-//    Station station = stations.at(0);
-//    QCOMPARE(station.name(), QString("testStation"));
-//    QCOMPARE(station.disambiguation().count(), 2);
-//    QCOMPARE(station.disambiguation().value("test1"), QVariant(12345));
-//    QCOMPARE(station.disambiguation().value("test2"), QVariant("abcde"));
-//    QCOMPARE(station.properties().count(), 2);
-//    QCOMPARE(station.properties().value("property1"), QVariant(67890));
-//    QCOMPARE(station.properties().value("property2"), QVariant("fghij"));
-
-//    manager.stopBackend("test");
-//    QTest::qWait(300);
-//    manager.killBackend("test");
-//    manager.removeBackend("test");
-//    QCOMPARE(manager.contains("test"), false);
-
-//    DBusBackendManager::unregisterDBusService();
-//}
+    DBusBackendManager::unregisterDBusService();
+}
 
 QTEST_MAIN(Test)

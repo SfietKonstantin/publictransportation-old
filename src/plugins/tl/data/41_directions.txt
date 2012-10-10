@@ -1,2 +1,0 @@
-2533279085378299::Montolieu::Praz-Séchaud::MONTO > PSECH
-2533279085378305::Praz-Séchaud::Montolieu::PSECH > MONTO

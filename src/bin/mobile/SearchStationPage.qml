@@ -16,11 +16,12 @@
 
 import QtQuick 1.1
 import com.nokia.meego 1.0
+import "UiConstants.js" as Ui
 
 AbstractPage {
     headerColor: "#006E29"
     headerLabelColor: "white"
-    title: qsTr("Journeys")
+    title: qsTr("Search stations")
     tools: ToolBarLayout {
         ToolIcon {
             iconId: "toolbar-back"
@@ -30,32 +31,24 @@ AbstractPage {
     content: Item {
         anchors.fill: parent
 
+        TextField {
+            id: searchField
+            anchors.top: parent.top; anchors.topMargin: Ui.MARGIN_DEFAULT
+            anchors.left: parent.left; anchors.leftMargin: Ui.MARGIN_DEFAULT
+            anchors.right: parent.right; anchors.rightMargin: Ui.MARGIN_DEFAULT
+            placeholderText: qsTr("Search for a station")
+            onTextChanged: SearchStationModelInstance.search(text)
+        }
+
         ListView {
-            id: view
+            anchors.top: searchField.bottom; anchors.topMargin: Ui.MARGIN_DEFAULT
+            anchors.left: parent.left; anchors.right: parent.right
+            anchors.bottom: parent.bottom
             clip: true
-            anchors.fill: parent
-            model: JourneysModelInstance
+            model: SearchStationModelInstance
             delegate: ClickableEntry {
                 text: model.name
-                subText: model.description
-                onClicked: {
-                    window.pageStack.push(stationsPage)
-                    JourneysModelInstance.requestStations(model.index)
-                }
             }
         }
-
-        ScrollDecorator {
-            flickableItem: view
-        }
-
-        BusyIndicator {
-            anchors.centerIn: parent
-            visible: JourneysModelInstance.updating
-            platformStyle: BusyIndicatorStyle { size: "large" }
-            running: visible
-        }
     }
-
-    StationsPage {id: stationsPage}
 }

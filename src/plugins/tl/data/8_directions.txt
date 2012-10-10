@@ -1,2 +1,0 @@
-2533279085378531::Verrière::Grand-Mont::VERRI > GMONT
-2533279085378551::Grand-Mont::Verrière::GMONT > VERRI

@@ -1,2 +1,0 @@
-2533279085363763::Croix/Lutry::Lutry-Port::CROIX > LPORT
-2533279085363760::Lutry-Port::Croix/Lutry::LPORT > CROIX

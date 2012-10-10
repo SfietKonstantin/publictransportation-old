@@ -1,9 +1,0 @@
-3377704015495878::Lausanne::Prilly-Eglise
-3377704015495212::Lausanne::Bourg-Dessus
-3377704015495546::Lausanne::Follieu
-3377704015495277::Lausanne::Borjod
-3377704015495965::Lausanne::Saugiaz
-3377704015495173::Lausanne::1er Mai
-3377704015495633::Lausanne::Industrie
-3377704015495890::Lausanne::Renens-14 Avril
-3377704015495909::Lausanne::Renens-Gare nord

@@ -27,7 +27,7 @@ private slots:
     void testDBusSimpleReceive();
     void testBackendInfo();
     void testDBusProvider();
-//    void testDBusBackendManager();
+    void testDBusBackendManager();
 };
 
 #endif // TEST_H

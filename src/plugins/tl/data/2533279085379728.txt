@@ -1,3 +1,0 @@
-3377704015495562::Lausanne::Forêt
-3377704015496236::Lausanne::Entre-Bois
-3377704015496238::Lausanne::Maillefer

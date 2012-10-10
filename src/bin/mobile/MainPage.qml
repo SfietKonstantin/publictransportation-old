@@ -34,14 +34,14 @@ AbstractNavigationPage {
         }
     }
     onShow: {
-        if(page == "showCompaniesList") {
-            window.pageStack.push(companiesPage)
+        if(page == "showSearchStation") {
+            window.pageStack.push(searchStationPage)
         }
     }
     model: ListModel {
         ListElement {
-            identifier: "showCompaniesList"
-            text: QT_TR_NOOP("Companies list")
+            identifier: "showSearchStation"
+            text: QT_TR_NOOP("Search station")
         }
     }
 
@@ -57,7 +57,7 @@ AbstractNavigationPage {
         }
     }
 
-    CompaniesPage {id: companiesPage}
+    SearchStationPage {id: searchStationPage}
     BackendSelectorPage {id: backendSelectorPage}
 
 

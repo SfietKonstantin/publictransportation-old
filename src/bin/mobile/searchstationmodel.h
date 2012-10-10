@@ -1,5 +1,5 @@
 /****************************************************************************************
- * Copyright (C) 2012 Lucien XU <sfietkonstantin@free.fr>                               *
+ * Copyright (C) 2011 Lucien XU <sfietkonstantin@free.fr>                               *
  *                                                                                      *
  * This program is free software; you can redistribute it and/or modify it under        *
  * the terms of the GNU General Public License as published by the Free Software        *
@@ -14,44 +14,27 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_JOURNEYSMODEL_H
-#define PUBLICTRANSPORTATION_JOURNEYSMODEL_H
-
 /**
- * @file journeysmodel.h
- * @short Definition of PublicTransportation::JourneysModel
+ * @file backendmodel.h
+ * @short Definition of PublicTransportation::BackendModel
  */
 
+#ifndef PUBLICTRANSPORTATION_SEARCHSTATIONMODEL_H
+#define PUBLICTRANSPORTATION_SEARCHSTATIONMODEL_H
+
 #include <QtCore/QAbstractListModel>
+#include <QtCore/QSettings>
 #include "manager/abstractbackendwrapper.h"
 
 namespace PublicTransportation
 {
 
 class AbstractBackendManager;
-class JourneysModelPrivate;
 
-/**
- * @brief A model for journeys
- *
- * This class provides a model for QML that contains
- * a list of journeys. It lists all the journeys of
- * a given line.
- *
- * This class is populated by calling
- * displayJourneys().
- *
- * This class also provides a method for QML context,
- * that is requestStations(), and that is used to ask for
- * getting informations on stations. This method is used to
- * emit stationsRequested() signal.
- */
-class JourneysModel: public QAbstractListModel
+class SearchStationModelPrivate;
+class SearchStationModel : public QAbstractListModel
 {
     Q_OBJECT
-    /**
-     * @short If the model is updating
-     */
     Q_PROPERTY(bool updating READ isUpdating NOTIFY updatingChanged)
     /**
      * @short Count
@@ -61,25 +44,21 @@ public:
     /**
      * @short Model roles
      */
-    enum JourneysModelRole {
+    enum SearchStationModelRole {
         /**
          * @short Name role
          */
-        NameRole = Qt::UserRole + 1,
-        /**
-         * @short Description role
-         */
-        DescriptionRole
+        NameRole = Qt::UserRole + 1
     };
     /**
      * @short Default constructor
      * @param parent parent object.
      */
-    explicit JourneysModel(QObject *parent = 0);
+    explicit SearchStationModel(QObject *parent = 0);
     /**
      * @short Destructor
      */
-    virtual ~JourneysModel();
+    virtual ~SearchStationModel();
     /**
      * @brief Set backend manager
      * @param backendManager backend manager to set.
@@ -92,10 +71,6 @@ public:
      * @return the number of rows in this model.
      */
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    /**
-     * @brief If the model is updating
-     * @return if the model is updating.
-     */
     bool isUpdating() const;
     /**
      * @short Count
@@ -112,51 +87,27 @@ public:
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 public Q_SLOTS:
     /**
-     * @brief Display journeys
-     * @param backendIdentifier backend identifier.
-     * @param company company for which the journey is requested.
-     * @param line line for which the journey is requested.
+     * @brief Search
      */
-    void displayJourneys(const QString &backendIdentifier,
-                         const PublicTransportation::Company &company,
-                         const PublicTransportation::Line &line);
-    /**
-     * @brief Request stations of a given journey
-     * @param index index of the journey.
-     */
-    void requestStations(int index);
+    void search(const QString &partialStation);
 Q_SIGNALS:
-    /**
-     * @brief Updating changed
-     */
     void updatingChanged();
     /**
      * @short Count changed
      */
     void countChanged();
-    /**
-     * @brief Stations requested
-     * @param backendIdentifier backend identifier.
-     * @param company company for which the stations are requested.
-     * @param line line for which the stations are requested.
-     * @param journey journey for which the stations are requested.
-     */
-    void stationsRequested(const QString &backendIdentifier,
-                           const PublicTransportation::Company &company,
-                           const PublicTransportation::Line &line,
-                           const PublicTransportation::Journey &journey);
 protected:
     /**
      * @short D-pointer
      */
-    const QScopedPointer<JourneysModelPrivate> d_ptr;
+    const QScopedPointer<SearchStationModelPrivate> d_ptr;
 private:
-    Q_DECLARE_PRIVATE(JourneysModel)
-    Q_PRIVATE_SLOT(d_func(), void slotJourneysChanged(PublicTransportation::Company,
-                                                      PublicTransportation::Line))
+    Q_DECLARE_PRIVATE(SearchStationModel)
+    Q_PRIVATE_SLOT(d_func(),
+                   void slotSuggestedStationsRegistered(int request, const QStringList &stations))
 
 };
 
 }
 
-#endif // PUBLICTRANSPORTATION_JOURNEYSMODEL_H
+#endif // PUBLICTRANSPORTATION_SEARCHSTATIONMODEL_H

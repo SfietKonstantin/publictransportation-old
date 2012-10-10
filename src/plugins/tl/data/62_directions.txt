@@ -1,4 +1,0 @@
-2533279085363707::Moudon-Gare::Croisettes::MOUD > CROIS    via La Râpe
-2533279085363699::Croisettes::Moudon-Gare::CROIS > MOUD    via La Râpe
-2533279085363696::Croisettes::Moudon-Gare::CROIS > MOUD
-2533279085379036::Moudon-Gare::Croisettes::MOUD > CROIS
