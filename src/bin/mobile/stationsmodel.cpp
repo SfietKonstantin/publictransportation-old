@@ -222,7 +222,8 @@ void StationsModel::test(int index)
     }
     Station station = d->data.at(index);
 
-    d->backendManager->backend(d->backendIdentifier)->requestWaitingTime(d->company, d->line, d->journey, station);
+    d->backendManager->backend(d->backendIdentifier)->requestWaitingTime(d->company, d->line,
+                                                                         d->journey, station);
 }
 
 void StationsModel::displayStations(const QString &backendIdentifier, const Company &company,
