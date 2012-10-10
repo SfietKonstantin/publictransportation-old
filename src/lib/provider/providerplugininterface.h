@@ -97,6 +97,8 @@ public:
      */
     virtual QList <Station> listStations(const Company &company, const Line &line,
                                          const Journey &journey) const = 0;
+    virtual void getWaitingTime(const Company &company, const Line &line,
+                                const Journey &journey, const Station &station) = 0;
 };
 
 }

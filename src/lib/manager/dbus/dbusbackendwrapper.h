@@ -96,6 +96,8 @@ public Q_SLOTS:
      */
     virtual void requestListStations(const Company &company, const Line &line,
                                      const Journey &journey);
+    virtual void requestWaitingTime(const Company &company, const Line &line,
+                                    const Journey &journey, const Station &station);
     /**
      * @brief Register backend
      *
@@ -150,6 +152,11 @@ public Q_SLOTS:
                                 const PublicTransportation::Line &line,
                                 const PublicTransportation::Journey &journey,
                                 const QList<PublicTransportation::Station> &stations);
+    void registerWaitingTime(const PublicTransportation::Company &company,
+                             const PublicTransportation::Line &line,
+                             const PublicTransportation::Journey &journey,
+                             const PublicTransportation::Station &stations,
+                             const QList<WaitingTime> &waitingTimes);
 Q_SIGNALS:
     /**
      * @brief List companies requested
@@ -173,7 +180,7 @@ Q_SIGNALS:
      * @param company company for which the journeys should be listed.
      * @param line line for which the journeys should be listed.
      */
-    void listJourneysRequested(const PublicTransportation::Company & company,
+    void listJourneysRequested(const PublicTransportation::Company &company,
                            const PublicTransportation::Line &line);
     /**
      * @brief List stations requested
@@ -184,9 +191,13 @@ Q_SIGNALS:
      * @param line line for which the stations should be listed.
      * @param journey journey for which the stations should be listed.
      */
-    void listStationsRequested(const PublicTransportation::Company & company,
-                           const PublicTransportation::Line & line,
-                           const PublicTransportation::Journey & journey);
+    void listStationsRequested(const PublicTransportation::Company &company,
+                           const PublicTransportation::Line &line,
+                           const PublicTransportation::Journey &journey);
+    void getWaitingTimeRequested(const PublicTransportation::Company &company,
+                                 const PublicTransportation::Line &line,
+                                 const PublicTransportation::Journey &journey,
+                                 const PublicTransportation::Station &station);
 private:
     Q_DECLARE_PRIVATE(DBusBackendWrapper)
     /// \cond buggy-doxygen-doc

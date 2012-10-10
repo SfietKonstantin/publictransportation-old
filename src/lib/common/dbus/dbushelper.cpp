@@ -27,6 +27,7 @@
 #include "common/line.h"
 #include "common/journey.h"
 #include "common/station.h"
+#include "common/waitingtime.h"
 
 namespace PublicTransportation
 {
@@ -147,6 +148,49 @@ const QDBusArgument & operator>>(const QDBusArgument &argument, Station &station
     return transportationObjectFromDBus(argument, station);
 }
 
+QDBusArgument & operator<<(QDBusArgument &argument, const WaitingTime &waitingTime)
+{
+    argument.beginStructure();
+    argument << waitingTime.waitingTime();
+
+    // Properties map
+    argument.beginMap(qMetaTypeId<QString>(), qMetaTypeId<QDBusVariant>());
+    QVariantMap map = waitingTime.properties();
+    foreach (QString key, map.keys()) {
+        argument.beginMapEntry();
+        argument << key << QDBusVariant(map.value(key));
+        argument.endMapEntry();
+    }
+    argument.endMap();
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument & operator>>(const QDBusArgument &argument, WaitingTime &waitingTime)
+{
+    argument.beginStructure();
+    int time;
+    argument >> time;
+    waitingTime.setWaitingTime(time);
+
+    // Properties map
+    QVariantMap map;
+    argument.beginMap();
+    while (!argument.atEnd()) {
+        argument.beginMapEntry();
+        QString key;
+        QDBusVariant value;
+        argument >> key;
+        argument >> value;
+        map.insert(key, value.variant());
+        argument.endMapEntry();
+    }
+    argument.endMap();
+    waitingTime.setProperties(map);
+    argument.endStructure();
+    return argument;
+}
+
 void registerDBusTypes()
 {
     qDBusRegisterMetaType<PublicTransportation::Company>();
@@ -157,6 +201,8 @@ void registerDBusTypes()
     qDBusRegisterMetaType<QList<PublicTransportation::Journey> >();
     qDBusRegisterMetaType<PublicTransportation::Station>();
     qDBusRegisterMetaType<QList<PublicTransportation::Station> >();
+    qDBusRegisterMetaType<PublicTransportation::WaitingTime>();
+    qDBusRegisterMetaType<QList<PublicTransportation::WaitingTime> >();
 }
 
 }

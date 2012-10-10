@@ -24,6 +24,7 @@
 
 #include "publictransportation_global.h"
 #include "transportationobject.h"
+#include "waitingtime.h"
 #include <QtCore/QVariantMap>
 
 namespace PublicTransportation
@@ -47,6 +48,12 @@ class StationPrivate;
  *
  * While creating stations, the station will also automatically
  * be attached to the journey.
+ *
+ * Stations also have a specific property, that is waiting time.
+ * This property, a list of integers (representing the minutes to
+ * wait) can be accessed and set using
+ * - waitingTime()
+ * - setWaitingTime()
  */
 class PUBLICTRANSPORTATION_EXPORT Station : public TransportationObject
 {
@@ -78,6 +85,15 @@ public:
      * @param journey journey to set.
      */
     void setJourney(const Journey &journey);
+    /**
+     * @short Waiting time
+     */
+    QList<WaitingTime> waitingTime() const;
+    /**
+     * @brief Set waiting time
+     * @param waitingTime waiting time to set.
+     */
+    void setWaitingTime(const QList<WaitingTime> &waitingTime);
 private:
     Q_DECLARE_PRIVATE(Station)
 };

@@ -1,0 +1,14 @@
+3377704015495666::Lausanne::Lutry-Port
+3377704015496032::Lausanne::Taillepied
+3377704015495342::Lausanne::Les Champs
+3377704015495779::Lausanne::Orzens
+3377704015496116::Lausanne::Avenue William
+3377704015495407::Lausanne::Colline
+3377704015495413::Lausanne::Conversion-Gare
+3377704015495321::Lausanne::Corsy-Dessous
+3377704015495684::Lausanne::Marionnettes
+3377704015495843::Lausanne::Ponfilet
+3377704015495301::Lausanne::Brûlées
+3377704015495323::Lausanne::Corsy-Dessus
+3377704015495498::Lausanne::Echerins
+3377704015495455::Lausanne::Croix/Lutry

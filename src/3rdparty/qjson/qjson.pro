@@ -8,7 +8,7 @@ INCLUDE_HEADERS +=  src/parser.h \
                     src/qobjecthelper.h \
                     src/parserrunnable.h \
                     src/serializer.h \
-                    src/serializerrubbale.h
+                    src/serializerrunnable.h
 
 HEADERS +=  $${INCLUDE_HEADERS} \
             src/json_parser.hh \

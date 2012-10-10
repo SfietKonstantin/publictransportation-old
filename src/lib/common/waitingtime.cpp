@@ -14,58 +14,60 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_PROVIDER_TLLIST_H
-#define PUBLICTRANSPORTATION_PROVIDER_TLLIST_H
-
-#include <QtCore/QList>
-#include "common/company.h"
-#include "common/line.h"
-#include "common/journey.h"
-#include "common/station.h"
+#include "waitingtime.h"
 
 namespace PublicTransportation
 {
 
-namespace Provider
+WaitingTime::WaitingTime():
+    d_ptr(new WaitingTimePrivate)
 {
+    Q_D(WaitingTime);
+    d->waitingTime = -1;
+}
 
-/**
- * @short List of all TL lines, journeys and stations
- *
- * This class provides, in an hard-coded way, all
- * informations related to TL, including all the
- * lines, the journeys, and stations.
- *
- * It provides methods that are compatible with provider
- * interface.
- *
- * Content of this class is generated with a script that
- * downloads information from t-l.ch.
- */
-class TlList
+WaitingTime::WaitingTime(const WaitingTime &other):
+    d_ptr(other.d_ptr)
 {
-public:
-    /**
-     * @short Lines
-     * @return TL lines.
-     */
-    static QList<Line> lines();
-    /**
-     * @short Journeys
-     * @param line line.
-     * @return Journeys associated to the line.
-     */
-    static QList<Journey> journeys(const Line &line);
-    /**
-     * @short Journeys
-     * @param line line.
-     * @return Journeys associated to the line.
-     */
-    static QList<Station> stations(const Line &line, const Journey &journey);
-};
+}
 
+WaitingTime::WaitingTime(WaitingTimePrivate &dd):
+    d_ptr(&dd)
+{
+}
+
+WaitingTime::~WaitingTime()
+{
+}
+
+bool WaitingTime::isNull() const
+{
+    Q_D(const WaitingTime);
+    return (d->waitingTime < 0);
+}
+
+int WaitingTime::waitingTime() const
+{
+    Q_D(const WaitingTime);
+    return d->waitingTime;
+}
+
+void WaitingTime::setWaitingTime(int waitingTime)
+{
+    Q_D(WaitingTime);
+    d->waitingTime = waitingTime;
+}
+
+QVariantMap WaitingTime::properties() const
+{
+    Q_D(const WaitingTime);
+    return d->properties;
+}
+
+void WaitingTime::setProperties(const QVariantMap &properties)
+{
+    Q_D(WaitingTime);
+    d->properties = properties;
 }
 
 }
-
-#endif // PUBLICTRANSPORTATION_PROVIDER_TLLIST_H

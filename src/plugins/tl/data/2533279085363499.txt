@@ -1,0 +1,3 @@
+3377704015495341::Lausanne::Cery-Gériatrie
+3377704015495328::Lausanne::Coudraie
+3377704015495712::Lausanne::Mont-Goulin

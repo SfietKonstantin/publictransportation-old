@@ -22,6 +22,9 @@
  * @short Definition of helper functions used by DBus interface
  */
 
+#include <QtCore/QList>
+#include <QtCore/QMetaType>
+
 class QDBusArgument;
 namespace PublicTransportation
 {
@@ -31,6 +34,7 @@ class Company;
 class Line;
 class Journey;
 class Station;
+class WaitingTime;
 
 /**
  * @brief Marshall a transportation object to a DBus argument
@@ -123,6 +127,8 @@ QDBusArgument & operator<<(QDBusArgument &argument, const Station &station);
  * @return DBus argument without the station.
  */
 const QDBusArgument & operator>>(const QDBusArgument &argument, Station &station);
+QDBusArgument & operator<<(QDBusArgument &argument, const WaitingTime &waitingTime);
+const QDBusArgument & operator>>(const QDBusArgument &argument, WaitingTime &waitingTime);
 
 /**
  * @brief Register DBus types
@@ -132,6 +138,6 @@ const QDBusArgument & operator>>(const QDBusArgument &argument, Station &station
  * making any DBus call involving these complex types.
  */
 void registerDBusTypes();
-}
 
+}
 #endif // PUBLICTRANSPORTATION_DBUSHELPER_H

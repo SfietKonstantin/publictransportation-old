@@ -30,6 +30,7 @@
 #include "common/line.h"
 #include "common/journey.h"
 #include "common/station.h"
+#include "common/waitingtime.h"
 
 namespace PublicTransportation
 {
@@ -93,6 +94,7 @@ class AbstractBackendWrapperPrivate;
  * - setLines()
  * - setJourneys()
  * - setStations()
+ * - setWaitingTime()
  *
  * as well as
  * - capabilities()
@@ -100,6 +102,7 @@ class AbstractBackendWrapperPrivate;
  * - lines()
  * - journeys()
  * - stations()
+ * - waitingTime()
  *
  * This class also provides interfaces for implementing some capabilities
  * of the providers, that should be implemented in subclasses:
@@ -107,6 +110,7 @@ class AbstractBackendWrapperPrivate;
  * - requestListLines()
  * - requestListJourneys()
  * - requestListStations()
+ * - requestWaitingTime()
  *
  * Remark that there is no request for capabilities. It is because
  * registering capabilities is something that backends should do
@@ -214,6 +218,8 @@ public:
      */
     QList<Station> stations(const Company &company, const Line &line,
                             const Journey &journey) const;
+    QList<WaitingTime> waitingTime(const Company &company, const Line &line,
+                                   const Journey &journey, const Station &station) const;
 public Q_SLOTS:
     /**
      * @brief Launch the backend
@@ -269,6 +275,8 @@ public Q_SLOTS:
      */
     virtual void requestListStations(const Company &company, const Line &line,
                                      const Journey &journey) = 0;
+    virtual void requestWaitingTime(const Company &company, const Line &line,
+                                    const Journey &journey, const Station &station) = 0;
 Q_SIGNALS:
     /**
      * @brief Status changed
@@ -303,6 +311,10 @@ Q_SIGNALS:
     void stationsChanged(const PublicTransportation::Company &company,
                          const PublicTransportation::Line &line,
                          const PublicTransportation::Journey &journey);
+    void waitingTimeChanged(const PublicTransportation::Company &company,
+                            const PublicTransportation::Line &line,
+                            const PublicTransportation::Journey &journey,
+                            const PublicTransportation::Station &station);
 protected:
     /**
      * @brief D-pointer based constructor
@@ -362,6 +374,8 @@ protected:
      */
     void setStations(const Company &company, const Line &line, const Journey &journey,
                      const QList<Station> &stations);
+    void setWaitingTime(const Company &company, const Line &line, const Journey &journey,
+                        const Station &station, const QList<WaitingTime> &waitingTimes);
     /**
      * @brief D-pointer
      */

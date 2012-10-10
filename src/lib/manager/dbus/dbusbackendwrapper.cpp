@@ -246,6 +246,12 @@ void DBusBackendWrapper::requestListStations(const Company &company, const Line 
     emit listStationsRequested(company, line, journey);
 }
 
+void DBusBackendWrapper::requestWaitingTime(const Company &company, const Line &line,
+                                            const Journey &journey, const Station &station)
+{
+    emit getWaitingTimeRequested(company, line, journey, station);
+}
+
 void DBusBackendWrapper::registerBackend(const QStringList &capabilities)
 {
     Q_D(DBusBackendWrapper);
@@ -338,7 +344,7 @@ void DBusBackendWrapper::registerListedJourneys(const Company &company, const Li
 
 void DBusBackendWrapper::registerListedStations(const Company &company, const Line &line,
                                                 const Journey &journey,
-                                                 const QList<Station> &stations)
+                                                const QList<Station> &stations)
 {
     Q_D(DBusBackendWrapper);
 
@@ -347,11 +353,28 @@ void DBusBackendWrapper::registerListedStations(const Company &company, const Li
                                   << "retrieved for" << d->dbusObjectPath.toAscii().constData();
     debug("dbus-backend-wrapper") << "List of stations:";
     foreach(Station station, stations) {
-        QString stationName = station.name();
-        debug("dbus-backend-wrapper") << stationName;
+        debug("dbus-backend-wrapper") << station.name();
     }
 
     setStations(company, line, journey, stations);
+}
+
+void DBusBackendWrapper::registerWaitingTime(const Company &company, const Line &line,
+                                             const Journey &journey, const Station &station,
+                                             const QList<WaitingTime> &waitingTimes)
+{
+    Q_D(DBusBackendWrapper);
+
+    debug("dbus-backend-wrapper") << "Waiting time of backend for company" << company.name()
+                                  << "line" << line.name() << "journey" << journey.name()
+                                  << "and station" << station.name()
+                                  << "retrieved for" << d->dbusObjectPath.toAscii().constData();
+    debug("dbus-backend-wrapper") << "Waiting time:";
+    foreach(WaitingTime waitingTime, waitingTimes) {
+        debug("dbus-backend-wrapper") << waitingTime.waitingTime();
+    }
+
+    setWaitingTime(company, line, journey, station, waitingTimes);
 }
 
 }

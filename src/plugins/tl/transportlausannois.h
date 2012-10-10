@@ -40,10 +40,13 @@ public:
     virtual QList<Journey> listJourneys(const Company &company, const Line &line) const;
     virtual QList<Station> listStations(const Company &company, const Line &line,
                                         const Journey &journey) const;
+    virtual void getWaitingTime(const Company &company, const Line &line,
+                                const Journey &journey, const Station &station);
 protected:
     QScopedPointer<TransportLausannoisPrivate> d_ptr;
 private:
     Q_DECLARE_PRIVATE(TransportLausannois)
+    Q_PRIVATE_SLOT(d_func(), void slotFinished())
 };
 
 }

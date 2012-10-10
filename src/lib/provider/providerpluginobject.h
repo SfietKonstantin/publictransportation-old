@@ -54,6 +54,12 @@ public:
      * @brief Destructor
      */
     virtual ~ProviderPluginObject() {}
+Q_SIGNALS:
+    void waitingTimeRetrieved(const PublicTransportation::Company &company,
+                              const PublicTransportation::Line &line,
+                              const PublicTransportation::Journey &journey,
+                              const PublicTransportation::Station &station,
+                              const QList<PublicTransportation::WaitingTime> &waitingTimes);
 };
 
 }

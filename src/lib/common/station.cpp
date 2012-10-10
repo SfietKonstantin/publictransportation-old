@@ -38,6 +38,11 @@ public:
      * @brief Journey
      */
     Journey journey;
+    /**
+     * @internal
+     * @brief Waiting time
+     */
+    QList<WaitingTime> waitingTime;
 };
 
 ////// End of private class //////
@@ -75,6 +80,18 @@ void Station::setJourney(const Journey &journey)
     Q_D(Station);
     d->journey = journey;
     d->journey.addStation(*this);
+}
+
+QList<WaitingTime> Station::waitingTime() const
+{
+    Q_D(const Station);
+    return d->waitingTime;
+}
+
+void Station::setWaitingTime(const QList<WaitingTime> &waitingTime)
+{
+    Q_D(Station);
+    d->waitingTime = waitingTime;
 }
 
 }

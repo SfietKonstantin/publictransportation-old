@@ -1,0 +1,24 @@
+3377704015495887::Lausanne::Renens-14 Avril
+3377704015495909::Lausanne::Renens-Gare nord
+3377704015495169::Lausanne::1er Août
+3377704015495893::Lausanne::Hôtel-de-Ville
+3377704015495976::Lausanne::Sous l'Eglise
+3377704015495896::Lausanne::Renens-Village
+3377704015495822::Renens::Perrelet
+3377704015495579::Lausanne::Galicien
+3377704015495885::Lausanne::Prélaz-les-Roses
+3377704015495862::Lausanne::Prélaz
+3377704015495913::Lausanne::Recordon
+3377704015495280::Lausanne::Boston
+3377704015495381::Lausanne::Chauderon
+3377704015495193::Lausanne::Bel-Air
+3377704015495982::Lausanne::St-François
+3377704015495229::Lausanne::Bessières
+3377704015495786::Lausanne::Ours
+3377704015495233::Lausanne::Béthusy
+3377704015495538::Lausanne::Fauconnières
+3377704015495810::Lausanne::Pont de Chailly
+3377704015495360::Lausanne::Chailly-Village
+3377704015495329::Lausanne::Coudrette
+3377704015495933::Lausanne::Rosiaz
+3377704015496115::Lausanne::Val-Vert

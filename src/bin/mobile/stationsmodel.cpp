@@ -214,6 +214,17 @@ QVariant StationsModel::data(const QModelIndex &index, int role) const
     }
 }
 
+void StationsModel::test(int index)
+{
+    Q_D(const StationsModel);
+    if (index < 0 or index >= rowCount()) {
+        return;
+    }
+    Station station = d->data.at(index);
+
+    d->backendManager->backend(d->backendIdentifier)->requestWaitingTime(d->company, d->line, d->journey, station);
+}
+
 void StationsModel::displayStations(const QString &backendIdentifier, const Company &company,
                                     const Line &line, const Journey &journey)
 {

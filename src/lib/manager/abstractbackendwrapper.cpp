@@ -128,6 +128,34 @@ QList<Station> AbstractBackendWrapper::stations(const Company &company, const Li
     return sharedJourney.stations();
 }
 
+QList<WaitingTime> AbstractBackendWrapper::waitingTime(const Company &company, const Line &line,
+                                                       const Journey &journey,
+                                                       const Station &station) const
+{
+    Q_D(const AbstractBackendWrapper);
+    Company sharedCompany = sharedCopy<Company>(company, d->companies);
+    if (sharedCompany.isNull()) {
+        return QList<WaitingTime>();
+    }
+
+    Line sharedLine = sharedCopy<Line>(line, sharedCompany.lines());
+    if (sharedLine.isNull()) {
+        return QList<WaitingTime>();
+    }
+
+    Journey sharedJourney = sharedCopy<Journey>(journey, sharedLine.journeys());
+    if (sharedJourney.isNull()) {
+        return QList<WaitingTime>();
+    }
+
+    Station sharedStation = sharedCopy<Station>(station, sharedJourney.stations());
+    if (sharedStation.isNull()) {
+        return QList<WaitingTime>();
+    }
+
+    return sharedStation.waitingTime();
+}
+
 void AbstractBackendWrapper::waitForStopped()
 {
 }
@@ -316,6 +344,53 @@ void AbstractBackendWrapper::setStations(const Company &company, const Line &lin
     debug("abs-backend-wrapper") << "Stations changed for company" << sharedCompany.name()
                                  << ", line" << sharedLine.name()
                                  << "and journey" << sharedJourney.name();
+}
+
+void AbstractBackendWrapper::setWaitingTime(const Company &company, const Line &line,
+                                            const Journey &journey, const Station &station,
+                                            const QList<WaitingTime> &waitingTimes)
+{
+    Q_D(AbstractBackendWrapper);
+
+    Company sharedCompany = sharedCopy<Company>(company, d->companies);
+    if (sharedCompany.isNull()) {
+        warning("abs-backend-wrapper") << "Waiting time are set for an unknown company:"
+                                       << company.name();
+        return;
+    }
+
+    Line sharedLine = sharedCopy<Line>(line, sharedCompany.lines());
+    if (sharedLine.isNull()) {
+        warning("abs-backend-wrapper") << "Waiting time are set for an unknown line:" << line.name()
+                                       << "(and for company " << company.name() << ")";
+        return;
+    }
+
+    Journey sharedJourney = sharedCopy<Journey>(journey, sharedLine.journeys());
+    if (sharedJourney.isNull()) {
+        warning("abs-backend-wrapper") << "Waiting time are set for an unknown journey:"
+                                       << journey.name() << "(and for company "
+                                       << company.name() << "and line" << line.name() << ")";
+        return;
+    }
+
+    Station sharedStation = sharedCopy<Station>(station, sharedJourney.stations());
+    if (sharedJourney.isNull()) {
+        warning("abs-backend-wrapper") << "Waiting time are set for an unknown station:"
+                                       << journey.name() << "(and for company "
+                                       << company.name() << ",line" << line.name()
+                                       << "and station" << station.name() << ")";
+        return;
+    }
+
+
+    sharedStation.setWaitingTime(waitingTimes);
+
+    emit waitingTimeChanged(sharedCompany, sharedLine, sharedJourney, sharedStation);
+    debug("abs-backend-wrapper") << "Waiting time changed for company" << sharedCompany.name()
+                                 << ", line" << sharedLine.name()
+                                 << ", journey" << sharedJourney.name()
+                                 << "and station" << station.name();
 }
 
 }

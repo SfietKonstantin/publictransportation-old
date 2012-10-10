@@ -31,6 +31,7 @@ AbstractPage {
         anchors.fill: parent
 
         ListView {
+            id: view
             clip: true
             anchors.fill: parent
             model: CompaniesModelInstance
@@ -42,6 +43,10 @@ AbstractPage {
                     CompaniesModelInstance.requestLines(model.index)
                 }
             }
+        }
+
+        ScrollDecorator {
+            flickableItem: view
         }
 
         BusyIndicator {

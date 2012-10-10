@@ -31,6 +31,7 @@ namespace PublicTransportation
 class Company;
 class Line;
 class Journey;
+class Station;
 class ProviderPluginDBusWrapperPrivate;
 
 /**
@@ -104,6 +105,10 @@ public Q_SLOTS:
     void sendListedStations(const PublicTransportation::Company &company,
                             const PublicTransportation::Line &line,
                             const PublicTransportation::Journey &journey) const;
+    void getWaitingTime(const PublicTransportation::Company &company,
+                        const PublicTransportation::Line &line,
+                        const PublicTransportation::Journey &journey,
+                        const PublicTransportation::Station &station) const;
 protected:
     /**
      * @brief D-pointer

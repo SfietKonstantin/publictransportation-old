@@ -2,15 +2,18 @@ include(../../../globals.pri)
 
 TARGET = tl
 TEMPLATE = lib
+QT = core network
 CONFIG += plugin
 INCLUDEPATH += ../../lib/
+INCLUDEPATH += ../../3rdparty/qjson/src
 LIBS += -L../../lib/ -l$${NAME}
+LIBS += -L../../3rdparty/qjson/ -lqjson
 
 HEADERS +=      transportlausannois.h \
-                tllist.h \
 
 SOURCES +=      transportlausannois.cpp \
-                tllist.cpp \
+
+RESOURCES +=    res.qrc
 
 OTHER_FILES +=  tl.desktop
 

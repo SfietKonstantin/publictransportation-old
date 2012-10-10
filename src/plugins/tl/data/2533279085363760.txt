@@ -1,0 +1,9 @@
+3377704015495666::Lausanne::Lutry-Port
+3377704015496032::Lausanne::Taillepied
+3377704015495342::Lausanne::Les Champs
+3377704015495384::Lausanne::Ciblerie
+3377704015495970::Lausanne::Savuit-Place
+3377704015495620::Lausanne::Gravesse
+3377704015495290::Lausanne::Brélaz
+3377704015495968::Lausanne::Savoie
+3377704015495453::Lausanne::Croix/Lutry

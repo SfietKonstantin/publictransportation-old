@@ -1,0 +1,13 @@
+Source: publictransportation
+Section: user/location
+Priority: optional
+Maintainer: Lucien XU <sfietkonstantin@free.fr>
+Build-Depends: debhelper (>= 5), libqt4-dev, applauncherd-dev, aegis-builder (>= 1.6)
+Standards-Version: 3.7.3
+Homepage: https://gitorious.org/publictransportation/publictransportation
+
+Package: publictransportation
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Public transportation application
+XSBC-Maemo-Display-Name: publictransportation

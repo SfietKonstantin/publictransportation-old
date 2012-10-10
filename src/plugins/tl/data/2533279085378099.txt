@@ -1,0 +1,16 @@
+3377704015496061::Lausanne::Verdeil
+3377704015495572::Lausanne::Floreyres
+3377704015495742::Lausanne::Mousquines
+3377704015495345::Lausanne::Chandolin
+3377704015495746::Lausanne::Mon Repos
+3377704015495222::Lausanne::Benj. Constant
+3377704015495981::Lausanne::St-François
+3377704015495196::Lausanne::Bel-Air
+3377704015495383::Lausanne::Chauderon
+3377704015496028::Lausanne::Tivoli
+3377704015495259::Lausanne::Belvédère
+3377704015495755::Lausanne::Montelly
+3377704015495423::Lausanne::Cottages
+3377704015495870::Lausanne::Provence Sud
+3377704015496085::Lausanne::Jeunesse
+3377704015495868::Lausanne::Provence Nord

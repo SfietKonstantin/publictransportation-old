@@ -115,12 +115,14 @@ bool ProviderPluginDBusWrapper::load(const QString &plugin)
     if (!pluginObject) {
         warning("provider-wrapper") << "The plugin" << plugin.toAscii().constData()
                                     << "cannot be loaded";
+        warning("provider-wrapper") << pluginLoader.errorString();
         return false;
     }
 
     d->provider = qobject_cast<ProviderPluginObject *>(pluginObject);
     if (!d->provider) {
-        warning("provider-wrapper") << "The plugin" << plugin.toAscii().constData() << "is not valid";
+        warning("provider-wrapper") << "The plugin" << plugin.toAscii().constData()
+                                    << "is not valid";
         return false;
     }
 
@@ -137,6 +139,24 @@ bool ProviderPluginDBusWrapper::load(const QString &plugin)
                                                    PublicTransportation::Journey)),
             this, SLOT(sendListedStations(PublicTransportation::Company,PublicTransportation::Line,
                                           PublicTransportation::Journey)));
+    connect(d->proxy, SIGNAL(getWaitingTimeRequested(PublicTransportation::Company,
+                                                     PublicTransportation::Line,
+                                                     PublicTransportation::Journey,
+                                                     PublicTransportation::Station)),
+            this, SLOT(getWaitingTime(PublicTransportation::Company,
+                                      PublicTransportation::Line,
+                                      PublicTransportation::Journey,
+                                      PublicTransportation::Station)));
+    connect(d->provider, SIGNAL(waitingTimeRetrieved(PublicTransportation::Company,
+                                                     PublicTransportation::Line,
+                                                     PublicTransportation::Journey,
+                                                     PublicTransportation::Station,
+                                                     QList<PublicTransportation::WaitingTime>)),
+            d->proxy, SLOT(registerWaitingTime(PublicTransportation::Company,
+                                               PublicTransportation::Line,
+                                               PublicTransportation::Journey,
+                                               PublicTransportation::Station,
+                                               QList<PublicTransportation::WaitingTime>)));
 
     // Register
     debug("provider-wrapper") << "Registration from backend with pid"
@@ -180,6 +200,16 @@ void ProviderPluginDBusWrapper::sendListedStations(const Company &company, const
                               << QCoreApplication::applicationPid();
     d->proxy->registerListedStations(company, line, journey,
                                      d->provider->listStations(company, line, journey));
+}
+
+void ProviderPluginDBusWrapper::getWaitingTime(const Company &company, const Line &line,
+                                               const Journey &journey,
+                                               const Station &station) const
+{
+    Q_D(const ProviderPluginDBusWrapper);
+    debug("provider-wrapper") << "Getting waiting time from backend with pid"
+                              << QCoreApplication::applicationPid();
+    d->provider->getWaitingTime(company, line, journey, station);
 }
 
 }

@@ -2,8 +2,8 @@
 NAME = publictransportation
 
 # version
-VERSION_MAJOR = 1
-VERSION_MINOR = 0
+VERSION_MAJOR = 0
+VERSION_MINOR = 1
 VERSION_PATCH = 0
 
 isEmpty(DEPLOYMENT_PREFIX) {
@@ -36,7 +36,8 @@ isEmpty(SHAREDIR) {
 }
 
 isEmpty(OPTDIR) {
-    OPTDIR = $${PREFIX}/opt/$${NAME}
+
+    OPTDIR = /opt/$${NAME}
 }
 
 isEmpty(INCLUDEDIR) {
@@ -71,4 +72,4 @@ DEFINES += 'VERSION_PATCH=$${VERSION_PATCH}'
 
 DEFINES += 'APPLICATION_FOLDER=\'\"$${APPLICATION_FOLDER}\"\''
 DEFINES += 'PLUGIN_FOLDER=\'\"$${PLUGIN_FOLDER}\"\''
-DEFINES += 'PROVIDER_PATH=\'\"$${BINDIR}/$${NAME}-provider\"\''
+DEFINES += 'PROVIDER_PATH=\'\"$${APPLICATION_FOLDER}/$${NAME}-provider\"\''

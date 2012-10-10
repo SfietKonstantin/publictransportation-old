@@ -15,6 +15,7 @@
  ****************************************************************************************/
 
 import QtQuick 1.1
+import com.nokia.meego 1.0
 
 AbstractPage {
     id: container
@@ -24,6 +25,7 @@ AbstractPage {
     content: Item {
         anchors.fill: parent
         ListView {
+            id: view
             anchors.fill: parent
             model: container.model
             clip: true
@@ -31,6 +33,10 @@ AbstractPage {
                 text: qsTranslate("", model.text)
                 onClicked: container.show(model.identifier)
             }
+        }
+
+        ScrollDecorator {
+            flickableItem: view
         }
     }
 }

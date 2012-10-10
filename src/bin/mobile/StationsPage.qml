@@ -31,13 +31,19 @@ AbstractPage {
         anchors.fill: parent
 
         ListView {
+            id: view
             clip: true
             anchors.fill: parent
             model: StationsModelInstance
             delegate: ClickableEntry {
                 text: model.name
                 subText: model.description
+                onClicked: StationsModelInstance.test(model.index)
             }
+        }
+
+        ScrollDecorator {
+            flickableItem: view
         }
 
         BusyIndicator {

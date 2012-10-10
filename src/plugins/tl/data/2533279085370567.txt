@@ -1,0 +1,8 @@
+3377704015495698::Lausanne::Montbenon
+3377704015495982::Lausanne::St-François
+3377704015495614::Lausanne::Georgette
+3377704015495506::Lausanne::Eglantine
+3377704015495651::Lausanne::Avenue du Léman
+3377704015495533::Lausanne::Bonne-Espérance
+3377704015496033::Lausanne::Trabandan
+3377704015495540::Lausanne::Faverges

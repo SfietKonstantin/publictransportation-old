@@ -1,0 +1,16 @@
+3377704015496977::Lausanne::Venoge sud
+3377704015495668::Lausanne::Laviau
+3377704015495372::Lausanne::Chantres
+3377704015496003::Lausanne::St-Sulpice
+3377704015495268::Lausanne::Bochet
+3377704015495947::Lausanne::Russel
+3377704015495794::Lausanne::Pâqueret
+3377704015496965::Lausanne::Blévallaire
+3377704015495990::Lausanne::UNIL-Sorge
+3377704015496973::Lausanne::Mouline
+3377704015496967::Lausanne::Berges
+3377704015495348::Lausanne::Chavannes-Plaine
+3377704015495410::Lausanne::Concorde
+3377704015495835::Lausanne::Planta
+3377704015495595::Lausanne::Glycines
+3377704015495911::Lausanne::Renens-Gare sud

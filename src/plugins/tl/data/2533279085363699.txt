@@ -1,0 +1,18 @@
+3377704015495449::Epalinges::Croisettes
+3377704015495660::Lausanne::Lion d'Or
+3377704015495682::Lausanne::En Marin
+3377704015496057::Lausanne::Vert-Bois
+3377704015495377::Lausanne::Chalet-à-Gobet
+3377704015495358::Lausanne::Chalet-Fontaine
+3377704015496009::Lausanne::Ste-Catherine
+3377704015495921::Lausanne::Riau-Graubon
+3377704015495199::Lausanne::Balances
+3377704015495743::Lausanne::Montpreveyres
+3377704015495420::Lausanne::Corcelles-Jorat
+3377704015495626::Lausanne::Home du Jorat
+3377704015495900::Lausanne::La Râpe
+3377704015496015::Lausanne::Syens C. Château
+3377704015495292::Lausanne::Bressonnaz
+3377704015495988::Lausanne::Sorbiers
+3377704015496070::Lausanne::Verger
+3377704015495739::Moudon::Moudon-Gare
