@@ -1,0 +1,23 @@
+3377704015495675::Lausanne::Maladière
+3377704015495763::Lausanne::Montoie
+3377704015495205::Lausanne::Batelière
+3377704015495943::Lausanne::Riant-Cour
+3377704015495333::Lausanne::Cèdres
+3377704015495236::Lausanne::Beauregard
+3377704015495426::Lausanne::Cour
+3377704015495483::Lausanne::Dapples
+3377704015495529::Lausanne::Epinettes
+3377704015495584::Lausanne::Lausanne-Gare
+3377704015495714::Lausanne::Mirabeau
+3377704015495615::Lausanne::Georgette
+3377704015495981::Lausanne::St-François
+3377704015495195::Lausanne::Bel-Air
+3377704015495929::Lausanne::Rue Neuve
+3377704015496055::Lausanne::Valentin
+3377704015495488::Lausanne::Druey-Collège
+3377704015495777::Lausanne::Oiseaux
+3377704015495317::Lausanne::Casernes
+3377704015495996::Lausanne::Stade Olympique
+3377704015496064::Lausanne::Parc Vélodrome
+3377704015495238::Lausanne::Bois-Gentil
+3377704015495246::Lausanne::Blécherette

@@ -1,0 +1,15 @@
+3377704015495551::Lausanne::Lausanne-Flon
+3377704015496076::Lausanne::Vigie
+3377704015495756::Lausanne::Montelly
+3377704015495872::Lausanne::Provence
+3377704015495679::Lausanne::Malley
+3377704015495263::Lausanne::Bourdonnette
+3377704015495479::Lausanne::UNIL-Dorigny
+3377704015495721::Lausanne::UNIL-Mouline
+3377704015495993::Lausanne::UNIL-Sorge
+3377704015495520::Lausanne::EPFL
+3377704015495204::Lausanne::Bassenges
+3377704015495340::Lausanne::Cerisaie
+3377704015495447::Lausanne::Crochy
+3377704015495526::Lausanne::Epenex
+3377704015495891::Renens::Renens-Gare

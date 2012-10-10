@@ -1,0 +1,17 @@
+3377704015495698::Lausanne::Montbenon
+3377704015495982::Lausanne::St-François
+3377704015495221::Lausanne::Benj. Constant
+3377704015495806::Lausanne::Pont Bessières
+3377704015496081::Lausanne::Pierre Viret
+3377704015496031::Lausanne::Tunnel
+3377704015495202::Lausanne::Barre
+3377704015496110::Lausanne::Vulliemin
+3377704015495808::Lausanne::Petit Château
+3377704015495624::Lausanne::Hermitage
+3377704015495662::Lausanne::Lisière
+3377704015495984::Lausanne::Signal
+3377704015495366::Lausanne::Chocolatière
+3377704015495966::Lausanne::Lac Sauvabelin
+3377704015496083::Lausanne::Vivarium
+3377704015495657::Lausanne::Libellules
+3377704015495618::Lausanne::Grand Vennes

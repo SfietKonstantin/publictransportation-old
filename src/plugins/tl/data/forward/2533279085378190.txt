@@ -1,0 +1,15 @@
+3377704015495549::Lausanne::Lausanne-Flon
+3377704015495936::Lausanne::Rôtillon
+3377704015495228::Lausanne::Bessières
+3377704015495773::Lausanne::Place du Nord
+3377704015496029::Lausanne::Tunnel
+3377704015495699::Lausanne::Mémise
+3377704015495586::Lausanne::Grande-Borde
+3377704015496091::Lausanne::Vieux-Moulin
+3377704015495938::Lausanne::Rouvraie
+3377704015495736::Lausanne::Motte
+3377704015495562::Lausanne::Forêt
+3377704015495217::Lausanne::Bellevaux
+3377704015495800::Lausanne::Pavement
+3377704015495828::Lausanne::Piécettes
+3377704015495395::Lausanne::Clochatte

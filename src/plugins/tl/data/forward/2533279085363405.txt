@@ -1,0 +1,19 @@
+3377704015495261::Lausanne::Bourdonnette
+3377704015495951::Lausanne::Sablons
+3377704015495272::Lausanne::Bois de Vaux
+3377704015495674::Lausanne::Maladière
+3377704015495543::Lausanne::Figuiers
+3377704015495205::Lausanne::Batelière
+3377704015495943::Lausanne::Riant-Cour
+3377704015495333::Lausanne::Cèdres
+3377704015495236::Lausanne::Beauregard
+3377704015495474::Lausanne::Délices
+3377704015495508::Lausanne::Elysée
+3377704015495771::Lausanne::Musée Olympique
+3377704015495767::Lausanne::Montchoisi
+3377704015495701::Lausanne::Métairie
+3377704015495852::Lausanne::Pierraz-Portay
+3377704015495898::Lausanne::C.-F. Ramuz
+3377704015495639::Lausanne::Joliette
+3377704015495858::Lausanne::Préau
+3377704015495838::Pully::Pully-Gare

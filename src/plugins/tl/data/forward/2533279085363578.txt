@@ -1,0 +1,10 @@
+3377704015495260::Lausanne::Bois Murat
+3377704015496036::Epalinges::Tuileries
+3377704015495450::Epalinges::Croisettes
+3377704015495832::Lausanne::Planches
+3377704015495464::Lausanne::Croix Blanche
+3377704015495513::Lausanne::Epalinges-Centre
+3377704015495515::Lausanne::En Praz Bin
+3377704015495244::Lausanne::Biolleyre
+3377704015495842::Lausanne::Polny
+3377704015495201::Lausanne::Ballègue

@@ -1,0 +1,25 @@
+3377704015495667::Lausanne::Lutry-Corniche
+3377704015496095::Lausanne::Voisinand
+3377704015495601::Lausanne::Grand-Pont
+3377704015495689::Lausanne::Marronnier
+3377704015495799::Lausanne::Paudex
+3377704015495723::Lausanne::Moulins
+3377704015495920::Lausanne::Reymondin
+3377704015495392::Lausanne::Pully-Clergère
+3377704015495762::Lausanne::Montillier
+3377704015495813::Lausanne::Perraudettaz
+3377704015495532::Lausanne::Bonne-Espérance
+3377704015495652::Lausanne::Avenue du Léman
+3377704015495507::Lausanne::Eglantine
+3377704015495616::Lausanne::Georgette
+3377704015495981::Lausanne::St-François
+3377704015495196::Lausanne::Bel-Air
+3377704015495383::Lausanne::Chauderon
+3377704015495281::Lausanne::Boston
+3377704015495999::Lausanne::St-Paul
+3377704015495758::Lausanne::Montétan
+3377704015496047::Lausanne::Valency
+3377704015495631::Lausanne::Huttins
+3377704015495875::Lausanne::Prilly-Centre
+3377704015495817::Lausanne::Perréaz
+3377704015495877::Lausanne::Prilly-Eglise

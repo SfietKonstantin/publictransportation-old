@@ -1,0 +1,33 @@
+3377704015495548::Lausanne::Lausanne-Flon
+3377704015495936::Lausanne::Rôtillon
+3377704015495228::Lausanne::Bessières
+3377704015495773::Lausanne::Place du Nord
+3377704015496029::Lausanne::Tunnel
+3377704015495699::Lausanne::Mémise
+3377704015495586::Lausanne::Grande-Borde
+3377704015496091::Lausanne::Vieux-Moulin
+3377704015495938::Lausanne::Rouvraie
+3377704015495736::Lausanne::Motte
+3377704015495562::Lausanne::Forêt
+3377704015495218::Lausanne::Bellevaux
+3377704015495593::Lausanne::Grangette
+3377704015495690::Lausanne::Martines
+3377704015495424::Lausanne::Côtes
+3377704015495840::Lausanne::Petit-Mont
+3377704015495415::Lausanne::Coppoz-Poste
+3377704015495417::Lausanne::Coppoz
+3377704015495597::Lausanne::Grand-Mont
+3377704015495536::Lausanne::Etavez
+3377704015495566::Lausanne::Fougères
+3377704015495305::Lausanne::Budron
+3377704015495319::Lausanne::Cavenette
+3377704015495460::Lausanne::Cugy-Poste
+3377704015495462::Lausanne::Cugy
+3377704015495724::Lausanne::Moulin
+3377704015495294::Lausanne::Bretigny/Morrens
+3377704015495350::Lausanne::Chalet Coucou
+3377704015495284::Lausanne::Bottens
+3377704015495949::Lausanne::Rustériaz
+3377704015495577::Lausanne::Village
+3377704015495573::Lausanne::Croisée
+3377704015495575::Lausanne::Laiterie

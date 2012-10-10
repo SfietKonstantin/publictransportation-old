@@ -1,0 +1,20 @@
+3377704015496024::Lausanne::Timonet
+3377704015495443::Crissier::Crissier-Centre
+3377704015495297::Lausanne::Bré
+3377704015495975::Lausanne::Scierie
+3377704015495776::Lausanne::Noutes
+3377704015495890::Lausanne::Renens-14 Avril
+3377704015495909::Lausanne::Renens-Gare nord
+3377704015495171::Lausanne::1er Août
+3377704015495912::Lausanne::Renens-Gare sud
+3377704015495596::Lausanne::Glycines
+3377704015495834::Lausanne::Planta
+3377704015495409::Lausanne::Concorde
+3377704015495860::Lausanne::Préfaully
+3377704015495335::Lausanne::Censuy
+3377704015495894::Lausanne::Renens-Piscine
+3377704015495352::Lausanne::Chêne
+3377704015495647::Lausanne::Rue du Lac
+3377704015495664::Lausanne::Longemalle
+3377704015495715::Lausanne::Malley-Nord
+3377704015495581::Lausanne::Galicien

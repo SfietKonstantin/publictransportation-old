@@ -1,0 +1,23 @@
+3377704015495604::Lausanne::Grandvaux
+3377704015495565::Lausanne::Pra Forni
+3377704015495635::Lausanne::Jordillon
+3377704015495963::Lausanne::Sapelle
+3377704015495454::Lausanne::Croix/Lutry
+3377704015495499::Lausanne::Echerins
+3377704015495650::Lausanne::Landar
+3377704015495439::Lausanne::Crêt-des-Pierres
+3377704015495250::Lausanne::Blessoney
+3377704015495214::Lausanne::Belmont
+3377704015495589::Lausanne::Grand-Champ
+3377704015495365::Lausanne::Chenaulaz
+3377704015496114::Lausanne::Val-Vert
+3377704015495935::Lausanne::Rosiaz
+3377704015495330::Lausanne::Coudrette
+3377704015495361::Lausanne::Chailly-Village
+3377704015495811::Lausanne::Pont de Chailly
+3377704015495539::Lausanne::Fauconnières
+3377704015495235::Lausanne::Béthusy
+3377704015495788::Lausanne::Ours
+3377704015495230::Lausanne::Bessières
+3377704015495979::Lausanne::St-François
+3377704015495698::Lausanne::Montbenon

@@ -1,0 +1,14 @@
+3377704015495247::Lausanne::Blécherette
+3377704015495278::Lausanne::Bossons
+3377704015495603::Lausanne::Grattapaille
+3377704015495303::Lausanne::Beau-Site
+3377704015495274::Lausanne::Boisy
+3377704015495225::Lausanne::Bergières
+3377704015495856::Lausanne::Presbytère
+3377704015495252::Lausanne::Beaulieu
+3377704015495255::Lausanne::Beaulieu-Jomini
+3377704015496002::Lausanne::St-Roch
+3377704015495882::Lausanne::Pont Chauderon
+3377704015495332::Lausanne::Cécil
+3377704015496087::Lausanne::Villard
+3377704015495583::Lausanne::Lausanne-Gare

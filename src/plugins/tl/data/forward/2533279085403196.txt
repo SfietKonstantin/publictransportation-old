@@ -1,0 +1,29 @@
+3377704015496975::Lausanne::Venoge nord
+3377704015496969::Lausanne::Champs-Courbes
+3377704015496233::Lausanne::Montaney
+3377704015495915::Lausanne::Renges
+3377704015495510::Lausanne::En Enjalin
+3377704015495818::Lausanne::Perrettes
+3377704015496089::Lausanne::Villars
+3377704015495846::Lausanne::Pontet
+3377704015496062::Lausanne::Veilloud
+3377704015496007::Lausanne::Stand
+3377704015495880::Lausanne::Place de Sport
+3377704015495458::Lausanne::Croset
+3377704015495796::Lausanne::Parc
+3377704015496011::Lausanne::Suchet-Forêt
+3377704015495523::Lausanne::Epenex
+3377704015495911::Lausanne::Renens-Gare sud
+3377704015495335::Lausanne::Censuy
+3377704015495894::Lausanne::Renens-Piscine
+3377704015495352::Lausanne::Chêne
+3377704015495647::Lausanne::Rue du Lac
+3377704015495664::Lausanne::Longemalle
+3377704015495715::Lausanne::Malley-Nord
+3377704015495581::Lausanne::Galicien
+3377704015495557::Lausanne::Flumeaux
+3377704015495622::Lausanne::Grand Vigne
+3377704015495874::Lausanne::Prilly-Centre
+3377704015495346::Lausanne::Prilly-Chasseur
+3377704015495328::Lausanne::Coudraie
+3377704015495711::Lausanne::Mont-Goulin

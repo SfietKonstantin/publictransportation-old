@@ -1,0 +1,11 @@
+3377704015495448::Epalinges::Croisettes
+3377704015495832::Lausanne::Planches
+3377704015495866::Lausanne::Pré-d'Yverdon
+3377704015495820::Lausanne::Perronnaz
+3377704015495628::Lausanne::Haute-Combe
+3377704015495692::Lausanne::Chalet à Matthey
+3377704015495729::Lausanne::Molliettes
+3377704015496059::Lausanne::Vers-chez-Blanc
+3377704015495354::Lausanne::Chevreuils
+3377704015495854::Lausanne::Praz-Collet
+3377704015495376::Lausanne::Chalet-à-Gobet

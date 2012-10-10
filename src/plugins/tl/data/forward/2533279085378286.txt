@@ -1,0 +1,20 @@
+3377704015495326::Lausanne::Coudraie
+3377704015495713::Lausanne::Mont-Goulin
+3377704015495903::Lausanne::Rapille
+3377704015495232::Lausanne::Béthanie
+3377704015495487::Lausanne::Dranse
+3377704015495503::Lausanne::Ecole Commerce
+3377704015496000::Lausanne::St-Roch
+3377704015495178::Lausanne::Chauderon-Ale
+3377704015495193::Lausanne::Bel-Air
+3377704015495983::Lausanne::St-François
+3377704015495617::Lausanne::Georgette
+3377704015495182::Lausanne::Alpes
+3377704015495644::Lausanne::Jurigoz
+3377704015495767::Lausanne::Montchoisi
+3377704015495701::Lausanne::Métairie
+3377704015495852::Lausanne::Pierraz-Portay
+3377704015495898::Lausanne::C.-F. Ramuz
+3377704015495639::Lausanne::Joliette
+3377704015495858::Lausanne::Préau
+3377704015495837::Pully::Pully-Gare

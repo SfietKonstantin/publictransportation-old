@@ -1,0 +1,12 @@
+3377704015495215::Lausanne::Bellevaux
+3377704015495563::Lausanne::Forêt
+3377704015495737::Lausanne::Motte
+3377704015496092::Lausanne::Vieux-Moulin
+3377704015495318::Lausanne::Casernes
+3377704015495750::Lausanne::Mont-Blanc
+3377704015495254::Lausanne::Beaulieu-Jomini
+3377704015496002::Lausanne::St-Roch
+3377704015495882::Lausanne::Pont Chauderon
+3377704015495332::Lausanne::Cécil
+3377704015496087::Lausanne::Villard
+3377704015495584::Lausanne::Lausanne-Gare

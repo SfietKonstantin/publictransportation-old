@@ -1,0 +1,6 @@
+3377704015495726::Lausanne::Closalet
+3377704015495732::Lausanne::Mongevon
+3377704015495681::Lausanne::Marcolet
+3377704015496118::Lausanne::Zinguerie
+3377704015495642::Lausanne::Jura
+3377704015495908::Lausanne::Renens-Gare nord

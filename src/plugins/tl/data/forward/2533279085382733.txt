@@ -1,0 +1,14 @@
+3377704015496178::Lausanne::Ouchy
+3377704015496179::Lausanne::Jordils
+3377704015496183::Lausanne::Délices
+3377704015496121::Lausanne::Grancy
+3377704015496186::Lausanne::Lausanne-Gare
+3377704015496188::Lausanne::Lausanne-Flon
+3377704015496190::Lausanne::Riponne-M.Béjart
+3377704015496192::Lausanne::Bessières
+3377704015496194::Lausanne::Ours
+3377704015496196::Lausanne::CHUV
+3377704015496198::Lausanne::Sallaz
+3377704015496122::Lausanne::Fourmi
+3377704015496201::Lausanne::Vennes
+3377704015496204::Epalinges::Croisettes

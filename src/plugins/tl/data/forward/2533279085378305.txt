@@ -1,0 +1,11 @@
+3377704015495879::Lausanne::Praz-Séchaud
+3377704015495289::Lausanne::Boveresses
+3377704015495570::Lausanne::Foyer
+3377704015496050::Lausanne::Valmont
+3377704015496006::Lausanne::St-Etienne
+3377704015495953::Lausanne::Sallaz
+3377704015495804::Lausanne::Praz-Berthoud
+3377704015495271::Lausanne::Boissonnet
+3377704015495176::Lausanne::Abeilles
+3377704015495387::Lausanne::Cigale
+3377704015495735::Lausanne::Montolieu

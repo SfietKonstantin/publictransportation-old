@@ -1,0 +1,22 @@
+3377704015496048::Lausanne::Valmont
+3377704015496006::Lausanne::St-Etienne
+3377704015495956::Lausanne::Sallaz
+3377704015496101::Lausanne::Victor-Ruffy
+3377704015496052::Lausanne::Vallonnette
+3377704015496099::Lausanne::Virgile-Rossel
+3377704015495180::Lausanne::Allières
+3377704015495235::Lausanne::Béthusy
+3377704015495788::Lausanne::Ours
+3377704015495230::Lausanne::Bessières
+3377704015495981::Lausanne::St-François
+3377704015495196::Lausanne::Bel-Air
+3377704015495383::Lausanne::Chauderon
+3377704015495882::Lausanne::Pont Chauderon
+3377704015495332::Lausanne::Cécil
+3377704015495671::Lausanne::Pont Marc Dufour
+3377704015495654::Lausanne::Languedoc
+3377704015495560::Lausanne::Fontenay
+3377704015495748::Lausanne::Mont d'Or
+3377704015495544::Lausanne::Figuiers
+3377704015495764::Lausanne::Montoie
+3377704015495675::Lausanne::Maladière
