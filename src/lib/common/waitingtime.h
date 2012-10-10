@@ -17,6 +17,11 @@
 #ifndef PUBLICTRANSPORTATION_WAITTIME_H
 #define PUBLICTRANSPORTATION_WAITTIME_H
 
+/**
+ * @file waitingtime.h
+ * @short Definition of PublicTransportation::WaitingTime
+ */
+
 #include <QtCore/QExplicitlySharedDataPointer>
 #include <QtCore/QString>
 #include <QtCore/QVariantMap>
@@ -24,6 +29,13 @@
 namespace PublicTransportation
 {
 
+/**
+ * @internal
+ * @brief Private class for PublicTransportation::WaitingTime
+ *
+ * This class is used to store the explicitly shared
+ * data for PublicTransportation::WaitingTime.
+ */
 class WaitingTimePrivate: public QSharedData
 {
 public:
@@ -39,6 +51,26 @@ public:
     QVariantMap properties;
 };
 
+/**
+ * @brief A component representing waiting time
+ *
+ * This class is used to represent waiting time.
+ * Waiting time is basically the time to wait
+ * before the public transport arrives (often in
+ * minutes). It can also contains some more
+ * properties, that provides hints about the
+ * type of waiting time (real-time retrieved, or
+ * based on a time-table), and also provide some
+ * display information, like directions etc.
+ *
+ * Those properties can be accessed using
+ * - waitingTime()
+ * - properties()
+ *
+ * and be set using
+ * - setWaitingTime()
+ * - setProperties()
+ */
 class WaitingTime
 {
 public:
@@ -51,6 +83,9 @@ public:
      * @param other other wait time.
      */
     WaitingTime(const WaitingTime &other);
+    /**
+     * @brief Destructor
+     */
     virtual ~WaitingTime();
     /**
      * @brief If the waiting time is null

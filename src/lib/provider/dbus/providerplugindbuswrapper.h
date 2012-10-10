@@ -105,6 +105,17 @@ public Q_SLOTS:
     void sendListedStations(const PublicTransportation::Company &company,
                             const PublicTransportation::Line &line,
                             const PublicTransportation::Journey &journey) const;
+    /**
+     * @brief Get waiting time
+     *
+     * This method is used to send waiting time
+     * through DBus.
+     *
+     * @param company company for which the stations should be retrieved.
+     * @param line line for which the stations should be retrieved.
+     * @param journey journey for which the stations should be retrieved.
+     * @param station station for which the stations should be retrieved.
+     */
     void getWaitingTime(const PublicTransportation::Company &company,
                         const PublicTransportation::Line &line,
                         const PublicTransportation::Journey &journey,

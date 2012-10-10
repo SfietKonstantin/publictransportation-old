@@ -96,6 +96,13 @@ public Q_SLOTS:
      */
     virtual void requestListStations(const Company &company, const Line &line,
                                      const Journey &journey);
+    /**
+     * @brief Request waiting time
+     * @param company company for which the waiting time should be retrieved.
+     * @param line line for which the waiting time should be retrieved.
+     * @param journey journey for which the waiting time should be retrieved.
+     * @param station station for which the waiting time should be retrieved.
+     */
     virtual void requestWaitingTime(const Company &company, const Line &line,
                                     const Journey &journey, const Station &station);
     /**
@@ -152,6 +159,17 @@ public Q_SLOTS:
                                 const PublicTransportation::Line &line,
                                 const PublicTransportation::Journey &journey,
                                 const QList<PublicTransportation::Station> &stations);
+    /**
+     * @brief Register waiting time
+     *
+     * This is a DBus proxy method.
+     *
+     * @param company company for which the waiting time should be registered.
+     * @param line line for which the waiting time should be registered.
+     * @param journey journey for which the waiting time should be registered.
+     * @param stations stations for which the waiting time should be registered.
+     * @param waitingTimes waiting time to register.
+     */
     void registerWaitingTime(const PublicTransportation::Company &company,
                              const PublicTransportation::Line &line,
                              const PublicTransportation::Journey &journey,
@@ -194,6 +212,16 @@ Q_SIGNALS:
     void listStationsRequested(const PublicTransportation::Company &company,
                            const PublicTransportation::Line &line,
                            const PublicTransportation::Journey &journey);
+    /**
+     * @brief Get waiting time requested
+     *
+     * This is a DBus proxy signal.
+     *
+     * @param company company for which the waiting time should be retrieved.
+     * @param line line for which the waiting time should be retrieved.
+     * @param journey journey for which the waiting time should be retrieved.
+     * @param station station for which the waiting time should be retrieved.
+     */
     void getWaitingTimeRequested(const PublicTransportation::Company &company,
                                  const PublicTransportation::Line &line,
                                  const PublicTransportation::Journey &journey,

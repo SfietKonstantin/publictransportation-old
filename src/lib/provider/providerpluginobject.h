@@ -55,6 +55,14 @@ public:
      */
     virtual ~ProviderPluginObject() {}
 Q_SIGNALS:
+    /**
+     * @brief Waiting time retrieved
+     * @param company company for which the waiting time is retrieved.
+     * @param line line for which the waiting time is retrieved.
+     * @param journey journey for which the waiting time is retrieved.
+     * @param station station for which the waiting time is retrieved.
+     * @param waitingTimes retrieved waiting time.
+     */
     void waitingTimeRetrieved(const PublicTransportation::Company &company,
                               const PublicTransportation::Line &line,
                               const PublicTransportation::Journey &journey,

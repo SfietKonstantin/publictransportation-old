@@ -218,6 +218,14 @@ public:
      */
     QList<Station> stations(const Company &company, const Line &line,
                             const Journey &journey) const;
+    /**
+     * @brief Waiting time
+     * @param company company for which the waiting time should be retrieved.
+     * @param line line for which the waiting time should be retrieved.
+     * @param journey journey for which the waiting time should be retrieved.
+     * @param station station for which the waiting time should be retrieved.
+     * @return
+     */
     QList<WaitingTime> waitingTime(const Company &company, const Line &line,
                                    const Journey &journey, const Station &station) const;
 public Q_SLOTS:
@@ -275,6 +283,13 @@ public Q_SLOTS:
      */
     virtual void requestListStations(const Company &company, const Line &line,
                                      const Journey &journey) = 0;
+    /**
+     * @brief Request waiting time
+     * @param company company for which the waiting time should be retrieved.
+     * @param line line for which the waiting time should be retrieved.
+     * @param journey journey for which the waiting time should be retrieved.
+     * @param station station for which the waiting time should be retrieved.
+     */
     virtual void requestWaitingTime(const Company &company, const Line &line,
                                     const Journey &journey, const Station &station) = 0;
 Q_SIGNALS:
@@ -311,6 +326,13 @@ Q_SIGNALS:
     void stationsChanged(const PublicTransportation::Company &company,
                          const PublicTransportation::Line &line,
                          const PublicTransportation::Journey &journey);
+    /**
+     * @brief Waiting time changed
+     * @param company company for which the waiting time should be retrieved.
+     * @param line line for which the swaiting time should be retrieved.
+     * @param journey journey for which the waiting time should be retrieved.
+     * @param station station for which the waiting time should be retrieved.
+     */
     void waitingTimeChanged(const PublicTransportation::Company &company,
                             const PublicTransportation::Line &line,
                             const PublicTransportation::Journey &journey,
@@ -374,6 +396,14 @@ protected:
      */
     void setStations(const Company &company, const Line &line, const Journey &journey,
                      const QList<Station> &stations);
+    /**
+     * @brief Set waiting time
+     * @param company company for which the waiting time should be retrieved.
+     * @param line line for which the waiting time should be retrieved.
+     * @param journey journey for which the waiting time should be retrieved.
+     * @param station station for which the waiting time should be retrieved.
+     * @param waitingTimes waiting time to set.
+     */
     void setWaitingTime(const Company &company, const Line &line, const Journey &journey,
                         const Station &station, const QList<WaitingTime> &waitingTimes);
     /**

@@ -14,6 +14,11 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+/**
+ * @file waitingtime.cpp
+ * @short Implementation of PublicTransportation::WaitingTime
+ */
+
 #include "waitingtime.h"
 
 namespace PublicTransportation

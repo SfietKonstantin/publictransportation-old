@@ -57,6 +57,13 @@ namespace PublicTransportation
  * depending to the supported capabilities of the provider,
  * they might return, or do nothing.
  *
+ * @section asynchronous Asynchronous calls
+ *
+ * Some methods should returns nothing when called. Instead,
+ * they should trigger an asynchronous call, and emit signals
+ * that are declared in PublicTransportation::ProviderPluginObject
+ * when the operation is terminated.
+ *
  */
 class ProviderPluginInterface
 {
@@ -97,6 +104,13 @@ public:
      */
     virtual QList <Station> listStations(const Company &company, const Line &line,
                                          const Journey &journey) const = 0;
+    /**
+     * @brief Get waiting time
+     * @param company company for which the waiting time should be retrieved.
+     * @param line line for which the waiting time should be retrieved.
+     * @param journey journey for which the waiting time should be retrieved.
+     * @param station station for which the waiting time should be retrieved.
+     */
     virtual void getWaitingTime(const Company &company, const Line &line,
                                 const Journey &journey, const Station &station) = 0;
 };

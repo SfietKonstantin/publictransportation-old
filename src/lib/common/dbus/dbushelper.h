@@ -127,7 +127,19 @@ QDBusArgument & operator<<(QDBusArgument &argument, const Station &station);
  * @return DBus argument without the station.
  */
 const QDBusArgument & operator>>(const QDBusArgument &argument, Station &station);
+/**
+ * @brief Marshall a waiting time
+ * @param[out] argument DBus argument.
+ * @param[in] waitingTime waiting time.
+ * @return DBus argument containing the waiting thme.
+ */
 QDBusArgument & operator<<(QDBusArgument &argument, const WaitingTime &waitingTime);
+/**
+ * @brief Demarshall a waiting time
+ * @param[in] argument DBus argument.
+ * @param[out] waitingTime waiting time.
+ * @return DBus argument without the waiting thme.
+ */
 const QDBusArgument & operator>>(const QDBusArgument &argument, WaitingTime &waitingTime);
 
 /**
