@@ -21,90 +21,21 @@
 
 #include "line.h"
 
-#include "company.h"
-#include "journey.h"
-
 namespace PublicTransportation
 {
 
-/**
- * @internal
- * @brief Private class for PublicTransportation::Line
- */
-struct LinePrivate: public TransportationObjectPrivate
-{
-    /**
-     * @internal
-     * @brief Company
-     */
-    Company company;
-    /**
-     * @internal Journeys
-     * @brief journeys
-     */
-    QList<Journey> journeys;
-};
-
-////// End of private class //////
-
 Line::Line() :
-    TransportationObject(*new LinePrivate)
+    TransportationObject()
 {
 }
 
-Line::Line(const QVariantMap &disambiguation, const QString &name,
-           const Company &company, const QVariantMap &properties):
-    TransportationObject(*new LinePrivate)
+Line::Line(const QVariantMap &disambiguation, const QString &name, const QVariantMap &properties):
+    TransportationObject()
 {
-    Q_D(Line);
+    Q_D(TransportationObject);
     d->disambiguation = disambiguation;
     d->name = name;
     d->properties = properties;
-
-    setCompany(company);
-}
-
-Line::~Line()
-{
-}
-
-Company Line::company() const
-{
-    Q_D(const Line);
-    return d->company;
-}
-
-void Line::setCompany(const Company &company)
-{
-    Q_D(Line);
-    d->company = company;
-    d->company.addLine(*this);
-}
-
-QList<Journey> Line::journeys() const
-{
-    Q_D(const Line);
-    return d->journeys;
-}
-
-void Line::addJourney(const Journey &journey)
-{
-    Q_D(Line);
-    if (d->journeys.contains(journey)) {
-        return;
-    }
-
-    d->journeys.append(journey);
-}
-
-void Line::removeJourney(const Journey &journey)
-{
-    Q_D(Line);
-    if (!d->journeys.contains(journey)) {
-        return;
-    }
-
-    d->journeys.removeAll(journey);
 }
 
 }

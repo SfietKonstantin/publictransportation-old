@@ -14,51 +14,21 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_STATION_H
-#define PUBLICTRANSPORTATION_STATION_H
+#include "signalreceiver.h"
 
-/**
- * @file station.h
- * @short Definition of PublicTransportation::Station
- */
-
-#include "publictransportation_global.h"
-#include "transportationobject.h"
-#include <QtCore/QVariantMap>
-
-namespace PublicTransportation
+SignalReceiver::SignalReceiver(QObject *parent) :
+    QObject(parent)
 {
-
-/**
- * @brief A public transportation station
- *
- * This class is used to represent a public transportation
- * station. A station is a transportation entity that
- * have a name, that should be the official name of the station,
- * a disambiguation parameter, and other properties.
- */
-class PUBLICTRANSPORTATION_EXPORT Station : public TransportationObject
-{
-public:
-    /**
-     * @brief Default constructor
-     */
-    explicit Station();
-    /**
-     * @brief Constructor
-     * @param disambiguation disambiguation.
-     * @param name name.
-     * @param properties properties.
-     */
-    explicit Station(const QVariantMap &disambiguation, const QString &name,
-                     const QVariantMap &properties);
-private:
-    Q_DECLARE_PRIVATE(TransportationObject)
-};
-
 }
 
-Q_DECLARE_METATYPE(PublicTransportation::Station)
-Q_DECLARE_METATYPE(QList<PublicTransportation::Station>)
+QStringList SignalReceiver::suggestedStations() const
+{
+    return m_suggestedStations;
+}
 
-#endif // PUBLICTRANSPORTATION_STATION_H
+void SignalReceiver::slotSuggestedStationsRegistered(int request,
+                                                     const QStringList &suggestedStations)
+{
+    Q_UNUSED(request)
+    m_suggestedStations = suggestedStations;
+}

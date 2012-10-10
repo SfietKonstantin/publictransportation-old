@@ -35,18 +35,24 @@
 namespace PublicTransportation
 {
 
+struct RequestData
+{
+    int request;
+    AbstractBackendWrapper::RequestType type;
+};
+
 /**
  * @internal
  * @brief Private class for PublicTransportation::AbstractBackendWrapper
  */
-struct AbstractBackendWrapperPrivate
+class AbstractBackendWrapperPrivate
 {
 public:
     /**
      * @internal
      * @brief Default constructor
      */
-    inline AbstractBackendWrapperPrivate() {status = AbstractBackendWrapper::Stopped;}
+    AbstractBackendWrapperPrivate();
     /**
      * @internal
      * @brief Identifier
@@ -77,11 +83,8 @@ public:
      * @brief Capabilities
      */
     QStringList capabilities;
-    /**
-     * @internal
-     * @brief Companies
-     */
-    QList<Company> companies;
+    QMap<int, RequestData *> requests;
+    int requestCount;
 };
 
 }

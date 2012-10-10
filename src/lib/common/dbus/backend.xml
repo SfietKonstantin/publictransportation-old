@@ -2,7 +2,30 @@
 "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node>
     <interface name="org.SfietKonstantin.publictransportation">
-        <signal name="listCompaniesRequested" />
+        <!-- Method for registration -->
+        <method name="registerBackend">
+            <arg name="capabilities" type="as" direction="in"/>
+        </method>
+
+        <!-- Method used to transmit that something wrong happened -->
+        <method name="registerError">
+            <arg name="request" type="i" direction="in" />
+            <arg name="error" type="s" direction="in" />
+        </method>
+
+        <!-- Autocompletion for station search -->
+        <signal name="suggestStationsRequested">
+            <arg name="request" type="i" direction="out" />
+            <arg name="partialStation" type="s" direction="out" />
+        </signal>
+        <method name="registerSuggestedStations">
+            <arg name="request" type="i" direction="in" />,
+            <arg name="suggestedStations" type="as" direction="in" />
+        </method>
+
+
+
+        <!--<signal name="listCompaniesRequested" />
         <signal name="listLinesRequested">
             <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="const PublicTransportation::Company &amp;"/>
             <arg name="company" type="(a{sv}sa{sv})" direction="out" />
@@ -73,6 +96,6 @@
             <arg name="journey" type="(a{sv}sa{sv})" direction="in"/>
             <arg name="station" type="a(a{sv}sa{sv})" direction="in"/>
             <arg name="waitingTime" type="a(ia{sv})" direction="in" />
-        </method>
+        </method>-->
     </interface>
 </node>

@@ -21,6 +21,7 @@
 #include "common/line.h"
 #include "common/journey.h"
 #include "common/station.h"
+#include "common/waitingtime.h"
 #include "common/dbus/dbusconstants.h"
 #include "common/dbus/dbushelper.h"
 
@@ -45,12 +46,15 @@ int main(int argc, char **argv)
     QDBusInterface interface (DBUS_SERVICE, "/");
     interface.call("receiveCompany", QVariant::fromValue(company));
 
-    PublicTransportation::Line line (disambiguation, "testLine", company, properties);
+    PublicTransportation::Line line (disambiguation, "testLine", properties);
     interface.call("receiveLine", QVariant::fromValue(line));
 
-    PublicTransportation::Journey journey (disambiguation, "testJourney", line, properties);
+    PublicTransportation::Journey journey (disambiguation, "testJourney", properties);
     interface.call("receiveJourney", QVariant::fromValue(journey));
 
-    PublicTransportation::Station station (disambiguation, "testStation", journey, properties);
+    PublicTransportation::Station station (disambiguation, "testStation", properties);
     interface.call("receiveStation", QVariant::fromValue(station));
+
+    PublicTransportation::WaitingTime waitingTime (12345, properties);
+    interface.call("receiveWaitingTime", QVariant::fromValue(waitingTime));
 }

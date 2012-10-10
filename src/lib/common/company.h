@@ -28,8 +28,6 @@
 namespace PublicTransportation
 {
 
-class Line;
-class CompanyPrivate;
 /**
  * @brief A public transportation company
  *
@@ -44,19 +42,6 @@ class CompanyPrivate;
  * - setCopyright()
  *
  * It is also stored in the properties of the company.
- *
- * A company also have transportation lines. Those transportation
- * lines might vary during the life of the instance for example for
- * web providers that only provide information for the incoming trains.
- *
- * In order to access and update the registered lines, those methods
- * can be used
- * - lines()
- * - addLine() that adds a line to the company.
- * - removeLine() that remove a line from the company.
- *
- * Please note that when comparing two companies, the lines that these
- * companies stores are not compared.
  */
 class PUBLICTRANSPORTATION_EXPORT Company: public TransportationObject
 {
@@ -88,24 +73,8 @@ public:
      * @param copyright copyright to set.
      */
     void setCopyright(const QString &copyright);
-    /**
-     * @brief Lines
-     * @return lines.
-     */
-    QList<Line> lines() const;
-//    void setLines(const QList<Line> &lines);
-    /**
-     * @brief Add line
-     * @param line line to add.
-     */
-    void addLine(const Line &line);
-    /**
-     * @brief Remove line
-     * @param line line to remove.
-     */
-    void removeLine(const Line &line);
 private:
-    Q_DECLARE_PRIVATE(Company)
+    Q_DECLARE_PRIVATE(TransportationObject)
 };
 
 }

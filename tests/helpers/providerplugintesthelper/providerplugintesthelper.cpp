@@ -18,6 +18,7 @@
 
 #include <QtCore/QtPlugin>
 
+#include "debug.h"
 #include "common/capabilitiesconstants.h"
 #include "common/company.h"
 
@@ -31,97 +32,21 @@ ProviderPluginTestHelper::ProviderPluginTestHelper(QObject *parent) :
 
 }
 
-ProviderPluginTestHelper::~ProviderPluginTestHelper()
-{
-}
-
 QStringList ProviderPluginTestHelper::capabilities() const
 {
     QStringList capabilities;
-    capabilities.append(CAPABILITY_LIST_COMPANIES);
-    capabilities.append(CAPABILITY_LIST_LINES);
-    capabilities.append(CAPABILITY_LIST_JOURNEYS);
-    capabilities.append(CAPABILITY_LIST_STATIONS);
+    capabilities.append(SUGGEST_STATIONS);
     return capabilities;
 }
 
-QList<Company> ProviderPluginTestHelper::listCompanies() const
+void ProviderPluginTestHelper::retrieveSuggestedStations(int request, const QString &partialStation)
 {
-    QVariantMap disambiguation;
-    disambiguation.insert("test1", 12345);
-    disambiguation.insert("test2", "abcde");
+    QStringList data;
+    data.append(partialStation);
+    data.append(partialStation.repeated(2));
+    data.append(partialStation.repeated(3));
 
-    QVariantMap properties;
-    properties.insert("property1", 67890);
-    properties.insert("property2", "fghij");
-
-    Company company (disambiguation, "testCompany", "some copyright", properties);
-    QList<Company> companies;
-    companies.append(company);
-
-    return companies;
-}
-
-QList<Line> ProviderPluginTestHelper::listLines(const Company &company) const
-{
-    Q_UNUSED(company)
-
-    QVariantMap disambiguation;
-    disambiguation.insert("test1", 12345);
-    disambiguation.insert("test2", "abcde");
-
-    QVariantMap properties;
-    properties.insert("property1", 67890);
-    properties.insert("property2", "fghij");
-
-    Line line (disambiguation, "testLine", Company(), properties);
-    QList<Line> lines;
-    lines.append(line);
-
-    return lines;
-}
-
-QList<Journey> ProviderPluginTestHelper::listJourneys(const Company &company,
-                                                      const Line &line) const
-{
-    Q_UNUSED(company)
-    Q_UNUSED(line)
-
-    QVariantMap disambiguation;
-    disambiguation.insert("test1", 12345);
-    disambiguation.insert("test2", "abcde");
-
-    QVariantMap properties;
-    properties.insert("property1", 67890);
-    properties.insert("property2", "fghij");
-
-    Journey journey (disambiguation, "testJourney", Line(), properties);
-    QList<Journey> journeys;
-    journeys.append(journey);
-
-    return journeys;
-}
-
-QList<Station> ProviderPluginTestHelper::listStations(const Company &company, const Line &line,
-                                             const Journey &journey) const
-{
-    Q_UNUSED(company)
-    Q_UNUSED(line)
-    Q_UNUSED(journey)
-
-    QVariantMap disambiguation;
-    disambiguation.insert("test1", 12345);
-    disambiguation.insert("test2", "abcde");
-
-    QVariantMap properties;
-    properties.insert("property1", 67890);
-    properties.insert("property2", "fghij");
-
-    Station station (disambiguation, "testStation", Journey(), properties);
-    QList<Station> stations;
-    stations.append(station);
-
-    return stations;
+    emit suggestedStationsRetrieved(request, data);
 }
 
 }

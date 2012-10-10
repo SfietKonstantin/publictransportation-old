@@ -56,6 +56,7 @@ public:
      * @brief Destructor
      */
     virtual ~DBusBackendWrapper();
+    virtual int requestSuggestStations(const QString &partialStation);
 public Q_SLOTS:
     /**
      * @brief Launch the backend
@@ -73,159 +74,14 @@ public Q_SLOTS:
      * @brief Kill the backend
      */
     virtual void kill();
-    /**
-     * @brief Request a list of the companies
-     */
-    virtual void requestListCompanies();
-    /**
-     * @brief Request a list of the lines
-     * @param company company for which the lines should be listed.
-     */
-    virtual void requestListLines(const Company &company);
-    /**
-     * @brief Request a list of the journeys
-     * @param company company for which the journeys should be listed.
-     * @param line line for which the journeys should be listed.
-     */
-    virtual void requestListJourneys(const Company &company, const Line &line);
-    /**
-     * @brief Request a list of the stations
-     * @param company company for which the stations should be listed.
-     * @param line line for which the stations should be listed.
-     * @param journey journey for which the stations should be listed.
-     */
-    virtual void requestListStations(const Company &company, const Line &line,
-                                     const Journey &journey);
-    /**
-     * @brief Request waiting time
-     * @param company company for which the waiting time should be retrieved.
-     * @param line line for which the waiting time should be retrieved.
-     * @param journey journey for which the waiting time should be retrieved.
-     * @param station station for which the waiting time should be retrieved.
-     */
-    virtual void requestWaitingTime(const Company &company, const Line &line,
-                                    const Journey &journey, const Station &station);
-    /**
-     * @brief Register backend
-     *
-     * This is a DBus proxy method.
-     *
-     * This method is used to perform backend registration.
-     *
-     * @param capabilities capabilities to register.
-     */
     void registerBackend(const QStringList &capabilities);
-    /**
-     * @brief Register listed companies
-     *
-     * This is a DBus proxy method.
-     *
-     * @param companies companies to register.
-     */
-    void registerListedCompanies(const QList<PublicTransportation::Company> &companies);
-    /**
-     * @brief Register listed lines
-     *
-     * This is a DBus proxy method.
-     *
-     * @param company company for which the lines should be registered.
-     * @param lines lines to register.
-     */
-    void registerListedLines(const PublicTransportation::Company &company,
-                             const QList<PublicTransportation::Line> &lines);
-    /**
-     * @brief Register listed journeys
-     *
-     * This is a DBus proxy method.
-     *
-     * @param company company for which the journeys should be registered.
-     * @param line line for which the journeys should be registered.
-     * @param journeys journeys to register.
-     */
-    void registerListedJourneys(const PublicTransportation::Company &company,
-                                const PublicTransportation::Line &line,
-                                const QList<PublicTransportation::Journey> &journeys);
-    /**
-     * @brief Register listed stations
-     *
-     * This is a DBus proxy method.
-     *
-     * @param company company for which the stations should be registered.
-     * @param line line for which the stations should be registered.
-     * @param journey journey for which the stations should be registered.
-     * @param stations stations to register.
-     */
-    void registerListedStations(const PublicTransportation::Company &company,
-                                const PublicTransportation::Line &line,
-                                const PublicTransportation::Journey &journey,
-                                const QList<PublicTransportation::Station> &stations);
-    /**
-     * @brief Register waiting time
-     *
-     * This is a DBus proxy method.
-     *
-     * @param company company for which the waiting time should be registered.
-     * @param line line for which the waiting time should be registered.
-     * @param journey journey for which the waiting time should be registered.
-     * @param stations stations for which the waiting time should be registered.
-     * @param waitingTimes waiting time to register.
-     */
-    void registerWaitingTime(const PublicTransportation::Company &company,
-                             const PublicTransportation::Line &line,
-                             const PublicTransportation::Journey &journey,
-                             const PublicTransportation::Station &stations,
-                             const QList<WaitingTime> &waitingTimes);
 Q_SIGNALS:
     /**
-     * @brief List companies requested
+     * @brief Request suggested stations
      *
      * This is a DBus proxy signal.
      */
-    void listCompaniesRequested();
-    /**
-     * @brief List lines requested
-     *
-     * This is a DBus proxy signal.
-     *
-     * @param company company for which the lines should be listed.
-     */
-    void listLinesRequested(const PublicTransportation::Company &company);
-    /**
-     * @brief List journeys requested
-     *
-     * This is a DBus proxy signal.
-     *
-     * @param company company for which the journeys should be listed.
-     * @param line line for which the journeys should be listed.
-     */
-    void listJourneysRequested(const PublicTransportation::Company &company,
-                           const PublicTransportation::Line &line);
-    /**
-     * @brief List stations requested
-     *
-     * This is a DBus proxy signal.
-     *
-     * @param company company for which the stations should be listed.
-     * @param line line for which the stations should be listed.
-     * @param journey journey for which the stations should be listed.
-     */
-    void listStationsRequested(const PublicTransportation::Company &company,
-                           const PublicTransportation::Line &line,
-                           const PublicTransportation::Journey &journey);
-    /**
-     * @brief Get waiting time requested
-     *
-     * This is a DBus proxy signal.
-     *
-     * @param company company for which the waiting time should be retrieved.
-     * @param line line for which the waiting time should be retrieved.
-     * @param journey journey for which the waiting time should be retrieved.
-     * @param station station for which the waiting time should be retrieved.
-     */
-    void getWaitingTimeRequested(const PublicTransportation::Company &company,
-                                 const PublicTransportation::Line &line,
-                                 const PublicTransportation::Journey &journey,
-                                 const PublicTransportation::Station &station);
+    void suggestStationsRequested(int request, const QString &partialStation);
 private:
     Q_DECLARE_PRIVATE(DBusBackendWrapper)
     /// \cond buggy-doxygen-doc

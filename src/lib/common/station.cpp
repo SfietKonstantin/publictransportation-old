@@ -21,77 +21,22 @@
 
 #include "station.h"
 
-#include "journey.h"
-
 namespace PublicTransportation
 {
 
-/**
- * @internal
- * @brief Private class for PublicTransportation::Station
- */
-class StationPrivate: public TransportationObjectPrivate
-{
-public:
-    /**
-     * @internal
-     * @brief Journey
-     */
-    Journey journey;
-    /**
-     * @internal
-     * @brief Waiting time
-     */
-    QList<WaitingTime> waitingTime;
-};
-
-////// End of private class //////
-
-
 Station::Station() :
-    TransportationObject(* new StationPrivate)
+    TransportationObject()
 {
 }
 
 Station::Station(const QVariantMap &disambiguation, const QString &name,
-                 const Journey &journey, const QVariantMap &properties):
-    TransportationObject(* new StationPrivate)
+                 const QVariantMap &properties):
+    TransportationObject()
 {
-    Q_D(Station);
+    Q_D(TransportationObject);
     d->disambiguation = disambiguation;
     d->name = name;
     d->properties = properties;
-
-    setJourney(journey);
-}
-
-Station::~Station()
-{
-}
-
-Journey Station::journey() const
-{
-    Q_D(const Station);
-    return d->journey;
-}
-
-void Station::setJourney(const Journey &journey)
-{
-    Q_D(Station);
-    d->journey = journey;
-    d->journey.addStation(*this);
-}
-
-QList<WaitingTime> Station::waitingTime() const
-{
-    Q_D(const Station);
-    return d->waitingTime;
-}
-
-void Station::setWaitingTime(const QList<WaitingTime> &waitingTime)
-{
-    Q_D(Station);
-    d->waitingTime = waitingTime;
 }
 
 }

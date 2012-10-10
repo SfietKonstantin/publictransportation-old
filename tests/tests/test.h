@@ -24,12 +24,10 @@ class Test : public QObject
     Q_OBJECT
 private slots:
     void testBaseCommonEntities();
-    void testBaseSharedEntities();
     void testDBusSimpleReceive();
     void testBackendInfo();
-    void testDBusBackend();
     void testDBusProvider();
-    void testDBusBackendManager();
+//    void testDBusBackendManager();
 };
 
 #endif // TEST_H

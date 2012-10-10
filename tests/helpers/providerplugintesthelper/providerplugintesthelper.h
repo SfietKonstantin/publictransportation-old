@@ -29,13 +29,9 @@ class ProviderPluginTestHelper : public ProviderPluginObject
     Q_INTERFACES(PublicTransportation::ProviderPluginInterface)
 public:
     explicit ProviderPluginTestHelper(QObject *parent = 0);
-    virtual ~ProviderPluginTestHelper();
     virtual QStringList capabilities() const;
-    virtual QList<PublicTransportation::Company> listCompanies() const;
-    virtual QList<Line> listLines(const Company &company) const;
-    virtual QList<Journey> listJourneys(const Company &company, const Line &line) const;
-    virtual QList<Station> listStations(const Company &company, const Line &line,
-                                        const Journey &journey) const;
+public Q_SLOTS:
+    virtual void retrieveSuggestedStations(int request, const QString &partialStation);
 };
 
 }

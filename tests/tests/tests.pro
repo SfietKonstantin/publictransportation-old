@@ -11,10 +11,12 @@ DEFINES += 'HELPER_FOLDER=\'\"$${TEST_FOLDER}/helpers\"\''
 HEADERS +=  generator.h \
             dbusobject.h \
             test.h \
+    signalreceiver.h
 
 SOURCES +=  generator.cpp \
             dbusobject.cpp \
             test.cpp \
+    signalreceiver.cpp
 
 # Deployment
 target.path = $${TEST_FOLDER}

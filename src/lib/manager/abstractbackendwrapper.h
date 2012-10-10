@@ -152,6 +152,10 @@ public:
          */
         Invalid
     };
+    enum RequestType {
+        SuggestStationType
+    };
+
     /**
      * @brief Default constructor
      *
@@ -191,43 +195,9 @@ public:
      * @return capabilities.
      */
     QStringList capabilities() const;
-    /**
-     * @brief Companies
-     * @return companies.
-     */
-    QList<Company> companies() const;
-    /**
-     * @brief Lines
-     * @param company company for which the lines should be listed.
-     * @return lines.
-     */
-    QList<Line> lines(const Company &company) const;
-    /**
-     * @brief Journeys
-     * @param company company for which the journeys should be listed.
-     * @param line line for which the journeys should be listed.
-     * @return journeys.
-     */
-    QList<Journey> journeys(const Company &company, const Line &line) const;
-    /**
-     * @brief Stations
-     * @param company company for which the stations should be listed.
-     * @param line line for which the stations should be listed.
-     * @param journey journey for which the stations should be listed.
-     * @return stations.
-     */
-    QList<Station> stations(const Company &company, const Line &line,
-                            const Journey &journey) const;
-    /**
-     * @brief Waiting time
-     * @param company company for which the waiting time should be retrieved.
-     * @param line line for which the waiting time should be retrieved.
-     * @param journey journey for which the waiting time should be retrieved.
-     * @param station station for which the waiting time should be retrieved.
-     * @return
-     */
-    QList<WaitingTime> waitingTime(const Company &company, const Line &line,
-                                   const Journey &journey, const Station &station) const;
+
+
+    virtual int requestSuggestStations(const QString &partialStation) = 0;
 public Q_SLOTS:
     /**
      * @brief Launch the backend
@@ -260,38 +230,8 @@ public Q_SLOTS:
      * situations.
      */
     virtual void kill() = 0;
-    /**
-     * @brief Request a list of the companies
-     */
-    virtual void requestListCompanies() = 0;
-    /**
-     * @brief Request a list of the lines
-     * @param company company for which the lines should be listed.
-     */
-    virtual void requestListLines(const Company &company) = 0;
-    /**
-     * @brief Request a list of the journeys
-     * @param company company for which the journeys should be listed.
-     * @param line line for which the journeys should be listed.
-     */
-    virtual void requestListJourneys(const Company &company, const Line &line) = 0;
-    /**
-     * @brief Request a list of the stations
-     * @param company company for which the stations should be listed.
-     * @param line line for which the stations should be listed.
-     * @param journey journey for which the stations should be listed.
-     */
-    virtual void requestListStations(const Company &company, const Line &line,
-                                     const Journey &journey) = 0;
-    /**
-     * @brief Request waiting time
-     * @param company company for which the waiting time should be retrieved.
-     * @param line line for which the waiting time should be retrieved.
-     * @param journey journey for which the waiting time should be retrieved.
-     * @param station station for which the waiting time should be retrieved.
-     */
-    virtual void requestWaitingTime(const Company &company, const Line &line,
-                                    const Journey &journey, const Station &station) = 0;
+    void registerError(int request, const QString &error);
+    void registerSuggestedStations(int request, const QStringList &suggestedStations);
 Q_SIGNALS:
     /**
      * @brief Status changed
@@ -301,42 +241,9 @@ Q_SIGNALS:
      * @brief Capabilities changed
      */
     void capabilitiesChanged();
-    /**
-     * @brief Companies changed
-     */
-    void companiesChanged();
-    /**
-     * @brief Lines changed
-     * @param company company for which the lines should be listed.
-     */
-    void linesChanged(const PublicTransportation::Company &company);
-    /**
-     * @brief Journeys changed
-     * @param company company for which the journeys should be listed.
-     * @param line line for which the journeys should be listed.
-     */
-    void journeysChanged(const PublicTransportation::Company &company,
-                         const PublicTransportation::Line &line);
-    /**
-     * @brief Stations changed
-     * @param company company for which the stations should be listed.
-     * @param line line for which the stations should be listed.
-     * @param journey journey for which the stations should be listed.
-     */
-    void stationsChanged(const PublicTransportation::Company &company,
-                         const PublicTransportation::Line &line,
-                         const PublicTransportation::Journey &journey);
-    /**
-     * @brief Waiting time changed
-     * @param company company for which the waiting time should be retrieved.
-     * @param line line for which the swaiting time should be retrieved.
-     * @param journey journey for which the waiting time should be retrieved.
-     * @param station station for which the waiting time should be retrieved.
-     */
-    void waitingTimeChanged(const PublicTransportation::Company &company,
-                            const PublicTransportation::Line &line,
-                            const PublicTransportation::Journey &journey,
-                            const PublicTransportation::Station &station);
+
+    void errorRegistered(int request, const QString &error);
+    void suggestedStationsRegistered(int request, const QStringList &suggestedStations);
 protected:
     /**
      * @brief D-pointer based constructor
@@ -369,43 +276,8 @@ protected:
      * @param capabilities capabilities to set.
      */
     void setCapabilities(const QStringList &capabilities);
-    /**
-     * @brief Set companies
-     * @param companies companies to set.
-     */
-    void setCompanies(const QList<Company> &companies);
-    /**
-     * @brief Set lines
-     * @param company company for which the lines should be listed.
-     * @param lines lines to set.
-     */
-    void setLines(const Company &company, const QList<Line> &lines);
-    /**
-     * @brief Set journeys
-     * @param company company for which the journeys should be listed.
-     * @param line line for which the journey should be listed.
-     * @param journeys journeys to set.
-     */
-    void setJourneys(const Company &company, const Line &line, const QList<Journey> &journeys);
-    /**
-     * @brief Set stations
-     * @param company company for which the stations should be listed.
-     * @param line line for which the stations should be listed.
-     * @param journey journey for which the stations should be listed.
-     * @param stations stations to set.
-     */
-    void setStations(const Company &company, const Line &line, const Journey &journey,
-                     const QList<Station> &stations);
-    /**
-     * @brief Set waiting time
-     * @param company company for which the waiting time should be retrieved.
-     * @param line line for which the waiting time should be retrieved.
-     * @param journey journey for which the waiting time should be retrieved.
-     * @param station station for which the waiting time should be retrieved.
-     * @param waitingTimes waiting time to set.
-     */
-    void setWaitingTime(const Company &company, const Line &line, const Journey &journey,
-                        const Station &station, const QList<WaitingTime> &waitingTimes);
+    int createRequest(RequestType requestType);
+
     /**
      * @brief D-pointer
      */

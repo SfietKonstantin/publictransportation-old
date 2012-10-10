@@ -77,42 +77,7 @@ public:
      * @return capabilities.
      */
     virtual QStringList capabilities() const = 0;
-    /**
-     * @brief List companies
-     * @return listed companies.
-     */
-    virtual QList <Company> listCompanies() const = 0;
-    /**
-     * @brief List lines
-     * @param company company for which the lines should be listed.
-     * @return listed lines.
-     */
-    virtual QList <Line> listLines(const Company &company) const = 0;
-    /**
-     * @brief List journeys
-     * @param company company for which the journeys should be listed.
-     * @param line line for which the journeys should be listed.
-     * @return listed journeys.
-     */
-    virtual QList <Journey> listJourneys(const Company &company, const Line &line) const = 0;
-    /**
-     * @brief List stations
-     * @param company company for which the stations should be listed.
-     * @param line line for which the stations should be listed.
-     * @param journey journey for which the stations should be listed.
-     * @return listed stations.
-     */
-    virtual QList <Station> listStations(const Company &company, const Line &line,
-                                         const Journey &journey) const = 0;
-    /**
-     * @brief Get waiting time
-     * @param company company for which the waiting time should be retrieved.
-     * @param line line for which the waiting time should be retrieved.
-     * @param journey journey for which the waiting time should be retrieved.
-     * @param station station for which the waiting time should be retrieved.
-     */
-    virtual void getWaitingTime(const Company &company, const Line &line,
-                                const Journey &journey, const Station &station) = 0;
+    virtual void retrieveSuggestedStations(int request, const QString &partialStation) = 0;
 };
 
 }

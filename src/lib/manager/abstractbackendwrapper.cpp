@@ -28,6 +28,14 @@
 namespace PublicTransportation
 {
 
+AbstractBackendWrapperPrivate::AbstractBackendWrapperPrivate()
+{
+     status = AbstractBackendWrapper::Stopped;
+     requestCount = 0;
+}
+
+////// End of private class //////
+
 AbstractBackendWrapper::AbstractBackendWrapper(const QString &identifier, const QString &executable,
                                                const QMap<QString, QString> &arguments,
                                                QObject *parent):
@@ -73,91 +81,37 @@ QStringList AbstractBackendWrapper::capabilities() const
     return d->capabilities;
 }
 
-QList<Company> AbstractBackendWrapper::companies() const
-{
-    Q_D(const AbstractBackendWrapper);
-    return d->companies;
-}
-
-QList<Line> AbstractBackendWrapper::lines(const Company &company) const
-{
-    Q_D(const AbstractBackendWrapper);
-    Company sharedCompany = sharedCopy<Company>(company, d->companies);
-    if (sharedCompany.isNull()) {
-        return QList<Line>();
-    }
-
-    return sharedCompany.lines();
-}
-
-QList<Journey> AbstractBackendWrapper::journeys(const Company &company, const Line &line) const
-{
-    Q_D(const AbstractBackendWrapper);
-    Company sharedCompany = sharedCopy<Company>(company, d->companies);
-    if (sharedCompany.isNull()) {
-        return QList<Journey>();
-    }
-
-    Line sharedLine = sharedCopy<Line>(line, sharedCompany.lines());
-    if (sharedLine.isNull()) {
-        return QList<Journey>();
-    }
-
-    return sharedLine.journeys();
-}
-
-QList<Station> AbstractBackendWrapper::stations(const Company &company, const Line &line,
-                                                const Journey &journey) const
-{
-    Q_D(const AbstractBackendWrapper);
-    Company sharedCompany = sharedCopy<Company>(company, d->companies);
-    if (sharedCompany.isNull()) {
-        return QList<Station>();
-    }
-
-    Line sharedLine = sharedCopy<Line>(line, sharedCompany.lines());
-    if (sharedLine.isNull()) {
-        return QList<Station>();
-    }
-
-    Journey sharedJourney = sharedCopy<Journey>(journey, sharedLine.journeys());
-    if (sharedJourney.isNull()) {
-        return QList<Station>();
-    }
-
-    return sharedJourney.stations();
-}
-
-QList<WaitingTime> AbstractBackendWrapper::waitingTime(const Company &company, const Line &line,
-                                                       const Journey &journey,
-                                                       const Station &station) const
-{
-    Q_D(const AbstractBackendWrapper);
-    Company sharedCompany = sharedCopy<Company>(company, d->companies);
-    if (sharedCompany.isNull()) {
-        return QList<WaitingTime>();
-    }
-
-    Line sharedLine = sharedCopy<Line>(line, sharedCompany.lines());
-    if (sharedLine.isNull()) {
-        return QList<WaitingTime>();
-    }
-
-    Journey sharedJourney = sharedCopy<Journey>(journey, sharedLine.journeys());
-    if (sharedJourney.isNull()) {
-        return QList<WaitingTime>();
-    }
-
-    Station sharedStation = sharedCopy<Station>(station, sharedJourney.stations());
-    if (sharedStation.isNull()) {
-        return QList<WaitingTime>();
-    }
-
-    return sharedStation.waitingTime();
-}
-
 void AbstractBackendWrapper::waitForStopped()
 {
+}
+
+void AbstractBackendWrapper::registerError(int request, const QString &error)
+{
+    Q_D(AbstractBackendWrapper);
+    if (d->requests.contains(request)) {
+        debug("abs-backend-wrapper") << "Request" << request << "failed";
+        debug("abs-backend-wrapper") << error;
+
+        delete d->requests.take(request);
+        emit errorRegistered(request, error);
+    }
+}
+
+void AbstractBackendWrapper::registerSuggestedStations(int request,
+                                                       const QStringList &suggestedStations)
+{
+    Q_D(AbstractBackendWrapper);
+    if (d->requests.contains(request)) {
+        delete d->requests.take(request);
+        debug("abs-backend-wrapper") << "Suggested stations registered";
+        debug("abs-backend-wrapper") << "(Request" << request << ")";
+        debug("abs-backend-wrapper") << "list of suggested stations";
+        foreach (QString station, suggestedStations) {
+            debug("abs-backend-wrapper") << station;
+        }
+
+        emit suggestedStationsRegistered(request, suggestedStations);
+    }
 }
 
 QString AbstractBackendWrapper::executable() const
@@ -201,196 +155,21 @@ void AbstractBackendWrapper::setCapabilities(const QStringList &capabilities)
     }
 }
 
-void AbstractBackendWrapper::setCompanies(const QList<Company> &companies)
+int AbstractBackendWrapper::createRequest(RequestType requestType)
 {
     Q_D(AbstractBackendWrapper);
-    QList<Company> companiesToAdd;
+    int request = d->requestCount;
+    d->requestCount ++;
 
-    foreach (Company company, companies) {
-        if (!d->companies.contains(company)) {
-            companiesToAdd.append(company);
-        }
-    }
+    debug("abs-backend-wrapper") << "Created request (request " << request
+                                 << "and type" << requestType << ")";
+    RequestData *requestData = new RequestData;
+    requestData->request = request;
+    requestData->type = requestType;
+    d->requests.insert(request, requestData);
 
-    if (companiesToAdd.isEmpty()) {
-        return;
-    }
-
-    foreach (Company company, companiesToAdd) {
-        d->companies.append(company);
-    }
-    emit companiesChanged();
-
-    debug("abs-backend-wrapper") << "Companies changed";
+    return request;
 }
 
-void AbstractBackendWrapper::setLines(const Company &company, const QList<Line> &lines)
-{
-    Q_D(AbstractBackendWrapper);
-
-    Company sharedCompany = sharedCopy<Company>(company, d->companies);
-    if (sharedCompany.isNull()) {
-        warning("abs-backend-wrapper") << "Lines are set for an unknown company:" << company.name();
-        return;
-    }
-
-    QList<Line> companyLines = sharedCompany.lines();
-    QList<Line> linesToAdd;
-
-    foreach (Line line, lines) {
-        if (!companyLines.contains(line)) {
-            linesToAdd.append(line);
-        }
-    }
-
-    if (linesToAdd.isEmpty()) {
-        return;
-    }
-
-    foreach (Line line, linesToAdd) {
-        sharedCompany.addLine(line);
-    }
-
-    emit linesChanged(sharedCompany);
-    debug("abs-backend-wrapper") << "Lines changed for company" << sharedCompany.name();
-}
-
-void AbstractBackendWrapper::setJourneys(const Company &company, const Line &line,
-                                         const QList<Journey> &journeys)
-{
-    Q_D(AbstractBackendWrapper);
-
-    Company sharedCompany = sharedCopy<Company>(company, d->companies);
-    if (sharedCompany.isNull()) {
-        warning("abs-backend-wrapper") << "Journeys are set for an unknown company:"
-                                       << company.name();
-        return;
-    }
-
-    Line sharedLine = sharedCopy<Line>(line, sharedCompany.lines());
-    if (sharedLine.isNull()) {
-        warning("abs-backend-wrapper") << "Journeys are set for an unknown line:" << line.name()
-                                       << "(and for company " << company.name() << ")";
-        return;
-    }
-
-    QList<Journey> lineJourneys = sharedLine.journeys();
-    QList<Journey> journeysToAdd;
-
-    foreach (Journey journey, journeys) {
-        if (!lineJourneys.contains(journey)) {
-            journeysToAdd.append(journey);
-        }
-    }
-
-    if (journeysToAdd.isEmpty()) {
-        return;
-    }
-
-    foreach (Journey journey, journeysToAdd) {
-        sharedLine.addJourney(journey);
-    }
-
-    emit journeysChanged(sharedCompany, sharedLine);
-    debug("abs-backend-wrapper") << "Journeys changed for company" << sharedCompany.name()
-                                 << "and line" << sharedLine.name();
-}
-
-void AbstractBackendWrapper::setStations(const Company &company, const Line &line,
-                                         const Journey &journey, const QList<Station> &stations)
-{
-    Q_D(AbstractBackendWrapper);
-
-    Company sharedCompany = sharedCopy<Company>(company, d->companies);
-    if (sharedCompany.isNull()) {
-        warning("abs-backend-wrapper") << "Stations are set for an unknown company:"
-                                       << company.name();
-        return;
-    }
-
-    Line sharedLine = sharedCopy<Line>(line, sharedCompany.lines());
-    if (sharedLine.isNull()) {
-        warning("abs-backend-wrapper") << "Stations are set for an unknown line:" << line.name()
-                                       << "(and for company " << company.name() << ")";
-        return;
-    }
-
-    Journey sharedJourney = sharedCopy<Journey>(journey, sharedLine.journeys());
-    if (sharedJourney.isNull()) {
-        warning("abs-backend-wrapper") << "Stations are set for an unknown journey:"
-                                       << journey.name() << "(and for company "
-                                       << company.name() << "and line" << line.name() << ")";
-        return;
-    }
-
-    QList<Station> journeyStations = sharedJourney.stations();
-    QList<Station> stationsToAdd;
-
-    foreach (Station station, stations) {
-        if (!journeyStations.contains(station)) {
-            stationsToAdd.append(station);
-        }
-    }
-
-    if (stationsToAdd.isEmpty()) {
-        return;
-    }
-
-    foreach (Station station, stationsToAdd) {
-        sharedJourney.addStation(station);
-    }
-
-    emit stationsChanged(sharedCompany, sharedLine, sharedJourney);
-    debug("abs-backend-wrapper") << "Stations changed for company" << sharedCompany.name()
-                                 << ", line" << sharedLine.name()
-                                 << "and journey" << sharedJourney.name();
-}
-
-void AbstractBackendWrapper::setWaitingTime(const Company &company, const Line &line,
-                                            const Journey &journey, const Station &station,
-                                            const QList<WaitingTime> &waitingTimes)
-{
-    Q_D(AbstractBackendWrapper);
-
-    Company sharedCompany = sharedCopy<Company>(company, d->companies);
-    if (sharedCompany.isNull()) {
-        warning("abs-backend-wrapper") << "Waiting time are set for an unknown company:"
-                                       << company.name();
-        return;
-    }
-
-    Line sharedLine = sharedCopy<Line>(line, sharedCompany.lines());
-    if (sharedLine.isNull()) {
-        warning("abs-backend-wrapper") << "Waiting time are set for an unknown line:" << line.name()
-                                       << "(and for company " << company.name() << ")";
-        return;
-    }
-
-    Journey sharedJourney = sharedCopy<Journey>(journey, sharedLine.journeys());
-    if (sharedJourney.isNull()) {
-        warning("abs-backend-wrapper") << "Waiting time are set for an unknown journey:"
-                                       << journey.name() << "(and for company "
-                                       << company.name() << "and line" << line.name() << ")";
-        return;
-    }
-
-    Station sharedStation = sharedCopy<Station>(station, sharedJourney.stations());
-    if (sharedJourney.isNull()) {
-        warning("abs-backend-wrapper") << "Waiting time are set for an unknown station:"
-                                       << journey.name() << "(and for company "
-                                       << company.name() << ",line" << line.name()
-                                       << "and station" << station.name() << ")";
-        return;
-    }
-
-
-    sharedStation.setWaitingTime(waitingTimes);
-
-    emit waitingTimeChanged(sharedCompany, sharedLine, sharedJourney, sharedStation);
-    debug("abs-backend-wrapper") << "Waiting time changed for company" << sharedCompany.name()
-                                 << ", line" << sharedLine.name()
-                                 << ", journey" << sharedJourney.name()
-                                 << "and station" << station.name();
-}
 
 }

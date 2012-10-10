@@ -22,6 +22,7 @@
 #include "common/line.h"
 #include "common/journey.h"
 #include "common/station.h"
+#include "common/waitingtime.h"
 
 class DBusObject : public QObject
 {
@@ -33,16 +34,19 @@ public:
     PublicTransportation::Line line() const;
     PublicTransportation::Journey journey() const;
     PublicTransportation::Station station() const;
+    PublicTransportation::WaitingTime waitingTime() const;
 public slots:
     void receiveCompany(const PublicTransportation::Company &company);
     void receiveLine(const PublicTransportation::Line &line);
     void receiveJourney(const PublicTransportation::Journey &journey);
     void receiveStation(const PublicTransportation::Station &station);
+    void receiveWaitingTime(const PublicTransportation::WaitingTime &waitingTime);
 private:
     PublicTransportation::Company m_company;
     PublicTransportation::Line m_line;
     PublicTransportation::Journey m_journey;
     PublicTransportation::Station m_station;
+    PublicTransportation::WaitingTime m_waitingTime;
 
 };
 

@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef BACKENDDBUSPROXY_H_1349826035
-#define BACKENDDBUSPROXY_H_1349826035
+#ifndef BACKENDDBUSPROXY_H_1349883541
+#define BACKENDDBUSPROXY_H_1349883541
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -48,47 +48,22 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("registerBackend"), argumentList);
     }
 
-    inline QDBusPendingReply<> registerListedCompanies(const QList<PublicTransportation::Company> & companies)
+    inline QDBusPendingReply<> registerError(int request, const QString &error)
     {
         QList<QVariant> argumentList;
-        argumentList << QVariant::fromValue(companies);
-        return asyncCallWithArgumentList(QLatin1String("registerListedCompanies"), argumentList);
+        argumentList << QVariant::fromValue(request) << QVariant::fromValue(error);
+        return asyncCallWithArgumentList(QLatin1String("registerError"), argumentList);
     }
 
-    inline QDBusPendingReply<> registerListedJourneys(const PublicTransportation::Company & company, const PublicTransportation::Line & line, const QList<PublicTransportation::Journey> & journeys)
+    inline QDBusPendingReply<> registerSuggestedStations(int request, const QStringList &suggestedStations)
     {
         QList<QVariant> argumentList;
-        argumentList << QVariant::fromValue(company) << QVariant::fromValue(line) << QVariant::fromValue(journeys);
-        return asyncCallWithArgumentList(QLatin1String("registerListedJourneys"), argumentList);
-    }
-
-    inline QDBusPendingReply<> registerListedLines(const PublicTransportation::Company & company, const QList<PublicTransportation::Line> & lines)
-    {
-        QList<QVariant> argumentList;
-        argumentList << QVariant::fromValue(company) << QVariant::fromValue(lines);
-        return asyncCallWithArgumentList(QLatin1String("registerListedLines"), argumentList);
-    }
-
-    inline QDBusPendingReply<> registerListedStations(const PublicTransportation::Company & company, const PublicTransportation::Line & line, const PublicTransportation::Journey & journey, const QList<PublicTransportation::Station> & stations)
-    {
-        QList<QVariant> argumentList;
-        argumentList << QVariant::fromValue(company) << QVariant::fromValue(line) << QVariant::fromValue(journey) << QVariant::fromValue(stations);
-        return asyncCallWithArgumentList(QLatin1String("registerListedStations"), argumentList);
-    }
-
-    inline QDBusPendingReply<> registerWaitingTime(const PublicTransportation::Company & company, const PublicTransportation::Line & line, const PublicTransportation::Journey & journey, const PublicTransportation::Station & station, const QList<PublicTransportation::WaitingTime> & waitingTime)
-    {
-        QList<QVariant> argumentList;
-        argumentList << QVariant::fromValue(company) << QVariant::fromValue(line) << QVariant::fromValue(journey) << QVariant::fromValue(station) << QVariant::fromValue(waitingTime);
-        return asyncCallWithArgumentList(QLatin1String("registerWaitingTime"), argumentList);
+        argumentList << QVariant::fromValue(request) << QVariant::fromValue(suggestedStations);
+        return asyncCallWithArgumentList(QLatin1String("registerSuggestedStations"), argumentList);
     }
 
 Q_SIGNALS: // SIGNALS
-    void getWaitingTimeRequested(const PublicTransportation::Company & company, const PublicTransportation::Line & line, const PublicTransportation::Journey & journey, const PublicTransportation::Station & station);
-    void listCompaniesRequested();
-    void listJourneysRequested(const PublicTransportation::Company & company, const PublicTransportation::Line & line);
-    void listLinesRequested(const PublicTransportation::Company & company);
-    void listStationsRequested(const PublicTransportation::Company & company, const PublicTransportation::Line & line, const PublicTransportation::Journey & journey);
+    void suggestStationsRequested(int request, const QString &partialStation);
 };
 
 namespace org {

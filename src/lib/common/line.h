@@ -28,39 +28,14 @@
 namespace PublicTransportation
 {
 
-class Company;
-class Journey;
-class LinePrivate;
-
 /**
  * @brief A public transportation line
  *
  * This class is used to represent a public transportation
  * line. A line is a transportation entity that
  * have a name, that should be the official name of the line,
- * a disambiguation parameter, a company on which the line
- * belongs, and other properties, such as the color of the
- * line, or the logo.
- *
- * %Company can be accessed and set using
- * - company()
- * - setCompany()
- *
- * A line also have journeys. Those journeys might vary during the life
- * of the instance for example for web providers that only provide
- * information for the incoming trains.
- *
- * In order to access and update the registered journeys, those methods
- * can be used
- * - journeys()
- * - addJourney() that adds a journey to the line.
- * - removeJourney() that remove a line from the line.
- *
- * While creating lines, the line will also automatically
- * be attached to the company.
- *
- * Please note that when comparing two lines, the journeys that these
- * lines stores are not compared.
+ * a disambiguation parameter, and other properties, such as
+ * the color of the line, or the logo.
  */
 class PUBLICTRANSPORTATION_EXPORT Line: public TransportationObject
 {
@@ -73,42 +48,12 @@ public:
      * @brief Constructor
      * @param disambiguation disambiguation.
      * @param name name.
-     * @param company company.
      * @param properties properties.
      */
     explicit Line(const QVariantMap &disambiguation, const QString &name,
-                  const Company &company, const QVariantMap &properties);
-    /**
-     * @brief Destructor
-     */
-    virtual ~Line();
-    /**
-     * @brief Company
-     * @return company.
-     */
-    Company company() const;
-    /**
-     * @brief Set company
-     * @param company company to set.
-     */
-    void setCompany(const Company &company);
-    /**
-     * @brief Journeys
-     * @return journeys.
-     */
-    QList<Journey> journeys() const;
-    /**
-     * @brief Add journey
-     * @param journey journey to add.
-     */
-    void addJourney(const Journey &journey);
-    /**
-     * @brief Remove journey
-     * @param journey journey to remove.
-     */
-    void removeJourney(const Journey &journey);
+                  const QVariantMap &properties);
 private:
-    Q_DECLARE_PRIVATE(Line)
+    Q_DECLARE_PRIVATE(TransportationObject)
 };
 
 }

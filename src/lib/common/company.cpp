@@ -21,11 +21,6 @@
 
 #include "company.h"
 
-#include <QtCore/QDebug>
-#include <QtCore/QList>
-
-#include "line.h"
-
 namespace PublicTransportation
 {
 
@@ -37,33 +32,16 @@ namespace PublicTransportation
  */
 static const char *COPYRIGHT_KEY = "copyright";
 
-
-/**
- * @internal
- * @brief Private class for PublicTransportation::Company
- */
-class CompanyPrivate: public TransportationObjectPrivate
-{
-public:
-    /**
-     * @internal Lines
-     * @brief lines
-     */
-    QList<Line> lines;
-};
-
-////// End of private class //////
-
 Company::Company():
-    TransportationObject(*new CompanyPrivate)
+    TransportationObject()
 {
 }
 
 Company::Company(const QVariantMap &disambiguation, const QString &name,
                  const QString &copyright, const QVariantMap &properties):
-    TransportationObject(*new CompanyPrivate)
+    TransportationObject()
 {
-    Q_D(Company);
+    Q_D(TransportationObject);
     d->disambiguation = disambiguation;
     d->name = name;
     d->properties = properties;
@@ -76,40 +54,14 @@ Company::~Company()
 
 QString Company::copyright() const
 {
-    Q_D(const Company);
+    Q_D(const TransportationObject);
     return d->properties.value(COPYRIGHT_KEY).toString();
 }
 
 void Company::setCopyright(const QString &copyright)
 {
-    Q_D(Company);
+    Q_D(TransportationObject);
     d->properties.insert(COPYRIGHT_KEY, copyright);
-}
-
-QList<Line> Company::lines() const
-{
-    Q_D(const Company);
-    return d->lines;
-}
-
-void Company::addLine(const Line &line)
-{
-    Q_D(Company);
-    if (d->lines.contains(line)) {
-        return;
-    }
-
-    d->lines.append(line);
-}
-
-void Company::removeLine(const Line &line)
-{
-    Q_D(Company);
-    if (!d->lines.contains(line)) {
-        return;
-    }
-
-    d->lines.removeAll(line);
 }
 
 }

@@ -42,6 +42,11 @@ PublicTransportation::Station DBusObject::station() const
     return m_station;
 }
 
+PublicTransportation::WaitingTime DBusObject::waitingTime() const
+{
+    return m_waitingTime;
+}
+
 void DBusObject::receiveCompany(const PublicTransportation::Company &company)
 {
     qDebug() << "Company received";
@@ -64,4 +69,10 @@ void DBusObject::receiveStation(const PublicTransportation::Station &station)
 {
     qDebug() << "Station received";
     m_station = station;
+}
+
+void DBusObject::receiveWaitingTime(const PublicTransportation::WaitingTime &waitingTime)
+{
+    qDebug() << "Waiting time received";
+    m_waitingTime = waitingTime;
 }

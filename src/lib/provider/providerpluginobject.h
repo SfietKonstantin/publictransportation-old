@@ -49,25 +49,16 @@ public:
      * @brief Default constructor
      * @param parent parent object.
      */
-    explicit ProviderPluginObject(QObject *parent = 0): QObject(parent) {}
+    explicit ProviderPluginObject(QObject *parent = 0);
     /**
      * @brief Destructor
      */
-    virtual ~ProviderPluginObject() {}
+    virtual ~ProviderPluginObject();
+public Q_SLOTS:
+    virtual void retrieveSuggestedStations(int request, const QString &partialStation);
 Q_SIGNALS:
-    /**
-     * @brief Waiting time retrieved
-     * @param company company for which the waiting time is retrieved.
-     * @param line line for which the waiting time is retrieved.
-     * @param journey journey for which the waiting time is retrieved.
-     * @param station station for which the waiting time is retrieved.
-     * @param waitingTimes retrieved waiting time.
-     */
-    void waitingTimeRetrieved(const PublicTransportation::Company &company,
-                              const PublicTransportation::Line &line,
-                              const PublicTransportation::Journey &journey,
-                              const PublicTransportation::Station &station,
-                              const QList<PublicTransportation::WaitingTime> &waitingTimes);
+    void errorRetrieved(int request, const QString &error);
+    void suggestedStationsRetrieved(int request, const QStringList &suggestedStations);
 };
 
 }

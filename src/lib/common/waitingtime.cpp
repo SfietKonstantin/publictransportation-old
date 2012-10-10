@@ -31,6 +31,14 @@ WaitingTime::WaitingTime():
     d->waitingTime = -1;
 }
 
+WaitingTime::WaitingTime(int waitingTime, const QVariantMap &properties):
+    d_ptr(new WaitingTimePrivate)
+{
+    Q_D(WaitingTime);
+    d->waitingTime = waitingTime;
+    d->properties = properties;
+}
+
 WaitingTime::WaitingTime(const WaitingTime &other):
     d_ptr(other.d_ptr)
 {

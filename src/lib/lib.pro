@@ -49,6 +49,7 @@ SOURCES +=  common/transportationobject.cpp \
             manager/dbus/dbusbackendwrapper.cpp \
             manager/dbus/dbusbackendwrapperadaptor.cpp \
             manager/dbus/dbusbackendmanager.cpp \
+            provider/providerpluginobject.cpp \
             provider/dbus/backenddbusproxy.cpp \
             provider/dbus/providerplugindbuswrapper.cpp \
 

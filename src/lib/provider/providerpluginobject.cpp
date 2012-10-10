@@ -14,51 +14,24 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_STATION_H
-#define PUBLICTRANSPORTATION_STATION_H
-
-/**
- * @file station.h
- * @short Definition of PublicTransportation::Station
- */
-
-#include "publictransportation_global.h"
-#include "transportationobject.h"
-#include <QtCore/QVariantMap>
+#include "providerpluginobject.h"
 
 namespace PublicTransportation
 {
 
-/**
- * @brief A public transportation station
- *
- * This class is used to represent a public transportation
- * station. A station is a transportation entity that
- * have a name, that should be the official name of the station,
- * a disambiguation parameter, and other properties.
- */
-class PUBLICTRANSPORTATION_EXPORT Station : public TransportationObject
+ProviderPluginObject::ProviderPluginObject(QObject *parent):
+    QObject(parent)
 {
-public:
-    /**
-     * @brief Default constructor
-     */
-    explicit Station();
-    /**
-     * @brief Constructor
-     * @param disambiguation disambiguation.
-     * @param name name.
-     * @param properties properties.
-     */
-    explicit Station(const QVariantMap &disambiguation, const QString &name,
-                     const QVariantMap &properties);
-private:
-    Q_DECLARE_PRIVATE(TransportationObject)
-};
-
 }
 
-Q_DECLARE_METATYPE(PublicTransportation::Station)
-Q_DECLARE_METATYPE(QList<PublicTransportation::Station>)
+ProviderPluginObject::~ProviderPluginObject()
+{
+}
 
-#endif // PUBLICTRANSPORTATION_STATION_H
+void ProviderPluginObject::retrieveSuggestedStations(int request, const QString &partialStation)
+{
+    Q_UNUSED(partialStation)
+    emit errorRetrieved(request, tr("SUGGEST_STATIONS capability is not implement"));
+}
+
+}

@@ -64,62 +64,6 @@ public:
      * @return if the plugin has been successfully loaded.
      */
     bool load(const QString &plugin);
-public Q_SLOTS:
-    /**
-     * @brief Send listed companies
-     *
-     * This method is used to send listed companies
-     * through DBus.
-     */
-    void sendListedCompanies() const;
-    /**
-     * @brief Send listed lines
-     *
-     * This method is used to send listed lines
-     * through DBus.
-     *
-     * @param company company for which the lines should be listed.
-     */
-    void sendListedLines(const PublicTransportation::Company &company) const;
-    /**
-     * @brief Send listed journeys
-     *
-     * This method is used to send listed journeys
-     * through DBus.
-     *
-     * @param company company for which the journeys should be listed.
-     * @param line line for which the journeys should be listed.
-     */
-    void sendListedJourneys(const PublicTransportation::Company &company,
-                            const PublicTransportation::Line &line) const;
-    /**
-     * @brief Send listed stations
-     *
-     * This method is used to send listed stations
-     * through DBus.
-     *
-     * @param company company for which the stations should be listed.
-     * @param line line for which the stations should be listed.
-     * @param journey journey for which the stations should be listed.
-     */
-    void sendListedStations(const PublicTransportation::Company &company,
-                            const PublicTransportation::Line &line,
-                            const PublicTransportation::Journey &journey) const;
-    /**
-     * @brief Get waiting time
-     *
-     * This method is used to send waiting time
-     * through DBus.
-     *
-     * @param company company for which the stations should be retrieved.
-     * @param line line for which the stations should be retrieved.
-     * @param journey journey for which the stations should be retrieved.
-     * @param station station for which the stations should be retrieved.
-     */
-    void getWaitingTime(const PublicTransportation::Company &company,
-                        const PublicTransportation::Line &line,
-                        const PublicTransportation::Journey &journey,
-                        const PublicTransportation::Station &station) const;
 protected:
     /**
      * @brief D-pointer

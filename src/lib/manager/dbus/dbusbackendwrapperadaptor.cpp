@@ -39,33 +39,15 @@ void PublictransportationAdaptor::registerBackend(const QStringList &capabilitie
     parent()->registerBackend(capabilities);
 }
 
-void PublictransportationAdaptor::registerListedCompanies(const QList<PublicTransportation::Company> & companies)
+void PublictransportationAdaptor::registerError(int request, const QString &error)
 {
-    // handle method call org.SfietKonstantin.publictransportation.registerListedCompanies
-    parent()->registerListedCompanies(companies);
+    // handle method call org.SfietKonstantin.publictransportation.registerError
+    parent()->registerError(request, error);
 }
 
-void PublictransportationAdaptor::registerListedJourneys(const PublicTransportation::Company & company, const PublicTransportation::Line & line, const QList<PublicTransportation::Journey> & journeys)
+void PublictransportationAdaptor::registerSuggestedStations(int request, const QStringList &suggestedStations)
 {
-    // handle method call org.SfietKonstantin.publictransportation.registerListedJourneys
-    parent()->registerListedJourneys(company, line, journeys);
-}
-
-void PublictransportationAdaptor::registerListedLines(const PublicTransportation::Company & company, const QList<PublicTransportation::Line> & lines)
-{
-    // handle method call org.SfietKonstantin.publictransportation.registerListedLines
-    parent()->registerListedLines(company, lines);
-}
-
-void PublictransportationAdaptor::registerListedStations(const PublicTransportation::Company & company, const PublicTransportation::Line & line, const PublicTransportation::Journey & journey, const QList<PublicTransportation::Station> & stations)
-{
-    // handle method call org.SfietKonstantin.publictransportation.registerListedStations
-    parent()->registerListedStations(company, line, journey, stations);
-}
-
-void PublictransportationAdaptor::registerWaitingTime(const PublicTransportation::Company & company, const PublicTransportation::Line & line, const PublicTransportation::Journey & journey, const PublicTransportation::Station & station, const QList<PublicTransportation::WaitingTime> & waitingTime)
-{
-    // handle method call org.SfietKonstantin.publictransportation.registerWaitingTime
-    parent()->registerWaitingTime(company, line, journey, station, waitingTime);
+    // handle method call org.SfietKonstantin.publictransportation.registerSuggestedStations
+    parent()->registerSuggestedStations(request, suggestedStations);
 }
 

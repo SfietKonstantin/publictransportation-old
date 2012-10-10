@@ -78,6 +78,7 @@ public:
      * @brief Default constructor
      */
     explicit WaitingTime();
+    explicit WaitingTime(int waitingTime, const QVariantMap &properties);
     /**
      * @brief Copy constructor
      * @param other other wait time.
