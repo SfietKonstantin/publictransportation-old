@@ -32,7 +32,7 @@ AbstractPage {
     }
     onVisibleChanged: {
         if (!visible) {
-            SearchStationModelInstance.search("")
+            SearchStationModelInstance.clear()
             searchField.text = ""
         }
     }

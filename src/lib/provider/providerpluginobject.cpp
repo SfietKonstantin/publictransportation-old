@@ -35,4 +35,12 @@ void ProviderPluginObject::retrieveSuggestedStations(const QString &request,
     emit errorRetrieved(request, tr("SUGGEST_STATIONS capability is not implement"));
 }
 
+void ProviderPluginObject::retrieveJourneysFromStation(const QString &request,
+                                                       const Station &station)
+{
+    Q_UNUSED(station)
+    emit errorRetrieved(request, tr("JOURNEYS_FROM_STATION capability is not implement"));
+}
+
+
 }

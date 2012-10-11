@@ -17,6 +17,7 @@ HEADERS =   publictransportation_global.h \
             common/line.h \
             common/journey.h \
             common/station.h \
+            common/linejourneys.h \
             common/waitingtime.h \
             common/dbus/dbusconstants.h \
             common/dbus/dbushelper.h \
@@ -39,6 +40,7 @@ SOURCES +=  common/transportationobject.cpp \
             common/line.cpp \
             common/journey.cpp \
             common/station.cpp \
+            common/linejourneys.cpp \
             common/waitingtime.cpp \
             common/dbus/dbushelper.cpp \
             manager/desktopfileparser_p.cpp \

@@ -14,56 +14,60 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_PROVIDERPLUGINOBJECT_H
-#define PUBLICTRANSPORTATION_PROVIDERPLUGINOBJECT_H
-
-/**
- * @file providerpluginobject.h
- * @short Definition of PublicTransportation::ProviderPluginObject
- */
+#ifndef PUBLICTRANSPORTATION_LINEJOURNEYS_H
+#define PUBLICTRANSPORTATION_LINEJOURNEYS_H
 
 #include "publictransportation_global.h"
-#include <QtCore/QObject>
-#include "providerplugininterface.h"
+
+#include <QtCore/QList>
+#include <QtCore/QExplicitlySharedDataPointer>
+
+#include "line.h"
+#include "journey.h"
 
 namespace PublicTransportation
 {
 
-/**
- * @brief Base for a provider plugin
- *
- * This class is the recommanded base for a provider
- * plugin. It provides all the interfaces declared
- * in PublicTransportation::ProviderPluginInterface,
- * but also offers a QObject as a base.
- *
- * For more information about creating a provider plugin,
- * see \ref PublicTransportation::ProviderPluginInterface.
- */
-class PUBLICTRANSPORTATION_EXPORT ProviderPluginObject:
-        public QObject, public ProviderPluginInterface
+class LineJourneysPrivate: public QSharedData
 {
-    Q_OBJECT
 public:
+    Line line;
+    QList<Journey> journeys;
+};
+
+class PUBLICTRANSPORTATION_EXPORT LineJourneys
+{
+public:
+    explicit LineJourneys();
+    explicit LineJourneys(const Line &line, const QList<Journey> &journeys);
     /**
-     * @brief Default constructor
-     * @param parent parent object.
+     * @brief Copy constructor
+     * @param other other line-journeys object.
      */
-    explicit ProviderPluginObject(QObject *parent = 0);
+    LineJourneys(const LineJourneys &other);
     /**
      * @brief Destructor
      */
-    virtual ~ProviderPluginObject();
-public Q_SLOTS:
-    virtual void retrieveSuggestedStations(const QString &request, const QString &partialStation);
-    virtual void retrieveJourneysFromStation(const QString &request,
-                                             const PublicTransportation::Station &station);
-Q_SIGNALS:
-    void errorRetrieved(const QString &request, const QString &error);
-    void suggestedStationsRetrieved(const QString &request,
-                                    const QList<PublicTransportation::Station> &suggestedStations);
+    virtual ~LineJourneys();
+    bool operator==(const LineJourneys &other) const;
+    /**
+     * @brief If the line-journeys object is null
+     * @return if the line-journeys object is null.
+     */
+    bool isNull() const;
+    Line line() const;
+    void setLine(const Line &line);
+    QList<Journey> journeys() const;
+    void setJourneys(const QList<Journey> &journeys);
+protected:
+    QExplicitlySharedDataPointer<LineJourneysPrivate> d_ptr;
+private:
+    Q_DECLARE_PRIVATE(LineJourneys)
 };
 
 }
 
-#endif // PUBLICTRANSPORTATION_PROVIDERPLUGINOBJECT_H
+Q_DECLARE_METATYPE(PublicTransportation::LineJourneys)
+Q_DECLARE_METATYPE(QList<PublicTransportation::LineJourneys>)
+
+#endif // PUBLICTRANSPORTATION_LINEJOURNEYS_H

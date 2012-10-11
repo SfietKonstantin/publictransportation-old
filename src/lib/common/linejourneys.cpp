@@ -14,26 +14,67 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef CAPABILITIESCONSTANTS_H
-#define CAPABILITIESCONSTANTS_H
+#include "linejourneys.h"
 
-/**
- * @file capabilitiesconstants.h
- * @short Definition of constants that stands for backend capabilities
- */
+namespace PublicTransportation
+{
 
+LineJourneys::LineJourneys():
+    d_ptr(new LineJourneysPrivate())
+{
+}
 
-/**
- * @short SUGGEST_STATIONS
- *
- * The backend is able suggest stations.
- */
-#define SUGGEST_STATIONS "suggest_stations"
-/**
- * @short JOURNEYS_FROM_STATION
- *
- * The backend is able to get journeys from a station.
- */
-#define JOURNEYS_FROM_STATION "journeys_from_station"
+LineJourneys::LineJourneys(const Line &line, const QList<Journey> &journeys):
+    d_ptr(new LineJourneysPrivate())
+{
+    Q_D(LineJourneys);
+    d->line = line;
+    d->journeys = journeys;
+}
 
-#endif // CAPABILITIESCONSTANTS_H
+LineJourneys::LineJourneys(const LineJourneys &other):
+    d_ptr(other.d_ptr)
+{
+}
+
+LineJourneys::~LineJourneys()
+{
+}
+
+bool LineJourneys::operator==(const LineJourneys &other) const
+{
+    Q_D(const LineJourneys);
+    return (d->line == other.line()) && (d->journeys == other.journeys());
+}
+
+bool LineJourneys::isNull() const
+{
+    Q_D(const LineJourneys);
+    return d->line.isNull();
+}
+
+Line LineJourneys::line() const
+{
+    Q_D(const LineJourneys);
+    return d->line;
+}
+
+void LineJourneys::setLine(const Line &line)
+{
+    Q_D(LineJourneys);
+    d->line = line;
+}
+
+QList<Journey> LineJourneys::journeys() const
+{
+    Q_D(const LineJourneys);
+    return d->journeys;
+}
+
+void LineJourneys::setJourneys(const QList<Journey> &journeys)
+{
+    Q_D(LineJourneys);
+    d->journeys = journeys;
+}
+
+}

@@ -31,6 +31,7 @@
 #include "common/journey.h"
 #include "common/station.h"
 #include "common/waitingtime.h"
+#include "common/linejourneys.h"
 
 namespace PublicTransportation
 {
@@ -198,6 +199,7 @@ public:
 
 
     virtual QString requestSuggestStations(const QString &partialStation) = 0;
+    virtual QString requestJourneysFromStation(const Station &station) = 0;
 public Q_SLOTS:
     /**
      * @brief Launch the backend
@@ -233,6 +235,8 @@ public Q_SLOTS:
     void registerError(const QString &request, const QString &error);
     void registerSuggestedStations(const QString &request,
                                    const QList<PublicTransportation::Station> &suggestedStations);
+    void registerJourneysFromStation(const QString &request,
+                                     const QList<PublicTransportation::LineJourneys> &journeys);
 Q_SIGNALS:
     /**
      * @brief Status changed
@@ -246,6 +250,8 @@ Q_SIGNALS:
     void errorRegistered(const QString &request, const QString &error);
     void suggestedStationsRegistered(const QString & request,
                                      const QList<PublicTransportation::Station> &suggestedStations);
+    void journeysFromStationRegistered(const QString &request,
+                                       const QList<PublicTransportation::LineJourneys> &journeys);
 protected:
     /**
      * @brief D-pointer based constructor

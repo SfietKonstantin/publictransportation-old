@@ -45,6 +45,12 @@ void PublictransportationAdaptor::registerError(const QString &request, const QS
     parent()->registerError(request, error);
 }
 
+void PublictransportationAdaptor::registerJourneysFromStation(const QString &request, const QList<PublicTransportation::LineJourneys> & journeys)
+{
+    // handle method call org.SfietKonstantin.publictransportation.registerJourneysFromStation
+    parent()->registerJourneysFromStation(request, journeys);
+}
+
 void PublictransportationAdaptor::registerSuggestedStations(const QString &request, const QList<PublicTransportation::Station> & suggestedStations)
 {
     // handle method call org.SfietKonstantin.publictransportation.registerSuggestedStations

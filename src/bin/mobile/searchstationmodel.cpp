@@ -42,6 +42,9 @@ public:
      * @param q Q-pointer.
      */
     SearchStationModelPrivate(SearchStationModel *q);
+    void slotBackendAdded(const QString &identifier, AbstractBackendWrapper *backend);
+    void slotStatusChanged();
+    void slotErrorRegistered(const QString &request, const QString &errorString);
     void slotSuggestedStationsRegistered(const QString & request,
                                          const QList<PublicTransportation::Station> &stations);
     /**
@@ -66,6 +69,56 @@ SearchStationModelPrivate::SearchStationModelPrivate(SearchStationModel *q):
     backendManager = 0;
 }
 
+void SearchStationModelPrivate::slotBackendAdded(const QString &identifier,
+                                                 AbstractBackendWrapper *backend)
+{
+    Q_UNUSED(identifier)
+    Q_Q(SearchStationModel);
+    q->connect(backend, SIGNAL(statusChanged()), q, SLOT(slotStatusChanged()));
+}
+
+void SearchStationModelPrivate::slotStatusChanged()
+{
+    Q_Q(SearchStationModel);
+    QObject *sender = q->sender();
+    AbstractBackendWrapper *backend = qobject_cast<AbstractBackendWrapper *>(sender);
+    if (!backend) {
+        return;
+    }
+
+    if (backend->status() == AbstractBackendWrapper::Launched) {
+        q->connect(backend,
+                   SIGNAL(suggestedStationsRegistered(QString,
+                                                      QList<PublicTransportation::Station>)),
+                   q, SLOT(slotSuggestedStationsRegistered(QString,
+                                                           QList<PublicTransportation::Station>)));
+        q->connect(backend, SIGNAL(errorRegistered(QString,QString)),
+                   q, SLOT(slotErrorRegistered(QString,QString)));
+    }
+
+    if (backend->status() == AbstractBackendWrapper::Stopping) {
+        q->disconnect(backend,
+                      SIGNAL(suggestedStationsRegistered(QString,
+                                                         QList<PublicTransportation::Station>)),
+                      q,
+                      SLOT(slotSuggestedStationsRegistered(QString,
+                                                           QList<PublicTransportation::Station>)));
+        q->disconnect(backend, SIGNAL(errorRegistered(QString,QString)),
+                      q, SLOT(slotErrorRegistered(QString,QString)));
+    }
+}
+
+void SearchStationModelPrivate::slotErrorRegistered(const QString &request,
+                                                    const QString &errorString)
+{
+    Q_UNUSED(errorString)
+    Q_Q(SearchStationModel);
+    requests.removeAll(request);
+    if (requests.isEmpty()) {
+        emit q->updatingChanged();
+    }
+}
+
 void SearchStationModelPrivate::slotSuggestedStationsRegistered(const QString & request,
                                                                 const QList<Station> &stations)
 {
@@ -73,8 +126,6 @@ void SearchStationModelPrivate::slotSuggestedStationsRegistered(const QString & 
     if (!requests.contains(request)) {
         return;
     }
-
-    q->sender()->disconnect(q);
 
     requests.removeAll(request);
     if (requests.isEmpty()) {
@@ -116,6 +167,15 @@ void SearchStationModel::setBackendManager(AbstractBackendManager *backendManage
 {
     Q_D(SearchStationModel);
     if (d->backendManager != backendManager) {
+
+        if (d->backendManager) {
+            disconnect(d->backendManager, SIGNAL(backendAdded(QString,AbstractBackendWrapper*)),
+                       this, SLOT(slotBackendAdded(QString,AbstractBackendWrapper*)));
+        }
+
+        connect(backendManager, SIGNAL(backendAdded(QString,AbstractBackendWrapper*)),
+                this, SLOT(slotBackendAdded(QString,AbstractBackendWrapper*)));
+
         d->backendManager = backendManager;
     }
 }
@@ -163,6 +223,23 @@ void SearchStationModel::search(const QString &partialStation)
 {
     Q_D(SearchStationModel);
 
+    clear();
+
+    foreach (AbstractBackendWrapper *backend, d->backendManager->backends()) {
+        if (!backend->capabilities().contains(SUGGEST_STATIONS)) {
+            break;
+        }
+        QString request = backend->requestSuggestStations(partialStation);
+        d->requests.append(request);
+    }
+
+    emit updatingChanged();
+}
+
+void SearchStationModel::clear()
+{
+    Q_D(SearchStationModel);
+
     d->requests.clear();
     beginRemoveRows(QModelIndex(), 0, rowCount() - 1);
 
@@ -170,20 +247,6 @@ void SearchStationModel::search(const QString &partialStation)
 
     emit countChanged();
     endRemoveRows();
-
-    foreach (AbstractBackendWrapper *backend, d->backendManager->backends()) {
-        if (!backend->capabilities().contains(SUGGEST_STATIONS)) {
-            break;
-        }
-        connect(backend, SIGNAL(suggestedStationsRegistered(QString,
-                                                            QList<PublicTransportation::Station>)),
-                this, SLOT(slotSuggestedStationsRegistered(QString,
-                                                           QList<PublicTransportation::Station>)));
-        QString request = backend->requestSuggestStations(partialStation);
-        d->requests.append(request);
-    }
-
-    emit updatingChanged();
 }
 
 }

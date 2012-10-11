@@ -94,6 +94,7 @@ public Q_SLOTS:
      * @brief Search
      */
     void search(const QString &partialStation);
+    void clear();
 Q_SIGNALS:
     void updatingChanged();
     /**
@@ -107,6 +108,9 @@ protected:
     const QScopedPointer<SearchStationModelPrivate> d_ptr;
 private:
     Q_DECLARE_PRIVATE(SearchStationModel)
+    Q_PRIVATE_SLOT(d_func(), void slotBackendAdded(QString,AbstractBackendWrapper*))
+    Q_PRIVATE_SLOT(d_func(), void slotStatusChanged())
+    Q_PRIVATE_SLOT(d_func(), void slotErrorRegistered(QString,QString))
     Q_PRIVATE_SLOT(d_func(),
                    void slotSuggestedStationsRegistered(QString,
                                                         QList<PublicTransportation::Station>))

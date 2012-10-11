@@ -115,6 +115,23 @@ void AbstractBackendWrapper::registerSuggestedStations(const QString & request,
     }
 }
 
+void AbstractBackendWrapper::registerJourneysFromStation(const QString &request,
+                                                         const QList<LineJourneys> &journeys)
+{
+    Q_D(AbstractBackendWrapper);
+    if (d->requests.contains(request)) {
+        delete d->requests.take(request);
+        debug("abs-backend-wrapper") << "Journeys from station registered";
+        debug("abs-backend-wrapper") << "(Request" << request << ")";
+        debug("abs-backend-wrapper") << "list of suggested stations";
+        foreach (LineJourneys journey, journeys) {
+            debug("abs-backend-wrapper") << journey.line().name();
+        }
+
+        emit journeysFromStationRegistered(request, journeys);
+    }
+}
+
 QString AbstractBackendWrapper::executable() const
 {
     Q_D(const AbstractBackendWrapper);

@@ -43,7 +43,7 @@ TransportationObject::~TransportationObject()
 {
 }
 
-bool TransportationObject::operator ==(const TransportationObject &other) const
+bool TransportationObject::operator==(const TransportationObject &other) const
 {
     Q_D(const TransportationObject);
     return (d->name == other.name()) && (d->disambiguation == other.disambiguation());

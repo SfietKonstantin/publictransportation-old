@@ -34,7 +34,18 @@
         </method>
 
         <!-- All journeys from a station -->
-<!--         <signal name="journeysFromStation" -->
+        <signal name="journeysFromStationRequested">
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In1"
+                        value="const PublicTransportation::Station &amp;"/>
+            <arg name="request" type="s" direction="out" />
+            <arg name="station" type="(a{sv}sa{sv})" direction="out" />
+        </signal>
+        <method name="registerJourneysFromStation">
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In1"
+                        value="const QList&lt;PublicTransportation::LineJourneys&gt; &amp;"/>
+            <arg name="request" type="s" direction="in" />
+            <arg name="journeys" type="a((a{sv}sa{sv})a(a{sv}sa{sv}))" direction="in" />
+        </method>
 
 
         <!--<signal name="listCompaniesRequested" />

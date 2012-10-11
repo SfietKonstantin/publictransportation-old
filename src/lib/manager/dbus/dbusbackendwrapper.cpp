@@ -273,6 +273,13 @@ QString DBusBackendWrapper::requestSuggestStations(const QString &partialStation
     return request;
 }
 
+QString DBusBackendWrapper::requestJourneysFromStation(const Station &station)
+{
+    QString request = createRequest(SuggestStationType);
+    emit journeysFromStationRequested(request, station);
+    return request;
+}
+
 }
 
 #include "moc_dbusbackendwrapper.cpp"

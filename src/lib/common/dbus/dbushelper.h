@@ -35,6 +35,7 @@ class Line;
 class Journey;
 class Station;
 class WaitingTime;
+class LineJourneys;
 
 /**
  * @brief Marshall a transportation object to a DBus argument
@@ -141,6 +142,8 @@ QDBusArgument & operator<<(QDBusArgument &argument, const WaitingTime &waitingTi
  * @return DBus argument without the waiting thme.
  */
 const QDBusArgument & operator>>(const QDBusArgument &argument, WaitingTime &waitingTime);
+QDBusArgument & operator<<(QDBusArgument &argument, const LineJourneys &lineJourneys);
+const QDBusArgument & operator>>(const QDBusArgument &argument, LineJourneys &lineJourneys);
 
 /**
  * @brief Register DBus types
