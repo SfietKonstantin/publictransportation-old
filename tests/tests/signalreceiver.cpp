@@ -16,18 +16,19 @@
 
 #include "signalreceiver.h"
 
+using namespace PublicTransportation;
+
 SignalReceiver::SignalReceiver(QObject *parent) :
     QObject(parent)
 {
 }
 
-QStringList SignalReceiver::suggestedStations() const
+QList<Station> SignalReceiver::suggestedStations() const
 {
     return m_suggestedStations;
 }
 
-void SignalReceiver::slotSuggestedStationsRegistered(int request,
-                                                     const QStringList &suggestedStations)
+void SignalReceiver::saveSuggestedStations(int request, const QList<Station> &suggestedStations)
 {
     Q_UNUSED(request)
     m_suggestedStations = suggestedStations;

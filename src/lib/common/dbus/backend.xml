@@ -9,20 +9,32 @@
 
         <!-- Method used to transmit that something wrong happened -->
         <method name="registerError">
-            <arg name="request" type="i" direction="in" />
+            <arg name="request" type="s" direction="in" />
             <arg name="error" type="s" direction="in" />
         </method>
 
+        <!-- Copyright -->
+        <!--<method name="getCopyright">
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In0"
+                        value="const PublicTransportation::Company &amp;"/>
+            <arg name="company" type="(a{sv}sa{sv})" direction="in" />
+            <arg name="copyright" type="s" direction="out" />
+        </method>-->
+
         <!-- Autocompletion for station search -->
         <signal name="suggestStationsRequested">
-            <arg name="request" type="i" direction="out" />
+            <arg name="request" type="s" direction="out" />
             <arg name="partialStation" type="s" direction="out" />
         </signal>
         <method name="registerSuggestedStations">
-            <arg name="request" type="i" direction="in" />,
-            <arg name="suggestedStations" type="as" direction="in" />
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In1"
+                        value="const QList&lt;PublicTransportation::Station&gt; &amp;"/>
+            <arg name="request" type="s" direction="in" />,
+            <arg name="suggestedStations" type="a(a{sv}sa{sv})" direction="in" />
         </method>
 
+        <!-- All journeys from a station -->
+<!--         <signal name="journeysFromStation" -->
 
 
         <!--<signal name="listCompaniesRequested" />

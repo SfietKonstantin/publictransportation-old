@@ -48,7 +48,11 @@ public:
         /**
          * @short Name role
          */
-        NameRole = Qt::UserRole + 1
+        NameRole = Qt::UserRole + 1,
+        /**
+         * @short Company role
+         */
+        ProviderNameRole
     };
     /**
      * @short Default constructor
@@ -104,7 +108,8 @@ protected:
 private:
     Q_DECLARE_PRIVATE(SearchStationModel)
     Q_PRIVATE_SLOT(d_func(),
-                   void slotSuggestedStationsRegistered(int request, const QStringList &stations))
+                   void slotSuggestedStationsRegistered(QString,
+                                                        QList<PublicTransportation::Station>))
 
 };
 

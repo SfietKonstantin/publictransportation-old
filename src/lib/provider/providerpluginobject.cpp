@@ -28,7 +28,8 @@ ProviderPluginObject::~ProviderPluginObject()
 {
 }
 
-void ProviderPluginObject::retrieveSuggestedStations(int request, const QString &partialStation)
+void ProviderPluginObject::retrieveSuggestedStations(const QString &request,
+                                                     const QString &partialStation)
 {
     Q_UNUSED(partialStation)
     emit errorRetrieved(request, tr("SUGGEST_STATIONS capability is not implement"));

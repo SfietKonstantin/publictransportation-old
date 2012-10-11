@@ -14,8 +14,8 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_PROVIDER_TRANSPORTLAUSANNOIS_H
-#define PUBLICTRANSPORTATION_PROVIDER_TRANSPORTLAUSANNOIS_H
+#ifndef PUBLICTRANSPORTATION_PROVIDER_OPENDATACH_H
+#define PUBLICTRANSPORTATION_PROVIDER_OPENDATACH_H
 
 #include <QtCore/QObject>
 #include "provider/providerpluginobject.h"
@@ -26,25 +26,25 @@ namespace PublicTransportation
 namespace Provider
 {
 
-class TransportLausannoisPrivate;
-class TransportLausannois : public ProviderPluginObject
+class OpenDataChPrivate;
+class OpenDataCh : public ProviderPluginObject
 {
     Q_OBJECT
     Q_INTERFACES(PublicTransportation::ProviderPluginInterface)
 public:
-    explicit TransportLausannois(QObject *parent = 0);
+    explicit OpenDataCh(QObject *parent = 0);
     virtual QStringList capabilities() const;
 public Q_SLOTS:
     virtual void retrieveSuggestedStations(const QString &request, const QString &partialStation);
 protected:
-    QScopedPointer<TransportLausannoisPrivate> d_ptr;
+    QScopedPointer<OpenDataChPrivate> d_ptr;
 private:
-    Q_DECLARE_PRIVATE(TransportLausannois)
-    Q_PRIVATE_SLOT(d_func(), void slotFinished())
+    Q_DECLARE_PRIVATE(OpenDataCh)
+    Q_PRIVATE_SLOT(d_func(), void slotSuggestedStationsFinished())
 };
 
 }
 
 }
 
-#endif // PUBLICTRANSPORTATION_PROVIDER_TRANSPORTLAUSANNOIS_H
+#endif // PUBLICTRANSPORTATION_PROVIDER_OPENDATACH_H

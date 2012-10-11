@@ -1,2 +1,2 @@
 TEMPLATE = subdirs
-SUBDIRS = lib bin plugins
+SUBDIRS = 3rdparty lib bin plugins

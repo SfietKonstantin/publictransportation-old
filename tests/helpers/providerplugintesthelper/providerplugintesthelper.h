@@ -14,16 +14,13 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_PROVIDERPLUGINTESTHELPER_H
-#define PUBLICTRANSPORTATION_PROVIDERPLUGINTESTHELPER_H
+#ifndef PROVIDERPLUGINTESTHELPER_H
+#define PROVIDERPLUGINTESTHELPER_H
 
 #include <QtCore/QObject>
 #include "provider/providerpluginobject.h"
 
-namespace PublicTransportation
-{
-
-class ProviderPluginTestHelper : public ProviderPluginObject
+class ProviderPluginTestHelper : public PublicTransportation::ProviderPluginObject
 {
     Q_OBJECT
     Q_INTERFACES(PublicTransportation::ProviderPluginInterface)
@@ -34,7 +31,5 @@ public Q_SLOTS:
     virtual void retrieveSuggestedStations(int request, const QString &partialStation);
 };
 
-}
 
-
-#endif // PUBLICTRANSPORTATION_PROVIDERPLUGINTESTHELPER_H
+#endif // PROVIDERPLUGINTESTHELPER_H

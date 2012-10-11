@@ -21,6 +21,7 @@
 
 #include "searchstationmodel.h"
 
+#include "common/capabilitiesconstants.h"
 #include "manager/abstractbackendmanager.h"
 #include "debug.h"
 
@@ -41,14 +42,15 @@ public:
      * @param q Q-pointer.
      */
     SearchStationModelPrivate(SearchStationModel *q);
-    void slotSuggestedStationsRegistered(int request, const QStringList &stations);
+    void slotSuggestedStationsRegistered(const QString & request,
+                                         const QList<PublicTransportation::Station> &stations);
     /**
      * @internal
      * @brief Backend manager
      */
     AbstractBackendManager *backendManager;
-    QStringList data;
-    QList<int> requests;
+    QList<PublicTransportation::Station> data;
+    QList<QString> requests;
 private:
     /**
      * @internal
@@ -64,10 +66,13 @@ SearchStationModelPrivate::SearchStationModelPrivate(SearchStationModel *q):
     backendManager = 0;
 }
 
-void SearchStationModelPrivate::slotSuggestedStationsRegistered(int request,
-                                                                const QStringList &stations)
+void SearchStationModelPrivate::slotSuggestedStationsRegistered(const QString & request,
+                                                                const QList<Station> &stations)
 {
     Q_Q(SearchStationModel);
+    if (!requests.contains(request)) {
+        return;
+    }
 
     q->sender()->disconnect(q);
 
@@ -76,8 +81,15 @@ void SearchStationModelPrivate::slotSuggestedStationsRegistered(int request,
         emit q->updatingChanged();
     }
 
-    q->beginInsertRows(QModelIndex(), q->rowCount(), q->rowCount() + stations.count() - 1);
-    data.append(stations);
+    QList<Station> addedStations;
+    foreach (Station station, stations) {
+        if (!data.contains(station)) {
+            addedStations.append(station);
+        }
+    }
+
+    q->beginInsertRows(QModelIndex(), q->rowCount(), q->rowCount() + addedStations.count() - 1);
+    data.append(addedStations);
     emit q->countChanged();
     q->endInsertRows();
 }
@@ -92,6 +104,7 @@ SearchStationModel::SearchStationModel(QObject *parent):
     // Definition of roles
     QHash <int, QByteArray> roles;
     roles.insert(NameRole, "name");
+    roles.insert(ProviderNameRole, "providerName");
     setRoleNames(roles);
 }
 
@@ -131,11 +144,14 @@ QVariant SearchStationModel::data(const QModelIndex &index, int role) const
     if (index.row() < 0 or index.row() >= rowCount()) {
         return QVariant();
     }
-    QString data = d->data.at(index.row());
+    Station data = d->data.at(index.row());
 
     switch(role) {
     case NameRole:
-        return data;
+        return data.name();
+        break;
+    case ProviderNameRole:
+        return data.properties().value("providerName");
         break;
     default:
         return QVariant();
@@ -147,6 +163,7 @@ void SearchStationModel::search(const QString &partialStation)
 {
     Q_D(SearchStationModel);
 
+    d->requests.clear();
     beginRemoveRows(QModelIndex(), 0, rowCount() - 1);
 
     d->data.clear();
@@ -155,9 +172,14 @@ void SearchStationModel::search(const QString &partialStation)
     endRemoveRows();
 
     foreach (AbstractBackendWrapper *backend, d->backendManager->backends()) {
-        connect(backend, SIGNAL(suggestedStationsRegistered(int,QStringList)),
-                this, SLOT(slotSuggestedStationsRegistered(int,QStringList)));
-        int request = backend->requestSuggestStations(partialStation);
+        if (!backend->capabilities().contains(SUGGEST_STATIONS)) {
+            break;
+        }
+        connect(backend, SIGNAL(suggestedStationsRegistered(QString,
+                                                            QList<PublicTransportation::Station>)),
+                this, SLOT(slotSuggestedStationsRegistered(QString,
+                                                           QList<PublicTransportation::Station>)));
+        QString request = backend->requestSuggestStations(partialStation);
         d->requests.append(request);
     }
 

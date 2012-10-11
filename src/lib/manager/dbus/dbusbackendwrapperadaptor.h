@@ -9,8 +9,8 @@
  * before re-generating it.
  */
 
-#ifndef DBUSBACKENDWRAPPERADAPTOR_H_1349883541
-#define DBUSBACKENDWRAPPERADAPTOR_H_1349883541
+#ifndef DBUSBACKENDWRAPPERADAPTOR_H_1349940633
+#define DBUSBACKENDWRAPPERADAPTOR_H_1349940633
 
 #include <QtCore/QObject>
 #include <QtDBus/QtDBus>
@@ -37,18 +37,28 @@ class PublictransportationAdaptor: public QDBusAbstractAdaptor
 "    </method>\n"
 "    <!-- Method used to transmit that something wrong happened -->\n"
 "    <method name=\"registerError\">\n"
-"      <arg direction=\"in\" type=\"i\" name=\"request\"/>\n"
+"      <arg direction=\"in\" type=\"s\" name=\"request\"/>\n"
 "      <arg direction=\"in\" type=\"s\" name=\"error\"/>\n"
 "    </method>\n"
+"    <!-- Copyright -->\n"
+"    <!--<method name=\"getCopyright\">\n"
+"            <annotation name=\"org.qtproject.QtDBus.QtTypeName.In0\"\n"
+"                        value=\"const PublicTransportation::Company &amp;\"/>\n"
+"            <arg name=\"company\" type=\"(a{sv}sa{sv})\" direction=\"in\" />\n"
+"            <arg name=\"copyright\" type=\"s\" direction=\"out\" />\n"
+"        </method>-->\n"
 "    <!-- Autocompletion for station search -->\n"
 "    <signal name=\"suggestStationsRequested\">\n"
-"      <arg direction=\"out\" type=\"i\" name=\"request\"/>\n"
+"      <arg direction=\"out\" type=\"s\" name=\"request\"/>\n"
 "      <arg direction=\"out\" type=\"s\" name=\"partialStation\"/>\n"
 "    </signal>\n"
 "    <method name=\"registerSuggestedStations\">\n"
-"      <arg direction=\"in\" type=\"i\" name=\"request\"/>,\n"
-"            <arg direction=\"in\" type=\"as\" name=\"suggestedStations\"/>\n"
+"      <annotation value=\"const QList&lt;PublicTransportation::Station> &amp;\" name=\"org.qtproject.QtDBus.QtTypeName.In1\"/>\n"
+"      <arg direction=\"in\" type=\"s\" name=\"request\"/>,\n"
+"            <arg direction=\"in\" type=\"a(a{sv}sa{sv})\" name=\"suggestedStations\"/>\n"
 "    </method>\n"
+"    <!-- All journeys from a station -->\n"
+"    <!--         <signal name=\"journeysFromStation\" -->\n"
 "    <!--<signal name=\"listCompaniesRequested\" />\n"
 "        <signal name=\"listLinesRequested\">\n"
 "            <annotation name=\"org.qtproject.QtDBus.QtTypeName.In0\" value=\"const PublicTransportation::Company &amp;\"/>\n"
@@ -133,10 +143,10 @@ public:
 public: // PROPERTIES
 public Q_SLOTS: // METHODS
     void registerBackend(const QStringList &capabilities);
-    void registerError(int request, const QString &error);
-    void registerSuggestedStations(int request, const QStringList &suggestedStations);
+    void registerError(const QString &request, const QString &error);
+    void registerSuggestedStations(const QString &request, const QList<PublicTransportation::Station> & suggestedStations);
 Q_SIGNALS: // SIGNALS
-    void suggestStationsRequested(int request, const QString &partialStation);
+    void suggestStationsRequested(const QString &request, const QString &partialStation);
 };
 
 #endif

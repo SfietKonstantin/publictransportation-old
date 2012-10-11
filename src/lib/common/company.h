@@ -34,12 +34,7 @@ namespace PublicTransportation
  * This class is used to represent a public transportation
  * company. A company is a transportation entity that
  * have a name, that is the official name of the company,
- * a disambiguation parameter, and other properties, including
- * a copyright, that can be used to provide copyright information.
- *
- * Copyright can be accessed and set using
- * - copyright()
- * - setCopyright()
+ * a disambiguation parameter, and other properties.
  *
  * It is also stored in the properties of the company.
  */
@@ -54,25 +49,10 @@ public:
      * @brief Constructor
      * @param disambiguation disambiguation.
      * @param name name.
-     * @param copyright copyright.
      * @param properties properties.
      */
     explicit Company(const QVariantMap &disambiguation, const QString &name,
-                     const QString &copyright, const QVariantMap &properties);
-    /**
-     * @brief Destructor
-     */
-    virtual ~Company();
-    /**
-     * @brief Copyright
-     * @return copyrignt.
-     */
-    QString copyright() const;
-    /**
-     * @brief Set copyright
-     * @param copyright copyright to set.
-     */
-    void setCopyright(const QString &copyright);
+                     const QVariantMap &properties);
 private:
     Q_DECLARE_PRIVATE(TransportationObject)
 };

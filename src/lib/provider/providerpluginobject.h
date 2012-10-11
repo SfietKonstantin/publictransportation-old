@@ -55,10 +55,11 @@ public:
      */
     virtual ~ProviderPluginObject();
 public Q_SLOTS:
-    virtual void retrieveSuggestedStations(int request, const QString &partialStation);
+    virtual void retrieveSuggestedStations(const QString &request, const QString &partialStation);
 Q_SIGNALS:
-    void errorRetrieved(int request, const QString &error);
-    void suggestedStationsRetrieved(int request, const QStringList &suggestedStations);
+    void errorRetrieved(const QString &request, const QString &error);
+    void suggestedStationsRetrieved(const QString &request,
+                                    const QList<PublicTransportation::Station> &suggestedStations);
 };
 
 }

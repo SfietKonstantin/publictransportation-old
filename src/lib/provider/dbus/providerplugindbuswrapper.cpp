@@ -126,10 +126,12 @@ bool ProviderPluginDBusWrapper::load(const QString &plugin)
     }
 
     // Establish some connections
-    connect(d->proxy, SIGNAL(suggestStationsRequested(int,QString)),
-            d->provider, SLOT(retrieveSuggestedStations(int,QString)));
-    connect(d->provider, SIGNAL(suggestedStationsRetrieved(int,QStringList)),
-            d->proxy, SLOT(registerSuggestedStations(int,QStringList)));
+    connect(d->proxy, SIGNAL(suggestStationsRequested(QString,QString)),
+            d->provider, SLOT(retrieveSuggestedStations(QString,QString)));
+    connect(d->provider,
+            SIGNAL(suggestedStationsRetrieved(QString,QList<PublicTransportation::Station>)),
+            d->proxy,
+            SLOT(registerSuggestedStations(QString,QList<PublicTransportation::Station>)));
 
     // Register
     debug("provider-wrapper") << "Registration from backend with pid"

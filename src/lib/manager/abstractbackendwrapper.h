@@ -197,7 +197,7 @@ public:
     QStringList capabilities() const;
 
 
-    virtual int requestSuggestStations(const QString &partialStation) = 0;
+    virtual QString requestSuggestStations(const QString &partialStation) = 0;
 public Q_SLOTS:
     /**
      * @brief Launch the backend
@@ -230,8 +230,9 @@ public Q_SLOTS:
      * situations.
      */
     virtual void kill() = 0;
-    void registerError(int request, const QString &error);
-    void registerSuggestedStations(int request, const QStringList &suggestedStations);
+    void registerError(const QString &request, const QString &error);
+    void registerSuggestedStations(const QString &request,
+                                   const QList<PublicTransportation::Station> &suggestedStations);
 Q_SIGNALS:
     /**
      * @brief Status changed
@@ -242,8 +243,9 @@ Q_SIGNALS:
      */
     void capabilitiesChanged();
 
-    void errorRegistered(int request, const QString &error);
-    void suggestedStationsRegistered(int request, const QStringList &suggestedStations);
+    void errorRegistered(const QString &request, const QString &error);
+    void suggestedStationsRegistered(const QString & request,
+                                     const QList<PublicTransportation::Station> &suggestedStations);
 protected:
     /**
      * @brief D-pointer based constructor
@@ -276,7 +278,7 @@ protected:
      * @param capabilities capabilities to set.
      */
     void setCapabilities(const QStringList &capabilities);
-    int createRequest(RequestType requestType);
+    QString createRequest(RequestType requestType);
 
     /**
      * @brief D-pointer

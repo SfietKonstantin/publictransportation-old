@@ -136,17 +136,26 @@ QStringList TransportLausannois::capabilities() const
     return capabilities;
 }
 
-void TransportLausannois::retrieveSuggestedStations(int request, const QString &partialStation)
+void TransportLausannois::retrieveSuggestedStations(const QString &request,
+                                                    const QString &partialStation)
 {
     Q_D(TransportLausannois);
     if (partialStation.size() < 3) {
-        emit suggestedStationsRetrieved(request, QStringList());
+        emit suggestedStationsRetrieved(request, QList<Station>());
         return;
     }
 
-    QStringList suggestedStations;
-    foreach (QString station, d->stations) {
-        if (station.toLower().contains(partialStation.toLower())) {
+    QList<Station> suggestedStations;
+    QVariantMap disambiguation;
+    disambiguation.insert("id", "org.SfietKonstantin.publictransportation.tl");
+
+    QVariantMap properties;
+    properties.insert("providerName", "Transports Lausannois");
+
+
+    foreach (QString stationName, d->stations) {
+        if (stationName.toLower().contains(partialStation.toLower())) {
+            Station station (disambiguation, stationName, properties);
             suggestedStations.append(station);
         }
     }

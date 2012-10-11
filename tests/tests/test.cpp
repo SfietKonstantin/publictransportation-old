@@ -93,11 +93,10 @@ void Test::testDBusSimpleReceive()
     QTest::qWait(300);
 
     QCOMPARE(dbusObject->company().name(), QString("testCompany"));
-    QCOMPARE(dbusObject->company().copyright(), QString("some copyright"));
     QCOMPARE(dbusObject->company().disambiguation().count(), 2);
     QCOMPARE(dbusObject->company().disambiguation().value("test1"), QVariant(12345));
     QCOMPARE(dbusObject->company().disambiguation().value("test2"), QVariant("abcde"));
-    QCOMPARE(dbusObject->company().properties().count(), 3);
+    QCOMPARE(dbusObject->company().properties().count(), 2);
     QCOMPARE(dbusObject->company().properties().value("property1"), QVariant(67890));
     QCOMPARE(dbusObject->company().properties().value("property2"), QVariant("fghij"));
 
@@ -234,8 +233,8 @@ void Test::testDBusProvider()
     DBusBackendWrapper backend ("test", QString("$PROVIDER ") + HELPER_FOLDER
                                         + "/libproviderplugintesthelper.so",
                                 QMap<QString, QString>());
-    connect(&backend, SIGNAL(suggestedStationsRegistered(int,QStringList)),
-            &signalReceiver, SLOT(slotSuggestedStationsRegistered(int,QStringList)));
+    connect(&backend, SIGNAL(suggestedStationsRegistered(int,QList<PublicTransportation::Station>)),
+            &signalReceiver, SLOT(saveSuggestedStations(int,QList<PublicTransportation::Station>)));
 
     backend.launch();
     QTest::qWait(300);
@@ -244,11 +243,11 @@ void Test::testDBusProvider()
     backend.requestSuggestStations(partialStation);
     QTest::qWait(300);
 
-    QStringList suggestedStations = signalReceiver.suggestedStations();
+    QList<PublicTransportation::Station> suggestedStations = signalReceiver.suggestedStations();
     QCOMPARE(suggestedStations.count(), 3);
-    QCOMPARE(suggestedStations.at(0), partialStation);
-    QCOMPARE(suggestedStations.at(1), partialStation.repeated(2));
-    QCOMPARE(suggestedStations.at(2), partialStation.repeated(3));
+    QCOMPARE(suggestedStations.at(0).name(), partialStation);
+    QCOMPARE(suggestedStations.at(1).name(), partialStation.repeated(2));
+    QCOMPARE(suggestedStations.at(2).name(), partialStation.repeated(3));
 
     backend.stop();
     QTest::qWait(300);
@@ -273,18 +272,18 @@ void Test::testDBusBackendManager()
     QTest::qWait(300);
 
     AbstractBackendWrapper *backend = manager.backend("test");
-    connect(backend, SIGNAL(suggestedStationsRegistered(int,QStringList)),
-            &signalReceiver, SLOT(slotSuggestedStationsRegistered(int,QStringList)));
+    connect(backend, SIGNAL(suggestedStationsRegistered(int,QList<PublicTransportation::Station>)),
+            &signalReceiver, SLOT(saveSuggestedStations(int,QList<PublicTransportation::Station>)));
 
     QString partialStation = Generator::generateRandomString();
     backend->requestSuggestStations(partialStation);
     QTest::qWait(300);
 
-    QStringList suggestedStations = signalReceiver.suggestedStations();
+    QList<PublicTransportation::Station> suggestedStations = signalReceiver.suggestedStations();
     QCOMPARE(suggestedStations.count(), 3);
-    QCOMPARE(suggestedStations.at(0), partialStation);
-    QCOMPARE(suggestedStations.at(1), partialStation.repeated(2));
-    QCOMPARE(suggestedStations.at(2), partialStation.repeated(3));
+    QCOMPARE(suggestedStations.at(0).name(), partialStation);
+    QCOMPARE(suggestedStations.at(1).name(), partialStation.repeated(2));
+    QCOMPARE(suggestedStations.at(2).name(), partialStation.repeated(3));
 
     manager.stopBackend("test");
     QTest::qWait(300);

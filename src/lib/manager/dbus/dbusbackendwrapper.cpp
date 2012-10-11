@@ -266,9 +266,9 @@ void DBusBackendWrapper::registerBackend(const QStringList &capabilities)
     setStatus(Launched);
 }
 
-int DBusBackendWrapper::requestSuggestStations(const QString &partialStation)
+QString DBusBackendWrapper::requestSuggestStations(const QString &partialStation)
 {
-    int request = createRequest(SuggestStationType);
+    QString request = createRequest(SuggestStationType);
     emit suggestStationsRequested(request, partialStation);
     return request;
 }

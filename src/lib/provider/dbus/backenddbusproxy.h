@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef BACKENDDBUSPROXY_H_1349883541
-#define BACKENDDBUSPROXY_H_1349883541
+#ifndef BACKENDDBUSPROXY_H_1349940633
+#define BACKENDDBUSPROXY_H_1349940633
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -48,14 +48,14 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("registerBackend"), argumentList);
     }
 
-    inline QDBusPendingReply<> registerError(int request, const QString &error)
+    inline QDBusPendingReply<> registerError(const QString &request, const QString &error)
     {
         QList<QVariant> argumentList;
         argumentList << QVariant::fromValue(request) << QVariant::fromValue(error);
         return asyncCallWithArgumentList(QLatin1String("registerError"), argumentList);
     }
 
-    inline QDBusPendingReply<> registerSuggestedStations(int request, const QStringList &suggestedStations)
+    inline QDBusPendingReply<> registerSuggestedStations(const QString &request, const QList<PublicTransportation::Station> & suggestedStations)
     {
         QList<QVariant> argumentList;
         argumentList << QVariant::fromValue(request) << QVariant::fromValue(suggestedStations);
@@ -63,7 +63,7 @@ public Q_SLOTS: // METHODS
     }
 
 Q_SIGNALS: // SIGNALS
-    void suggestStationsRequested(int request, const QString &partialStation);
+    void suggestStationsRequested(const QString &request, const QString &partialStation);
 };
 
 namespace org {

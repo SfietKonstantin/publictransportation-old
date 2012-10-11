@@ -22,6 +22,8 @@
 #include "abstractbackendwrapper.h"
 #include "abstractbackendwrapper_p.h"
 
+#include <QtCore/QUuid>
+
 #include "debug.h"
 #include "common/commonhelper.h"
 
@@ -31,7 +33,6 @@ namespace PublicTransportation
 AbstractBackendWrapperPrivate::AbstractBackendWrapperPrivate()
 {
      status = AbstractBackendWrapper::Stopped;
-     requestCount = 0;
 }
 
 ////// End of private class //////
@@ -85,7 +86,7 @@ void AbstractBackendWrapper::waitForStopped()
 {
 }
 
-void AbstractBackendWrapper::registerError(int request, const QString &error)
+void AbstractBackendWrapper::registerError(const QString &request, const QString &error)
 {
     Q_D(AbstractBackendWrapper);
     if (d->requests.contains(request)) {
@@ -97,8 +98,8 @@ void AbstractBackendWrapper::registerError(int request, const QString &error)
     }
 }
 
-void AbstractBackendWrapper::registerSuggestedStations(int request,
-                                                       const QStringList &suggestedStations)
+void AbstractBackendWrapper::registerSuggestedStations(const QString & request,
+                                                       const QList<Station> &suggestedStations)
 {
     Q_D(AbstractBackendWrapper);
     if (d->requests.contains(request)) {
@@ -106,8 +107,8 @@ void AbstractBackendWrapper::registerSuggestedStations(int request,
         debug("abs-backend-wrapper") << "Suggested stations registered";
         debug("abs-backend-wrapper") << "(Request" << request << ")";
         debug("abs-backend-wrapper") << "list of suggested stations";
-        foreach (QString station, suggestedStations) {
-            debug("abs-backend-wrapper") << station;
+        foreach (Station station, suggestedStations) {
+            debug("abs-backend-wrapper") << station.name();
         }
 
         emit suggestedStationsRegistered(request, suggestedStations);
@@ -155,11 +156,10 @@ void AbstractBackendWrapper::setCapabilities(const QStringList &capabilities)
     }
 }
 
-int AbstractBackendWrapper::createRequest(RequestType requestType)
+QString AbstractBackendWrapper::createRequest(RequestType requestType)
 {
     Q_D(AbstractBackendWrapper);
-    int request = d->requestCount;
-    d->requestCount ++;
+    QString request = QUuid::createUuid().toString();
 
     debug("abs-backend-wrapper") << "Created request (request " << request
                                  << "and type" << requestType << ")";

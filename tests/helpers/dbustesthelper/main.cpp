@@ -40,8 +40,7 @@ int main(int argc, char **argv)
     QVariantMap properties;
     properties.insert("property1", 67890);
     properties.insert("property2", "fghij");
-    PublicTransportation::Company company (disambiguation, "testCompany", "some copyright",
-                                           properties);
+    PublicTransportation::Company company (disambiguation, "testCompany", properties);
 
     QDBusInterface interface (DBUS_SERVICE, "/");
     interface.call("receiveCompany", QVariant::fromValue(company));

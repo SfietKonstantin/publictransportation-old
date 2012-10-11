@@ -47,12 +47,17 @@ AbstractNavigationPage {
 
     Menu {
         id: mainMenu
-
-        MenuItem {
-            text: qsTr("Manage information source")
-            onClicked: {
-                window.pageStack.push(backendSelectorPage)
-                mainMenu.close()
+        MenuLayout {
+            MenuItem {
+                text: qsTr("Manage information source")
+                onClicked: {
+                    window.pageStack.push(backendSelectorPage)
+                    mainMenu.close()
+                }
+            }
+            MenuItem {
+                text: qsTr("Switch color theme")
+                onClicked: theme.inverted = !theme.inverted
             }
         }
     }

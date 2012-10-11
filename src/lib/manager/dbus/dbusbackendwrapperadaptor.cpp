@@ -39,13 +39,13 @@ void PublictransportationAdaptor::registerBackend(const QStringList &capabilitie
     parent()->registerBackend(capabilities);
 }
 
-void PublictransportationAdaptor::registerError(int request, const QString &error)
+void PublictransportationAdaptor::registerError(const QString &request, const QString &error)
 {
     // handle method call org.SfietKonstantin.publictransportation.registerError
     parent()->registerError(request, error);
 }
 
-void PublictransportationAdaptor::registerSuggestedStations(int request, const QStringList &suggestedStations)
+void PublictransportationAdaptor::registerSuggestedStations(const QString &request, const QList<PublicTransportation::Station> & suggestedStations)
 {
     // handle method call org.SfietKonstantin.publictransportation.registerSuggestedStations
     parent()->registerSuggestedStations(request, suggestedStations);

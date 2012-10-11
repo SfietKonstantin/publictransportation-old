@@ -20,16 +20,19 @@
 #include <QtCore/QObject>
 #include <QtCore/QStringList>
 
+#include "common/station.h"
+
 class SignalReceiver : public QObject
 {
     Q_OBJECT
 public:
     explicit SignalReceiver(QObject *parent = 0);
-    QStringList suggestedStations() const;
+    QList<PublicTransportation::Station> suggestedStations() const;
 public slots:
-    void slotSuggestedStationsRegistered(int request, const QStringList &suggestedStations);
+    void saveSuggestedStations(int request,
+                               const QList<PublicTransportation::Station> &suggestedStations);
 private:
-    QStringList m_suggestedStations;
+    QList<PublicTransportation::Station> m_suggestedStations;
 };
 
 #endif // SIGNALRECEIVER_H

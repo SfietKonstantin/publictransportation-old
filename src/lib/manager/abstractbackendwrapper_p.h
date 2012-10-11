@@ -37,7 +37,7 @@ namespace PublicTransportation
 
 struct RequestData
 {
-    int request;
+    QString request;
     AbstractBackendWrapper::RequestType type;
 };
 
@@ -83,8 +83,7 @@ public:
      * @brief Capabilities
      */
     QStringList capabilities;
-    QMap<int, RequestData *> requests;
-    int requestCount;
+    QMap<QString, RequestData *> requests;
 };
 
 }

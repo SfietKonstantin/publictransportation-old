@@ -77,7 +77,8 @@ public:
      * @return capabilities.
      */
     virtual QStringList capabilities() const = 0;
-    virtual void retrieveSuggestedStations(int request, const QString &partialStation) = 0;
+    virtual void retrieveSuggestedStations(const QString &request,
+                                           const QString &partialStation) = 0;
 };
 
 }

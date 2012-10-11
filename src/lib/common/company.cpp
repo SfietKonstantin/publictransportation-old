@@ -24,44 +24,19 @@
 namespace PublicTransportation
 {
 
-/**
- * @internal
- * @brief COPYRIGHT_KEY
- *
- * Used in PublicTransportation::Company.
- */
-static const char *COPYRIGHT_KEY = "copyright";
-
 Company::Company():
     TransportationObject()
 {
 }
 
 Company::Company(const QVariantMap &disambiguation, const QString &name,
-                 const QString &copyright, const QVariantMap &properties):
+                 const QVariantMap &properties):
     TransportationObject()
 {
     Q_D(TransportationObject);
     d->disambiguation = disambiguation;
     d->name = name;
     d->properties = properties;
-    d->properties.insert(COPYRIGHT_KEY, copyright);
-}
-
-Company::~Company()
-{
-}
-
-QString Company::copyright() const
-{
-    Q_D(const TransportationObject);
-    return d->properties.value(COPYRIGHT_KEY).toString();
-}
-
-void Company::setCopyright(const QString &copyright)
-{
-    Q_D(TransportationObject);
-    d->properties.insert(COPYRIGHT_KEY, copyright);
 }
 
 }

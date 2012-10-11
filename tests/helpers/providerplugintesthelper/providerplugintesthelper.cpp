@@ -22,9 +22,7 @@
 #include "common/capabilitiesconstants.h"
 #include "common/company.h"
 
-namespace PublicTransportation
-{
-
+using namespace PublicTransportation;
 
 ProviderPluginTestHelper::ProviderPluginTestHelper(QObject *parent) :
     ProviderPluginObject(parent)
@@ -41,14 +39,12 @@ QStringList ProviderPluginTestHelper::capabilities() const
 
 void ProviderPluginTestHelper::retrieveSuggestedStations(int request, const QString &partialStation)
 {
-    QStringList data;
-    data.append(partialStation);
-    data.append(partialStation.repeated(2));
-    data.append(partialStation.repeated(3));
+    QList<Station> data;
+    data.append(Station(QVariantMap(), partialStation, QVariantMap()));
+    data.append(Station(QVariantMap(), partialStation.repeated(2), QVariantMap()));
+    data.append(Station(QVariantMap(), partialStation.repeated(3), QVariantMap()));
 
     emit suggestedStationsRetrieved(request, data);
 }
 
-}
-
-Q_EXPORT_PLUGIN2(providerplugintesthelper, PublicTransportation::ProviderPluginTestHelper)
+Q_EXPORT_PLUGIN2(providerplugintesthelper, ProviderPluginTestHelper)

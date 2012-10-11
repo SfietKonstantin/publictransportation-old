@@ -25,9 +25,18 @@ AbstractPage {
     tools: ToolBarLayout {
         ToolIcon {
             iconId: "toolbar-back"
-            onClicked: window.pageStack.pop()
+            onClicked: {
+                window.pageStack.pop()
+            }
         }
     }
+    onVisibleChanged: {
+        if (!visible) {
+            SearchStationModelInstance.search("")
+            searchField.text = ""
+        }
+    }
+
     content: Item {
         anchors.fill: parent
 
@@ -48,7 +57,15 @@ AbstractPage {
             model: SearchStationModelInstance
             delegate: ClickableEntry {
                 text: model.name
+                subText: model.providerName
             }
+        }
+
+        BusyIndicator {
+            anchors.centerIn: parent
+            visible: SearchStationModelInstance.updating
+            running: SearchStationModelInstance.updating
+            platformStyle: BusyIndicatorStyle {size: "large"}
         }
     }
 }
