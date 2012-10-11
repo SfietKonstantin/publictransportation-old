@@ -2,42 +2,42 @@
 <stations>
     <station name="Haute Combe">
         <line description="Croisettes - Chalet-à-Gobet" id="11821953316814876" name="64">
-            <journey from="Chalet-à-Gobet" id="2533279085363716" internalDescription="CHT &gt; CROIS" name="Chalet-à-Gobet &gt; Croisettes" to="Croisettes"/>
+            <journey from="Chalet-à-Gobet" id="2533279085363716" internalDescription="CHT &gt; CROIS" name="Croisettes" to="Croisettes"/>
         </line>
     </station>
     <station name="Haute-Combe">
         <line description="Croisettes - Chalet-à-Gobet" id="11821953316814876" name="64">
-            <journey from="Croisettes" id="2533279085363711" internalDescription="CROIS &gt; CHT" name="Croisettes &gt; Chalet-à-Gobet" to="Chalet-à-Gobet"/>
+            <journey from="Croisettes" id="2533279085363711" internalDescription="CROIS &gt; CHT" name="Chalet-à-Gobet" to="Chalet-à-Gobet"/>
         </line>
     </station>
     <station name="Hermitage">
         <line description="Montbenon - Grand Vennes" id="11821953316814852" name="16">
-            <journey from="Montbenon" id="2533279085363278" internalDescription="MBNON &gt; GVENN" name="Montbenon &gt; Grand Vennes" to="Grand Vennes"/>
-            <journey from="Grand Vennes" id="2533279085363286" internalDescription="GVENN &gt; MBNON" name="Grand Vennes &gt; Montbenon" to="Montbenon"/>
+            <journey from="Montbenon" id="2533279085363278" internalDescription="MBNON &gt; GVENN" name="Grand Vennes" to="Grand Vennes"/>
+            <journey from="Grand Vennes" id="2533279085363286" internalDescription="GVENN &gt; MBNON" name="Montbenon" to="Montbenon"/>
         </line>
     </station>
     <station name="Home du Jorat">
         <line description="Croisettes - Moudon-Gare" id="11821953316814875" name="62">
-            <journey from="Croisettes" id="2533279085363696" internalDescription="CROIS &gt; MOUD" name="Croisettes &gt; Moudon-Gare" to="Moudon-Gare"/>
-            <journey from="Croisettes" id="2533279085363699" internalDescription="CROIS &gt; MOUD    via La Râpe" name="Croisettes &gt; Moudon-Gare" to="Moudon-Gare"/>
-            <journey from="Moudon-Gare" id="2533279085363707" internalDescription="MOUD &gt; CROIS    via La Râpe" name="Moudon-Gare &gt; Croisettes" to="Croisettes"/>
-            <journey from="Moudon-Gare" id="2533279085379036" internalDescription="MOUD &gt; CROIS" name="Moudon-Gare &gt; Croisettes" to="Croisettes"/>
+            <journey from="Croisettes" id="2533279085363696" internalDescription="CROIS &gt; MOUD" name="Moudon-Gare" to="Moudon-Gare"/>
+            <journey from="Croisettes" id="2533279085363699" internalDescription="CROIS &gt; MOUD    via La Râpe" name="Moudon-Gare via La Râpe" to="Moudon-Gare" via="La Râpe"/>
+            <journey from="Moudon-Gare" id="2533279085363707" internalDescription="MOUD &gt; CROIS    via La Râpe" name="Croisettes via La Râpe" to="Croisettes" via="La Râpe"/>
+            <journey from="Moudon-Gare" id="2533279085379036" internalDescription="MOUD &gt; CROIS" name="Croisettes" to="Croisettes"/>
         </line>
     </station>
     <station name="Huttins">
         <line description="Lutry-Corniche - Prilly-Eglise" id="11821953316814886" name="9">
-            <journey from="Lutry-Corniche" id="2533279085378570" internalDescription="LUTRY &gt; PRY" name="Lutry-Corniche &gt; Prilly-Eglise" to="Prilly-Eglise"/>
-            <journey from="Prilly-Eglise" id="2533279085378585" internalDescription="PRY &gt; LUTRY" name="Prilly-Eglise &gt; Lutry-Corniche" to="Lutry-Corniche"/>
+            <journey from="Lutry-Corniche" id="2533279085378570" internalDescription="LUTRY &gt; PRY" name="Prilly-Eglise" to="Prilly-Eglise"/>
+            <journey from="Prilly-Eglise" id="2533279085378585" internalDescription="PRY &gt; LUTRY" name="Lutry-Corniche" to="Lutry-Corniche"/>
         </line>
     </station>
     <station name="Hôtel-de-Ville">
         <line description="Renens-14 Avril - Val-Vert" id="11821953316814881" name="7">
-            <journey from="Renens-14 Avril" id="2533279085378439" internalDescription="R-14A &gt; VVERT" name="Renens-14 Avril &gt; Val-Vert" to="Val-Vert"/>
-            <journey from="Val-Vert" id="2533279085378448" internalDescription="VVERT &gt; R-14A" name="Val-Vert &gt; Renens-14 Avril" to="Renens-14 Avril"/>
+            <journey from="Renens-14 Avril" id="2533279085378439" internalDescription="R-14A &gt; VVERT" name="Val-Vert" to="Val-Vert"/>
+            <journey from="Val-Vert" id="2533279085378448" internalDescription="VVERT &gt; R-14A" name="Renens-14 Avril" to="Renens-14 Avril"/>
         </line>
         <line description="Georgette - Croix Péage" id="11821953316814853" name="17">
-            <journey from="Georgette" id="2533279085378116" internalDescription="GTE &gt; CPEAG" name="Georgette &gt; Croix-Péage" to="Croix-Péage"/>
-            <journey from="Croix-Péage" id="2533279085378124" internalDescription="CPEAG &gt; GTE" name="Croix-Péage &gt; Georgette" to="Georgette"/>
+            <journey from="Georgette" id="2533279085378116" internalDescription="GTE &gt; CPEAG" name="Croix-Péage" to="Croix-Péage"/>
+            <journey from="Croix-Péage" id="2533279085378124" internalDescription="CPEAG &gt; GTE" name="Georgette" to="Georgette"/>
         </line>
     </station>
 </stations>

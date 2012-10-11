@@ -80,7 +80,9 @@ QList<AbstractBackendWrapper *> AbstractBackendManager::backends() const
     Q_D(const AbstractBackendManager);
     QList<AbstractBackendWrapper *> wrappers;
     foreach(QString key, d->backends.keys()) {
-        wrappers.append(d->backends.value(key));
+        if (d->backends.value(key)->status() == AbstractBackendWrapper::Launched) {
+            wrappers.append(d->backends.value(key));
+        }
     }
 
     return wrappers;

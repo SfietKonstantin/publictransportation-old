@@ -78,7 +78,7 @@ AbstractPage {
             clip: true
             model: JourneysFromStationModelInstance
             delegate: ClickableEntry {
-                text: "<b>" + model.line + "</b> " + model.name
+                text: "<b>" + model.line + "</b>   " + model.name
             }
             section.property: page.displayCategories ? "line" : ""
             section.delegate: GroupIndicator {

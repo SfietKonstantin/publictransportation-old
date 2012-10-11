@@ -2,12 +2,12 @@
 <stations>
     <station name="Zinguerie">
         <line description="Georgette - Croix Péage" id="11821953316814853" name="17">
-            <journey from="Georgette" id="2533279085378116" internalDescription="GTE &gt; CPEAG" name="Georgette &gt; Croix-Péage" to="Croix-Péage"/>
-            <journey from="Croix-Péage" id="2533279085378124" internalDescription="CPEAG &gt; GTE" name="Croix-Péage &gt; Georgette" to="Georgette"/>
+            <journey from="Georgette" id="2533279085378116" internalDescription="GTE &gt; CPEAG" name="Croix-Péage" to="Croix-Péage"/>
+            <journey from="Croix-Péage" id="2533279085378124" internalDescription="CPEAG &gt; GTE" name="Georgette" to="Georgette"/>
         </line>
         <line description="Renens-Gare nord - Closalet" id="11821953316814864" name="36">
-            <journey from="Renens-Gare nord" id="2533279085363501" internalDescription="RCFFN &gt; MMM" name="Renens-Gare nord &gt; Closalet" to="Closalet"/>
-            <journey from="Closalet" id="2533279085363503" internalDescription="MMM &gt; RCFFN" name="Closalet &gt; Renens-Gare nord" to="Renens-Gare nord"/>
+            <journey from="Renens-Gare nord" id="2533279085363501" internalDescription="RCFFN &gt; MMM" name="Closalet" to="Closalet"/>
+            <journey from="Closalet" id="2533279085363503" internalDescription="MMM &gt; RCFFN" name="Renens-Gare nord" to="Renens-Gare nord"/>
         </line>
     </station>
 </stations>

@@ -2,23 +2,23 @@
 <stations>
     <station name="1er Août">
         <line description="Renens-14 Avril - Val-Vert" id="11821953316814881" name="7">
-            <journey from="Renens-14 Avril" id="2533279085378439" internalDescription="R-14A &gt; VVERT" name="Renens-14 Avril &gt; Val-Vert" to="Val-Vert"/>
+            <journey from="Renens-14 Avril" id="2533279085378439" internalDescription="R-14A &gt; VVERT" name="Val-Vert" to="Val-Vert"/>
         </line>
         <line description="Georgette - Croix Péage" id="11821953316814853" name="17">
-            <journey from="Croix-Péage" id="2533279085378124" internalDescription="CPEAG &gt; GTE" name="Croix-Péage &gt; Georgette" to="Georgette"/>
+            <journey from="Croix-Péage" id="2533279085378124" internalDescription="CPEAG &gt; GTE" name="Georgette" to="Georgette"/>
         </line>
         <line description="Galicien - Timonet" id="11821953316814861" name="32">
-            <journey from="Timonet" id="2533279085363470" internalDescription="TIMON &gt; GALIC" name="Timonet &gt; Galicien" to="Galicien"/>
-            <journey from="Galicien" id="2533279085379530" internalDescription="GALIC &gt; TIMON" name="Galicien &gt; Timonet" to="Timonet"/>
+            <journey from="Timonet" id="2533279085363470" internalDescription="TIMON &gt; GALIC" name="Galicien" to="Galicien"/>
+            <journey from="Galicien" id="2533279085379530" internalDescription="GALIC &gt; TIMON" name="Timonet" to="Timonet"/>
         </line>
         <line description="Renens-Gare nord - Prilly-Eglise" id="11821953316814896" name="38">
-            <journey from="Renens-Gare nord" id="2533279085403217" internalDescription="RCFFN &gt; PRY" name="Renens-Gare nord &gt; Prilly-Eglise" to="Prilly-Eglise"/>
+            <journey from="Renens-Gare nord" id="2533279085403217" internalDescription="RCFFN &gt; PRY" name="Prilly-Eglise" to="Prilly-Eglise"/>
         </line>
     </station>
     <station name="1er Mai">
         <line description="Renens-Gare nord - Prilly-Eglise" id="11821953316814896" name="38">
-            <journey from="Renens-Gare nord" id="2533279085403217" internalDescription="RCFFN &gt; PRY" name="Renens-Gare nord &gt; Prilly-Eglise" to="Prilly-Eglise"/>
-            <journey from="Prilly-Eglise" id="2533279085403218" internalDescription="PRY &gt; RCFFN" name="Prilly-Eglise &gt; Renens-Gare nord" to="Renens-Gare nord"/>
+            <journey from="Renens-Gare nord" id="2533279085403217" internalDescription="RCFFN &gt; PRY" name="Prilly-Eglise" to="Prilly-Eglise"/>
+            <journey from="Prilly-Eglise" id="2533279085403218" internalDescription="PRY &gt; RCFFN" name="Renens-Gare nord" to="Renens-Gare nord"/>
         </line>
     </station>
 </stations>

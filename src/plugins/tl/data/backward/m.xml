@@ -2,376 +2,364 @@
 <stations>
     <station name="Maillefer">
         <line description="Forêt - Maillefer" id="11821953316814894" name="23">
-            <journey from="Forêt" id="2533279085379728" internalDescription="FORET &gt; MAIFR" name="Forêt &gt; Maillefer" to="Maillefer"/>
-            <journey from="Maillefer" id="2533279085379730" internalDescription="MAIFR &gt; FORET" name="Maillefer &gt; Forêt" to="Forêt"/>
+            <journey from="Maillefer" id="2533279085379730" internalDescription="MAIFR &gt; FORET" name="Forêt" to="Forêt"/>
         </line>
     </station>
     <station name="Maladière">
         <line description="Maladière - Blécherette" id="11821953316814849" name="1">
-            <journey from="Maladière" id="2533279085378050" internalDescription="MALAD &gt; BLECH" name="Maladière &gt; Blécherette" to="Blécherette"/>
-            <journey from="Blécherette" id="2533279085378063" internalDescription="BLECH &gt; MALAD" name="Blécherette &gt; Maladière" to="Maladière"/>
+            <journey from="Maladière" id="2533279085378050" internalDescription="MALAD &gt; BLECH" name="Blécherette" to="Blécherette"/>
         </line>
         <line description="Maladière - Sallaz" id="11821953316814873" name="6">
-            <journey from="Maladière" id="2533279085378354" internalDescription="MALAD &gt; VALMT" name="Maladière &gt; Valmont" to="Valmont"/>
-            <journey from="Valmont" id="2533279085378368" internalDescription="VALMT &gt; MALAD" name="Valmont &gt; Maladière" to="Maladière"/>
+            <journey from="Maladière" id="2533279085378354" internalDescription="MALAD &gt; VALMT" name="Valmont" to="Valmont"/>
         </line>
         <line description="Bourdonnette - Pully-Gare" id="11821953316814858" name="25">
-            <journey from="Bourdonnette" id="2533279085363405" internalDescription="BNETT &gt; PLY-G" name="Bourdonnette &gt; Pully-Gare" to="Pully-Gare"/>
-            <journey from="Pully-Gare" id="2533279085363416" internalDescription="PLY-G &gt; BNETT" name="Pully-Gare &gt; Bourdonnette" to="Bourdonnette"/>
+            <journey from="Bourdonnette" id="2533279085363405" internalDescription="BNETT &gt; PLY-G" name="Pully-Gare" to="Pully-Gare"/>
+            <journey from="Pully-Gare" id="2533279085363416" internalDescription="PLY-G &gt; BNETT" name="Bourdonnette" to="Bourdonnette"/>
         </line>
     </station>
     <station name="Maladière-Lac">
         <line description="Maladière - Désert" id="11821953316814855" name="2">
-            <journey from="Maladière-Lac" id="2533279085378143" internalDescription="MALAD &gt; DST" name="Maladière-Lac &gt; Désert" to="Désert"/>
-            <journey from="Désert" id="2533279085378157" internalDescription="DST &gt; MALAD" name="Désert &gt; Maladière-Lac" to="Maladière-Lac"/>
+            <journey from="Maladière-Lac" id="2533279085378143" internalDescription="MALAD &gt; DST" name="Désert" to="Désert"/>
         </line>
     </station>
     <station name="Malley">
         <line description="Renens-Gare - Lausanne-Flon" id="11821953316814882" name="m1">
-            <journey from="Renens-Gare" id="2533279085363796" internalDescription="R-CFF &gt; FLON" name="Renens-Gare &gt; Lausanne-Flon" to="Lausanne-Flon"/>
-            <journey from="Lausanne-Flon" id="2533279085363804" internalDescription="FLON &gt; R-CFF" name="Lausanne-Flon &gt; Renens-Gare" to="Renens-Gare"/>
+            <journey from="Renens-Gare" id="2533279085363796" internalDescription="R-CFF &gt; FLON" name="Lausanne-Flon" to="Lausanne-Flon"/>
+            <journey from="Lausanne-Flon" id="2533279085363804" internalDescription="FLON &gt; R-CFF" name="Renens-Gare" to="Renens-Gare"/>
         </line>
     </station>
     <station name="Malley-Nord">
         <line description="Galicien - Timonet" id="11821953316814861" name="32">
-            <journey from="Timonet" id="2533279085363470" internalDescription="TIMON &gt; GALIC" name="Timonet &gt; Galicien" to="Galicien"/>
+            <journey from="Timonet" id="2533279085363470" internalDescription="TIMON &gt; GALIC" name="Galicien" to="Galicien"/>
         </line>
         <line description="Venoge nord - Mont-Goulin" id="11821953316814862" name="33">
-            <journey from="Venoge nord" id="2533279085403196" internalDescription="VENON &gt; MGOUL" name="Venoge nord &gt; Mont-Goulin" to="Mont-Goulin"/>
+            <journey from="Venoge nord" id="2533279085403196" internalDescription="VENON &gt; MGOUL" name="Mont-Goulin" to="Mont-Goulin"/>
         </line>
     </station>
     <station name="Malley-Ouest">
         <line description="Galicien - Timonet" id="11821953316814861" name="32">
-            <journey from="Galicien" id="2533279085379530" internalDescription="GALIC &gt; TIMON" name="Galicien &gt; Timonet" to="Timonet"/>
+            <journey from="Galicien" id="2533279085379530" internalDescription="GALIC &gt; TIMON" name="Timonet" to="Timonet"/>
         </line>
         <line description="Venoge nord - Mont-Goulin" id="11821953316814862" name="33">
-            <journey from="Mont-Goulin" id="2533279085403198" internalDescription="MGOUL &gt; VENON" name="Mont-Goulin &gt; Venoge nord" to="Venoge nord"/>
+            <journey from="Mont-Goulin" id="2533279085403198" internalDescription="MGOUL &gt; VENON" name="Venoge nord" to="Venoge nord"/>
         </line>
     </station>
     <station name="Marcolet">
         <line description="Renens-Gare nord - Closalet" id="11821953316814864" name="36">
-            <journey from="Renens-Gare nord" id="2533279085363501" internalDescription="RCFFN &gt; MMM" name="Renens-Gare nord &gt; Closalet" to="Closalet"/>
-            <journey from="Closalet" id="2533279085363503" internalDescription="MMM &gt; RCFFN" name="Closalet &gt; Renens-Gare nord" to="Renens-Gare nord"/>
+            <journey from="Renens-Gare nord" id="2533279085363501" internalDescription="RCFFN &gt; MMM" name="Closalet" to="Closalet"/>
+            <journey from="Closalet" id="2533279085363503" internalDescription="MMM &gt; RCFFN" name="Renens-Gare nord" to="Renens-Gare nord"/>
         </line>
     </station>
     <station name="Margerol">
         <line description="Pully-Clergère - Daillettes" id="11821953316814871" name="48">
-            <journey from="Pully-Clergère" id="2533279085383040" internalDescription="CLERG &gt; DTTES" name="Pully-Clergère &gt; Daillettes" to="Daillettes"/>
-            <journey from="Daillettes" id="2533279085383047" internalDescription="DTTES &gt; CLERG" name="Daillettes &gt; Pully-Clergère" to="Pully-Clergère"/>
+            <journey from="Pully-Clergère" id="2533279085383040" internalDescription="CLERG &gt; DTTES" name="Daillettes" to="Daillettes"/>
+            <journey from="Daillettes" id="2533279085383047" internalDescription="DTTES &gt; CLERG" name="Pully-Clergère" to="Pully-Clergère"/>
         </line>
     </station>
     <station name="Marionnettes">
         <line description="Lutry-Port - Croix sur Lutry" id="11821953316814879" name="68">
-            <journey from="Lutry-Port" id="2533279085363754" internalDescription="LPORT &gt; CROIX" name="Lutry-Port &gt; Croix/Lutry" to="Croix/Lutry"/>
+            <journey from="Lutry-Port" id="2533279085363754" internalDescription="LPORT &gt; CROIX" name="Croix/Lutry" to="Croix/Lutry"/>
         </line>
         <line description="Lutry-Port - Croix/Lutry" id="11821953316814880" name="69">
-            <journey from="Croix/Lutry" id="2533279085363763" internalDescription="CROIX &gt; LPORT" name="Croix/Lutry &gt; Lutry-Port" to="Lutry-Port"/>
+            <journey from="Croix/Lutry" id="2533279085363763" internalDescription="CROIX &gt; LPORT" name="Lutry-Port" to="Lutry-Port"/>
         </line>
     </station>
     <station name="Marronnier">
         <line description="Lutry-Corniche - Prilly-Eglise" id="11821953316814886" name="9">
-            <journey from="Lutry-Corniche" id="2533279085378570" internalDescription="LUTRY &gt; PRY" name="Lutry-Corniche &gt; Prilly-Eglise" to="Prilly-Eglise"/>
-            <journey from="Prilly-Eglise" id="2533279085378585" internalDescription="PRY &gt; LUTRY" name="Prilly-Eglise &gt; Lutry-Corniche" to="Lutry-Corniche"/>
+            <journey from="Lutry-Corniche" id="2533279085378570" internalDescription="LUTRY &gt; PRY" name="Prilly-Eglise" to="Prilly-Eglise"/>
+            <journey from="Prilly-Eglise" id="2533279085378585" internalDescription="PRY &gt; LUTRY" name="Lutry-Corniche" to="Lutry-Corniche"/>
         </line>
     </station>
     <station name="Martines">
         <line description="Verrière - Grand-Mont" id="11821953316814885" name="8">
-            <journey from="Verrière" id="2533279085378531" internalDescription="VERRI &gt; GMONT" name="Verrière &gt; Grand-Mont" to="Grand-Mont"/>
-            <journey from="Grand-Mont" id="2533279085378551" internalDescription="GMONT &gt; VERRI" name="Grand-Mont &gt; Verrière" to="Verrière"/>
+            <journey from="Verrière" id="2533279085378531" internalDescription="VERRI &gt; GMONT" name="Grand-Mont" to="Grand-Mont"/>
+            <journey from="Grand-Mont" id="2533279085378551" internalDescription="GMONT &gt; VERRI" name="Verrière" to="Verrière"/>
         </line>
         <line description="Lausanne-Flon - Froideville-Laiterie" id="11821953316814874" name="60">
-            <journey from="Laiterie" id="2533279085377482" internalDescription="FROIL &gt; FLON    via Bottens" name="Laiterie &gt; Lausanne-Flon" to="Lausanne-Flon"/>
-            <journey from="Lausanne-Flon" id="2533279085377483" internalDescription="FLON &gt; FROIL    via Bottens" name="Lausanne-Flon &gt; Laiterie" to="Laiterie"/>
-            <journey from="Lausanne-Flon" id="2533279085377486" internalDescription="FLON &gt; FROIL    via Montheron" name="Lausanne-Flon &gt; Laiterie" to="Laiterie"/>
-            <journey from="Laiterie" id="2533279085377487" internalDescription="FROIL &gt; FLON    via Montheron" name="Laiterie &gt; Lausanne-Flon" to="Lausanne-Flon"/>
+            <journey from="Laiterie" id="2533279085377482" internalDescription="FROIL &gt; FLON    via Bottens" name="Lausanne-Flon via Bottens" to="Lausanne-Flon" via="Bottens"/>
+            <journey from="Lausanne-Flon" id="2533279085377483" internalDescription="FLON &gt; FROIL    via Bottens" name="Laiterie via Bottens" to="Laiterie" via="Bottens"/>
+            <journey from="Lausanne-Flon" id="2533279085377486" internalDescription="FLON &gt; FROIL    via Montheron" name="Laiterie via Montheron" to="Laiterie" via="Montheron"/>
+            <journey from="Laiterie" id="2533279085377487" internalDescription="FROIL &gt; FLON    via Montheron" name="Lausanne-Flon via Montheron" to="Lausanne-Flon" via="Montheron"/>
         </line>
     </station>
     <station name="Mauvernay">
         <line description="Bois Murat - Chalet-à-Gobet" id="11821953316814868" name="45">
-            <journey from="Bois Murat" id="2533279085370572" internalDescription="BMURA &gt; CHT" name="Bois Murat &gt; Chalet-à-Gobet" to="Chalet-à-Gobet"/>
-            <journey from="Chalet-à-Gobet" id="2533279085370573" internalDescription="CHT &gt; BMURA" name="Chalet-à-Gobet &gt; Bois Murat" to="Bois Murat"/>
+            <journey from="Bois Murat" id="2533279085370572" internalDescription="BMURA &gt; CHT" name="Chalet-à-Gobet" to="Chalet-à-Gobet"/>
+            <journey from="Chalet-à-Gobet" id="2533279085370573" internalDescription="CHT &gt; BMURA" name="Bois Murat" to="Bois Murat"/>
         </line>
     </station>
     <station name="Mex-Poste">
         <line description="Crissier-Centre - Mex Richardaz" id="11821953316814872" name="56">
-            <journey from="Crissier-Centre" id="2533279085376941" internalDescription="CRISS &gt; RICHA" name="Crissier-Centre &gt; Richardaz" to="Richardaz"/>
-            <journey from="Richardaz" id="2533279085376942" internalDescription="RICHA &gt; CRISS" name="Richardaz &gt; Crissier-Centre" to="Crissier-Centre"/>
+            <journey from="Crissier-Centre" id="2533279085376941" internalDescription="CRISS &gt; RICHA" name="Richardaz" to="Richardaz"/>
+            <journey from="Richardaz" id="2533279085376942" internalDescription="RICHA &gt; CRISS" name="Crissier-Centre" to="Crissier-Centre"/>
         </line>
     </station>
     <station name="Mex-Village">
         <line description="Crissier-Centre - Mex Richardaz" id="11821953316814872" name="56">
-            <journey from="Crissier-Centre" id="2533279085376941" internalDescription="CRISS &gt; RICHA" name="Crissier-Centre &gt; Richardaz" to="Richardaz"/>
-            <journey from="Richardaz" id="2533279085376942" internalDescription="RICHA &gt; CRISS" name="Richardaz &gt; Crissier-Centre" to="Crissier-Centre"/>
+            <journey from="Crissier-Centre" id="2533279085376941" internalDescription="CRISS &gt; RICHA" name="Richardaz" to="Richardaz"/>
+            <journey from="Richardaz" id="2533279085376942" internalDescription="RICHA &gt; CRISS" name="Crissier-Centre" to="Crissier-Centre"/>
         </line>
     </station>
     <station name="Mirabeau">
         <line description="Maladière - Blécherette" id="11821953316814849" name="1">
-            <journey from="Maladière" id="2533279085378050" internalDescription="MALAD &gt; BLECH" name="Maladière &gt; Blécherette" to="Blécherette"/>
+            <journey from="Maladière" id="2533279085378050" internalDescription="MALAD &gt; BLECH" name="Blécherette" to="Blécherette"/>
         </line>
         <line description="Maladière - Désert" id="11821953316814855" name="2">
-            <journey from="Maladière-Lac" id="2533279085378143" internalDescription="MALAD &gt; DST" name="Maladière-Lac &gt; Désert" to="Désert"/>
+            <journey from="Maladière-Lac" id="2533279085378143" internalDescription="MALAD &gt; DST" name="Désert" to="Désert"/>
         </line>
     </station>
     <station name="Mollie-Margot">
         <line description="Sallaz - Servion-Poste" id="11821953316814877" name="65">
-            <journey from="Sallaz" id="2533279085363722" internalDescription="SALA &gt; SERV" name="Sallaz &gt; Servion-Poste" to="Servion-Poste"/>
-            <journey from="Servion-Poste" id="2533279085363728" internalDescription="SERV &gt; SALA" name="Servion-Poste &gt; Sallaz" to="Sallaz"/>
+            <journey from="Sallaz" id="2533279085363722" internalDescription="SALA &gt; SERV" name="Servion-Poste" to="Servion-Poste"/>
+            <journey from="Servion-Poste" id="2533279085363728" internalDescription="SERV &gt; SALA" name="Sallaz" to="Sallaz"/>
         </line>
     </station>
     <station name="Molliettes">
         <line description="Croisettes - Chalet-à-Gobet" id="11821953316814876" name="64">
-            <journey from="Croisettes" id="2533279085363711" internalDescription="CROIS &gt; CHT" name="Croisettes &gt; Chalet-à-Gobet" to="Chalet-à-Gobet"/>
-            <journey from="Chalet-à-Gobet" id="2533279085363716" internalDescription="CHT &gt; CROIS" name="Chalet-à-Gobet &gt; Croisettes" to="Croisettes"/>
+            <journey from="Croisettes" id="2533279085363711" internalDescription="CROIS &gt; CHT" name="Chalet-à-Gobet" to="Chalet-à-Gobet"/>
+            <journey from="Chalet-à-Gobet" id="2533279085363716" internalDescription="CHT &gt; CROIS" name="Croisettes" to="Croisettes"/>
         </line>
     </station>
     <station name="Mon Repos">
         <line description="Provence Nord - Verdeil" id="11821953316814851" name="13">
-            <journey from="Provence Nord" id="2533279085378091" internalDescription="PROVN &gt; VDEIL" name="Provence Nord &gt; Verdeil" to="Verdeil"/>
-            <journey from="Verdeil" id="2533279085378099" internalDescription="VDEIL &gt; PROVN" name="Verdeil &gt; Provence Nord" to="Provence Nord"/>
+            <journey from="Provence Nord" id="2533279085378091" internalDescription="PROVN &gt; VDEIL" name="Verdeil" to="Verdeil"/>
+            <journey from="Verdeil" id="2533279085378099" internalDescription="VDEIL &gt; PROVN" name="Provence Nord" to="Provence Nord"/>
         </line>
     </station>
     <station name="Mongevon">
         <line description="Renens-Gare nord - Closalet" id="11821953316814864" name="36">
-            <journey from="Renens-Gare nord" id="2533279085363501" internalDescription="RCFFN &gt; MMM" name="Renens-Gare nord &gt; Closalet" to="Closalet"/>
-            <journey from="Closalet" id="2533279085363503" internalDescription="MMM &gt; RCFFN" name="Closalet &gt; Renens-Gare nord" to="Renens-Gare nord"/>
+            <journey from="Renens-Gare nord" id="2533279085363501" internalDescription="RCFFN &gt; MMM" name="Closalet" to="Closalet"/>
+            <journey from="Closalet" id="2533279085363503" internalDescription="MMM &gt; RCFFN" name="Renens-Gare nord" to="Renens-Gare nord"/>
         </line>
     </station>
     <station name="Mont d'Or">
         <line description="Maladière - Sallaz" id="11821953316814873" name="6">
-            <journey from="Maladière" id="2533279085378354" internalDescription="MALAD &gt; VALMT" name="Maladière &gt; Valmont" to="Valmont"/>
-            <journey from="Valmont" id="2533279085378368" internalDescription="VALMT &gt; MALAD" name="Valmont &gt; Maladière" to="Maladière"/>
+            <journey from="Maladière" id="2533279085378354" internalDescription="MALAD &gt; VALMT" name="Valmont" to="Valmont"/>
+            <journey from="Valmont" id="2533279085378368" internalDescription="VALMT &gt; MALAD" name="Maladière" to="Maladière"/>
         </line>
     </station>
     <station name="Mont-Blanc">
         <line description="Lausanne-Gare - Bellevaux" id="11821953316814859" name="3">
-            <journey from="Lausanne-Gare" id="2533279085378218" internalDescription="GARE &gt; BELVO" name="Lausanne-Gare &gt; Bellevaux" to="Bellevaux"/>
-            <journey from="Bellevaux" id="2533279085378225" internalDescription="BELVO &gt; GARE" name="Bellevaux &gt; Lausanne-Gare" to="Lausanne-Gare"/>
+            <journey from="Lausanne-Gare" id="2533279085378218" internalDescription="GARE &gt; BELVO" name="Bellevaux" to="Bellevaux"/>
+            <journey from="Bellevaux" id="2533279085378225" internalDescription="BELVO &gt; GARE" name="Lausanne-Gare" to="Lausanne-Gare"/>
         </line>
     </station>
     <station name="Mont-Fleuri">
         <line description="Maladière - Désert" id="11821953316814855" name="2">
-            <journey from="Maladière-Lac" id="2533279085378143" internalDescription="MALAD &gt; DST" name="Maladière-Lac &gt; Désert" to="Désert"/>
+            <journey from="Maladière-Lac" id="2533279085378143" internalDescription="MALAD &gt; DST" name="Désert" to="Désert"/>
         </line>
     </station>
     <station name="Mont-Goulin">
         <line description="Pully-Gare - Coudraie" id="11821953316814865" name="4">
-            <journey from="Pully-Gare" id="2533279085378270" internalDescription="PLY-G &gt; CDRAI" name="Pully-Gare &gt; Coudraie" to="Coudraie"/>
-            <journey from="Coudraie" id="2533279085378286" internalDescription="CDRAI &gt; PLY-G" name="Coudraie &gt; Pully-Gare" to="Pully-Gare"/>
+            <journey from="Pully-Gare" id="2533279085378270" internalDescription="PLY-G &gt; CDRAI" name="Coudraie" to="Coudraie"/>
+            <journey from="Coudraie" id="2533279085378286" internalDescription="CDRAI &gt; PLY-G" name="Pully-Gare" to="Pully-Gare"/>
         </line>
         <line description="Venoge nord - Mont-Goulin" id="11821953316814862" name="33">
-            <journey from="Venoge nord" id="2533279085403196" internalDescription="VENON &gt; MGOUL" name="Venoge nord &gt; Mont-Goulin" to="Mont-Goulin"/>
-            <journey from="Mont-Goulin" id="2533279085403198" internalDescription="MGOUL &gt; VENON" name="Mont-Goulin &gt; Venoge nord" to="Venoge nord"/>
+            <journey from="Mont-Goulin" id="2533279085403198" internalDescription="MGOUL &gt; VENON" name="Venoge nord" to="Venoge nord"/>
         </line>
         <line description="Mont-Goulin - Cery-Gériatrie" id="11821953316814863" name="34">
-            <journey from="Mont-Goulin" id="2533279085363497" internalDescription="MGOUL &gt; CERY" name="Mont-Goulin &gt; Cery-Gériatrie" to="Cery-Gériatrie"/>
-            <journey from="Cery-Gériatrie" id="2533279085363499" internalDescription="CERY &gt; MGOUL" name="Cery-Gériatrie &gt; Mont-Goulin" to="Mont-Goulin"/>
+            <journey from="Mont-Goulin" id="2533279085363497" internalDescription="MGOUL &gt; CERY" name="Cery-Gériatrie" to="Cery-Gériatrie"/>
         </line>
     </station>
     <station name="Montaney">
         <line description="Venoge nord - Mont-Goulin" id="11821953316814862" name="33">
-            <journey from="Venoge nord" id="2533279085403196" internalDescription="VENON &gt; MGOUL" name="Venoge nord &gt; Mont-Goulin" to="Mont-Goulin"/>
-            <journey from="Mont-Goulin" id="2533279085403198" internalDescription="MGOUL &gt; VENON" name="Mont-Goulin &gt; Venoge nord" to="Venoge nord"/>
+            <journey from="Venoge nord" id="2533279085403196" internalDescription="VENON &gt; MGOUL" name="Mont-Goulin" to="Mont-Goulin"/>
+            <journey from="Mont-Goulin" id="2533279085403198" internalDescription="MGOUL &gt; VENON" name="Venoge nord" to="Venoge nord"/>
         </line>
     </station>
     <station name="Montbenon">
         <line description="Faverges - Montbenon" id="11821953316814850" name="12">
-            <journey from="Faverges" id="2533279085363239" internalDescription="FAVER &gt; MBNON" name="Faverges &gt; Montbenon" to="Montbenon"/>
-            <journey from="Montbenon" id="2533279085370567" internalDescription="MBNON &gt; FAVER" name="Montbenon &gt; Faverges" to="Faverges"/>
+            <journey from="Montbenon" id="2533279085370567" internalDescription="MBNON &gt; FAVER" name="Faverges" to="Faverges"/>
         </line>
         <line description="Montbenon - Grand Vennes" id="11821953316814852" name="16">
-            <journey from="Montbenon" id="2533279085363278" internalDescription="MBNON &gt; GVENN" name="Montbenon &gt; Grand Vennes" to="Grand Vennes"/>
-            <journey from="Grand Vennes" id="2533279085363286" internalDescription="GVENN &gt; MBNON" name="Grand Vennes &gt; Montbenon" to="Montbenon"/>
+            <journey from="Montbenon" id="2533279085363278" internalDescription="MBNON &gt; GVENN" name="Grand Vennes" to="Grand Vennes"/>
         </line>
         <line description="Montbenon - Grandvaux-Pra Grana" id="11821953316814878" name="66">
-            <journey from="Montbenon" id="2533279085363738" internalDescription="MBNON &gt; GRAVX" name="Montbenon &gt; Grandvaux" to="Grandvaux"/>
-            <journey from="Grandvaux" id="2533279085363750" internalDescription="GRAVX &gt; MBNON" name="Grandvaux &gt; Montbenon" to="Montbenon"/>
+            <journey from="Montbenon" id="2533279085363738" internalDescription="MBNON &gt; GRAVX" name="Grandvaux" to="Grandvaux"/>
         </line>
     </station>
     <station name="Montblesson">
         <line description="Sallaz - Servion-Poste" id="11821953316814877" name="65">
-            <journey from="Sallaz" id="2533279085363722" internalDescription="SALA &gt; SERV" name="Sallaz &gt; Servion-Poste" to="Servion-Poste"/>
-            <journey from="Servion-Poste" id="2533279085363728" internalDescription="SERV &gt; SALA" name="Servion-Poste &gt; Sallaz" to="Sallaz"/>
+            <journey from="Sallaz" id="2533279085363722" internalDescription="SALA &gt; SERV" name="Servion-Poste" to="Servion-Poste"/>
+            <journey from="Servion-Poste" id="2533279085363728" internalDescription="SERV &gt; SALA" name="Sallaz" to="Sallaz"/>
         </line>
     </station>
     <station name="Montchoisi">
         <line description="Pully-Gare - Coudraie" id="11821953316814865" name="4">
-            <journey from="Pully-Gare" id="2533279085378270" internalDescription="PLY-G &gt; CDRAI" name="Pully-Gare &gt; Coudraie" to="Coudraie"/>
-            <journey from="Coudraie" id="2533279085378286" internalDescription="CDRAI &gt; PLY-G" name="Coudraie &gt; Pully-Gare" to="Pully-Gare"/>
+            <journey from="Pully-Gare" id="2533279085378270" internalDescription="PLY-G &gt; CDRAI" name="Coudraie" to="Coudraie"/>
+            <journey from="Coudraie" id="2533279085378286" internalDescription="CDRAI &gt; PLY-G" name="Pully-Gare" to="Pully-Gare"/>
         </line>
         <line description="Verrière - Grand-Mont" id="11821953316814885" name="8">
-            <journey from="Verrière" id="2533279085378531" internalDescription="VERRI &gt; GMONT" name="Verrière &gt; Grand-Mont" to="Grand-Mont"/>
-            <journey from="Grand-Mont" id="2533279085378551" internalDescription="GMONT &gt; VERRI" name="Grand-Mont &gt; Verrière" to="Verrière"/>
+            <journey from="Verrière" id="2533279085378531" internalDescription="VERRI &gt; GMONT" name="Grand-Mont" to="Grand-Mont"/>
+            <journey from="Grand-Mont" id="2533279085378551" internalDescription="GMONT &gt; VERRI" name="Verrière" to="Verrière"/>
         </line>
         <line description="Bourdonnette - Pully-Gare" id="11821953316814858" name="25">
-            <journey from="Bourdonnette" id="2533279085363405" internalDescription="BNETT &gt; PLY-G" name="Bourdonnette &gt; Pully-Gare" to="Pully-Gare"/>
-            <journey from="Pully-Gare" id="2533279085363416" internalDescription="PLY-G &gt; BNETT" name="Pully-Gare &gt; Bourdonnette" to="Bourdonnette"/>
+            <journey from="Bourdonnette" id="2533279085363405" internalDescription="BNETT &gt; PLY-G" name="Pully-Gare" to="Pully-Gare"/>
+            <journey from="Pully-Gare" id="2533279085363416" internalDescription="PLY-G &gt; BNETT" name="Bourdonnette" to="Bourdonnette"/>
         </line>
     </station>
     <station name="Montelly">
         <line description="Renens-Gare - Lausanne-Flon" id="11821953316814882" name="m1">
-            <journey from="Renens-Gare" id="2533279085363796" internalDescription="R-CFF &gt; FLON" name="Renens-Gare &gt; Lausanne-Flon" to="Lausanne-Flon"/>
-            <journey from="Lausanne-Flon" id="2533279085363804" internalDescription="FLON &gt; R-CFF" name="Lausanne-Flon &gt; Renens-Gare" to="Renens-Gare"/>
+            <journey from="Renens-Gare" id="2533279085363796" internalDescription="R-CFF &gt; FLON" name="Lausanne-Flon" to="Lausanne-Flon"/>
+            <journey from="Lausanne-Flon" id="2533279085363804" internalDescription="FLON &gt; R-CFF" name="Renens-Gare" to="Renens-Gare"/>
         </line>
         <line description="Provence Nord - Verdeil" id="11821953316814851" name="13">
-            <journey from="Provence Nord" id="2533279085378091" internalDescription="PROVN &gt; VDEIL" name="Provence Nord &gt; Verdeil" to="Verdeil"/>
-            <journey from="Verdeil" id="2533279085378099" internalDescription="VDEIL &gt; PROVN" name="Verdeil &gt; Provence Nord" to="Provence Nord"/>
+            <journey from="Provence Nord" id="2533279085378091" internalDescription="PROVN &gt; VDEIL" name="Verdeil" to="Verdeil"/>
+            <journey from="Verdeil" id="2533279085378099" internalDescription="VDEIL &gt; PROVN" name="Provence Nord" to="Provence Nord"/>
         </line>
     </station>
     <station name="Montheron">
         <line description="Lausanne-Flon - Froideville-Laiterie" id="11821953316814874" name="60">
-            <journey from="Lausanne-Flon" id="2533279085377486" internalDescription="FLON &gt; FROIL    via Montheron" name="Lausanne-Flon &gt; Laiterie" to="Laiterie"/>
-            <journey from="Laiterie" id="2533279085377487" internalDescription="FROIL &gt; FLON    via Montheron" name="Laiterie &gt; Lausanne-Flon" to="Lausanne-Flon"/>
+            <journey from="Lausanne-Flon" id="2533279085377486" internalDescription="FLON &gt; FROIL    via Montheron" name="Laiterie via Montheron" to="Laiterie" via="Montheron"/>
+            <journey from="Laiterie" id="2533279085377487" internalDescription="FROIL &gt; FLON    via Montheron" name="Lausanne-Flon via Montheron" to="Lausanne-Flon" via="Montheron"/>
         </line>
     </station>
     <station name="Montillier">
         <line description="Lutry-Corniche - Prilly-Eglise" id="11821953316814886" name="9">
-            <journey from="Lutry-Corniche" id="2533279085378570" internalDescription="LUTRY &gt; PRY" name="Lutry-Corniche &gt; Prilly-Eglise" to="Prilly-Eglise"/>
-            <journey from="Prilly-Eglise" id="2533279085378585" internalDescription="PRY &gt; LUTRY" name="Prilly-Eglise &gt; Lutry-Corniche" to="Lutry-Corniche"/>
+            <journey from="Lutry-Corniche" id="2533279085378570" internalDescription="LUTRY &gt; PRY" name="Prilly-Eglise" to="Prilly-Eglise"/>
+            <journey from="Prilly-Eglise" id="2533279085378585" internalDescription="PRY &gt; LUTRY" name="Lutry-Corniche" to="Lutry-Corniche"/>
         </line>
         <line description="Pully-Clergère - Daillettes" id="11821953316814871" name="48">
-            <journey from="Pully-Clergère" id="2533279085383040" internalDescription="CLERG &gt; DTTES" name="Pully-Clergère &gt; Daillettes" to="Daillettes"/>
-            <journey from="Daillettes" id="2533279085383047" internalDescription="DTTES &gt; CLERG" name="Daillettes &gt; Pully-Clergère" to="Pully-Clergère"/>
+            <journey from="Pully-Clergère" id="2533279085383040" internalDescription="CLERG &gt; DTTES" name="Daillettes" to="Daillettes"/>
+            <journey from="Daillettes" id="2533279085383047" internalDescription="DTTES &gt; CLERG" name="Pully-Clergère" to="Pully-Clergère"/>
         </line>
     </station>
     <station name="Montoie">
         <line description="Maladière - Blécherette" id="11821953316814849" name="1">
-            <journey from="Maladière" id="2533279085378050" internalDescription="MALAD &gt; BLECH" name="Maladière &gt; Blécherette" to="Blécherette"/>
-            <journey from="Blécherette" id="2533279085378063" internalDescription="BLECH &gt; MALAD" name="Blécherette &gt; Maladière" to="Maladière"/>
+            <journey from="Maladière" id="2533279085378050" internalDescription="MALAD &gt; BLECH" name="Blécherette" to="Blécherette"/>
+            <journey from="Blécherette" id="2533279085378063" internalDescription="BLECH &gt; MALAD" name="Maladière" to="Maladière"/>
         </line>
         <line description="Maladière - Sallaz" id="11821953316814873" name="6">
-            <journey from="Maladière" id="2533279085378354" internalDescription="MALAD &gt; VALMT" name="Maladière &gt; Valmont" to="Valmont"/>
-            <journey from="Valmont" id="2533279085378368" internalDescription="VALMT &gt; MALAD" name="Valmont &gt; Maladière" to="Maladière"/>
+            <journey from="Maladière" id="2533279085378354" internalDescription="MALAD &gt; VALMT" name="Valmont" to="Valmont"/>
+            <journey from="Valmont" id="2533279085378368" internalDescription="VALMT &gt; MALAD" name="Maladière" to="Maladière"/>
         </line>
     </station>
     <station name="Montolieu">
         <line description="Montolieu - Praz-Séchaud" id="11821953316814866" name="41">
-            <journey from="Montolieu" id="2533279085378299" internalDescription="MONTO &gt; PSECH" name="Montolieu &gt; Praz-Séchaud" to="Praz-Séchaud"/>
-            <journey from="Praz-Séchaud" id="2533279085378305" internalDescription="PSECH &gt; MONTO" name="Praz-Séchaud &gt; Montolieu" to="Montolieu"/>
+            <journey from="Montolieu" id="2533279085378299" internalDescription="MONTO &gt; PSECH" name="Praz-Séchaud" to="Praz-Séchaud"/>
         </line>
     </station>
     <station name="Montpreveyres">
         <line description="Croisettes - Moudon-Gare" id="11821953316814875" name="62">
-            <journey from="Croisettes" id="2533279085363696" internalDescription="CROIS &gt; MOUD" name="Croisettes &gt; Moudon-Gare" to="Moudon-Gare"/>
-            <journey from="Croisettes" id="2533279085363699" internalDescription="CROIS &gt; MOUD    via La Râpe" name="Croisettes &gt; Moudon-Gare" to="Moudon-Gare"/>
-            <journey from="Moudon-Gare" id="2533279085363707" internalDescription="MOUD &gt; CROIS    via La Râpe" name="Moudon-Gare &gt; Croisettes" to="Croisettes"/>
-            <journey from="Moudon-Gare" id="2533279085379036" internalDescription="MOUD &gt; CROIS" name="Moudon-Gare &gt; Croisettes" to="Croisettes"/>
+            <journey from="Croisettes" id="2533279085363696" internalDescription="CROIS &gt; MOUD" name="Moudon-Gare" to="Moudon-Gare"/>
+            <journey from="Croisettes" id="2533279085363699" internalDescription="CROIS &gt; MOUD    via La Râpe" name="Moudon-Gare via La Râpe" to="Moudon-Gare" via="La Râpe"/>
+            <journey from="Moudon-Gare" id="2533279085363707" internalDescription="MOUD &gt; CROIS    via La Râpe" name="Croisettes via La Râpe" to="Croisettes" via="La Râpe"/>
+            <journey from="Moudon-Gare" id="2533279085379036" internalDescription="MOUD &gt; CROIS" name="Croisettes" to="Croisettes"/>
         </line>
     </station>
     <station name="Monts-de-Pully">
         <line description="Sallaz - Servion-Poste" id="11821953316814877" name="65">
-            <journey from="Sallaz" id="2533279085363722" internalDescription="SALA &gt; SERV" name="Sallaz &gt; Servion-Poste" to="Servion-Poste"/>
-            <journey from="Servion-Poste" id="2533279085363728" internalDescription="SERV &gt; SALA" name="Servion-Poste &gt; Sallaz" to="Sallaz"/>
+            <journey from="Sallaz" id="2533279085363722" internalDescription="SALA &gt; SERV" name="Servion-Poste" to="Servion-Poste"/>
+            <journey from="Servion-Poste" id="2533279085363728" internalDescription="SERV &gt; SALA" name="Sallaz" to="Sallaz"/>
         </line>
     </station>
     <station name="Montétan">
         <line description="Lutry-Corniche - Prilly-Eglise" id="11821953316814886" name="9">
-            <journey from="Lutry-Corniche" id="2533279085378570" internalDescription="LUTRY &gt; PRY" name="Lutry-Corniche &gt; Prilly-Eglise" to="Prilly-Eglise"/>
-            <journey from="Prilly-Eglise" id="2533279085378585" internalDescription="PRY &gt; LUTRY" name="Prilly-Eglise &gt; Lutry-Corniche" to="Lutry-Corniche"/>
+            <journey from="Lutry-Corniche" id="2533279085378570" internalDescription="LUTRY &gt; PRY" name="Prilly-Eglise" to="Prilly-Eglise"/>
+            <journey from="Prilly-Eglise" id="2533279085378585" internalDescription="PRY &gt; LUTRY" name="Lutry-Corniche" to="Lutry-Corniche"/>
         </line>
     </station>
     <station name="Motte">
         <line description="Lausanne-Gare - Bellevaux" id="11821953316814859" name="3">
-            <journey from="Lausanne-Gare" id="2533279085378218" internalDescription="GARE &gt; BELVO" name="Lausanne-Gare &gt; Bellevaux" to="Bellevaux"/>
-            <journey from="Bellevaux" id="2533279085378225" internalDescription="BELVO &gt; GARE" name="Bellevaux &gt; Lausanne-Gare" to="Lausanne-Gare"/>
+            <journey from="Lausanne-Gare" id="2533279085378218" internalDescription="GARE &gt; BELVO" name="Bellevaux" to="Bellevaux"/>
+            <journey from="Bellevaux" id="2533279085378225" internalDescription="BELVO &gt; GARE" name="Lausanne-Gare" to="Lausanne-Gare"/>
         </line>
         <line description="Verrière - Grand-Mont" id="11821953316814885" name="8">
-            <journey from="Verrière" id="2533279085378531" internalDescription="VERRI &gt; GMONT" name="Verrière &gt; Grand-Mont" to="Grand-Mont"/>
-            <journey from="Grand-Mont" id="2533279085378551" internalDescription="GMONT &gt; VERRI" name="Grand-Mont &gt; Verrière" to="Verrière"/>
+            <journey from="Verrière" id="2533279085378531" internalDescription="VERRI &gt; GMONT" name="Grand-Mont" to="Grand-Mont"/>
+            <journey from="Grand-Mont" id="2533279085378551" internalDescription="GMONT &gt; VERRI" name="Verrière" to="Verrière"/>
         </line>
         <line description="Lausanne-Flon - Clochatte" id="11821953316814857" name="22">
-            <journey from="Lausanne-Flon" id="2533279085378190" internalDescription="FLON &gt; CLOCH" name="Lausanne-Flon &gt; Clochatte" to="Clochatte"/>
-            <journey from="Clochatte" id="2533279085378197" internalDescription="CLOCH &gt; FLON" name="Clochatte &gt; Lausanne-Flon" to="Lausanne-Flon"/>
+            <journey from="Lausanne-Flon" id="2533279085378190" internalDescription="FLON &gt; CLOCH" name="Clochatte" to="Clochatte"/>
+            <journey from="Clochatte" id="2533279085378197" internalDescription="CLOCH &gt; FLON" name="Lausanne-Flon" to="Lausanne-Flon"/>
         </line>
         <line description="Lausanne-Flon - Froideville-Laiterie" id="11821953316814874" name="60">
-            <journey from="Laiterie" id="2533279085377482" internalDescription="FROIL &gt; FLON    via Bottens" name="Laiterie &gt; Lausanne-Flon" to="Lausanne-Flon"/>
-            <journey from="Lausanne-Flon" id="2533279085377483" internalDescription="FLON &gt; FROIL    via Bottens" name="Lausanne-Flon &gt; Laiterie" to="Laiterie"/>
-            <journey from="Lausanne-Flon" id="2533279085377486" internalDescription="FLON &gt; FROIL    via Montheron" name="Lausanne-Flon &gt; Laiterie" to="Laiterie"/>
-            <journey from="Laiterie" id="2533279085377487" internalDescription="FROIL &gt; FLON    via Montheron" name="Laiterie &gt; Lausanne-Flon" to="Lausanne-Flon"/>
+            <journey from="Laiterie" id="2533279085377482" internalDescription="FROIL &gt; FLON    via Bottens" name="Lausanne-Flon via Bottens" to="Lausanne-Flon" via="Bottens"/>
+            <journey from="Lausanne-Flon" id="2533279085377483" internalDescription="FLON &gt; FROIL    via Bottens" name="Laiterie via Bottens" to="Laiterie" via="Bottens"/>
+            <journey from="Lausanne-Flon" id="2533279085377486" internalDescription="FLON &gt; FROIL    via Montheron" name="Laiterie via Montheron" to="Laiterie" via="Montheron"/>
+            <journey from="Laiterie" id="2533279085377487" internalDescription="FROIL &gt; FLON    via Montheron" name="Lausanne-Flon via Montheron" to="Lausanne-Flon" via="Montheron"/>
         </line>
     </station>
     <station name="Moudon-Gare">
         <line description="Croisettes - Moudon-Gare" id="11821953316814875" name="62">
-            <journey from="Croisettes" id="2533279085363696" internalDescription="CROIS &gt; MOUD" name="Croisettes &gt; Moudon-Gare" to="Moudon-Gare"/>
-            <journey from="Croisettes" id="2533279085363699" internalDescription="CROIS &gt; MOUD    via La Râpe" name="Croisettes &gt; Moudon-Gare" to="Moudon-Gare"/>
-            <journey from="Moudon-Gare" id="2533279085363707" internalDescription="MOUD &gt; CROIS    via La Râpe" name="Moudon-Gare &gt; Croisettes" to="Croisettes"/>
-            <journey from="Moudon-Gare" id="2533279085379036" internalDescription="MOUD &gt; CROIS" name="Moudon-Gare &gt; Croisettes" to="Croisettes"/>
+            <journey from="Moudon-Gare" id="2533279085363707" internalDescription="MOUD &gt; CROIS    via La Râpe" name="Croisettes via La Râpe" to="Croisettes" via="La Râpe"/>
+            <journey from="Moudon-Gare" id="2533279085379036" internalDescription="MOUD &gt; CROIS" name="Croisettes" to="Croisettes"/>
         </line>
     </station>
     <station name="Moulin">
         <line description="Lausanne-Flon - Froideville-Laiterie" id="11821953316814874" name="60">
-            <journey from="Laiterie" id="2533279085377482" internalDescription="FROIL &gt; FLON    via Bottens" name="Laiterie &gt; Lausanne-Flon" to="Lausanne-Flon"/>
-            <journey from="Lausanne-Flon" id="2533279085377483" internalDescription="FLON &gt; FROIL    via Bottens" name="Lausanne-Flon &gt; Laiterie" to="Laiterie"/>
-            <journey from="Lausanne-Flon" id="2533279085377486" internalDescription="FLON &gt; FROIL    via Montheron" name="Lausanne-Flon &gt; Laiterie" to="Laiterie"/>
-            <journey from="Laiterie" id="2533279085377487" internalDescription="FROIL &gt; FLON    via Montheron" name="Laiterie &gt; Lausanne-Flon" to="Lausanne-Flon"/>
+            <journey from="Laiterie" id="2533279085377482" internalDescription="FROIL &gt; FLON    via Bottens" name="Lausanne-Flon via Bottens" to="Lausanne-Flon" via="Bottens"/>
+            <journey from="Lausanne-Flon" id="2533279085377483" internalDescription="FLON &gt; FROIL    via Bottens" name="Laiterie via Bottens" to="Laiterie" via="Bottens"/>
+            <journey from="Lausanne-Flon" id="2533279085377486" internalDescription="FLON &gt; FROIL    via Montheron" name="Laiterie via Montheron" to="Laiterie" via="Montheron"/>
+            <journey from="Laiterie" id="2533279085377487" internalDescription="FROIL &gt; FLON    via Montheron" name="Lausanne-Flon via Montheron" to="Lausanne-Flon" via="Montheron"/>
         </line>
     </station>
     <station name="Mouline">
         <line description="Venoge sud - Renens-Gare sud" id="11821953316814895" name="31">
-            <journey from="Venoge sud" id="2533279085403172" internalDescription="VENOS &gt; RCFFS" name="Venoge sud &gt; Renens-Gare sud" to="Renens-Gare sud"/>
-            <journey from="Renens-Gare sud" id="2533279085403174" internalDescription="RCFFS &gt; VENOS" name="Renens-Gare sud &gt; Venoge sud" to="Venoge sud"/>
+            <journey from="Venoge sud" id="2533279085403172" internalDescription="VENOS &gt; RCFFS" name="Renens-Gare sud" to="Renens-Gare sud"/>
+            <journey from="Renens-Gare sud" id="2533279085403174" internalDescription="RCFFS &gt; VENOS" name="Venoge sud" to="Venoge sud"/>
         </line>
     </station>
     <station name="Moulins">
         <line description="Lutry-Corniche - Prilly-Eglise" id="11821953316814886" name="9">
-            <journey from="Lutry-Corniche" id="2533279085378570" internalDescription="LUTRY &gt; PRY" name="Lutry-Corniche &gt; Prilly-Eglise" to="Prilly-Eglise"/>
-            <journey from="Prilly-Eglise" id="2533279085378585" internalDescription="PRY &gt; LUTRY" name="Prilly-Eglise &gt; Lutry-Corniche" to="Lutry-Corniche"/>
+            <journey from="Lutry-Corniche" id="2533279085378570" internalDescription="LUTRY &gt; PRY" name="Prilly-Eglise" to="Prilly-Eglise"/>
+            <journey from="Prilly-Eglise" id="2533279085378585" internalDescription="PRY &gt; LUTRY" name="Lutry-Corniche" to="Lutry-Corniche"/>
         </line>
     </station>
     <station name="Mousquines">
         <line description="Provence Nord - Verdeil" id="11821953316814851" name="13">
-            <journey from="Provence Nord" id="2533279085378091" internalDescription="PROVN &gt; VDEIL" name="Provence Nord &gt; Verdeil" to="Verdeil"/>
-            <journey from="Verdeil" id="2533279085378099" internalDescription="VDEIL &gt; PROVN" name="Verdeil &gt; Provence Nord" to="Provence Nord"/>
+            <journey from="Provence Nord" id="2533279085378091" internalDescription="PROVN &gt; VDEIL" name="Verdeil" to="Verdeil"/>
+            <journey from="Verdeil" id="2533279085378099" internalDescription="VDEIL &gt; PROVN" name="Provence Nord" to="Provence Nord"/>
         </line>
     </station>
     <station name="Musée Olympique">
         <line description="Verrière - Grand-Mont" id="11821953316814885" name="8">
-            <journey from="Verrière" id="2533279085378531" internalDescription="VERRI &gt; GMONT" name="Verrière &gt; Grand-Mont" to="Grand-Mont"/>
-            <journey from="Grand-Mont" id="2533279085378551" internalDescription="GMONT &gt; VERRI" name="Grand-Mont &gt; Verrière" to="Verrière"/>
+            <journey from="Verrière" id="2533279085378531" internalDescription="VERRI &gt; GMONT" name="Grand-Mont" to="Grand-Mont"/>
+            <journey from="Grand-Mont" id="2533279085378551" internalDescription="GMONT &gt; VERRI" name="Verrière" to="Verrière"/>
         </line>
         <line description="Bourdonnette - Pully-Gare" id="11821953316814858" name="25">
-            <journey from="Bourdonnette" id="2533279085363405" internalDescription="BNETT &gt; PLY-G" name="Bourdonnette &gt; Pully-Gare" to="Pully-Gare"/>
-            <journey from="Pully-Gare" id="2533279085363416" internalDescription="PLY-G &gt; BNETT" name="Pully-Gare &gt; Bourdonnette" to="Bourdonnette"/>
+            <journey from="Bourdonnette" id="2533279085363405" internalDescription="BNETT &gt; PLY-G" name="Pully-Gare" to="Pully-Gare"/>
+            <journey from="Pully-Gare" id="2533279085363416" internalDescription="PLY-G &gt; BNETT" name="Bourdonnette" to="Bourdonnette"/>
         </line>
     </station>
     <station name="Mémise">
         <line description="Verrière - Grand-Mont" id="11821953316814885" name="8">
-            <journey from="Verrière" id="2533279085378531" internalDescription="VERRI &gt; GMONT" name="Verrière &gt; Grand-Mont" to="Grand-Mont"/>
-            <journey from="Grand-Mont" id="2533279085378551" internalDescription="GMONT &gt; VERRI" name="Grand-Mont &gt; Verrière" to="Verrière"/>
+            <journey from="Verrière" id="2533279085378531" internalDescription="VERRI &gt; GMONT" name="Grand-Mont" to="Grand-Mont"/>
+            <journey from="Grand-Mont" id="2533279085378551" internalDescription="GMONT &gt; VERRI" name="Verrière" to="Verrière"/>
         </line>
         <line description="Montbenon - Grand Vennes" id="11821953316814852" name="16">
-            <journey from="Grand Vennes" id="2533279085363286" internalDescription="GVENN &gt; MBNON" name="Grand Vennes &gt; Montbenon" to="Montbenon"/>
+            <journey from="Grand Vennes" id="2533279085363286" internalDescription="GVENN &gt; MBNON" name="Montbenon" to="Montbenon"/>
         </line>
         <line description="Lausanne-Flon - Clochatte" id="11821953316814857" name="22">
-            <journey from="Lausanne-Flon" id="2533279085378190" internalDescription="FLON &gt; CLOCH" name="Lausanne-Flon &gt; Clochatte" to="Clochatte"/>
-            <journey from="Clochatte" id="2533279085378197" internalDescription="CLOCH &gt; FLON" name="Clochatte &gt; Lausanne-Flon" to="Lausanne-Flon"/>
+            <journey from="Lausanne-Flon" id="2533279085378190" internalDescription="FLON &gt; CLOCH" name="Clochatte" to="Clochatte"/>
+            <journey from="Clochatte" id="2533279085378197" internalDescription="CLOCH &gt; FLON" name="Lausanne-Flon" to="Lausanne-Flon"/>
         </line>
         <line description="Lausanne-Flon - Froideville-Laiterie" id="11821953316814874" name="60">
-            <journey from="Laiterie" id="2533279085377482" internalDescription="FROIL &gt; FLON    via Bottens" name="Laiterie &gt; Lausanne-Flon" to="Lausanne-Flon"/>
-            <journey from="Lausanne-Flon" id="2533279085377483" internalDescription="FLON &gt; FROIL    via Bottens" name="Lausanne-Flon &gt; Laiterie" to="Laiterie"/>
-            <journey from="Lausanne-Flon" id="2533279085377486" internalDescription="FLON &gt; FROIL    via Montheron" name="Lausanne-Flon &gt; Laiterie" to="Laiterie"/>
-            <journey from="Laiterie" id="2533279085377487" internalDescription="FROIL &gt; FLON    via Montheron" name="Laiterie &gt; Lausanne-Flon" to="Lausanne-Flon"/>
+            <journey from="Laiterie" id="2533279085377482" internalDescription="FROIL &gt; FLON    via Bottens" name="Lausanne-Flon via Bottens" to="Lausanne-Flon" via="Bottens"/>
+            <journey from="Lausanne-Flon" id="2533279085377483" internalDescription="FLON &gt; FROIL    via Bottens" name="Laiterie via Bottens" to="Laiterie" via="Bottens"/>
+            <journey from="Lausanne-Flon" id="2533279085377486" internalDescription="FLON &gt; FROIL    via Montheron" name="Laiterie via Montheron" to="Laiterie" via="Montheron"/>
+            <journey from="Laiterie" id="2533279085377487" internalDescription="FROIL &gt; FLON    via Montheron" name="Lausanne-Flon via Montheron" to="Lausanne-Flon" via="Montheron"/>
         </line>
     </station>
     <station name="Métairie">
         <line description="Pully-Gare - Coudraie" id="11821953316814865" name="4">
-            <journey from="Pully-Gare" id="2533279085378270" internalDescription="PLY-G &gt; CDRAI" name="Pully-Gare &gt; Coudraie" to="Coudraie"/>
-            <journey from="Coudraie" id="2533279085378286" internalDescription="CDRAI &gt; PLY-G" name="Coudraie &gt; Pully-Gare" to="Pully-Gare"/>
+            <journey from="Pully-Gare" id="2533279085378270" internalDescription="PLY-G &gt; CDRAI" name="Coudraie" to="Coudraie"/>
+            <journey from="Coudraie" id="2533279085378286" internalDescription="CDRAI &gt; PLY-G" name="Pully-Gare" to="Pully-Gare"/>
         </line>
         <line description="Bourdonnette - Pully-Gare" id="11821953316814858" name="25">
-            <journey from="Bourdonnette" id="2533279085363405" internalDescription="BNETT &gt; PLY-G" name="Bourdonnette &gt; Pully-Gare" to="Pully-Gare"/>
-            <journey from="Pully-Gare" id="2533279085363416" internalDescription="PLY-G &gt; BNETT" name="Pully-Gare &gt; Bourdonnette" to="Bourdonnette"/>
+            <journey from="Bourdonnette" id="2533279085363405" internalDescription="BNETT &gt; PLY-G" name="Pully-Gare" to="Pully-Gare"/>
+            <journey from="Pully-Gare" id="2533279085363416" internalDescription="PLY-G &gt; BNETT" name="Bourdonnette" to="Bourdonnette"/>
         </line>
     </station>
     <station name="Mézières-Station">
         <line description="Croisettes - Moudon-Gare" id="11821953316814875" name="62">
-            <journey from="Croisettes" id="2533279085363696" internalDescription="CROIS &gt; MOUD" name="Croisettes &gt; Moudon-Gare" to="Moudon-Gare"/>
-            <journey from="Moudon-Gare" id="2533279085379036" internalDescription="MOUD &gt; CROIS" name="Moudon-Gare &gt; Croisettes" to="Croisettes"/>
+            <journey from="Croisettes" id="2533279085363696" internalDescription="CROIS &gt; MOUD" name="Moudon-Gare" to="Moudon-Gare"/>
+            <journey from="Moudon-Gare" id="2533279085379036" internalDescription="MOUD &gt; CROIS" name="Croisettes" to="Croisettes"/>
         </line>
     </station>
     <station name="Mézières-Village">
         <line description="Croisettes - Moudon-Gare" id="11821953316814875" name="62">
-            <journey from="Croisettes" id="2533279085363696" internalDescription="CROIS &gt; MOUD" name="Croisettes &gt; Moudon-Gare" to="Moudon-Gare"/>
-            <journey from="Moudon-Gare" id="2533279085379036" internalDescription="MOUD &gt; CROIS" name="Moudon-Gare &gt; Croisettes" to="Croisettes"/>
+            <journey from="Croisettes" id="2533279085363696" internalDescription="CROIS &gt; MOUD" name="Moudon-Gare" to="Moudon-Gare"/>
+            <journey from="Moudon-Gare" id="2533279085379036" internalDescription="MOUD &gt; CROIS" name="Croisettes" to="Croisettes"/>
         </line>
     </station>
 </stations>

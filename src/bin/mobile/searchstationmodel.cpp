@@ -254,11 +254,10 @@ void SearchStationModel::search(const QString &partialStation)
     clear();
 
     foreach (AbstractBackendWrapper *backend, d->backendManager->backends()) {
-        if (!backend->capabilities().contains(SUGGEST_STATIONS)) {
-            break;
+        if (backend->capabilities().contains(SUGGEST_STATIONS)) {
+            QString request = backend->requestSuggestStations(partialStation);
+            d->requests.append(request);
         }
-        QString request = backend->requestSuggestStations(partialStation);
-        d->requests.append(request);
     }
 
     emit updatingChanged();

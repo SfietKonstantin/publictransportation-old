@@ -224,6 +224,9 @@ void TransportLausannois::retrieveJourneysFromStation(const QString &request,
             properties.insert("from", journeyElement.attribute("from"));
             properties.insert("to", journeyElement.attribute("to"));
             properties.insert("internalDescription", journeyElement.attribute("internalDescription"));
+            if (journeyElement.hasAttribute("via")) {
+                properties.insert("via", journeyElement.attribute("via"));
+            }
             journey.setProperties(properties);
             journeys.append(journey);
 
