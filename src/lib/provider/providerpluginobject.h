@@ -57,11 +57,14 @@ public:
 public Q_SLOTS:
     virtual void retrieveSuggestedStations(const QString &request, const QString &partialStation);
     virtual void retrieveJourneysFromStation(const QString &request,
-                                             const PublicTransportation::Station &station);
+                                             const PublicTransportation::Station &station,
+                                             int limit);
 Q_SIGNALS:
     void errorRetrieved(const QString &request, const QString &error);
     void suggestedStationsRetrieved(const QString &request,
                                     const QList<PublicTransportation::Station> &suggestedStations);
+    void journeysFromStationRetrieved(const QString &request,
+                                      const QList<PublicTransportation::LineJourneys> &journeys);
 };
 
 }

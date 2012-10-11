@@ -20,68 +20,80 @@ import "UiConstants.js" as Ui
 
 AbstractPage {
     id: page
-    property bool shouldClean: false
+    property string text
+    property string subText
+    property bool displayCategories: true
     headerColor: "#006E29"
     headerLabelColor: "white"
-    title: qsTr("Search stations")
+    title: qsTr("Journeys")
     tools: ToolBarLayout {
         ToolIcon {
             iconId: "toolbar-back"
             onClicked: {
-                shouldClean = true
                 window.pageStack.pop()
             }
         }
-    }
-    onVisibleChanged: {
-        if (!visible && shouldClean) {
-            SearchStationModelInstance.clear()
-            searchField.text = ""
+
+        ToolIcon {
+            iconId: page.displayCategories ? "toolbar-list-selected" : "toolbar-list"
+            onClicked: {
+                page.displayCategories = !page.displayCategories
+            }
         }
     }
 
     content: Item {
         anchors.fill: parent
 
-        TextField {
-            id: searchField
-            anchors.top: parent.top; anchors.topMargin: Ui.MARGIN_DEFAULT
-            anchors.left: parent.left; anchors.leftMargin: Ui.MARGIN_DEFAULT
-            anchors.right: parent.right; anchors.rightMargin: Ui.MARGIN_DEFAULT
-            placeholderText: qsTr("Search for a station")
-            onTextChanged: SearchStationModelInstance.search(text)
+        Item {
+            id: labelItem
+            anchors.top: parent.top; anchors.left: parent.left; anchors.right: parent.right
+            height: 3 * Ui.MARGIN_DEFAULT + text.height + subText.height
+
+            Label {
+                id: text
+                anchors.top: parent.top; anchors.topMargin: Ui.MARGIN_DEFAULT
+                anchors.left: parent.left; anchors.leftMargin: Ui.MARGIN_DEFAULT
+                anchors.right: parent.right; anchors.rightMargin: Ui.MARGIN_DEFAULT
+                text: page.text
+                font.pixelSize: Ui.FONT_SIZE_XLARGE
+                color: !theme.inverted ? Ui.FONT_COLOR_PRIMARY : Ui.FONT_COLOR_INVERTED_PRIMARY
+            }
+
+            Label {
+                id: subText
+                anchors.top: text.bottom; anchors.topMargin: Ui.MARGIN_DEFAULT
+                anchors.left: parent.left; anchors.leftMargin: Ui.MARGIN_DEFAULT
+                anchors.right: parent.right; anchors.rightMargin: Ui.MARGIN_DEFAULT
+                text: page.subText
+                font.pixelSize: Ui.FONT_SIZE_DEFAULT
+                color: !theme.inverted ? Ui.FONT_COLOR_SECONDARY : Ui.FONT_COLOR_INVERTED_SECONDARY
+            }
         }
 
         ListView {
-            anchors.top: searchField.bottom; anchors.topMargin: Ui.MARGIN_DEFAULT
+            anchors.top: labelItem.bottom; anchors.topMargin: Ui.MARGIN_DEFAULT
             anchors.left: parent.left; anchors.right: parent.right
             anchors.bottom: parent.bottom
             clip: true
-            model: SearchStationModelInstance
+            model: JourneysFromStationModelInstance
             delegate: ClickableEntry {
-                text: model.name
-                subText: model.providerName
-                indicatorIcon: model.supportGetJourneys ? "icon-m-common-drilldown-arrow" : ""
-                onClicked: {
-                    SearchStationModelInstance.requestJourneysFromStation(model.index)
-                    journeysFromStationPage.text = model.name
-                    journeysFromStationPage.subText = model.providerName
-                    window.pageStack.push(journeysFromStationPage)
-                }
+                text: "<b>" + model.line + "</b> " + model.name
             }
+            section.property: page.displayCategories ? "line" : ""
+            section.delegate: GroupIndicator {
+                id: groupIndicator
+                text: qsTr("Line") + " " + section
+        }
 
             ScrollDecorator { flickableItem: parent }
         }
 
-
-
         BusyIndicator {
             anchors.centerIn: parent
-            visible: SearchStationModelInstance.updating && page.visible
-            running: SearchStationModelInstance.updating
+            visible: JourneysFromStationModelInstance.updating && page.visible
+            running: JourneysFromStationModelInstance.updating
             platformStyle: BusyIndicatorStyle {size: "large"}
         }
     }
-
-    JourneysFromStationPage {id: journeysFromStationPage}
 }

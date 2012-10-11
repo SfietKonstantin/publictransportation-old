@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef BACKENDDBUSPROXY_H_1349957175
-#define BACKENDDBUSPROXY_H_1349957175
+#ifndef BACKENDDBUSPROXY_H_1349965845
+#define BACKENDDBUSPROXY_H_1349965845
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -71,7 +71,7 @@ public Q_SLOTS: // METHODS
     }
 
 Q_SIGNALS: // SIGNALS
-    void journeysFromStationRequested(const QString &request, const PublicTransportation::Station & station);
+    void journeysFromStationRequested(const QString &request, const PublicTransportation::Station & station, int limit);
     void suggestStationsRequested(const QString &request, const QString &partialStation);
 };
 

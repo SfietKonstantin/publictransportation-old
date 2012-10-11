@@ -28,6 +28,12 @@
 namespace PublicTransportation
 {
 
+struct SearchStationModelData
+{
+    Station station;
+    bool supportGetJourneys;
+    QString backendIdentifier;
+};
 
 /**
  * @internal
@@ -52,7 +58,7 @@ public:
      * @brief Backend manager
      */
     AbstractBackendManager *backendManager;
-    QList<PublicTransportation::Station> data;
+    QList<SearchStationModelData *> data;
     QList<QString> requests;
 private:
     /**
@@ -127,20 +133,37 @@ void SearchStationModelPrivate::slotSuggestedStationsRegistered(const QString & 
         return;
     }
 
+    QObject *sender = q->sender();
+    AbstractBackendWrapper *backend = qobject_cast<AbstractBackendWrapper *>(sender);
+    if (!backend) {
+        return;
+    }
+
     requests.removeAll(request);
     if (requests.isEmpty()) {
         emit q->updatingChanged();
     }
 
-    QList<Station> addedStations;
+    QList<SearchStationModelData *> addedData;
     foreach (Station station, stations) {
-        if (!data.contains(station)) {
-            addedStations.append(station);
+        bool found = false;
+        foreach(SearchStationModelData *dataItem, data) {
+            if (dataItem->station == station) {
+                found = true;
+            }
+        }
+
+        if (!found) {
+            SearchStationModelData *dataItem = new SearchStationModelData;
+            dataItem->station = station;
+            dataItem->backendIdentifier = backend->identifier();
+            dataItem->supportGetJourneys = backend->capabilities().contains(JOURNEYS_FROM_STATION);
+            addedData.append(dataItem);
         }
     }
 
-    q->beginInsertRows(QModelIndex(), q->rowCount(), q->rowCount() + addedStations.count() - 1);
-    data.append(addedStations);
+    q->beginInsertRows(QModelIndex(), q->rowCount(), q->rowCount() + addedData.count() - 1);
+    data.append(addedData);
     emit q->countChanged();
     q->endInsertRows();
 }
@@ -155,12 +178,14 @@ SearchStationModel::SearchStationModel(QObject *parent):
     // Definition of roles
     QHash <int, QByteArray> roles;
     roles.insert(NameRole, "name");
+    roles.insert(SupportGetJourneysRole, "supportGetJourneys");
     roles.insert(ProviderNameRole, "providerName");
     setRoleNames(roles);
 }
 
 SearchStationModel::~SearchStationModel()
 {
+    clear();
 }
 
 void SearchStationModel::setBackendManager(AbstractBackendManager *backendManager)
@@ -204,14 +229,17 @@ QVariant SearchStationModel::data(const QModelIndex &index, int role) const
     if (index.row() < 0 or index.row() >= rowCount()) {
         return QVariant();
     }
-    Station data = d->data.at(index.row());
+    SearchStationModelData *data = d->data.at(index.row());
 
     switch(role) {
     case NameRole:
-        return data.name();
+        return data->station.name();
+        break;
+    case SupportGetJourneysRole:
+        return data->supportGetJourneys;
         break;
     case ProviderNameRole:
-        return data.properties().value("providerName");
+        return data->station.properties().value("providerName");
         break;
     default:
         return QVariant();
@@ -243,10 +271,40 @@ void SearchStationModel::clear()
     d->requests.clear();
     beginRemoveRows(QModelIndex(), 0, rowCount() - 1);
 
-    d->data.clear();
+    while (!d->data.isEmpty()) {
+        delete d->data.takeFirst();
+    }
 
     emit countChanged();
     endRemoveRows();
+}
+
+void SearchStationModel::requestJourneysFromStation(int index)
+{
+    Q_D(SearchStationModel);
+    if (index < 0 || index >= rowCount()) {
+        return;
+    }
+
+    SearchStationModelData *data = d->data.at(index);
+
+    if (!data->supportGetJourneys) {
+        return;
+    }
+
+    if (!d->backendManager) {
+        return;
+    }
+
+    QString backendIdentifier = data->backendIdentifier;
+    if (!d->backendManager->contains(backendIdentifier)) {
+        return;
+    }
+
+    AbstractBackendWrapper *backend = d->backendManager->backend(backendIdentifier);
+
+    QString request = backend->requestJourneysFromStation(data->station, 20);
+    emit journeysFromStationRequested(backend, request);
 }
 
 }

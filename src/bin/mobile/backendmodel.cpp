@@ -21,7 +21,7 @@
 
 #include "backendmodel.h"
 
-#include <QtCore/QCryptographicHash>
+#include <QtCore/QSettings>
 
 #include "manager/backendlistmanager.h"
 #include "manager/abstractbackendmanager.h"

@@ -11,21 +11,25 @@ LIBS += -L../../lib/ -l$${NAME}
 
 HEADERS +=      backendmodel.h \
                 searchstationmodel.h \
+                journeysfromstationmodel.h \
 
 SOURCES +=      main.cpp \
                 backendmodel.cpp \
                 searchstationmodel.cpp \
+                journeysfromstationmodel.cpp \
 
 OTHER_FILES +=  main.qml \
                 UiConstants.js \
                 HorizontalSeparator.qml \
+                GroupIndicator.qml \
                 AbstractPage.qml \
                 AbstractNavigationPage.qml \
                 ClickableEntry.qml \
                 MainPage.qml \
                 BackendEntry.qml \
                 BackendSelectorPage.qml \
-                SearchStationPage.qml
+                SearchStationPage.qml \
+                JourneysFromStationPage.qml \
 
 # deployment
 target.path = $${APPLICATION_FOLDER}

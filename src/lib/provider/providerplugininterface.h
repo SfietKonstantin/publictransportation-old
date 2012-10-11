@@ -27,6 +27,7 @@
 #include "common/line.h"
 #include "common/journey.h"
 #include "common/station.h"
+#include "common/linejourneys.h"
 
 namespace PublicTransportation
 {
@@ -80,7 +81,8 @@ public:
     virtual void retrieveSuggestedStations(const QString &request,
                                            const QString &partialStation) = 0;
     virtual void retrieveJourneysFromStation(const QString&request,
-                                             const PublicTransportation::Station &station) = 0;
+                                             const PublicTransportation::Station &station,
+                                             int limit) = 0;
 };
 
 }

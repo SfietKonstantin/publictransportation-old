@@ -273,10 +273,10 @@ QString DBusBackendWrapper::requestSuggestStations(const QString &partialStation
     return request;
 }
 
-QString DBusBackendWrapper::requestJourneysFromStation(const Station &station)
+QString DBusBackendWrapper::requestJourneysFromStation(const Station &station, int limit)
 {
     QString request = createRequest(SuggestStationType);
-    emit journeysFromStationRequested(request, station);
+    emit journeysFromStationRequested(request, station, limit);
     return request;
 }
 

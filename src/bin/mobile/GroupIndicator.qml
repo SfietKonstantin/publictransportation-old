@@ -1,5 +1,5 @@
 /****************************************************************************************
- * Copyright (C) 2012 Lucien XU <sfietkonstantin@free.fr>                               *
+ * Copyright (C) 2011 Lucien XU <sfietkonstantin@free.fr>                               *
  *                                                                                      *
  * This program is free software; you can redistribute it and/or modify it under        *
  * the terms of the GNU General Public License as published by the Free Software        *
@@ -14,38 +14,38 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#include "providerplugintesthelper.h"
+import QtQuick 1.0
+import com.nokia.meego 1.0
+import "UiConstants.js" as Ui
 
-#include <QtCore/QtPlugin>
+Item {
+    id: container
+    property alias text: label.text
+    width: parent.width
+    height: label.height
 
-#include "debug.h"
-#include "common/capabilitiesconstants.h"
-#include "common/company.h"
+    BorderImage {
+        id: headerSeparator
+        anchors.left: label.right; anchors.leftMargin: Ui.MARGIN_DEFAULT
+        anchors.right: parent.right; anchors.rightMargin: Ui.MARGIN_DEFAULT
+        anchors.verticalCenter: parent.verticalCenter
+        height: 2
 
-using namespace PublicTransportation;
+        source: "image://theme/meegotouch-separator" + (theme.inverted ? "-inverted" : "") +
+                "-background-horizontal"
+        border {left: 0; top: 2; right: 0; bottom: 0}
+    }
 
-ProviderPluginTestHelper::ProviderPluginTestHelper(QObject *parent) :
-    ProviderPluginObject(parent)
-{
+    Label {
+        id: label
+        anchors.left: parent.left; anchors.leftMargin: Ui.MARGIN_DEFAULT
+        platformStyle: LabelStyle {
+            fontPixelSize: Ui.FONT_SIZE_XXSMALL
+            textColor: theme.inverted ? Ui.FONT_COLOR_INVERTED_SECONDARY :
+                                        Ui.FONT_COLOR_SECONDARY
+        }
+    }
 
 }
 
-QStringList ProviderPluginTestHelper::capabilities() const
-{
-    QStringList capabilities;
-    capabilities.append(SUGGEST_STATIONS);
-    return capabilities;
-}
 
-void ProviderPluginTestHelper::retrieveSuggestedStations(const QString &request,
-                                                         const QString &partialStation)
-{
-    QList<Station> data;
-    data.append(Station(QVariantMap(), partialStation, QVariantMap()));
-    data.append(Station(QVariantMap(), partialStation.repeated(2), QVariantMap()));
-    data.append(Station(QVariantMap(), partialStation.repeated(3), QVariantMap()));
-
-    emit suggestedStationsRetrieved(request, data);
-}
-
-Q_EXPORT_PLUGIN2(providerplugintesthelper, ProviderPluginTestHelper)

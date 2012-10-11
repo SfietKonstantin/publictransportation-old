@@ -1,0 +1,165 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="La Râpe">
+        <line description="Croisettes - Moudon-Gare" id="11821953316814875" name="62">
+            <journey from="Croisettes" id="2533279085363699" internalDescription="CROIS &gt; MOUD    via La Râpe" name="Croisettes &gt; Moudon-Gare" to="Moudon-Gare"/>
+            <journey from="Moudon-Gare" id="2533279085363707" internalDescription="MOUD &gt; CROIS    via La Râpe" name="Moudon-Gare &gt; Croisettes" to="Croisettes"/>
+        </line>
+    </station>
+    <station name="Lac Sauvabelin">
+        <line description="Montbenon - Grand Vennes" id="11821953316814852" name="16">
+            <journey from="Montbenon" id="2533279085363278" internalDescription="MBNON &gt; GVENN" name="Montbenon &gt; Grand Vennes" to="Grand Vennes"/>
+            <journey from="Grand Vennes" id="2533279085363286" internalDescription="GVENN &gt; MBNON" name="Grand Vennes &gt; Montbenon" to="Montbenon"/>
+        </line>
+    </station>
+    <station name="Laiterie">
+        <line description="Lausanne-Flon - Froideville-Laiterie" id="11821953316814874" name="60">
+            <journey from="Laiterie" id="2533279085377482" internalDescription="FROIL &gt; FLON    via Bottens" name="Laiterie &gt; Lausanne-Flon" to="Lausanne-Flon"/>
+            <journey from="Lausanne-Flon" id="2533279085377483" internalDescription="FLON &gt; FROIL    via Bottens" name="Lausanne-Flon &gt; Laiterie" to="Laiterie"/>
+            <journey from="Lausanne-Flon" id="2533279085377486" internalDescription="FLON &gt; FROIL    via Montheron" name="Lausanne-Flon &gt; Laiterie" to="Laiterie"/>
+            <journey from="Laiterie" id="2533279085377487" internalDescription="FROIL &gt; FLON    via Montheron" name="Laiterie &gt; Lausanne-Flon" to="Lausanne-Flon"/>
+        </line>
+    </station>
+    <station name="Landar">
+        <line description="Pully-Port - Grandvaux-Pra Grana" id="11821953316814870" name="47">
+            <journey from="Pully-Port" id="2533279085381389" internalDescription="PPORT &gt; GRAVX" name="Pully-Port &gt; Grandvaux" to="Grandvaux"/>
+            <journey from="Grandvaux" id="2533279085384514" internalDescription="GRAVX &gt; PPORT" name="Grandvaux &gt; Pully-Port" to="Pully-Port"/>
+        </line>
+        <line description="Montbenon - Grandvaux-Pra Grana" id="11821953316814878" name="66">
+            <journey from="Montbenon" id="2533279085363738" internalDescription="MBNON &gt; GRAVX" name="Montbenon &gt; Grandvaux" to="Grandvaux"/>
+            <journey from="Grandvaux" id="2533279085363750" internalDescription="GRAVX &gt; MBNON" name="Grandvaux &gt; Montbenon" to="Montbenon"/>
+        </line>
+    </station>
+    <station name="Languedoc">
+        <line description="Maladière - Sallaz" id="11821953316814873" name="6">
+            <journey from="Maladière" id="2533279085378354" internalDescription="MALAD &gt; VALMT" name="Maladière &gt; Valmont" to="Valmont"/>
+            <journey from="Valmont" id="2533279085378368" internalDescription="VALMT &gt; MALAD" name="Valmont &gt; Maladière" to="Maladière"/>
+        </line>
+    </station>
+    <station name="Lausanne-Flon">
+        <line description="Renens-Gare - Lausanne-Flon" id="11821953316814882" name="m1">
+            <journey from="Renens-Gare" id="2533279085363796" internalDescription="R-CFF &gt; FLON" name="Renens-Gare &gt; Lausanne-Flon" to="Lausanne-Flon"/>
+            <journey from="Lausanne-Flon" id="2533279085363804" internalDescription="FLON &gt; R-CFF" name="Lausanne-Flon &gt; Renens-Gare" to="Renens-Gare"/>
+        </line>
+        <line description="Ouchy - Croisettes" id="11821953316814890" name="m2">
+            <journey from="Ouchy" id="2533279085382733" internalDescription="533" name="Ouchy &gt; Croisettes" to="Croisettes"/>
+            <journey from="Croisettes" id="2533279085405911" internalDescription="285" name="Croisettes &gt; Ouchy" to="Ouchy"/>
+        </line>
+        <line description="Lausanne-Flon - Timonet" id="11821953316814854" name="18">
+            <journey from="Lausanne-Flon" id="2533279085378131" internalDescription="FLON &gt; TIMON" name="Lausanne-Flon &gt; Timonet" to="Timonet"/>
+            <journey from="Timonet" id="2533279085378138" internalDescription="TIMON &gt; FLON" name="Timonet &gt; Lausanne-Flon" to="Lausanne-Flon"/>
+        </line>
+        <line description="Lausanne-Flon - Clochatte" id="11821953316814857" name="22">
+            <journey from="Lausanne-Flon" id="2533279085378190" internalDescription="FLON &gt; CLOCH" name="Lausanne-Flon &gt; Clochatte" to="Clochatte"/>
+            <journey from="Clochatte" id="2533279085378197" internalDescription="CLOCH &gt; FLON" name="Clochatte &gt; Lausanne-Flon" to="Lausanne-Flon"/>
+        </line>
+        <line description="Lausanne-Flon - Froideville-Laiterie" id="11821953316814874" name="60">
+            <journey from="Laiterie" id="2533279085377482" internalDescription="FROIL &gt; FLON    via Bottens" name="Laiterie &gt; Lausanne-Flon" to="Lausanne-Flon"/>
+            <journey from="Lausanne-Flon" id="2533279085377483" internalDescription="FLON &gt; FROIL    via Bottens" name="Lausanne-Flon &gt; Laiterie" to="Laiterie"/>
+            <journey from="Lausanne-Flon" id="2533279085377486" internalDescription="FLON &gt; FROIL    via Montheron" name="Lausanne-Flon &gt; Laiterie" to="Laiterie"/>
+            <journey from="Laiterie" id="2533279085377487" internalDescription="FROIL &gt; FLON    via Montheron" name="Laiterie &gt; Lausanne-Flon" to="Lausanne-Flon"/>
+        </line>
+    </station>
+    <station name="Lausanne-Gare">
+        <line description="Ouchy - Croisettes" id="11821953316814890" name="m2">
+            <journey from="Ouchy" id="2533279085382733" internalDescription="533" name="Ouchy &gt; Croisettes" to="Croisettes"/>
+            <journey from="Croisettes" id="2533279085405911" internalDescription="285" name="Croisettes &gt; Ouchy" to="Ouchy"/>
+        </line>
+        <line description="Maladière - Blécherette" id="11821953316814849" name="1">
+            <journey from="Maladière" id="2533279085378050" internalDescription="MALAD &gt; BLECH" name="Maladière &gt; Blécherette" to="Blécherette"/>
+            <journey from="Blécherette" id="2533279085378063" internalDescription="BLECH &gt; MALAD" name="Blécherette &gt; Maladière" to="Maladière"/>
+        </line>
+        <line description="Lausanne-Gare - Bellevaux" id="11821953316814859" name="3">
+            <journey from="Lausanne-Gare" id="2533279085378218" internalDescription="GARE &gt; BELVO" name="Lausanne-Gare &gt; Bellevaux" to="Bellevaux"/>
+            <journey from="Bellevaux" id="2533279085378225" internalDescription="BELVO &gt; GARE" name="Bellevaux &gt; Lausanne-Gare" to="Lausanne-Gare"/>
+        </line>
+        <line description="Lausanne Gare - Blécherette" id="11821953316814856" name="21">
+            <journey from="Lausanne-Gare" id="2533279085363369" internalDescription="GARE &gt; BLECH" name="Lausanne-Gare &gt; Blécherette" to="Blécherette"/>
+            <journey from="Blécherette" id="2533279085363380" internalDescription="BLECH &gt; GARE" name="Blécherette &gt; Lausanne-Gare" to="Lausanne-Gare"/>
+        </line>
+    </station>
+    <station name="Laviau">
+        <line description="Venoge sud - Renens-Gare sud" id="11821953316814895" name="31">
+            <journey from="Venoge sud" id="2533279085403172" internalDescription="VENOS &gt; RCFFS" name="Venoge sud &gt; Renens-Gare sud" to="Renens-Gare sud"/>
+            <journey from="Renens-Gare sud" id="2533279085403174" internalDescription="RCFFS &gt; VENOS" name="Renens-Gare sud &gt; Venoge sud" to="Venoge sud"/>
+        </line>
+    </station>
+    <station name="Les Champs">
+        <line description="Lutry-Port - Croix sur Lutry" id="11821953316814879" name="68">
+            <journey from="Lutry-Port" id="2533279085363754" internalDescription="LPORT &gt; CROIX" name="Lutry-Port &gt; Croix/Lutry" to="Croix/Lutry"/>
+            <journey from="Croix/Lutry" id="2533279085363757" internalDescription="CROIX &gt; LPORT" name="Croix/Lutry &gt; Lutry-Port" to="Lutry-Port"/>
+        </line>
+        <line description="Lutry-Port - Croix/Lutry" id="11821953316814880" name="69">
+            <journey from="Lutry-Port" id="2533279085363760" internalDescription="LPORT &gt; CROIX" name="Lutry-Port &gt; Croix/Lutry" to="Croix/Lutry"/>
+            <journey from="Croix/Lutry" id="2533279085363763" internalDescription="CROIX &gt; LPORT" name="Croix/Lutry &gt; Lutry-Port" to="Lutry-Port"/>
+        </line>
+    </station>
+    <station name="Les Chavannes">
+        <line description="Sallaz - Pont de Chailly - Foyer" id="11821953316814867" name="42">
+            <journey from="Sallaz" id="2533279085378041" internalDescription="SALA &gt; FOYER" name="Sallaz &gt; Foyer" to="Foyer"/>
+            <journey from="Foyer" id="2533279085378042" internalDescription="FOYER &gt; SALA" name="Foyer &gt; Sallaz" to="Sallaz"/>
+        </line>
+    </station>
+    <station name="Les Confréries">
+        <line description="Sallaz - Servion-Poste" id="11821953316814877" name="65">
+            <journey from="Sallaz" id="2533279085363722" internalDescription="SALA &gt; SERV" name="Sallaz &gt; Servion-Poste" to="Servion-Poste"/>
+            <journey from="Servion-Poste" id="2533279085363728" internalDescription="SERV &gt; SALA" name="Servion-Poste &gt; Sallaz" to="Sallaz"/>
+        </line>
+    </station>
+    <station name="Les Liaudes">
+        <line description="Pully-Clergère - Daillettes" id="11821953316814871" name="48">
+            <journey from="Pully-Clergère" id="2533279085383040" internalDescription="CLERG &gt; DTTES" name="Pully-Clergère &gt; Daillettes" to="Daillettes"/>
+            <journey from="Daillettes" id="2533279085383047" internalDescription="DTTES &gt; CLERG" name="Daillettes &gt; Pully-Clergère" to="Pully-Clergère"/>
+        </line>
+    </station>
+    <station name="Libellules">
+        <line description="Montbenon - Grand Vennes" id="11821953316814852" name="16">
+            <journey from="Montbenon" id="2533279085363278" internalDescription="MBNON &gt; GVENN" name="Montbenon &gt; Grand Vennes" to="Grand Vennes"/>
+            <journey from="Grand Vennes" id="2533279085363286" internalDescription="GVENN &gt; MBNON" name="Grand Vennes &gt; Montbenon" to="Montbenon"/>
+        </line>
+    </station>
+    <station name="Lion d'Or">
+        <line description="Bois Murat - Chalet-à-Gobet" id="11821953316814868" name="45">
+            <journey from="Bois Murat" id="2533279085370572" internalDescription="BMURA &gt; CHT" name="Bois Murat &gt; Chalet-à-Gobet" to="Chalet-à-Gobet"/>
+            <journey from="Chalet-à-Gobet" id="2533279085370573" internalDescription="CHT &gt; BMURA" name="Chalet-à-Gobet &gt; Bois Murat" to="Bois Murat"/>
+        </line>
+        <line description="Croisettes - Moudon-Gare" id="11821953316814875" name="62">
+            <journey from="Croisettes" id="2533279085363696" internalDescription="CROIS &gt; MOUD" name="Croisettes &gt; Moudon-Gare" to="Moudon-Gare"/>
+            <journey from="Croisettes" id="2533279085363699" internalDescription="CROIS &gt; MOUD    via La Râpe" name="Croisettes &gt; Moudon-Gare" to="Moudon-Gare"/>
+            <journey from="Moudon-Gare" id="2533279085363707" internalDescription="MOUD &gt; CROIS    via La Râpe" name="Moudon-Gare &gt; Croisettes" to="Croisettes"/>
+            <journey from="Moudon-Gare" id="2533279085379036" internalDescription="MOUD &gt; CROIS" name="Moudon-Gare &gt; Croisettes" to="Croisettes"/>
+        </line>
+    </station>
+    <station name="Lisière">
+        <line description="Montbenon - Grand Vennes" id="11821953316814852" name="16">
+            <journey from="Montbenon" id="2533279085363278" internalDescription="MBNON &gt; GVENN" name="Montbenon &gt; Grand Vennes" to="Grand Vennes"/>
+            <journey from="Grand Vennes" id="2533279085363286" internalDescription="GVENN &gt; MBNON" name="Grand Vennes &gt; Montbenon" to="Montbenon"/>
+        </line>
+    </station>
+    <station name="Longemalle">
+        <line description="Galicien - Timonet" id="11821953316814861" name="32">
+            <journey from="Timonet" id="2533279085363470" internalDescription="TIMON &gt; GALIC" name="Timonet &gt; Galicien" to="Galicien"/>
+            <journey from="Galicien" id="2533279085379530" internalDescription="GALIC &gt; TIMON" name="Galicien &gt; Timonet" to="Timonet"/>
+        </line>
+        <line description="Venoge nord - Mont-Goulin" id="11821953316814862" name="33">
+            <journey from="Venoge nord" id="2533279085403196" internalDescription="VENON &gt; MGOUL" name="Venoge nord &gt; Mont-Goulin" to="Mont-Goulin"/>
+            <journey from="Mont-Goulin" id="2533279085403198" internalDescription="MGOUL &gt; VENON" name="Mont-Goulin &gt; Venoge nord" to="Venoge nord"/>
+        </line>
+    </station>
+    <station name="Lutry-Corniche">
+        <line description="Lutry-Corniche - Prilly-Eglise" id="11821953316814886" name="9">
+            <journey from="Lutry-Corniche" id="2533279085378570" internalDescription="LUTRY &gt; PRY" name="Lutry-Corniche &gt; Prilly-Eglise" to="Prilly-Eglise"/>
+            <journey from="Prilly-Eglise" id="2533279085378585" internalDescription="PRY &gt; LUTRY" name="Prilly-Eglise &gt; Lutry-Corniche" to="Lutry-Corniche"/>
+        </line>
+    </station>
+    <station name="Lutry-Port">
+        <line description="Lutry-Port - Croix sur Lutry" id="11821953316814879" name="68">
+            <journey from="Lutry-Port" id="2533279085363754" internalDescription="LPORT &gt; CROIX" name="Lutry-Port &gt; Croix/Lutry" to="Croix/Lutry"/>
+            <journey from="Croix/Lutry" id="2533279085363757" internalDescription="CROIX &gt; LPORT" name="Croix/Lutry &gt; Lutry-Port" to="Lutry-Port"/>
+        </line>
+        <line description="Lutry-Port - Croix/Lutry" id="11821953316814880" name="69">
+            <journey from="Lutry-Port" id="2533279085363760" internalDescription="LPORT &gt; CROIX" name="Lutry-Port &gt; Croix/Lutry" to="Croix/Lutry"/>
+            <journey from="Croix/Lutry" id="2533279085363763" internalDescription="CROIX &gt; LPORT" name="Croix/Lutry &gt; Lutry-Port" to="Lutry-Port"/>
+        </line>
+    </station>
+</stations>

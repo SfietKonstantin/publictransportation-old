@@ -32,14 +32,15 @@ void ProviderPluginObject::retrieveSuggestedStations(const QString &request,
                                                      const QString &partialStation)
 {
     Q_UNUSED(partialStation)
-    emit errorRetrieved(request, tr("SUGGEST_STATIONS capability is not implement"));
+    emit errorRetrieved(request, tr("SUGGEST_STATIONS capability is not implemented"));
 }
 
 void ProviderPluginObject::retrieveJourneysFromStation(const QString &request,
-                                                       const Station &station)
+                                                       const Station &station, int limit)
 {
     Q_UNUSED(station)
-    emit errorRetrieved(request, tr("JOURNEYS_FROM_STATION capability is not implement"));
+    Q_UNUSED(limit)
+    emit errorRetrieved(request, tr("JOURNEYS_FROM_STATION capability is not implemented"));
 }
 
 

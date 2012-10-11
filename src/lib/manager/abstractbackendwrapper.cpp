@@ -123,9 +123,9 @@ void AbstractBackendWrapper::registerJourneysFromStation(const QString &request,
         delete d->requests.take(request);
         debug("abs-backend-wrapper") << "Journeys from station registered";
         debug("abs-backend-wrapper") << "(Request" << request << ")";
-        debug("abs-backend-wrapper") << "list of suggested stations";
-        foreach (LineJourneys journey, journeys) {
-            debug("abs-backend-wrapper") << journey.line().name();
+        debug("abs-backend-wrapper") << "list of suggested lines";
+        foreach (LineJourneys lineJournyes, journeys) {
+            debug("abs-backend-wrapper") << lineJournyes.line().name();
         }
 
         emit journeysFromStationRegistered(request, journeys);

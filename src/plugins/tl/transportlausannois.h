@@ -36,6 +36,8 @@ public:
     virtual QStringList capabilities() const;
 public Q_SLOTS:
     virtual void retrieveSuggestedStations(const QString &request, const QString &partialStation);
+    virtual void retrieveJourneysFromStation(const QString &request, const Station &station,
+                                             int limit);
 protected:
     QScopedPointer<TransportLausannoisPrivate> d_ptr;
 private:

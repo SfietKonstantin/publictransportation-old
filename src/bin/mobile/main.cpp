@@ -28,6 +28,7 @@
 #include "manager/dbus/dbusbackendmanager.h"
 #include "backendmodel.h"
 #include "searchstationmodel.h"
+#include "journeysfromstationmodel.h"
 
 using namespace PublicTransportation;
 
@@ -53,10 +54,16 @@ int main(int argc, char **argv)
     // Setup models and manager
     BackendModel backendModel;
     SearchStationModel searchStationModel;
+    JourneysFromStationModel journeysFromStationModel;
 
     DBusBackendManager dbusBackendManager;
     backendModel.setBackendManager(&dbusBackendManager);
     searchStationModel.setBackendManager(&dbusBackendManager);
+    journeysFromStationModel.setBackendManager(&dbusBackendManager);
+
+    QObject::connect(&searchStationModel,
+                     SIGNAL(journeysFromStationRequested(AbstractBackendWrapper*,QString)),
+                     &journeysFromStationModel, SLOT(load(AbstractBackendWrapper*,QString)));
 
     // Load backend list
     backendModel.reload();
@@ -76,6 +83,8 @@ int main(int argc, char **argv)
     view.rootContext()->setContextProperty("BACKEND_FIRST_TIME", QVariant(backendFirstTime));
     view.rootContext()->setContextProperty("BackendModelInstance", &backendModel);
     view.rootContext()->setContextProperty("SearchStationModelInstance", &searchStationModel);
+    view.rootContext()->setContextProperty("JourneysFromStationModelInstance",
+                                           &journeysFromStationModel);
 
     // Launch application
     view.setSource(QUrl(MAIN_QML_FILE));

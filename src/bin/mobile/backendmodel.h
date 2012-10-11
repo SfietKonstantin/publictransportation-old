@@ -23,7 +23,6 @@
 #define PUBLICTRANSPORTATION_BACKENDMODEL_H
 
 #include <QtCore/QAbstractListModel>
-#include <QtCore/QSettings>
 #include "manager/abstractbackendwrapper.h"
 
 namespace PublicTransportation

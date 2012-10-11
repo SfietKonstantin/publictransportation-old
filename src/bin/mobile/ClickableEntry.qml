@@ -92,6 +92,8 @@ Item
             anchors.left: parent.left; anchors.right: parent.right
             platformStyle: LabelStyle {
                 fontPixelSize: Ui.FONT_SIZE_MLARGE
+                textColor: theme.inverted ? Ui.FONT_COLOR_INVERTED_PRIMARY :
+                                            Ui.FONT_COLOR_PRIMARY
             }
         }
 

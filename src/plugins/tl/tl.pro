@@ -2,7 +2,7 @@ include(../../../globals.pri)
 
 TARGET = tl
 TEMPLATE = lib
-QT = core network
+QT = core network xml
 CONFIG += plugin
 INCLUDEPATH += ../../lib/
 #INCLUDEPATH += ../../3rdparty/qjson/src

@@ -28,7 +28,7 @@ public:
     explicit ProviderPluginTestHelper(QObject *parent = 0);
     virtual QStringList capabilities() const;
 public Q_SLOTS:
-    virtual void retrieveSuggestedStations(int request, const QString &partialStation);
+    virtual void retrieveSuggestedStations(const QString &request, const QString &partialStation);
 };
 
 

@@ -47,6 +47,11 @@ PublicTransportation::WaitingTime DBusObject::waitingTime() const
     return m_waitingTime;
 }
 
+PublicTransportation::LineJourneys DBusObject::lineJourneys() const
+{
+    return m_lineJourneys;
+}
+
 void DBusObject::receiveCompany(const PublicTransportation::Company &company)
 {
     qDebug() << "Company received";
@@ -75,4 +80,10 @@ void DBusObject::receiveWaitingTime(const PublicTransportation::WaitingTime &wai
 {
     qDebug() << "Waiting time received";
     m_waitingTime = waitingTime;
+}
+
+void DBusObject::receiveLineJourneys(const PublicTransportation::LineJourneys &lineJourneys)
+{
+    qDebug() << "Waiting line & journeys";
+    m_lineJourneys = lineJourneys;
 }

@@ -1,0 +1,98 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="Taillepied">
+        <line description="Lutry-Port - Croix sur Lutry" id="11821953316814879" name="68">
+            <journey from="Lutry-Port" id="2533279085363754" internalDescription="LPORT &gt; CROIX" name="Lutry-Port &gt; Croix/Lutry" to="Croix/Lutry"/>
+            <journey from="Croix/Lutry" id="2533279085363757" internalDescription="CROIX &gt; LPORT" name="Croix/Lutry &gt; Lutry-Port" to="Lutry-Port"/>
+        </line>
+        <line description="Lutry-Port - Croix/Lutry" id="11821953316814880" name="69">
+            <journey from="Lutry-Port" id="2533279085363760" internalDescription="LPORT &gt; CROIX" name="Lutry-Port &gt; Croix/Lutry" to="Croix/Lutry"/>
+            <journey from="Croix/Lutry" id="2533279085363763" internalDescription="CROIX &gt; LPORT" name="Croix/Lutry &gt; Lutry-Port" to="Lutry-Port"/>
+        </line>
+    </station>
+    <station name="Talliaz">
+        <line description="Sallaz - Servion-Poste" id="11821953316814877" name="65">
+            <journey from="Sallaz" id="2533279085363722" internalDescription="SALA &gt; SERV" name="Sallaz &gt; Servion-Poste" to="Servion-Poste"/>
+            <journey from="Servion-Poste" id="2533279085363728" internalDescription="SERV &gt; SALA" name="Servion-Poste &gt; Sallaz" to="Sallaz"/>
+        </line>
+    </station>
+    <station name="Théâtre de Vidy">
+        <line description="Maladière - Désert" id="11821953316814855" name="2">
+            <journey from="Maladière-Lac" id="2533279085378143" internalDescription="MALAD &gt; DST" name="Maladière-Lac &gt; Désert" to="Désert"/>
+            <journey from="Désert" id="2533279085378157" internalDescription="DST &gt; MALAD" name="Désert &gt; Maladière-Lac" to="Maladière-Lac"/>
+        </line>
+    </station>
+    <station name="Timonet">
+        <line description="Lausanne-Flon - Timonet" id="11821953316814854" name="18">
+            <journey from="Lausanne-Flon" id="2533279085378131" internalDescription="FLON &gt; TIMON" name="Lausanne-Flon &gt; Timonet" to="Timonet"/>
+            <journey from="Timonet" id="2533279085378138" internalDescription="TIMON &gt; FLON" name="Timonet &gt; Lausanne-Flon" to="Lausanne-Flon"/>
+        </line>
+        <line description="Galicien - Timonet" id="11821953316814861" name="32">
+            <journey from="Timonet" id="2533279085363470" internalDescription="TIMON &gt; GALIC" name="Timonet &gt; Galicien" to="Galicien"/>
+            <journey from="Galicien" id="2533279085379530" internalDescription="GALIC &gt; TIMON" name="Galicien &gt; Timonet" to="Timonet"/>
+        </line>
+        <line description="Crissier-Centre - Mex Richardaz" id="11821953316814872" name="56">
+            <journey from="Crissier-Centre" id="2533279085376941" internalDescription="CRISS &gt; RICHA" name="Crissier-Centre &gt; Richardaz" to="Richardaz"/>
+            <journey from="Richardaz" id="2533279085376942" internalDescription="RICHA &gt; CRISS" name="Richardaz &gt; Crissier-Centre" to="Crissier-Centre"/>
+        </line>
+    </station>
+    <station name="Tivoli">
+        <line description="Provence Nord - Verdeil" id="11821953316814851" name="13">
+            <journey from="Provence Nord" id="2533279085378091" internalDescription="PROVN &gt; VDEIL" name="Provence Nord &gt; Verdeil" to="Verdeil"/>
+            <journey from="Verdeil" id="2533279085378099" internalDescription="VDEIL &gt; PROVN" name="Verdeil &gt; Provence Nord" to="Provence Nord"/>
+        </line>
+    </station>
+    <station name="Tour Haldimand">
+        <line description="Verrière - Grand-Mont" id="11821953316814885" name="8">
+            <journey from="Verrière" id="2533279085378531" internalDescription="VERRI &gt; GMONT" name="Verrière &gt; Grand-Mont" to="Grand-Mont"/>
+            <journey from="Grand-Mont" id="2533279085378551" internalDescription="GMONT &gt; VERRI" name="Grand-Mont &gt; Verrière" to="Verrière"/>
+        </line>
+    </station>
+    <station name="Trabandan">
+        <line description="Faverges - Montbenon" id="11821953316814850" name="12">
+            <journey from="Montbenon" id="2533279085370567" internalDescription="MBNON &gt; FAVER" name="Montbenon &gt; Faverges" to="Faverges"/>
+        </line>
+    </station>
+    <station name="Trois Chasseurs">
+        <line description="Sallaz - Servion-Poste" id="11821953316814877" name="65">
+            <journey from="Sallaz" id="2533279085363722" internalDescription="SALA &gt; SERV" name="Sallaz &gt; Servion-Poste" to="Servion-Poste"/>
+            <journey from="Servion-Poste" id="2533279085363728" internalDescription="SERV &gt; SALA" name="Servion-Poste &gt; Sallaz" to="Sallaz"/>
+        </line>
+    </station>
+    <station name="Trésy">
+        <line description="Crissier-Centre - Mex Richardaz" id="11821953316814872" name="56">
+            <journey from="Crissier-Centre" id="2533279085376941" internalDescription="CRISS &gt; RICHA" name="Crissier-Centre &gt; Richardaz" to="Richardaz"/>
+            <journey from="Richardaz" id="2533279085376942" internalDescription="RICHA &gt; CRISS" name="Richardaz &gt; Crissier-Centre" to="Crissier-Centre"/>
+        </line>
+    </station>
+    <station name="Tuileries">
+        <line description="Bois Murat - Chalet-à-Gobet" id="11821953316814868" name="45">
+            <journey from="Bois Murat" id="2533279085370572" internalDescription="BMURA &gt; CHT" name="Bois Murat &gt; Chalet-à-Gobet" to="Chalet-à-Gobet"/>
+            <journey from="Chalet-à-Gobet" id="2533279085370573" internalDescription="CHT &gt; BMURA" name="Chalet-à-Gobet &gt; Bois Murat" to="Bois Murat"/>
+        </line>
+        <line description="Bois Murat - Ballègue" id="11821953316814869" name="46">
+            <journey from="Bois Murat" id="2533279085363578" internalDescription="BMURA &gt; BALLE" name="Bois Murat &gt; Ballègue" to="Ballègue"/>
+            <journey from="Ballègue" id="2533279085363584" internalDescription="BALLE &gt; BMURA" name="Ballègue &gt; Bois Murat" to="Bois Murat"/>
+        </line>
+    </station>
+    <station name="Tunnel">
+        <line description="Verrière - Grand-Mont" id="11821953316814885" name="8">
+            <journey from="Verrière" id="2533279085378531" internalDescription="VERRI &gt; GMONT" name="Verrière &gt; Grand-Mont" to="Grand-Mont"/>
+            <journey from="Grand-Mont" id="2533279085378551" internalDescription="GMONT &gt; VERRI" name="Grand-Mont &gt; Verrière" to="Verrière"/>
+        </line>
+        <line description="Montbenon - Grand Vennes" id="11821953316814852" name="16">
+            <journey from="Montbenon" id="2533279085363278" internalDescription="MBNON &gt; GVENN" name="Montbenon &gt; Grand Vennes" to="Grand Vennes"/>
+            <journey from="Grand Vennes" id="2533279085363286" internalDescription="GVENN &gt; MBNON" name="Grand Vennes &gt; Montbenon" to="Montbenon"/>
+        </line>
+        <line description="Lausanne-Flon - Clochatte" id="11821953316814857" name="22">
+            <journey from="Lausanne-Flon" id="2533279085378190" internalDescription="FLON &gt; CLOCH" name="Lausanne-Flon &gt; Clochatte" to="Clochatte"/>
+            <journey from="Clochatte" id="2533279085378197" internalDescription="CLOCH &gt; FLON" name="Clochatte &gt; Lausanne-Flon" to="Lausanne-Flon"/>
+        </line>
+        <line description="Lausanne-Flon - Froideville-Laiterie" id="11821953316814874" name="60">
+            <journey from="Laiterie" id="2533279085377482" internalDescription="FROIL &gt; FLON    via Bottens" name="Laiterie &gt; Lausanne-Flon" to="Lausanne-Flon"/>
+            <journey from="Lausanne-Flon" id="2533279085377483" internalDescription="FLON &gt; FROIL    via Bottens" name="Lausanne-Flon &gt; Laiterie" to="Laiterie"/>
+            <journey from="Lausanne-Flon" id="2533279085377486" internalDescription="FLON &gt; FROIL    via Montheron" name="Lausanne-Flon &gt; Laiterie" to="Laiterie"/>
+            <journey from="Laiterie" id="2533279085377487" internalDescription="FROIL &gt; FLON    via Montheron" name="Laiterie &gt; Lausanne-Flon" to="Lausanne-Flon"/>
+        </line>
+    </station>
+</stations>

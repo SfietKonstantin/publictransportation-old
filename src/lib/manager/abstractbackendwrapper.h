@@ -199,7 +199,7 @@ public:
 
 
     virtual QString requestSuggestStations(const QString &partialStation) = 0;
-    virtual QString requestJourneysFromStation(const Station &station) = 0;
+    virtual QString requestJourneysFromStation(const Station &station, int limit) = 0;
 public Q_SLOTS:
     /**
      * @brief Launch the backend

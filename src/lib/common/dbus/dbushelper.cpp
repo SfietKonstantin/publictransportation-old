@@ -195,29 +195,29 @@ const QDBusArgument & operator>>(const QDBusArgument &argument, WaitingTime &wai
 QDBusArgument & operator<<(QDBusArgument &argument, const LineJourneys &lineJourneys)
 {
     argument.beginStructure();
-    argument << lineJourneys.line();
+    transportationObjectToDBus(argument, lineJourneys.line());
 
-    argument.beginArray();
+    argument.beginArray(qMetaTypeId<PublicTransportation::Journey>());
     foreach(Journey journey, lineJourneys.journeys()) {
-        argument << journey;
+        transportationObjectToDBus(argument, journey);
     }
     argument.endArray();
     argument.endStructure();
     return argument;
 }
 
-const QDBusArgument & operator<<(const QDBusArgument &argument, LineJourneys &lineJourneys)
+const QDBusArgument & operator>>(const QDBusArgument &argument, LineJourneys &lineJourneys)
 {
     argument.beginStructure();
     Line line;
-    argument >> line;
+    transportationObjectFromDBus(argument, line);
     lineJourneys.setLine(line);
 
     argument.beginArray();
     QList<Journey> journeys;
     while (!argument.atEnd()) {
         Journey journey;
-        argument >> journey;
+        transportationObjectFromDBus(argument, journey);
         journeys.append(journey);
     }
     argument.endArray();

@@ -9,8 +9,8 @@
  * before re-generating it.
  */
 
-#ifndef DBUSBACKENDWRAPPERADAPTOR_H_1349957175
-#define DBUSBACKENDWRAPPERADAPTOR_H_1349957175
+#ifndef DBUSBACKENDWRAPPERADAPTOR_H_1349965845
+#define DBUSBACKENDWRAPPERADAPTOR_H_1349965845
 
 #include <QtCore/QObject>
 #include <QtDBus/QtDBus>
@@ -62,6 +62,7 @@ class PublictransportationAdaptor: public QDBusAbstractAdaptor
 "      <annotation value=\"const PublicTransportation::Station &amp;\" name=\"org.qtproject.QtDBus.QtTypeName.In1\"/>\n"
 "      <arg direction=\"out\" type=\"s\" name=\"request\"/>\n"
 "      <arg direction=\"out\" type=\"(a{sv}sa{sv})\" name=\"station\"/>\n"
+"      <arg direction=\"out\" type=\"i\" name=\"limit\"/>\n"
 "    </signal>\n"
 "    <method name=\"registerJourneysFromStation\">\n"
 "      <annotation value=\"const QList&lt;PublicTransportation::LineJourneys> &amp;\" name=\"org.qtproject.QtDBus.QtTypeName.In1\"/>\n"
@@ -156,7 +157,7 @@ public Q_SLOTS: // METHODS
     void registerJourneysFromStation(const QString &request, const QList<PublicTransportation::LineJourneys> & journeys);
     void registerSuggestedStations(const QString &request, const QList<PublicTransportation::Station> & suggestedStations);
 Q_SIGNALS: // SIGNALS
-    void journeysFromStationRequested(const QString &request, const PublicTransportation::Station & station);
+    void journeysFromStationRequested(const QString &request, const PublicTransportation::Station & station, int limit);
     void suggestStationsRequested(const QString &request, const QString &partialStation);
 };
 

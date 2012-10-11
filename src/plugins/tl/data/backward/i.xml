@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="Industrie">
+        <line description="Renens-Gare nord - Prilly-Eglise" id="11821953316814896" name="38">
+            <journey from="Renens-Gare nord" id="2533279085403217" internalDescription="RCFFN &gt; PRY" name="Renens-Gare nord &gt; Prilly-Eglise" to="Prilly-Eglise"/>
+            <journey from="Prilly-Eglise" id="2533279085403218" internalDescription="PRY &gt; RCFFN" name="Prilly-Eglise &gt; Renens-Gare nord" to="Renens-Gare nord"/>
+        </line>
+    </station>
+</stations>

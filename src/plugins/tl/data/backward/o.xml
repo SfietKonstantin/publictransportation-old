@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="Oiseaux">
+        <line description="Maladière - Blécherette" id="11821953316814849" name="1">
+            <journey from="Maladière" id="2533279085378050" internalDescription="MALAD &gt; BLECH" name="Maladière &gt; Blécherette" to="Blécherette"/>
+        </line>
+    </station>
+    <station name="Orzens">
+        <line description="Lutry-Port - Croix sur Lutry" id="11821953316814879" name="68">
+            <journey from="Lutry-Port" id="2533279085363754" internalDescription="LPORT &gt; CROIX" name="Lutry-Port &gt; Croix/Lutry" to="Croix/Lutry"/>
+        </line>
+        <line description="Lutry-Port - Croix/Lutry" id="11821953316814880" name="69">
+            <journey from="Croix/Lutry" id="2533279085363763" internalDescription="CROIX &gt; LPORT" name="Croix/Lutry &gt; Lutry-Port" to="Lutry-Port"/>
+        </line>
+    </station>
+    <station name="Osches">
+        <line description="Pully-Port - Grandvaux-Pra Grana" id="11821953316814870" name="47">
+            <journey from="Pully-Port" id="2533279085381389" internalDescription="PPORT &gt; GRAVX" name="Pully-Port &gt; Grandvaux" to="Grandvaux"/>
+            <journey from="Grandvaux" id="2533279085384514" internalDescription="GRAVX &gt; PPORT" name="Grandvaux &gt; Pully-Port" to="Pully-Port"/>
+        </line>
+    </station>
+    <station name="Ouchy">
+        <line description="Ouchy - Croisettes" id="11821953316814890" name="m2">
+            <journey from="Ouchy" id="2533279085382733" internalDescription="533" name="Ouchy &gt; Croisettes" to="Croisettes"/>
+            <journey from="Croisettes" id="2533279085405911" internalDescription="285" name="Croisettes &gt; Ouchy" to="Ouchy"/>
+        </line>
+        <line description="Maladière - Désert" id="11821953316814855" name="2">
+            <journey from="Maladière-Lac" id="2533279085378143" internalDescription="MALAD &gt; DST" name="Maladière-Lac &gt; Désert" to="Désert"/>
+            <journey from="Désert" id="2533279085378157" internalDescription="DST &gt; MALAD" name="Désert &gt; Maladière-Lac" to="Maladière-Lac"/>
+        </line>
+    </station>
+    <station name="Ours">
+        <line description="Ouchy - Croisettes" id="11821953316814890" name="m2">
+            <journey from="Ouchy" id="2533279085382733" internalDescription="533" name="Ouchy &gt; Croisettes" to="Croisettes"/>
+            <journey from="Croisettes" id="2533279085405911" internalDescription="285" name="Croisettes &gt; Ouchy" to="Ouchy"/>
+        </line>
+        <line description="Maladière - Sallaz" id="11821953316814873" name="6">
+            <journey from="Maladière" id="2533279085378354" internalDescription="MALAD &gt; VALMT" name="Maladière &gt; Valmont" to="Valmont"/>
+            <journey from="Valmont" id="2533279085378368" internalDescription="VALMT &gt; MALAD" name="Valmont &gt; Maladière" to="Maladière"/>
+        </line>
+        <line description="Renens-14 Avril - Val-Vert" id="11821953316814881" name="7">
+            <journey from="Renens-14 Avril" id="2533279085378439" internalDescription="R-14A &gt; VVERT" name="Renens-14 Avril &gt; Val-Vert" to="Val-Vert"/>
+            <journey from="Val-Vert" id="2533279085378448" internalDescription="VVERT &gt; R-14A" name="Val-Vert &gt; Renens-14 Avril" to="Renens-14 Avril"/>
+        </line>
+        <line description="Montbenon - Grandvaux-Pra Grana" id="11821953316814878" name="66">
+            <journey from="Montbenon" id="2533279085363738" internalDescription="MBNON &gt; GRAVX" name="Montbenon &gt; Grandvaux" to="Grandvaux"/>
+            <journey from="Grandvaux" id="2533279085363750" internalDescription="GRAVX &gt; MBNON" name="Grandvaux &gt; Montbenon" to="Montbenon"/>
+        </line>
+    </station>
+</stations>

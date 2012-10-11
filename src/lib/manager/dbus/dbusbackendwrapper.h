@@ -57,7 +57,7 @@ public:
      */
     virtual ~DBusBackendWrapper();
     virtual QString requestSuggestStations(const QString &partialStation);
-    virtual QString requestJourneysFromStation(const Station &station);
+    virtual QString requestJourneysFromStation(const Station &station, int limit);
 public Q_SLOTS:
     /**
      * @brief Launch the backend
@@ -84,7 +84,8 @@ Q_SIGNALS:
      */
     void suggestStationsRequested(const QString &request, const QString &partialStation);
     void journeysFromStationRequested(const QString &request,
-                                      const PublicTransportation::Station &station);
+                                      const PublicTransportation::Station &station,
+                                      int limit);
 private:
     Q_DECLARE_PRIVATE(DBusBackendWrapper)
     /// \cond buggy-doxygen-doc

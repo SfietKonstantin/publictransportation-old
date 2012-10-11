@@ -39,6 +39,7 @@
                         value="const PublicTransportation::Station &amp;"/>
             <arg name="request" type="s" direction="out" />
             <arg name="station" type="(a{sv}sa{sv})" direction="out" />
+            <arg name="limit" type="i" direction="out" />
         </signal>
         <method name="registerJourneysFromStation">
             <annotation name="org.qtproject.QtDBus.QtTypeName.In1"

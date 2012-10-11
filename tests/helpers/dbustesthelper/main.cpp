@@ -22,6 +22,7 @@
 #include "common/journey.h"
 #include "common/station.h"
 #include "common/waitingtime.h"
+#include "common/linejourneys.h"
 #include "common/dbus/dbusconstants.h"
 #include "common/dbus/dbushelper.h"
 
@@ -56,4 +57,9 @@ int main(int argc, char **argv)
 
     PublicTransportation::WaitingTime waitingTime (12345, properties);
     interface.call("receiveWaitingTime", QVariant::fromValue(waitingTime));
+
+    QList<PublicTransportation::Journey> journeys;
+    journeys.append(journey);
+    PublicTransportation::LineJourneys lineJourneys(line, journeys);
+    interface.call("receiveLineJourneys", QVariant::fromValue(lineJourneys));
 }

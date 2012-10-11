@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="Daillettes">
+        <line description="Pully-Clergère - Daillettes" id="11821953316814871" name="48">
+            <journey from="Pully-Clergère" id="2533279085383040" internalDescription="CLERG &gt; DTTES" name="Pully-Clergère &gt; Daillettes" to="Daillettes"/>
+            <journey from="Daillettes" id="2533279085383047" internalDescription="DTTES &gt; CLERG" name="Daillettes &gt; Pully-Clergère" to="Pully-Clergère"/>
+        </line>
+    </station>
+    <station name="Dapples">
+        <line description="Maladière - Blécherette" id="11821953316814849" name="1">
+            <journey from="Maladière" id="2533279085378050" internalDescription="MALAD &gt; BLECH" name="Maladière &gt; Blécherette" to="Blécherette"/>
+            <journey from="Blécherette" id="2533279085378063" internalDescription="BLECH &gt; MALAD" name="Blécherette &gt; Maladière" to="Maladière"/>
+        </line>
+    </station>
+    <station name="Denantou">
+        <line description="Verrière - Grand-Mont" id="11821953316814885" name="8">
+            <journey from="Verrière" id="2533279085378531" internalDescription="VERRI &gt; GMONT" name="Verrière &gt; Grand-Mont" to="Grand-Mont"/>
+            <journey from="Grand-Mont" id="2533279085378551" internalDescription="GMONT &gt; VERRI" name="Grand-Mont &gt; Verrière" to="Verrière"/>
+        </line>
+    </station>
+    <station name="Devin">
+        <line description="Sallaz - Pont de Chailly - Foyer" id="11821953316814867" name="42">
+            <journey from="Sallaz" id="2533279085378041" internalDescription="SALA &gt; FOYER" name="Sallaz &gt; Foyer" to="Foyer"/>
+            <journey from="Foyer" id="2533279085378042" internalDescription="FOYER &gt; SALA" name="Foyer &gt; Sallaz" to="Sallaz"/>
+        </line>
+    </station>
+    <station name="Dranse">
+        <line description="Pully-Gare - Coudraie" id="11821953316814865" name="4">
+            <journey from="Pully-Gare" id="2533279085378270" internalDescription="PLY-G &gt; CDRAI" name="Pully-Gare &gt; Coudraie" to="Coudraie"/>
+            <journey from="Coudraie" id="2533279085378286" internalDescription="CDRAI &gt; PLY-G" name="Coudraie &gt; Pully-Gare" to="Pully-Gare"/>
+        </line>
+    </station>
+    <station name="Druey">
+        <line description="Maladière - Blécherette" id="11821953316814849" name="1">
+            <journey from="Blécherette" id="2533279085378063" internalDescription="BLECH &gt; MALAD" name="Blécherette &gt; Maladière" to="Maladière"/>
+        </line>
+    </station>
+    <station name="Druey-Collège">
+        <line description="Maladière - Blécherette" id="11821953316814849" name="1">
+            <journey from="Maladière" id="2533279085378050" internalDescription="MALAD &gt; BLECH" name="Maladière &gt; Blécherette" to="Blécherette"/>
+            <journey from="Blécherette" id="2533279085378063" internalDescription="BLECH &gt; MALAD" name="Blécherette &gt; Maladière" to="Maladière"/>
+        </line>
+    </station>
+    <station name="Délices">
+        <line description="Ouchy - Croisettes" id="11821953316814890" name="m2">
+            <journey from="Ouchy" id="2533279085382733" internalDescription="533" name="Ouchy &gt; Croisettes" to="Croisettes"/>
+            <journey from="Croisettes" id="2533279085405911" internalDescription="285" name="Croisettes &gt; Ouchy" to="Ouchy"/>
+        </line>
+        <line description="Bourdonnette - Pully-Gare" id="11821953316814858" name="25">
+            <journey from="Bourdonnette" id="2533279085363405" internalDescription="BNETT &gt; PLY-G" name="Bourdonnette &gt; Pully-Gare" to="Pully-Gare"/>
+            <journey from="Pully-Gare" id="2533279085363416" internalDescription="PLY-G &gt; BNETT" name="Pully-Gare &gt; Bourdonnette" to="Bourdonnette"/>
+        </line>
+    </station>
+    <station name="Désert">
+        <line description="Maladière - Désert" id="11821953316814855" name="2">
+            <journey from="Maladière-Lac" id="2533279085378143" internalDescription="MALAD &gt; DST" name="Maladière-Lac &gt; Désert" to="Désert"/>
+            <journey from="Désert" id="2533279085378157" internalDescription="DST &gt; MALAD" name="Désert &gt; Maladière-Lac" to="Maladière-Lac"/>
+        </line>
+    </station>
+</stations>

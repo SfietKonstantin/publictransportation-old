@@ -22,6 +22,7 @@
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QNetworkReply>
+#include <QtXml/QDomDocument>
 //#include <parser.h>
 
 #include "debug.h"
@@ -133,6 +134,7 @@ QStringList TransportLausannois::capabilities() const
 {
     QStringList capabilities;
     capabilities.append(SUGGEST_STATIONS);
+    capabilities.append(JOURNEYS_FROM_STATION);
     return capabilities;
 }
 
@@ -161,6 +163,81 @@ void TransportLausannois::retrieveSuggestedStations(const QString &request,
     }
 
     emit suggestedStationsRetrieved(request, suggestedStations);
+}
+
+void TransportLausannois::retrieveJourneysFromStation(const QString &request,
+                                                      const Station &station, int limit)
+{
+    Q_UNUSED(limit)
+    QString fileName = QString(":/data/backward/%1.xml").arg(station.name().at(0).toLower());
+
+    QFile file (fileName);
+    if (!file.open(QIODevice::ReadOnly)) {
+        debug("tl-plugin") << "Failed to read" << fileName.toAscii().constData();
+        emit errorRetrieved(request, QString("Failed to read %1").arg(fileName));
+        return;
+    }
+
+    QDomDocument document;
+    document.setContent(&file);
+
+    file.close();
+
+    QDomElement foundElement;
+    QDomElement currentElement = document.documentElement().firstChildElement();
+
+    while (!currentElement.isNull() && foundElement.isNull()) {
+        if (currentElement.attribute("name") == station.name()) {
+            foundElement = currentElement;
+        }
+        currentElement = currentElement.nextSiblingElement();
+    }
+
+    if (foundElement.isNull()) {
+        debug("tl-plugin") << "Failed to find station" << station.name().toAscii().constData();
+        emit errorRetrieved(request, QString("Failed to find station %1").arg(station.name()));
+    }
+
+    QVariantMap disambiguation;
+    disambiguation.insert("id", "org.SfietKonstantin.publictransportation.tl");
+
+    QList<LineJourneys> lineJourneysList;
+    currentElement = foundElement.firstChildElement();
+    while (!currentElement.isNull()) {
+        LineJourneys lineJourney;
+        Line line;
+        line.setName(currentElement.attribute("name"));
+        QVariantMap properties;
+        properties.insert("id", currentElement.attribute("id"));
+        properties.insert("description", currentElement.attribute("description"));
+        line.setDisambiguation(disambiguation);
+        line.setProperties(properties);
+        lineJourney.setLine(line);
+
+        QList<Journey> journeys;
+        QDomElement journeyElement = currentElement.firstChildElement();
+        while (!journeyElement.isNull()) {
+            Journey journey;
+            journey.setName(journeyElement.attribute("name"));
+            QVariantMap properties;
+            properties.insert("id", journeyElement.attribute("id"));
+            properties.insert("from", journeyElement.attribute("from"));
+            properties.insert("to", journeyElement.attribute("to"));
+            properties.insert("internalDescription", journeyElement.attribute("internalDescription"));
+            journey.setProperties(properties);
+            journeys.append(journey);
+
+            journeyElement = journeyElement.nextSiblingElement();
+        }
+
+        lineJourney.setJourneys(journeys);
+        lineJourneysList.append(lineJourney);
+
+        currentElement = currentElement.nextSiblingElement();
+
+    }
+
+    emit journeysFromStationRetrieved(request, lineJourneysList);
 }
 
 }
