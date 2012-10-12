@@ -14,67 +14,83 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#include "linejourneys.h"
+#include "infojourneys.h"
 
 namespace PublicTransportation
 {
 
-LineJourneys::LineJourneys():
-    d_ptr(new LineJourneysPrivate())
+InfoJourneys::InfoJourneys():
+    d_ptr(new InfoJourneysPrivate())
 {
 }
 
-LineJourneys::LineJourneys(const Line &line, const QList<Journey> &journeys):
-    d_ptr(new LineJourneysPrivate())
+InfoJourneys::InfoJourneys(const Company &company, const Line &line,
+                           const QList<QPair<Journey, Station> > &journeysStations):
+    d_ptr(new InfoJourneysPrivate())
 {
-    Q_D(LineJourneys);
+    Q_D(InfoJourneys);
+    d->company = company;
     d->line = line;
-    d->journeys = journeys;
+    d->journeysStations = journeysStations;
 }
 
-LineJourneys::LineJourneys(const LineJourneys &other):
+InfoJourneys::InfoJourneys(const InfoJourneys &other):
     d_ptr(other.d_ptr)
 {
 }
 
-LineJourneys::~LineJourneys()
+InfoJourneys::~InfoJourneys()
 {
 }
 
-bool LineJourneys::operator==(const LineJourneys &other) const
+bool InfoJourneys::operator==(const InfoJourneys &other) const
 {
-    Q_D(const LineJourneys);
-    return (d->line == other.line()) && (d->journeys == other.journeys());
+    Q_D(const InfoJourneys);
+    return (d->company == other.company())
+            && (d->line == other.line())
+            && (d->journeysStations == other.journeysAndStations());
 }
 
-bool LineJourneys::isNull() const
+bool InfoJourneys::isNull() const
 {
-    Q_D(const LineJourneys);
-    return d->line.isNull();
+    Q_D(const InfoJourneys);
+    return d->company.isNull() || d->line.isNull();
 }
 
-Line LineJourneys::line() const
+Company InfoJourneys::company() const
 {
-    Q_D(const LineJourneys);
+    Q_D(const InfoJourneys);
+    return d->company;
+}
+
+void InfoJourneys::setCompany(const Company &company)
+{
+    Q_D(InfoJourneys);
+    d->company = company;
+}
+
+Line InfoJourneys::line() const
+{
+    Q_D(const InfoJourneys);
     return d->line;
 }
 
-void LineJourneys::setLine(const Line &line)
+void InfoJourneys::setLine(const Line &line)
 {
-    Q_D(LineJourneys);
+    Q_D(InfoJourneys);
     d->line = line;
 }
 
-QList<Journey> LineJourneys::journeys() const
+QList<QPair<Journey, Station> > InfoJourneys::journeysAndStations() const
 {
-    Q_D(const LineJourneys);
-    return d->journeys;
+    Q_D(const InfoJourneys);
+    return d->journeysStations;
 }
 
-void LineJourneys::setJourneys(const QList<Journey> &journeys)
+void InfoJourneys::setJourneysAndStations(const QList<QPair<Journey, Station> > &journeysStations)
 {
-    Q_D(LineJourneys);
-    d->journeys = journeys;
+    Q_D(InfoJourneys);
+    d->journeysStations = journeysStations;
 }
 
 }

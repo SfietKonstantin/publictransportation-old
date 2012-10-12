@@ -12,11 +12,13 @@ LIBS += -L../../lib/ -l$${NAME}
 HEADERS +=      backendmodel.h \
                 searchstationmodel.h \
                 journeysfromstationmodel.h \
+                waitingtimemodel.h \
 
 SOURCES +=      main.cpp \
                 backendmodel.cpp \
                 searchstationmodel.cpp \
                 journeysfromstationmodel.cpp \
+                waitingtimemodel.cpp \
 
 OTHER_FILES +=  main.qml \
                 UiConstants.js \
@@ -30,6 +32,7 @@ OTHER_FILES +=  main.qml \
                 BackendSelectorPage.qml \
                 SearchStationPage.qml \
                 JourneysFromStationPage.qml \
+                WaitingTimePage.qml \
 
 # deployment
 target.path = $${APPLICATION_FOLDER}

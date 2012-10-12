@@ -29,6 +29,7 @@
 #include "backendmodel.h"
 #include "searchstationmodel.h"
 #include "journeysfromstationmodel.h"
+#include "waitingtimemodel.h"
 
 using namespace PublicTransportation;
 
@@ -55,15 +56,31 @@ int main(int argc, char **argv)
     BackendModel backendModel;
     SearchStationModel searchStationModel;
     JourneysFromStationModel journeysFromStationModel;
+    WaitingTimeModel waitingTimeModel;
 
     DBusBackendManager dbusBackendManager;
     backendModel.setBackendManager(&dbusBackendManager);
     searchStationModel.setBackendManager(&dbusBackendManager);
     journeysFromStationModel.setBackendManager(&dbusBackendManager);
+    waitingTimeModel.setBackendManager(&dbusBackendManager);
 
     QObject::connect(&searchStationModel,
-                     SIGNAL(journeysFromStationRequested(AbstractBackendWrapper*,QString)),
-                     &journeysFromStationModel, SLOT(load(AbstractBackendWrapper*,QString)));
+                     SIGNAL(journeysFromStationRequested(AbstractBackendWrapper*,QString,
+                                                         PublicTransportation::Station)),
+                     &journeysFromStationModel, SLOT(load(AbstractBackendWrapper*,QString,
+                                                          PublicTransportation::Station)));
+    QObject::connect(&journeysFromStationModel,
+                     SIGNAL(waitingTimeRequested(AbstractBackendWrapper*,QString,
+                                                 PublicTransportation::Company,
+                                                 PublicTransportation::Line,
+                                                 PublicTransportation::Journey,
+                                                 PublicTransportation::Station)),
+                     &waitingTimeModel, SLOT(load(AbstractBackendWrapper*,QString,
+                                                  PublicTransportation::Company,
+                                                  PublicTransportation::Line,
+                                                  PublicTransportation::Journey,
+                                                  PublicTransportation::Station)));
+
 
     // Load backend list
     backendModel.reload();
@@ -85,6 +102,7 @@ int main(int argc, char **argv)
     view.rootContext()->setContextProperty("SearchStationModelInstance", &searchStationModel);
     view.rootContext()->setContextProperty("JourneysFromStationModelInstance",
                                            &journeysFromStationModel);
+    view.rootContext()->setContextProperty("WaitingTimeModelInstance", &waitingTimeModel);
 
     // Launch application
     view.setSource(QUrl(MAIN_QML_FILE));

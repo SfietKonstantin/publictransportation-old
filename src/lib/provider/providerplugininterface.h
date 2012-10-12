@@ -23,15 +23,14 @@
  */
 
 #include <QtCore/QStringList>
-#include "common/company.h"
-#include "common/line.h"
-#include "common/journey.h"
-#include "common/station.h"
-#include "common/linejourneys.h"
 
 namespace PublicTransportation
 {
 
+class Company;
+class Line;
+class Journey;
+class Station;
 /**
  * @brief Interface for a provider plugin
  *
@@ -80,9 +79,14 @@ public:
     virtual QStringList capabilities() const = 0;
     virtual void retrieveSuggestedStations(const QString &request,
                                            const QString &partialStation) = 0;
-    virtual void retrieveJourneysFromStation(const QString&request,
+    virtual void retrieveJourneysFromStation(const QString &request,
                                              const PublicTransportation::Station &station,
                                              int limit) = 0;
+    virtual void retrieveWaitingTime(const QString &request,
+                                     const PublicTransportation::Company &company,
+                                     const PublicTransportation::Line &line,
+                                     const PublicTransportation::Journey &journey,
+                                     const PublicTransportation::Station &station) = 0;
 };
 
 }

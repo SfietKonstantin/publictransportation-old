@@ -37,6 +37,7 @@ AbstractPage {
         if (!visible && shouldClean) {
             SearchStationModelInstance.clear()
             searchField.text = ""
+            shouldClean = false
         }
     }
 
@@ -45,7 +46,7 @@ AbstractPage {
 
         TextField {
             id: searchField
-            anchors.top: parent.top; anchors.topMargin: Ui.MARGIN_DEFAULT
+            anchors.top: parent.top; anchors.topMargin: Ui.MARGIN_SMALL
             anchors.left: parent.left; anchors.leftMargin: Ui.MARGIN_DEFAULT
             anchors.right: parent.right; anchors.rightMargin: Ui.MARGIN_DEFAULT
             placeholderText: qsTr("Search for a station")
@@ -61,11 +62,11 @@ AbstractPage {
             delegate: ClickableEntry {
                 text: model.name
                 subText: model.providerName
-                indicatorIcon: model.supportGetJourneys ? "icon-m-common-drilldown-arrow" : ""
+                enabled: model.supportJourneysFromStation
                 onClicked: {
                     SearchStationModelInstance.requestJourneysFromStation(model.index)
-                    journeysFromStationPage.text = model.name
-                    journeysFromStationPage.subText = model.providerName
+                    journeysFromStationPage.station = model.name
+                    journeysFromStationPage.provider = model.providerName
                     window.pageStack.push(journeysFromStationPage)
                 }
             }

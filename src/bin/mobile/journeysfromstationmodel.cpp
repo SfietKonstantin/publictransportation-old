@@ -21,6 +21,7 @@
 
 #include "journeysfromstationmodel.h"
 
+#include "common/capabilitiesconstants.h"
 #include "manager/abstractbackendmanager.h"
 #include "debug.h"
 
@@ -29,8 +30,11 @@ namespace PublicTransportation
 
 struct JourneysFromStationsModelData
 {
+    Company company;
     Line line;
     Journey journey;
+    Station station;
+    bool supportWaitingTime;
 };
 
 /**
@@ -47,12 +51,14 @@ public:
      */
     JourneysFromStationModelPrivate(JourneysFromStationModel *q);
     void slotJourneysRegistered(const QString &request,
-                                const QList<PublicTransportation::LineJourneys> &journeys);
+                                const QList<PublicTransportation::InfoJourneys> &infoJourneys);
     /**
      * @internal
      * @brief Backend list manager
      */
     AbstractBackendManager *backendManager;
+    QString backendIdentifier;
+    Station station;
     QString currentRequest;
     QList<JourneysFromStationsModelData *> data;
 private:
@@ -71,22 +77,33 @@ JourneysFromStationModelPrivate::JourneysFromStationModelPrivate(JourneysFromSta
 }
 
 void JourneysFromStationModelPrivate::slotJourneysRegistered(const QString &request,
-                                                              const QList<LineJourneys> &journeys)
+                                                             const QList<InfoJourneys> &infoJourneys)
 {
     Q_Q(JourneysFromStationModel);
     if (currentRequest != request) {
         return;
     }
 
+    QObject *sender = q->sender();
+    AbstractBackendWrapper *backend = qobject_cast<AbstractBackendWrapper *>(sender);
+    if (!backend) {
+        return;
+    }
+
     q->clear();
 
 
-    foreach (LineJourneys lineJourneys, journeys) {
-        Line line = lineJourneys.line();
-        foreach (Journey journey, lineJourneys.journeys()) {
+    foreach (InfoJourneys info, infoJourneys) {
+        Line line = info.line();
+        Company company = info.company();
+        QPair<Journey, Station> journeyStation;
+        foreach (journeyStation, info.journeysAndStations()) {
             JourneysFromStationsModelData * dataItem = new JourneysFromStationsModelData;
+            dataItem->company = company;
             dataItem->line = line;
-            dataItem->journey = journey;
+            dataItem->journey = journeyStation.first;
+            dataItem->station = journeyStation.second;
+            dataItem->supportWaitingTime = backend->capabilities().contains(WAITING_TIME);
             data.append(dataItem);
         }
     }
@@ -110,6 +127,9 @@ JourneysFromStationModel::JourneysFromStationModel(QObject *parent):
     QHash <int, QByteArray> roles;
     roles.insert(NameRole, "name");
     roles.insert(LineRole, "line");
+    roles.insert(CompanyRole, "company");
+    roles.insert(StationRole, "station");
+    roles.insert(SupportWaitingTimeRole, "supportWaitingTime");
     setRoleNames(roles);
 }
 
@@ -158,21 +178,63 @@ QVariant JourneysFromStationModel::data(const QModelIndex &index, int role) cons
     case LineRole:
         return data->line.name();
         break;
+    case CompanyRole:
+        return data->company.name();
+        break;
+    case StationRole:
+        return data->station.name();
+        break;
+    case SupportWaitingTimeRole:
+        return data->supportWaitingTime;
+        break;
     default:
         return QVariant();
         break;
     }
 }
 
-void JourneysFromStationModel::load(AbstractBackendWrapper *backend, const QString &request)
+void JourneysFromStationModel::load(AbstractBackendWrapper *backend, const QString &request,
+                                    const Station &station)
 {
     Q_D(JourneysFromStationModel);
     connect(backend,
             SIGNAL(journeysFromStationRegistered(QString,
-                                                 QList<PublicTransportation::LineJourneys>)),
-            this, SLOT(slotJourneysRegistered(QString,QList<PublicTransportation::LineJourneys>)));
+                                                 QList<PublicTransportation::InfoJourneys>)),
+            this, SLOT(slotJourneysRegistered(QString,QList<PublicTransportation::InfoJourneys>)));
+    d->backendIdentifier = backend->identifier();
+    d->station = station;
     d->currentRequest = request;
     emit updatingChanged();
+}
+
+void JourneysFromStationModel::requestWaitingTime(int index)
+{
+    Q_D(JourneysFromStationModel);
+    if (index < 0 || index >= rowCount()) {
+        return;
+    }
+
+    JourneysFromStationsModelData *data = d->data.at(index);
+
+    if (!data->supportWaitingTime) {
+        return;
+    }
+
+    if (!d->backendManager) {
+        return;
+    }
+
+    QString backendIdentifier = d->backendIdentifier;
+    if (!d->backendManager->contains(backendIdentifier)) {
+        return;
+    }
+
+    AbstractBackendWrapper *backend = d->backendManager->backend(backendIdentifier);
+
+    QString request = backend->requestWaitingTime(data->company, data->line,
+                                                  data->journey, data->station);
+    emit waitingTimeRequested(backend, request, data->company, data->line, data->journey,
+                              d->station);
 }
 
 void JourneysFromStationModel::clear()

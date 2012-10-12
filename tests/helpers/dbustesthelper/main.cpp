@@ -60,6 +60,6 @@ int main(int argc, char **argv)
 
     QList<PublicTransportation::Journey> journeys;
     journeys.append(journey);
-    PublicTransportation::LineJourneys lineJourneys(line, journeys);
+    PublicTransportation::InfoJourneys lineJourneys(line, journeys);
     interface.call("receiveLineJourneys", QVariant::fromValue(lineJourneys));
 }

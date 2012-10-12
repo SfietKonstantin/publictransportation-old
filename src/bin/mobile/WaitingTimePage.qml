@@ -21,8 +21,9 @@ import "UiConstants.js" as Ui
 AbstractPage {
     id: page
     property string station
-    property string provider
-    property bool displayCategories: true
+    property string line
+    property string journey
+    property string company
     headerColor: "#006E29"
     headerLabelColor: "white"
     title: qsTr("Journeys")
@@ -30,13 +31,6 @@ AbstractPage {
         ToolIcon {
             iconId: "toolbar-back"
             onClicked: window.pageStack.pop()
-        }
-
-        ToolIcon {
-            iconId: page.displayCategories ? "toolbar-list-selected" : "toolbar-list"
-            onClicked: {
-                page.displayCategories = !page.displayCategories
-            }
         }
     }
 
@@ -46,8 +40,8 @@ AbstractPage {
         Item {
             id: labelItem
             anchors.top: parent.top; anchors.left: parent.left; anchors.right: parent.right
-            height: 2 * Ui.MARGIN_DEFAULT + Ui.MARGIN_SMALL + stationText.height
-                    + providerText.height
+            height: 3 * Ui.MARGIN_DEFAULT + Ui.MARGIN_SMALL + stationText.height
+                    + companyText.height + lineAndDirectionText.height
 
             Label {
                 id: stationText
@@ -60,11 +54,21 @@ AbstractPage {
             }
 
             Label {
-                id: providerText
+                id: lineAndDirectionText
                 anchors.top: stationText.bottom; anchors.topMargin: Ui.MARGIN_DEFAULT
                 anchors.left: parent.left; anchors.leftMargin: Ui.MARGIN_DEFAULT
                 anchors.right: parent.right; anchors.rightMargin: Ui.MARGIN_DEFAULT
-                text: qsTr("Provided by") + " : "  + page.provider
+                text: "<b>" + page.line + "</b>   " + page.journey
+                font.pixelSize: Ui.FONT_SIZE_DEFAULT
+                color: !theme.inverted ? Ui.FONT_COLOR_PRIMARY : Ui.FONT_COLOR_INVERTED_PRIMARY
+            }
+
+            Label {
+                id: companyText
+                anchors.top: lineAndDirectionText.bottom; anchors.topMargin: Ui.MARGIN_DEFAULT
+                anchors.left: parent.left; anchors.leftMargin: Ui.MARGIN_DEFAULT
+                anchors.right: parent.right; anchors.rightMargin: Ui.MARGIN_DEFAULT
+                text: page.company
                 font.pixelSize: Ui.FONT_SIZE_DEFAULT
                 color: !theme.inverted ? Ui.FONT_COLOR_SECONDARY : Ui.FONT_COLOR_INVERTED_SECONDARY
             }
@@ -72,45 +76,29 @@ AbstractPage {
 
         HorizontalSeparator {
             id :horizontalSeparator
-            visible: !page.displayCategories
             anchors.top: labelItem.bottom
         }
 
         ListView {
-            anchors.top: horizontalSeparator.bottom//; anchors.topMargin: Ui.MARGIN_DEFAULT
+            anchors.top: horizontalSeparator.bottom
             anchors.left: parent.left; anchors.right: parent.right
             anchors.bottom: parent.bottom
             clip: true
-            model: JourneysFromStationModelInstance
+            model: WaitingTimeModelInstance
             delegate: ClickableEntry {
-                preText: "<b>" + model.line + "</b>"
-                text: model.name
-                enabled: model.supportWaitingTime
-                onClicked: {
-                    JourneysFromStationModelInstance.requestWaitingTime(model.index)
-                    waitingTimePage.station = model.station
-                    waitingTimePage.company = model.company
-                    waitingTimePage.line = model.line
-                    waitingTimePage.journey = model.name
-                    window.pageStack.push(waitingTimePage)
-                }
+                enabled: false
+                preText: model.waitingTime
+                text: model.destination
             }
-            section.property: page.displayCategories ? "line" : ""
-            section.delegate: GroupIndicator {
-                id: groupIndicator
-                text: qsTr("Line") + " " + section
-        }
 
             ScrollDecorator { flickableItem: parent }
         }
 
         BusyIndicator {
             anchors.centerIn: parent
-            visible: JourneysFromStationModelInstance.updating && page.visible
-            running: JourneysFromStationModelInstance.updating
+            visible: WaitingTimeModelInstance.updating && page.visible
+            running: WaitingTimeModelInstance.updating
             platformStyle: BusyIndicatorStyle {size: "large"}
         }
     }
-
-    WaitingTimePage {id: waitingTimePage}
 }

@@ -31,7 +31,7 @@
 #include "common/journey.h"
 #include "common/station.h"
 #include "common/waitingtime.h"
-#include "common/linejourneys.h"
+#include "common/infojourneys.h"
 
 namespace PublicTransportation
 {
@@ -154,7 +154,9 @@ public:
         Invalid
     };
     enum RequestType {
-        SuggestStationType
+        SuggestStationType,
+        JourneysFromStationType,
+        WaitingTimeType
     };
 
     /**
@@ -200,6 +202,8 @@ public:
 
     virtual QString requestSuggestStations(const QString &partialStation) = 0;
     virtual QString requestJourneysFromStation(const Station &station, int limit) = 0;
+    virtual QString requestWaitingTime(const Company &company, const Line &line,
+                                       const Journey &journey, const Station &station) = 0;
 public Q_SLOTS:
     /**
      * @brief Launch the backend
@@ -236,7 +240,9 @@ public Q_SLOTS:
     void registerSuggestedStations(const QString &request,
                                    const QList<PublicTransportation::Station> &suggestedStations);
     void registerJourneysFromStation(const QString &request,
-                                     const QList<PublicTransportation::LineJourneys> &journeys);
+                                     const QList<PublicTransportation::InfoJourneys> &infoJourneys);
+    void registerWaitingTime(const QString &request,
+                             const QList<PublicTransportation::WaitingTime> &waitingTimeList);
 Q_SIGNALS:
     /**
      * @brief Status changed
@@ -251,7 +257,9 @@ Q_SIGNALS:
     void suggestedStationsRegistered(const QString & request,
                                      const QList<PublicTransportation::Station> &suggestedStations);
     void journeysFromStationRegistered(const QString &request,
-                                       const QList<PublicTransportation::LineJourneys> &journeys);
+                                       const QList<PublicTransportation::InfoJourneys> &infoJourneys);
+    void waitingTimeRegistered(const QString &request,
+                               const QList<PublicTransportation::WaitingTime> &waitimgTimeList);
 protected:
     /**
      * @brief D-pointer based constructor

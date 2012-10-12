@@ -2,8 +2,8 @@
 <stations>
     <station name="Noutes">
         <line description="Galicien - Timonet" id="11821953316814861" name="32">
-            <journey from="Timonet" id="2533279085363470" internalDescription="TIMON &gt; GALIC" name="Galicien" to="Galicien"/>
-            <journey from="Galicien" id="2533279085379530" internalDescription="GALIC &gt; TIMON" name="Timonet" to="Timonet"/>
+            <journey from="Timonet" id="2533279085363470" internalDescription="TIMON &gt; GALIC" name="Galicien" stationCity="Lausanne" stationId="3377704015495776" to="Galicien"/>
+            <journey from="Galicien" id="2533279085379530" internalDescription="GALIC &gt; TIMON" name="Timonet" stationCity="Lausanne" stationId="3377704015495775" to="Timonet"/>
         </line>
     </station>
 </stations>

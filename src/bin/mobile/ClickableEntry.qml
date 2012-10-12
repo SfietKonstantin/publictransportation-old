@@ -39,10 +39,13 @@ Item
     signal clicked
     signal pressAndHold
     property string icon: ""
+    property alias preText: preText.text
     property alias text: mainText.text
     property alias subText: subText.text
-    property string indicatorIcon: "icon-m-common-drilldown-arrow" +
-                                   (theme.inverted ? "-inverse" : "")
+    property string indicatorIcon: enabled ? "icon-m-common-drilldown-arrow" +
+                                             (theme.inverted ? "-inverse" : "")
+                                           : ""
+    property alias enabled: mouseArea.enabled
 
     height: Ui.LIST_ITEM_HEIGHT_DEFAULT
     width: parent.width
@@ -80,8 +83,23 @@ Item
     }
 
     Item {
+        id: preTextContainer
+        anchors.top: parent.top;
+        anchors.bottom: parent.bottom
+        anchors.left: icon.right
+        anchors.leftMargin: preText.text == "" ? 0 : Ui.MARGIN_DEFAULT
+        width: preText.text == "" ? 0 : Math.max(80, preText.width)
+
+        Label {
+            id: preText
+            anchors.left: parent.left; anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+        }
+    }
+
+    Item {
         id: textContainer
-        anchors.left: icon.right; anchors.leftMargin: Ui.MARGIN_DEFAULT
+        anchors.left: preTextContainer.right; anchors.leftMargin: Ui.MARGIN_DEFAULT
         anchors.right: indicator.left; anchors.rightMargin: Ui.MARGIN_DEFAULT
         anchors.verticalCenter: parent.verticalCenter
         height: subText.text != "" ? mainText.height + Ui.MARGIN_XSMALL + subText.height :

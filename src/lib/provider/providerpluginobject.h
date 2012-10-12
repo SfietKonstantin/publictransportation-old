@@ -29,6 +29,8 @@
 namespace PublicTransportation
 {
 
+class InfoJourneys;
+class WaitingTime;
 /**
  * @brief Base for a provider plugin
  *
@@ -59,12 +61,19 @@ public Q_SLOTS:
     virtual void retrieveJourneysFromStation(const QString &request,
                                              const PublicTransportation::Station &station,
                                              int limit);
+    virtual void retrieveWaitingTime(const QString &request,
+                                     const PublicTransportation::Company &company,
+                                     const PublicTransportation::Line &line,
+                                     const PublicTransportation::Journey &journey,
+                                     const PublicTransportation::Station &station);
 Q_SIGNALS:
     void errorRetrieved(const QString &request, const QString &error);
     void suggestedStationsRetrieved(const QString &request,
                                     const QList<PublicTransportation::Station> &suggestedStations);
     void journeysFromStationRetrieved(const QString &request,
-                                      const QList<PublicTransportation::LineJourneys> &journeys);
+                                      const QList<PublicTransportation::InfoJourneys> &infoJourneys);
+    void waitingTimeRetrieved(const QString &request,
+                              const QList<PublicTransportation::WaitingTime> &waitingTimeList);
 };
 
 }

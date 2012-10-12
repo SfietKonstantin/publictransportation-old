@@ -2,23 +2,23 @@
 <stations>
     <station name="1er Août">
         <line description="Renens-14 Avril - Val-Vert" id="11821953316814881" name="7">
-            <journey from="Renens-14 Avril" id="2533279085378439" internalDescription="R-14A &gt; VVERT" name="Val-Vert" to="Val-Vert"/>
+            <journey from="Renens-14 Avril" id="2533279085378439" internalDescription="R-14A &gt; VVERT" name="Val-Vert" stationCity="Lausanne" stationId="3377704015495169" to="Val-Vert"/>
         </line>
         <line description="Georgette - Croix Péage" id="11821953316814853" name="17">
-            <journey from="Croix-Péage" id="2533279085378124" internalDescription="CPEAG &gt; GTE" name="Georgette" to="Georgette"/>
+            <journey from="Croix-Péage" id="2533279085378124" internalDescription="CPEAG &gt; GTE" name="Georgette" stationCity="Lausanne" stationId="3377704015495169" to="Georgette"/>
         </line>
         <line description="Galicien - Timonet" id="11821953316814861" name="32">
-            <journey from="Timonet" id="2533279085363470" internalDescription="TIMON &gt; GALIC" name="Galicien" to="Galicien"/>
-            <journey from="Galicien" id="2533279085379530" internalDescription="GALIC &gt; TIMON" name="Timonet" to="Timonet"/>
+            <journey from="Timonet" id="2533279085363470" internalDescription="TIMON &gt; GALIC" name="Galicien" stationCity="Lausanne" stationId="3377704015495171" to="Galicien"/>
+            <journey from="Galicien" id="2533279085379530" internalDescription="GALIC &gt; TIMON" name="Timonet" stationCity="Lausanne" stationId="3377704015495170" to="Timonet"/>
         </line>
         <line description="Renens-Gare nord - Prilly-Eglise" id="11821953316814896" name="38">
-            <journey from="Renens-Gare nord" id="2533279085403217" internalDescription="RCFFN &gt; PRY" name="Prilly-Eglise" to="Prilly-Eglise"/>
+            <journey from="Renens-Gare nord" id="2533279085403217" internalDescription="RCFFN &gt; PRY" name="Prilly-Eglise" stationCity="Lausanne" stationId="3377704015495169" to="Prilly-Eglise"/>
         </line>
     </station>
     <station name="1er Mai">
         <line description="Renens-Gare nord - Prilly-Eglise" id="11821953316814896" name="38">
-            <journey from="Renens-Gare nord" id="2533279085403217" internalDescription="RCFFN &gt; PRY" name="Prilly-Eglise" to="Prilly-Eglise"/>
-            <journey from="Prilly-Eglise" id="2533279085403218" internalDescription="PRY &gt; RCFFN" name="Renens-Gare nord" to="Renens-Gare nord"/>
+            <journey from="Renens-Gare nord" id="2533279085403217" internalDescription="RCFFN &gt; PRY" name="Prilly-Eglise" stationCity="Lausanne" stationId="3377704015495172" to="Prilly-Eglise"/>
+            <journey from="Prilly-Eglise" id="2533279085403218" internalDescription="PRY &gt; RCFFN" name="Renens-Gare nord" stationCity="Lausanne" stationId="3377704015495173" to="Renens-Gare nord"/>
         </line>
     </station>
 </stations>

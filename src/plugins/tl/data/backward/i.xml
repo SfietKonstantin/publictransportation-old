@@ -2,8 +2,8 @@
 <stations>
     <station name="Industrie">
         <line description="Renens-Gare nord - Prilly-Eglise" id="11821953316814896" name="38">
-            <journey from="Renens-Gare nord" id="2533279085403217" internalDescription="RCFFN &gt; PRY" name="Prilly-Eglise" to="Prilly-Eglise"/>
-            <journey from="Prilly-Eglise" id="2533279085403218" internalDescription="PRY &gt; RCFFN" name="Renens-Gare nord" to="Renens-Gare nord"/>
+            <journey from="Renens-Gare nord" id="2533279085403217" internalDescription="RCFFN &gt; PRY" name="Prilly-Eglise" stationCity="Lausanne" stationId="3377704015495632" to="Prilly-Eglise"/>
+            <journey from="Prilly-Eglise" id="2533279085403218" internalDescription="PRY &gt; RCFFN" name="Renens-Gare nord" stationCity="Lausanne" stationId="3377704015495633" to="Renens-Gare nord"/>
         </line>
     </station>
 </stations>

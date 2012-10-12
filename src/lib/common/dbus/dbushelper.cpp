@@ -25,10 +25,8 @@
 #include <QtDBus/QDBusArgument>
 #include "common/company.h"
 #include "common/line.h"
-#include "common/journey.h"
-#include "common/station.h"
 #include "common/waitingtime.h"
-#include "common/linejourneys.h"
+#include "common/infojourneys.h"
 
 namespace PublicTransportation
 {
@@ -192,36 +190,61 @@ const QDBusArgument & operator>>(const QDBusArgument &argument, WaitingTime &wai
     return argument;
 }
 
-QDBusArgument & operator<<(QDBusArgument &argument, const LineJourneys &lineJourneys)
+QDBusArgument & operator<<(QDBusArgument &argument, const JourneyAndStation &journeyAndStation)
 {
     argument.beginStructure();
-    transportationObjectToDBus(argument, lineJourneys.line());
+    argument << journeyAndStation.first;
+    argument << journeyAndStation.second;
+    argument.endStructure();
 
-    argument.beginArray(qMetaTypeId<PublicTransportation::Journey>());
-    foreach(Journey journey, lineJourneys.journeys()) {
-        transportationObjectToDBus(argument, journey);
+    return argument;
+}
+
+const QDBusArgument & operator>>(const QDBusArgument &argument,
+                                 JourneyAndStation &journeyAndStation)
+{
+    argument.beginStructure();
+    argument >> journeyAndStation.first;
+    argument >> journeyAndStation.second;
+    argument.endStructure();
+
+    return argument;
+}
+
+QDBusArgument & operator<<(QDBusArgument &argument, const InfoJourneys &lineJourneys)
+{
+    argument.beginStructure();
+    argument << lineJourneys.company();
+    argument << lineJourneys.line();
+
+    argument.beginArray(qMetaTypeId<PublicTransportation::JourneyAndStation>());
+    foreach(JourneyAndStation journeyStation, lineJourneys.journeysAndStations()) {
+        argument << journeyStation;
     }
     argument.endArray();
     argument.endStructure();
     return argument;
 }
 
-const QDBusArgument & operator>>(const QDBusArgument &argument, LineJourneys &lineJourneys)
+const QDBusArgument & operator>>(const QDBusArgument &argument, InfoJourneys &lineJourneys)
 {
     argument.beginStructure();
+    Company company;
+    argument >> company;
+    lineJourneys.setCompany(company);
     Line line;
-    transportationObjectFromDBus(argument, line);
+    argument >> line;
     lineJourneys.setLine(line);
 
     argument.beginArray();
-    QList<Journey> journeys;
+    QList<JourneyAndStation> journeysStations;
     while (!argument.atEnd()) {
-        Journey journey;
-        transportationObjectFromDBus(argument, journey);
-        journeys.append(journey);
+        JourneyAndStation journeyStation;
+        argument >> journeyStation;
+        journeysStations.append(journeyStation);
     }
     argument.endArray();
-    lineJourneys.setJourneys(journeys);
+    lineJourneys.setJourneysAndStations(journeysStations);
 
     argument.endStructure();
     return argument;
@@ -239,8 +262,10 @@ void registerDBusTypes()
     qDBusRegisterMetaType<QList<PublicTransportation::Station> >();
     qDBusRegisterMetaType<PublicTransportation::WaitingTime>();
     qDBusRegisterMetaType<QList<PublicTransportation::WaitingTime> >();
-    qDBusRegisterMetaType<PublicTransportation::LineJourneys>();
-    qDBusRegisterMetaType<QList<PublicTransportation::LineJourneys> >();
+    qDBusRegisterMetaType<PublicTransportation::JourneyAndStation>();
+    qDBusRegisterMetaType<QList<PublicTransportation::JourneyAndStation> >();
+    qDBusRegisterMetaType<PublicTransportation::InfoJourneys>();
+    qDBusRegisterMetaType<QList<PublicTransportation::InfoJourneys> >();
 }
 
 }

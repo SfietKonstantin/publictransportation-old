@@ -2,24 +2,24 @@
 <stations>
     <station name="UNIL-Dorigny">
         <line description="Renens-Gare - Lausanne-Flon" id="11821953316814882" name="m1">
-            <journey from="Renens-Gare" id="2533279085363796" internalDescription="R-CFF &gt; FLON" name="Lausanne-Flon" to="Lausanne-Flon"/>
-            <journey from="Lausanne-Flon" id="2533279085363804" internalDescription="FLON &gt; R-CFF" name="Renens-Gare" to="Renens-Gare"/>
+            <journey from="Renens-Gare" id="2533279085363796" internalDescription="R-CFF &gt; FLON" name="Lausanne-Flon" stationCity="Lausanne" stationId="3377704015495477" to="Lausanne-Flon"/>
+            <journey from="Lausanne-Flon" id="2533279085363804" internalDescription="FLON &gt; R-CFF" name="Renens-Gare" stationCity="Lausanne" stationId="3377704015495479" to="Renens-Gare"/>
         </line>
     </station>
     <station name="UNIL-Mouline">
         <line description="Renens-Gare - Lausanne-Flon" id="11821953316814882" name="m1">
-            <journey from="Renens-Gare" id="2533279085363796" internalDescription="R-CFF &gt; FLON" name="Lausanne-Flon" to="Lausanne-Flon"/>
-            <journey from="Lausanne-Flon" id="2533279085363804" internalDescription="FLON &gt; R-CFF" name="Renens-Gare" to="Renens-Gare"/>
+            <journey from="Renens-Gare" id="2533279085363796" internalDescription="R-CFF &gt; FLON" name="Lausanne-Flon" stationCity="Lausanne" stationId="3377704015495719" to="Lausanne-Flon"/>
+            <journey from="Lausanne-Flon" id="2533279085363804" internalDescription="FLON &gt; R-CFF" name="Renens-Gare" stationCity="Lausanne" stationId="3377704015495721" to="Renens-Gare"/>
         </line>
     </station>
     <station name="UNIL-Sorge">
         <line description="Renens-Gare - Lausanne-Flon" id="11821953316814882" name="m1">
-            <journey from="Renens-Gare" id="2533279085363796" internalDescription="R-CFF &gt; FLON" name="Lausanne-Flon" to="Lausanne-Flon"/>
-            <journey from="Lausanne-Flon" id="2533279085363804" internalDescription="FLON &gt; R-CFF" name="Renens-Gare" to="Renens-Gare"/>
+            <journey from="Renens-Gare" id="2533279085363796" internalDescription="R-CFF &gt; FLON" name="Lausanne-Flon" stationCity="Lausanne" stationId="3377704015495991" to="Lausanne-Flon"/>
+            <journey from="Lausanne-Flon" id="2533279085363804" internalDescription="FLON &gt; R-CFF" name="Renens-Gare" stationCity="Lausanne" stationId="3377704015495993" to="Renens-Gare"/>
         </line>
         <line description="Venoge sud - Renens-Gare sud" id="11821953316814895" name="31">
-            <journey from="Venoge sud" id="2533279085403172" internalDescription="VENOS &gt; RCFFS" name="Renens-Gare sud" to="Renens-Gare sud"/>
-            <journey from="Renens-Gare sud" id="2533279085403174" internalDescription="RCFFS &gt; VENOS" name="Venoge sud" to="Venoge sud"/>
+            <journey from="Venoge sud" id="2533279085403172" internalDescription="VENOS &gt; RCFFS" name="Renens-Gare sud" stationCity="Lausanne" stationId="3377704015495990" to="Renens-Gare sud"/>
+            <journey from="Renens-Gare sud" id="2533279085403174" internalDescription="RCFFS &gt; VENOS" name="Venoge sud" stationCity="Lausanne" stationId="3377704015495992" to="Venoge sud"/>
         </line>
     </station>
 </stations>

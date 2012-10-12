@@ -31,8 +31,8 @@ namespace PublicTransportation
 struct SearchStationModelData
 {
     Station station;
-    bool supportGetJourneys;
     QString backendIdentifier;
+    bool supportJourneysFromStation;
 };
 
 /**
@@ -157,7 +157,8 @@ void SearchStationModelPrivate::slotSuggestedStationsRegistered(const QString & 
             SearchStationModelData *dataItem = new SearchStationModelData;
             dataItem->station = station;
             dataItem->backendIdentifier = backend->identifier();
-            dataItem->supportGetJourneys = backend->capabilities().contains(JOURNEYS_FROM_STATION);
+            dataItem->supportJourneysFromStation
+                    = backend->capabilities().contains(JOURNEYS_FROM_STATION);
             addedData.append(dataItem);
         }
     }
@@ -178,7 +179,7 @@ SearchStationModel::SearchStationModel(QObject *parent):
     // Definition of roles
     QHash <int, QByteArray> roles;
     roles.insert(NameRole, "name");
-    roles.insert(SupportGetJourneysRole, "supportGetJourneys");
+    roles.insert(SupportJourneysFromStationRole, "supportJourneysFromStation");
     roles.insert(ProviderNameRole, "providerName");
     setRoleNames(roles);
 }
@@ -235,8 +236,8 @@ QVariant SearchStationModel::data(const QModelIndex &index, int role) const
     case NameRole:
         return data->station.name();
         break;
-    case SupportGetJourneysRole:
-        return data->supportGetJourneys;
+    case SupportJourneysFromStationRole:
+        return data->supportJourneysFromStation;
         break;
     case ProviderNameRole:
         return data->station.properties().value("providerName");
@@ -253,9 +254,14 @@ void SearchStationModel::search(const QString &partialStation)
 
     clear();
 
+    QString partialStationTrimmed = partialStation.trimmed();
+    if (partialStationTrimmed.isEmpty()) {
+        return;
+    }
+
     foreach (AbstractBackendWrapper *backend, d->backendManager->backends()) {
         if (backend->capabilities().contains(SUGGEST_STATIONS)) {
-            QString request = backend->requestSuggestStations(partialStation);
+            QString request = backend->requestSuggestStations(partialStationTrimmed);
             d->requests.append(request);
         }
     }
@@ -287,7 +293,7 @@ void SearchStationModel::requestJourneysFromStation(int index)
 
     SearchStationModelData *data = d->data.at(index);
 
-    if (!data->supportGetJourneys) {
+    if (!data->supportJourneysFromStation) {
         return;
     }
 
@@ -303,7 +309,7 @@ void SearchStationModel::requestJourneysFromStation(int index)
     AbstractBackendWrapper *backend = d->backendManager->backend(backendIdentifier);
 
     QString request = backend->requestJourneysFromStation(data->station, 20);
-    emit journeysFromStationRequested(backend, request);
+    emit journeysFromStationRequested(backend, request, data->station);
 }
 
 }

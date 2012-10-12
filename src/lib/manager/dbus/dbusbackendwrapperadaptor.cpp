@@ -45,15 +45,21 @@ void PublictransportationAdaptor::registerError(const QString &request, const QS
     parent()->registerError(request, error);
 }
 
-void PublictransportationAdaptor::registerJourneysFromStation(const QString &request, const QList<PublicTransportation::LineJourneys> & journeys)
+void PublictransportationAdaptor::registerJourneysFromStation(const QString &request, const QList<PublicTransportation::InfoJourneys> & infoJourneys)
 {
     // handle method call org.SfietKonstantin.publictransportation.registerJourneysFromStation
-    parent()->registerJourneysFromStation(request, journeys);
+    parent()->registerJourneysFromStation(request, infoJourneys);
 }
 
 void PublictransportationAdaptor::registerSuggestedStations(const QString &request, const QList<PublicTransportation::Station> & suggestedStations)
 {
     // handle method call org.SfietKonstantin.publictransportation.registerSuggestedStations
     parent()->registerSuggestedStations(request, suggestedStations);
+}
+
+void PublictransportationAdaptor::registerWaitingTime(const QString &request, const QList<PublicTransportation::WaitingTime> & waitingTimeList)
+{
+    // handle method call org.SfietKonstantin.publictransportation.registerWaitingTime
+    parent()->registerWaitingTime(request, waitingTimeList);
 }
 

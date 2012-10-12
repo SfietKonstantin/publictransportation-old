@@ -19,8 +19,8 @@
  * @short Definition of PublicTransportation::BackendModel
  */
 
-#ifndef PUBLICTRANSPORTATION_JOURNEYSFROMSTATIONSMODEL_H
-#define PUBLICTRANSPORTATION_JOURNEYSFROMSTATIONSMODEL_H
+#ifndef PUBLICTRANSPORTATION_WAITINGTIMEMODEL_H
+#define PUBLICTRANSPORTATION_WAITINGTIMEMODEL_H
 
 #include <QtCore/QAbstractListModel>
 
@@ -34,7 +34,7 @@ class Line;
 class Journey;
 class Station;
 
-class JourneysFromStationModelPrivate;
+class WaitingTimeModelPrivate;
 /**
  * @brief A model for available backends
  *
@@ -53,7 +53,7 @@ class JourneysFromStationModelPrivate;
  * backends are then restarted automatically (that happen,
  * for example, while the application is launched again).
  */
-class JourneysFromStationModel : public QAbstractListModel
+class WaitingTimeModel : public QAbstractListModel
 {
     Q_OBJECT
     /**
@@ -65,34 +65,25 @@ public:
     /**
      * @short Model roles
      */
-    enum JourneysFromStationsModelRole {
+    enum WaitingTimeModelRole {
         /**
          * @short Name role
          */
-        NameRole = Qt::UserRole + 1,
+        WaitingTimeRole = Qt::UserRole + 1,
         /**
-         * @short Line role
+         * @short Direction role
          */
-        LineRole,
-        /**
-         * @short Company role
-         */
-        CompanyRole,
-        /**
-         * @short Station role
-         */
-        StationRole,
-        SupportWaitingTimeRole
+        DestinationRole
     };
     /**
      * @short Default constructor
      * @param parent parent object.
      */
-    explicit JourneysFromStationModel(QObject *parent = 0);
+    explicit WaitingTimeModel(QObject *parent = 0);
     /**
      * @short Destructor
      */
-    virtual ~JourneysFromStationModel();
+    virtual ~WaitingTimeModel();
     /**
      * @brief Set backend manager
      * @param backendManager backend manager to set.
@@ -121,8 +112,10 @@ public:
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 public Q_SLOTS:
     void load(AbstractBackendWrapper *backend, const QString &request,
+              const PublicTransportation::Company &company,
+              const PublicTransportation::Line &line,
+              const PublicTransportation::Journey &journey,
               const PublicTransportation::Station &station);
-    void requestWaitingTime(int index);
     void clear();
 Q_SIGNALS:
     void updatingChanged();
@@ -130,22 +123,17 @@ Q_SIGNALS:
      * @short Count changed
      */
     void countChanged();
-    void waitingTimeRequested(AbstractBackendWrapper *backend, const QString &request,
-                              const PublicTransportation::Company &company,
-                              const PublicTransportation::Line &line,
-                              const PublicTransportation::Journey &journey,
-                              const PublicTransportation::Station &station);
 protected:
     /**
      * @short D-pointer
      */
-    const QScopedPointer<JourneysFromStationModelPrivate> d_ptr;
+    const QScopedPointer<WaitingTimeModelPrivate> d_ptr;
 private:
-    Q_DECLARE_PRIVATE(JourneysFromStationModel)
+    Q_DECLARE_PRIVATE(WaitingTimeModel)
     Q_PRIVATE_SLOT(d_func(),
-                   void slotJourneysRegistered(QString,QList<PublicTransportation::InfoJourneys>))
+                   void slotWaitingTimeRegistered(QString,QList<PublicTransportation::WaitingTime>))
 };
 
 }
 
-#endif // PUBLICTRANSPORTATION_JOURNEYSFROMSTATIONSMODEL_H
+#endif // PUBLICTRANSPORTATION_WAITINGTIMEMODEL_H

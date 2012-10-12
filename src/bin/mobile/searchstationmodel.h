@@ -49,7 +49,7 @@ public:
          * @short Name role
          */
         NameRole = Qt::UserRole + 1,
-        SupportGetJourneysRole,
+        SupportJourneysFromStationRole,
         /**
          * @short Company role
          */
@@ -103,7 +103,9 @@ Q_SIGNALS:
      * @short Count changed
      */
     void countChanged();
-    void journeysFromStationRequested(AbstractBackendWrapper *backend, const QString &request);
+    void journeysFromStationRequested(AbstractBackendWrapper *backend,
+                                      const QString &request,
+                                      const PublicTransportation::Station &station);
 protected:
     /**
      * @short D-pointer

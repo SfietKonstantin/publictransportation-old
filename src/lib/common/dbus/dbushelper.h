@@ -23,7 +23,11 @@
  */
 
 #include <QtCore/QList>
+#include <QtCore/QPair>
 #include <QtCore/QMetaType>
+
+#include "common/journey.h"
+#include "common/station.h"
 
 class QDBusArgument;
 namespace PublicTransportation
@@ -32,11 +36,9 @@ namespace PublicTransportation
 class TransportationObject;
 class Company;
 class Line;
-class Journey;
-class Station;
 class WaitingTime;
-class LineJourneys;
-
+class InfoJourneys;
+typedef QPair<Journey, Station> JourneyAndStation;
 /**
  * @brief Marshall a transportation object to a DBus argument
  *
@@ -142,8 +144,11 @@ QDBusArgument & operator<<(QDBusArgument &argument, const WaitingTime &waitingTi
  * @return DBus argument without the waiting thme.
  */
 const QDBusArgument & operator>>(const QDBusArgument &argument, WaitingTime &waitingTime);
-QDBusArgument & operator<<(QDBusArgument &argument, const LineJourneys &lineJourneys);
-const QDBusArgument & operator>>(const QDBusArgument &argument, LineJourneys &lineJourneys);
+QDBusArgument & operator<<(QDBusArgument &argument, const JourneyAndStation &journeyAndStation);
+const QDBusArgument & operator>>(const QDBusArgument &argument,
+                                 JourneyAndStation &journeyAndStation);
+QDBusArgument & operator<<(QDBusArgument &argument, const InfoJourneys &lineJourneys);
+const QDBusArgument & operator>>(const QDBusArgument &argument, InfoJourneys &lineJourneys);
 
 /**
  * @brief Register DBus types
@@ -155,4 +160,8 @@ const QDBusArgument & operator>>(const QDBusArgument &argument, LineJourneys &li
 void registerDBusTypes();
 
 }
+
+Q_DECLARE_METATYPE(PublicTransportation::JourneyAndStation)
+Q_DECLARE_METATYPE(QList<PublicTransportation::JourneyAndStation>)
+
 #endif // PUBLICTRANSPORTATION_DBUSHELPER_H

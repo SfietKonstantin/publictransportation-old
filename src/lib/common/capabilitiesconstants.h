@@ -35,5 +35,11 @@
  * The backend is able to get journeys from a station.
  */
 #define JOURNEYS_FROM_STATION "journeys_from_station"
+/**
+ * @short WAITING_TIME
+ *
+ * The backend is able to get waiting time.
+ */
+#define WAITING_TIME "waiting_time"
 
 #endif // CAPABILITIESCONSTANTS_H

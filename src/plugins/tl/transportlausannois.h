@@ -38,11 +38,14 @@ public Q_SLOTS:
     virtual void retrieveSuggestedStations(const QString &request, const QString &partialStation);
     virtual void retrieveJourneysFromStation(const QString &request, const Station &station,
                                              int limit);
+    virtual void retrieveWaitingTime(const QString &request, const Company &company,
+                                     const Line &line, const Journey &journey,
+                                     const Station &station);
 protected:
     QScopedPointer<TransportLausannoisPrivate> d_ptr;
 private:
     Q_DECLARE_PRIVATE(TransportLausannois)
-    Q_PRIVATE_SLOT(d_func(), void slotFinished())
+    Q_PRIVATE_SLOT(d_func(), void slotWaitingTimeFinished())
 };
 
 }

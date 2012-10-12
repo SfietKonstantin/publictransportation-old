@@ -23,11 +23,16 @@
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QNetworkReply>
 #include <QtXml/QDomDocument>
-//#include <parser.h>
+#include <parser.h>
 
 #include "debug.h"
 #include "common/capabilitiesconstants.h"
 #include "common/company.h"
+#include "common/line.h"
+#include "common/journey.h"
+#include "common/station.h"
+#include "common/infojourneys.h"
+#include "common/waitingtime.h"
 
 namespace PublicTransportation
 {
@@ -39,9 +44,10 @@ class TransportLausannoisPrivate
 {
 public:
     TransportLausannoisPrivate(TransportLausannois *q);
-    void slotFinished();
+    void slotWaitingTimeFinished();
     QStringList stations;
     QNetworkAccessManager *nam;
+    QMap<QNetworkReply *, QString> waitTimeRequestMap;
 private:
     TransportLausannois * const q_ptr;
     Q_DECLARE_PUBLIC(TransportLausannois)
@@ -67,58 +73,62 @@ TransportLausannoisPrivate::TransportLausannoisPrivate(TransportLausannois *q):
 
 }
 
-void TransportLausannoisPrivate::slotFinished()
+void TransportLausannoisPrivate::slotWaitingTimeFinished()
 {
-//    Q_Q(TransportLausannois);
-//    QNetworkReply *reply = qobject_cast<QNetworkReply *>(q->sender());
+    Q_Q(TransportLausannois);
+    QNetworkReply *reply = qobject_cast<QNetworkReply *>(q->sender());
+    QString waitTimeRequest = waitTimeRequestMap.value(reply);
 
-//    debug("tl-plugin") << "Data retrieved from url" << reply->url().toString();
-//    QJson::Parser parser;
+    debug("tl-plugin") << "Data retrieved from url" << reply->url().toString();
+    QJson::Parser parser;
 
-//    QList<WaitingTime> waitingTimes;
-//    QVariantList waitTimeList = parser.parse(reply).toList();
-//    foreach (QVariant waitTimeEntry, waitTimeList) {
-//        QVariantMap waitTimeMap = waitTimeEntry.toMap();
-//        QString stop = waitTimeMap.value("stop").toString();
-//        QString destination = waitTimeMap.value("destination").toString();
+    QList<WaitingTime> waitingTimes;
+    QVariant parsedValue = parser.parse(reply);
+    if (!parsedValue.isValid()) {
+        q->errorRetrieved(waitTimeRequest, "Failed to get information from TL website");
+        reply->deleteLater();
+        return;
+    }
 
-//        QString time = waitTimeMap.value("time").toString();
+    QVariantList waitTimeList = parsedValue.toList();
 
-//        QVariantMap properties;
-//        properties.insert("name", QString("%1 > %2").arg(stop, destination));
+    foreach (QVariant waitTimeEntry, waitTimeList) {
+        QVariantMap waitTimeMap = waitTimeEntry.toMap();
+        QString destination = waitTimeMap.value("destination").toString();
 
-//        WaitingTime waitingTime;
+        QString time = waitTimeMap.value("time").toString();
+        debug("tl-plugin") << time;
 
-//        QRegExp timeRegExp("(\\d\\d):(\\d\\d)");
-//        QRegExp realtimeRegExp("(\\d+)");
-//        QTime currentTime = QTime::currentTime();
-//        if (time.indexOf(timeRegExp) != -1) {
-//            QTime nextTime = QTime(timeRegExp.capturedTexts().at(1).toInt(),
-//                                   timeRegExp.capturedTexts().at(2).toInt());
-//            int minutes = currentTime.secsTo(nextTime) / 60;
-//            waitingTime.setWaitingTime(minutes);
-//            properties.insert("type", "timetable");
-//            waitingTime.setProperties(properties);
-//        } else if (time.indexOf(realtimeRegExp) != -1) {
-//            int minutes = realtimeRegExp.capturedTexts().at(1).toInt();
-//            waitingTime.setWaitingTime(minutes);
-//            properties.insert("type", "realtime");
-//            waitingTime.setProperties(properties);
-//        } else if (time.contains("now")) {
-//            waitingTime.setWaitingTime(0);
-//            properties.insert("type", "realtime");
-//            waitingTime.setProperties(properties);
-//        }
-//        waitingTimes.append(waitingTime);
-//    }
+        QVariantMap properties;
+        properties.insert("destination", destination);
 
-//    q->waitingTimeRetrieved(companyForWaitTime, lineForWaitTime,
-//                            journeyForWaitTime, stationForWaitTime, waitingTimes);
+        WaitingTime waitingTime;
 
-//    companyForWaitTime = Company();
-//    lineForWaitTime = Line();
-//    journeyForWaitTime = Journey();
-//    stationForWaitTime = Station();
+        QRegExp timeRegExp("(\\d\\d):(\\d\\d)");
+        QRegExp realtimeRegExp("(\\d+)");
+        QTime currentTime = QTime::currentTime();
+        if (time.indexOf(timeRegExp) != -1) {
+            QTime nextTime = QTime(timeRegExp.capturedTexts().at(1).toInt(),
+                                   timeRegExp.capturedTexts().at(2).toInt());
+            int minutes = ((currentTime.secsTo(nextTime) / 60) + 1440) % 1440;
+            waitingTime.setWaitingTime(minutes);
+            properties.insert("type", "timetable");
+            waitingTime.setProperties(properties);
+        } else if (time.indexOf(realtimeRegExp) != -1) {
+            int minutes = realtimeRegExp.capturedTexts().at(1).toInt();
+            waitingTime.setWaitingTime(minutes);
+            properties.insert("type", "realtime");
+            waitingTime.setProperties(properties);
+        } else if (time.contains("now")) {
+            waitingTime.setWaitingTime(0);
+            properties.insert("type", "realtime");
+            waitingTime.setProperties(properties);
+        }
+        waitingTimes.append(waitingTime);
+    }
+
+    emit q->waitingTimeRetrieved(waitTimeRequest, waitingTimes);
+    reply->deleteLater();
 }
 
 ////// End of private class //////
@@ -135,6 +145,7 @@ QStringList TransportLausannois::capabilities() const
     QStringList capabilities;
     capabilities.append(SUGGEST_STATIONS);
     capabilities.append(JOURNEYS_FROM_STATION);
+    capabilities.append(WAITING_TIME);
     return capabilities;
 }
 
@@ -142,7 +153,7 @@ void TransportLausannois::retrieveSuggestedStations(const QString &request,
                                                     const QString &partialStation)
 {
     Q_D(TransportLausannois);
-    if (partialStation.size() < 3) {
+    if (partialStation.size() < 2) {
         emit suggestedStationsRetrieved(request, QList<Station>());
         return;
     }
@@ -196,15 +207,19 @@ void TransportLausannois::retrieveJourneysFromStation(const QString &request,
     if (foundElement.isNull()) {
         debug("tl-plugin") << "Failed to find station" << station.name().toAscii().constData();
         emit errorRetrieved(request, QString("Failed to find station %1").arg(station.name()));
+        return;
     }
 
     QVariantMap disambiguation;
     disambiguation.insert("id", "org.SfietKonstantin.publictransportation.tl");
+    Company company;
+    company.setDisambiguation(disambiguation);
+    company.setName("Transports Lausannois");
 
-    QList<LineJourneys> lineJourneysList;
+    QList<InfoJourneys> infoJourneysList;
     currentElement = foundElement.firstChildElement();
     while (!currentElement.isNull()) {
-        LineJourneys lineJourney;
+        InfoJourneys infoJourneys;
         Line line;
         line.setName(currentElement.attribute("name"));
         QVariantMap properties;
@@ -212,35 +227,62 @@ void TransportLausannois::retrieveJourneysFromStation(const QString &request,
         properties.insert("description", currentElement.attribute("description"));
         line.setDisambiguation(disambiguation);
         line.setProperties(properties);
-        lineJourney.setLine(line);
+        infoJourneys.setCompany(company);
+        infoJourneys.setLine(line);
 
-        QList<Journey> journeys;
+        QList<QPair <Journey, Station> > journeysStations;
         QDomElement journeyElement = currentElement.firstChildElement();
         while (!journeyElement.isNull()) {
             Journey journey;
+            Station preciseStation;
             journey.setName(journeyElement.attribute("name"));
-            QVariantMap properties;
-            properties.insert("id", journeyElement.attribute("id"));
-            properties.insert("from", journeyElement.attribute("from"));
-            properties.insert("to", journeyElement.attribute("to"));
-            properties.insert("internalDescription", journeyElement.attribute("internalDescription"));
+            preciseStation.setName(station.name());
+            QVariantMap journeyProperties;
+            QVariantMap stationProperties;
+            journeyProperties.insert("id", journeyElement.attribute("id"));
+            journeyProperties.insert("from", journeyElement.attribute("from"));
+            journeyProperties.insert("to", journeyElement.attribute("to"));
+            journeyProperties.insert("internalDescription",
+                              journeyElement.attribute("internalDescription"));
             if (journeyElement.hasAttribute("via")) {
-                properties.insert("via", journeyElement.attribute("via"));
+                journeyProperties.insert("via", journeyElement.attribute("via"));
             }
-            journey.setProperties(properties);
-            journeys.append(journey);
+            stationProperties.insert("id", journeyElement.attribute("stationId"));
+            stationProperties.insert("city", journeyElement.attribute("stationCity"));
+            journey.setDisambiguation(disambiguation);
+            journey.setProperties(journeyProperties);
+            preciseStation.setDisambiguation(disambiguation);
+            preciseStation.setProperties(stationProperties);
+            journeysStations.append(QPair<Journey, Station>(journey, preciseStation));
 
             journeyElement = journeyElement.nextSiblingElement();
         }
 
-        lineJourney.setJourneys(journeys);
-        lineJourneysList.append(lineJourney);
+        infoJourneys.setJourneysAndStations(journeysStations);
+        infoJourneysList.append(infoJourneys);
 
         currentElement = currentElement.nextSiblingElement();
-
     }
 
-    emit journeysFromStationRetrieved(request, lineJourneysList);
+    debug("tl-plugin") << infoJourneysList.count();
+
+    emit journeysFromStationRetrieved(request, infoJourneysList);
+}
+
+void TransportLausannois::retrieveWaitingTime(const QString &request, const Company &company,
+                                              const Line &line, const Journey &journey,
+                                              const Station &station)
+{
+    Q_D(TransportLausannois);
+    Q_UNUSED(company);
+    Q_UNUSED(journey);
+    QString urlString = "http://m.t-l.ch/ressources/horaire.php?level=4&id=%1&line=%2";
+    urlString = urlString.arg(station.properties().value("id").toString(),
+                              line.properties().value("id").toString());
+
+    QNetworkReply *reply = d->nam->get(QNetworkRequest(QUrl(urlString)));
+    d->waitTimeRequestMap.insert(reply, request);
+    connect(reply, SIGNAL(finished()), this, SLOT(slotWaitingTimeFinished()));
 }
 
 }
