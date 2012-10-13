@@ -240,7 +240,7 @@ QVariant SearchStationModel::data(const QModelIndex &index, int role) const
         return data->supportJourneysFromStation;
         break;
     case ProviderNameRole:
-        return data->station.properties().value("providerName");
+        return data->station.properties().value("providerName", QString());
         break;
     default:
         return QVariant();

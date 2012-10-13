@@ -35,6 +35,7 @@ public:
     explicit TransportLausannois(QObject *parent = 0);
     virtual QStringList capabilities() const;
 public Q_SLOTS:
+    virtual void retrieveCopyright(const QString &request);
     virtual void retrieveSuggestedStations(const QString &request, const QString &partialStation);
     virtual void retrieveJourneysFromStation(const QString &request, const Station &station,
                                              int limit);

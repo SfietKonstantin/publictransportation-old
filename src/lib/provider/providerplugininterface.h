@@ -77,6 +77,7 @@ public:
      * @return capabilities.
      */
     virtual QStringList capabilities() const = 0;
+    virtual void retrieveCopyright(const QString &request) = 0;
     virtual void retrieveSuggestedStations(const QString &request,
                                            const QString &partialStation) = 0;
     virtual void retrieveJourneysFromStation(const QString &request,

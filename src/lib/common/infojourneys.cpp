@@ -14,6 +14,11 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+/**
+ * @file infojourneys.cpp
+ * @short Implemnetation of PublicTransportation::InfoJourneys
+ */
+
 #include "infojourneys.h"
 
 namespace PublicTransportation

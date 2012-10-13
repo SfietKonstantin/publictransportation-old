@@ -30,6 +30,35 @@
 #include "common/station.h"
 
 class QDBusArgument;
+
+/**
+ * @page dBusTypes DBus types used in publictransportation
+ *
+ * Several structures are used in publictransportation, and send through
+ * DBus. This page describes the content of those structures.
+ *
+ * @section transportationObject Transportation object
+ *
+ * A transportation object contains the properties describing an entity
+ * related to public transportation. The following entities are
+ * transportation objects.
+ * - A transportation company
+ * - A line
+ * - A journey
+ * - A station
+ *
+ * All these entities are stored the same way, using
+ * - A disambiguation parameter, that is a dictionnary of variant
+ * - A name, that is a string
+ * - Some properties, that is another dictionnary of variant.
+ *
+ * The signature of a transportation object is then
+ * \code
+ * (a{sv}sa{sv})
+ * \endcode
+ *
+ */
+
 namespace PublicTransportation
 {
 
@@ -38,6 +67,12 @@ class Company;
 class Line;
 class WaitingTime;
 class InfoJourneys;
+
+
+
+/**
+ * @brief A pair with a journey and a station
+ */
 typedef QPair<Journey, Station> JourneyAndStation;
 /**
  * @brief Marshall a transportation object to a DBus argument
@@ -144,11 +179,35 @@ QDBusArgument & operator<<(QDBusArgument &argument, const WaitingTime &waitingTi
  * @return DBus argument without the waiting thme.
  */
 const QDBusArgument & operator>>(const QDBusArgument &argument, WaitingTime &waitingTime);
+/**
+ * @brief Marshall a journey and a station
+ * @param[out] argument DBus argument.
+ * @param[in] journeyAndStation a journey and a station.
+ * @return DBus argument containing the journey and station.
+ */
 QDBusArgument & operator<<(QDBusArgument &argument, const JourneyAndStation &journeyAndStation);
+/**
+ * @brief Demarshall a journey and a station
+ * @param[in] argument DBus argument.
+ * @param[out] journeyAndStation a journey and a station.
+ * @return DBus argument without the journey and station.
+ */
 const QDBusArgument & operator>>(const QDBusArgument &argument,
                                  JourneyAndStation &journeyAndStation);
-QDBusArgument & operator<<(QDBusArgument &argument, const InfoJourneys &lineJourneys);
-const QDBusArgument & operator>>(const QDBusArgument &argument, InfoJourneys &lineJourneys);
+/**
+ * @brief Marshall an informations about journeys
+ * @param[out] argument DBus argument.
+ * @param[in] infoJourneys an informations about journeys.
+ * @return DBus argument containing the informations about journeys.
+ */
+QDBusArgument & operator<<(QDBusArgument &argument, const InfoJourneys &infoJourneys);
+/**
+ * @brief Demarshall an informations about journeys
+ * @param[out] argument DBus argument.
+ * @param[in] infoJourneys an informations about journeys.
+ * @return DBus argument without the informations about journeys.
+ */
+const QDBusArgument & operator>>(const QDBusArgument &argument, InfoJourneys &infoJourneys);
 
 /**
  * @brief Register DBus types

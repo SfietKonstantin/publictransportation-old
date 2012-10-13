@@ -14,12 +14,13 @@
         </method>
 
         <!-- Copyright -->
-        <!--<method name="getCopyright">
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In0"
-                        value="const PublicTransportation::Company &amp;"/>
-            <arg name="company" type="(a{sv}sa{sv})" direction="in" />
-            <arg name="copyright" type="s" direction="out" />
-        </method>-->
+        <signal name="copyrightRequested">
+            <arg name="request" type="s" direction="out" />
+        </signal>
+        <method name="registerCopyright">
+            <arg name="request" type="s" direction="in" />,
+            <arg name="copyright" type="s" direction="in" />,
+        </method>
 
         <!-- Autocompletion for station search -->
         <signal name="suggestStationsRequested">
@@ -45,8 +46,6 @@
             <annotation name="org.qtproject.QtDBus.QtTypeName.In1"
                         value="const QList&lt;PublicTransportation::InfoJourneys&gt; &amp;"/>
             <arg name="request" type="s" direction="in" />
-            <!--<arg name="infoJourneys" type="a((a{sv}sa{sv})(a{sv}sa{sv})a(((a{sv}sa{sv})(a{sv}sa{sv}))))"
-                direction="in" />-->
             <arg name="infoJourneys" type="a((a{sv}sa{sv})(a{sv}sa{sv})a((a{sv}sa{sv})(a{sv}sa{sv})))"
                  direction="in" />
         </method>
@@ -69,79 +68,5 @@
             <arg name="request" type="s" direction="in" />
             <arg name="waitingTimeList" type="a(ia{sv})" direction="in" />
         </method>
-
-
-        <!--<signal name="listCompaniesRequested" />
-        <signal name="listLinesRequested">
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="const PublicTransportation::Company &amp;"/>
-            <arg name="company" type="(a{sv}sa{sv})" direction="out" />
-        </signal>
-        <signal name="listJourneysRequested">
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="const PublicTransportation::Company &amp;"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="const PublicTransportation::Line &amp;"/>
-            <arg name="company" type="(a{sv}sa{sv})" direction="out" />
-            <arg name="line" type="(a{sv}sa{sv})" direction="out" />
-        </signal>
-        <signal name="listStationsRequested">
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="const PublicTransportation::Company &amp;"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="const PublicTransportation::Line &amp;"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="const PublicTransportation::Journey &amp;"/>
-            <arg name="company" type="(a{sv}sa{sv})" direction="out" />
-            <arg name="line" type="(a{sv}sa{sv})" direction="out" />
-            <arg name="journey" type="(a{sv}sa{sv})" direction="out" />
-        </signal>
-        <signal name="getWaitingTimeRequested">
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="const PublicTransportation::Company &amp;"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="const PublicTransportation::Line &amp;"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="const PublicTransportation::Journey &amp;"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In3" value="const PublicTransportation::Station &amp;"/>
-            <arg name="company" type="(a{sv}sa{sv})" direction="out" />
-            <arg name="line" type="(a{sv}sa{sv})" direction="out" />
-            <arg name="journey" type="(a{sv}sa{sv})" direction="out" />
-            <arg name="station" type="(a{sv}sa{sv})" direction="out" />
-        </signal>
-        <method name="registerBackend">
-            <arg name="capabilities" type="as" direction="in"/>
-        </method>
-        <method name="registerListedCompanies">
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="const QList&lt;PublicTransportation::Company&gt; &amp;"/>
-            <arg name="companies" type="a(a{sv}sa{sv})" direction="in"/>
-        </method>
-        <method name="registerListedLines">
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="const PublicTransportation::Company &amp;"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="const QList&lt;PublicTransportation::Line&gt; &amp;"/>
-            <arg name="company" type="(a{sv}sa{sv})" direction="in"/>
-            <arg name="lines" type="a(a{sv}sa{sv})" direction="in"/>
-        </method>
-        <method name="registerListedJourneys">
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="const PublicTransportation::Company &amp;"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="const PublicTransportation::Line &amp;"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="const QList&lt;PublicTransportation::Journey&gt; &amp;"/>
-            <arg name="company" type="(a{sv}sa{sv})" direction="in"/>
-            <arg name="line" type="(a{sv}sa{sv})" direction="in"/>
-            <arg name="journeys" type="a(a{sv}sa{sv})" direction="in"/>
-        </method>
-        <method name="registerListedStations">
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="const PublicTransportation::Company &amp;"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="const PublicTransportation::Line &amp;"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="const PublicTransportation::Journey &amp;"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In3" value="const QList&lt;PublicTransportation::Station&gt; &amp;"/>
-            <arg name="company" type="(a{sv}sa{sv})" direction="in"/>
-            <arg name="line" type="(a{sv}sa{sv})" direction="in"/>
-            <arg name="journey" type="(a{sv}sa{sv})" direction="in"/>
-            <arg name="stations" type="a(a{sv}sa{sv})" direction="in"/>
-        </method>
-        <method name="registerWaitingTime">
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="const PublicTransportation::Company &amp;"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="const PublicTransportation::Line &amp;"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="const PublicTransportation::Journey &amp;"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In3" value="const PublicTransportation::Station &amp;"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In4" value="const QList&lt;PublicTransportation::WaitingTime&gt; &amp;"/>
-            <arg name="company" type="(a{sv}sa{sv})" direction="in"/>
-            <arg name="line" type="(a{sv}sa{sv})" direction="in"/>
-            <arg name="journey" type="(a{sv}sa{sv})" direction="in"/>
-            <arg name="station" type="a(a{sv}sa{sv})" direction="in"/>
-            <arg name="waitingTime" type="a(ia{sv})" direction="in" />
-        </method>-->
     </interface>
 </node>

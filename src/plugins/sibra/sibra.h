@@ -14,41 +14,44 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_COMMONHELPER_H
-#define PUBLICTRANSPORTATION_COMMONHELPER_H
+#ifndef PUBLICTRANSPORTATION_PROVIDER_SIBRA_H
+#define PUBLICTRANSPORTATION_PROVIDER_SIBRA_H
 
-/**
- * @file commonhelper.h
- * @short Widely used helper functions
- */
-
-#include <QtCore/QList>
+#include <QtCore/QObject>
+#include "provider/providerpluginobject.h"
 
 namespace PublicTransportation
 {
 
-/**
- * @short Shared copy
- *
- * This function is used to get the shared copy
- * version of an implicitely shared object in a list.
- *
- * This function can then identify objects that are not
- * shared, but are equal, and retrieve a shared copy instead.
- *
- * @param entry shared entry to search.
- * @param list list of shared entries to search.
- * @return the shared version of the provided entry.
- */
-template<class T> inline T sharedCopy(const T &entry, const QList<T> list)
+namespace Provider
 {
-    if (list.contains(entry)) {
-        return list[list.indexOf(entry)];
-    } else {
-        return T();
-    }
-}
+
+class SibraPrivate;
+class Sibra : public ProviderPluginObject
+{
+    Q_OBJECT
+    Q_INTERFACES(PublicTransportation::ProviderPluginInterface)
+public:
+    explicit Sibra(QObject *parent = 0);
+    virtual QStringList capabilities() const;
+public Q_SLOTS:
+    virtual void retrieveCopyright(const QString &request);
+    virtual void retrieveSuggestedStations(const QString &request, const QString &partialStation);
+    virtual void retrieveJourneysFromStation(const QString &request, const Station &station,
+                                             int limit);
+    virtual void retrieveWaitingTime(const QString &request, const Company &company,
+                                     const Line &line, const Journey &journey,
+                                     const Station &station);
+protected:
+    QScopedPointer<SibraPrivate> d_ptr;
+private:
+    Q_DECLARE_PRIVATE(Sibra)
+    Q_PRIVATE_SLOT(d_func(), void slotSuggestedStationsFinished())
+    Q_PRIVATE_SLOT(d_func(), void slotJourneysFromStationFinished())
+};
 
 }
 
-#endif // PUBLICTRANSPORTATION_COMMONHELPER_H
+}
+
+#endif // PUBLICTRANSPORTATION_PROVIDER_SIBRA_H

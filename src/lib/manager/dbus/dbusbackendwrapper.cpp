@@ -266,6 +266,13 @@ void DBusBackendWrapper::registerBackend(const QStringList &capabilities)
     setStatus(Launched);
 }
 
+QString DBusBackendWrapper::requestCopyright()
+{
+    QString request = createRequest(CopyrightType);
+    emit copyrightRequested(request);
+    return request;
+}
+
 QString DBusBackendWrapper::requestSuggestStations(const QString &partialStation)
 {
     QString request = createRequest(SuggestStationType);

@@ -90,9 +90,6 @@ void JourneysFromStationModelPrivate::slotJourneysRegistered(const QString &requ
         return;
     }
 
-    q->clear();
-
-
     foreach (InfoJourneys info, infoJourneys) {
         Line line = info.line();
         Company company = info.company();
@@ -205,6 +202,8 @@ void JourneysFromStationModel::load(AbstractBackendWrapper *backend, const QStri
     d->station = station;
     d->currentRequest = request;
     emit updatingChanged();
+
+    clear();
 }
 
 void JourneysFromStationModel::requestWaitingTime(int index)

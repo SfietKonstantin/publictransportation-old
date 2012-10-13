@@ -39,6 +39,12 @@ void PublictransportationAdaptor::registerBackend(const QStringList &capabilitie
     parent()->registerBackend(capabilities);
 }
 
+void PublictransportationAdaptor::registerCopyright(const QString &request, const QString &copyright)
+{
+    // handle method call org.SfietKonstantin.publictransportation.registerCopyright
+    parent()->registerCopyright(request, copyright);
+}
+
 void PublictransportationAdaptor::registerError(const QString &request, const QString &error)
 {
     // handle method call org.SfietKonstantin.publictransportation.registerError

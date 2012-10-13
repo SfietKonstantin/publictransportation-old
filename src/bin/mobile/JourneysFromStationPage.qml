@@ -33,10 +33,12 @@ AbstractPage {
         }
 
         ToolIcon {
-            iconId: page.displayCategories ? "toolbar-list-selected" : "toolbar-list"
-            onClicked: {
-                page.displayCategories = !page.displayCategories
-            }
+            iconId: "toolbar-favorite-unmark"
+        }
+
+        ToolIcon {
+            iconId: "toolbar-view-menu"
+            onClicked: menu.open()
         }
     }
 
@@ -113,4 +115,15 @@ AbstractPage {
     }
 
     WaitingTimePage {id: waitingTimePage}
+
+    Menu {
+        id: menu
+
+        MenuLayout {
+            MenuItem {
+                text: page.displayCategories ? qsTr("Hide categories") : qsTr("Display categories")
+                onClicked: page.displayCategories = !page.displayCategories
+            }
+        }
+    }
 }

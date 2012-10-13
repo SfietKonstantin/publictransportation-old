@@ -54,10 +54,79 @@
  * - write a program or a script that profits from the DBus API
  * - write a provider plugin and profit from the C++ API.
  *
- * libpublictransportation manages providers and scripts and
+ * publictransportation manages providers and scripts and
  * launch them when needed, and communicate with DBus to them.
  * This have several advantages, notably a fully asynchronous
  * process and a very simple architecture.
+ *
+ * \section futureWorks Future works
+ *
+ * Due to the hard dependency on DBus, it is impossible
+ * to make publictransportation on non-Linux systems.
+ * However, the DBus part is separated from the logic
+ * and it might be possible to extend publictransportation
+ * to work using sockets, and then, on other platforms. However
+ * scripts using the DBus API won't work.
+ */
+/**
+ * \page api API
+ *
+ * \section Design
+ *
+ * publictransportation uses a fully asynchronous API. Requests
+ * are done calling methods that immediately returns, and responses
+ * are carried using signals.
+ *
+ * publictransportation runs several helper programs or scripts, called
+ * \e backends, that uses DBus to react to user input and return replies.
+ * These backends are represented using the AbstractBackendWrapper class.
+ * This class provides a bridge between the DBus API and the GUI.
+ *
+ * A typical call is described as follow
+ * -# Replying to user input, a request is sent. It is done using by calling
+ *    \b requestFoo method on the backend wrapper.
+ * -# The backend wrapper send a DBus signal, \b fooRequested
+ * -# The backend respond to the signal, and transmit data using the DBus
+ *    method \b registerFoo
+ * -# The backend wrapper get the data and send \b fooRegistered to notify the
+ *    GUI that information is available.
+ *
+ * \section DBus API
+ *
+ * publictransportation uses \e org.SfietKonstantin.publictransportation as
+ * service name, and all backends have a specific path (\e /backend/somepath) that
+ * should be used to communicate. The path is provided as an argument while the
+ * backend is launched, using --identifier <somepath>.
+ *
+ * \subsection registerBackend org.SfietKonstantin.publictransportation.registerBackend
+ *
+ * This method is used to register the backend. It should be called when the backend
+ * is launched in order or publictransportation to know about it's capabilities.
+ *
+ * \b Parameters
+ * - as \e capabilities Backend capabilities, that are send as a list of strings.
+ *
+ * \subsection registerError org.SfietKonstantin.publictransportation.registerError
+ *
+ * This method is used to reply to any request and to note that there were an
+ * error during the request.
+ *
+ * @todo this method is still WIP
+ *
+ * \b Parameters
+ * - s \e request Request identifier.
+ * - s \e error A string describing the error.
+ *
+ * \subsection copyrightRequested org.SfietKonstantin.publictransportation.copyrightRequested
+ *
+ * This signal is used to notify that copyright informations are requested. Copyright
+ * informations should be provided by all the providers, because most of the online
+ * public transportation websites requires that the copyright and other legal informations
+ * should be provided.
+ *
+ * \b Parameters
+ * - s \e request Request identifier.
+ * - s \e copyright Copyright and other legal informations.
  */
 
 /**

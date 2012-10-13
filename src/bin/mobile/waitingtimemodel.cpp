@@ -82,9 +82,6 @@ void WaitingTimeModelPrivate::slotWaitingTimeRegistered(const QString &request,
         return;
     }
 
-    q->clear();
-
-
     foreach (WaitingTime waitingTime, waitingTimeList) {
         WaitingTimeModelData * dataItem = new WaitingTimeModelData;
         dataItem->waitingTime = waitingTime;
@@ -180,6 +177,8 @@ void WaitingTimeModel::load(AbstractBackendWrapper *backend, const QString &requ
     d->station = station;
     d->currentRequest = request;
     emit updatingChanged();
+
+    clear();
 }
 
 void WaitingTimeModel::clear()

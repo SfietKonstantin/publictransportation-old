@@ -18,7 +18,6 @@
 
 #include <QtCore/QFile>
 #include <QtCore/QtPlugin>
-#include <QtCore/QTime>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkRequest>
 #include <QtNetwork/QNetworkReply>
@@ -63,7 +62,7 @@ void OpenDataChPrivate::slotSuggestedStationsFinished()
     Q_Q(OpenDataCh);
     QNetworkReply *reply = qobject_cast<QNetworkReply *>(q->sender());
 
-    debug("tl-plugin") << "Data retrieved from url" << reply->url().toString();
+    debug("opendatach-plugin") << "Data retrieved from url" << reply->url().toString();
     QJson::Parser parser;
 
     QVariantMap data = parser.parse(reply).toMap();

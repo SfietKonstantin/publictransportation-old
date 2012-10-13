@@ -57,6 +57,7 @@ public:
      */
     virtual ~ProviderPluginObject();
 public Q_SLOTS:
+    virtual void retrieveCopyright(const QString &request);
     virtual void retrieveSuggestedStations(const QString &request, const QString &partialStation);
     virtual void retrieveJourneysFromStation(const QString &request,
                                              const PublicTransportation::Station &station,
@@ -68,6 +69,7 @@ public Q_SLOTS:
                                      const PublicTransportation::Station &station);
 Q_SIGNALS:
     void errorRetrieved(const QString &request, const QString &error);
+    void copyrightRetrieved(const QString &request, const QString &copyright);
     void suggestedStationsRetrieved(const QString &request,
                                     const QList<PublicTransportation::Station> &suggestedStations);
     void journeysFromStationRetrieved(const QString &request,

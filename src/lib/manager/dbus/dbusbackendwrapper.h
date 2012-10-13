@@ -56,6 +56,7 @@ public:
      * @brief Destructor
      */
     virtual ~DBusBackendWrapper();
+    virtual QString requestCopyright();
     virtual QString requestSuggestStations(const QString &partialStation);
     virtual QString requestJourneysFromStation(const Station &station, int limit);
     virtual QString requestWaitingTime(const Company &company, const Line &line,
@@ -79,6 +80,7 @@ public Q_SLOTS:
     virtual void kill();
     void registerBackend(const QStringList &capabilities);
 Q_SIGNALS:
+    void copyrightRequested(const QString &request);
     /**
      * @brief Request suggested stations
      *

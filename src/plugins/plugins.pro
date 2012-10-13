@@ -1,2 +1,3 @@
 TEMPLATE = subdirs
-SUBDIRS += tl opendatach
+SUBDIRS += tl opendatach sibra
+

@@ -128,6 +128,10 @@ bool ProviderPluginDBusWrapper::load(const QString &plugin)
     // Establish some connections
     connect(d->provider, SIGNAL(errorRetrieved(QString,QString)),
             d->proxy, SLOT(registerError(QString,QString)));
+    connect(d->proxy, SIGNAL(copyrightRequested(QString)),
+            d->provider, SLOT(retrieveCopyright(QString)));
+    connect(d->provider, SIGNAL(copyrightRetrieved(QString,QString)),
+            d->proxy, SLOT(registerCopyright(QString,QString)));
     connect(d->proxy, SIGNAL(suggestStationsRequested(QString,QString)),
             d->provider, SLOT(retrieveSuggestedStations(QString,QString)));
     connect(d->provider,

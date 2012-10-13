@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef BACKENDDBUSPROXY_H_1349987003
-#define BACKENDDBUSPROXY_H_1349987003
+#ifndef BACKENDDBUSPROXY_H_1350055340
+#define BACKENDDBUSPROXY_H_1350055340
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -49,6 +49,13 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("registerBackend"), argumentList);
     }
 
+    inline QDBusPendingReply<> registerCopyright(const QString &request, const QString &copyright)
+    {
+        QList<QVariant> argumentList;
+        argumentList << QVariant::fromValue(request) << QVariant::fromValue(copyright);
+        return asyncCallWithArgumentList(QLatin1String("registerCopyright"), argumentList);
+    }
+
     inline QDBusPendingReply<> registerError(const QString &request, const QString &error)
     {
         QList<QVariant> argumentList;
@@ -78,6 +85,7 @@ public Q_SLOTS: // METHODS
     }
 
 Q_SIGNALS: // SIGNALS
+    void copyrightRequested(const QString &request);
     void journeysFromStationRequested(const QString &request, const PublicTransportation::Station & station, int limit);
     void suggestStationsRequested(const QString &request, const QString &partialStation);
     void waitingTimeRequested(const QString &request, const PublicTransportation::Company & company, const PublicTransportation::Line & line, const PublicTransportation::Journey & journey, const PublicTransportation::Station & station);

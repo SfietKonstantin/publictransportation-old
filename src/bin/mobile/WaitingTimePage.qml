@@ -26,7 +26,7 @@ AbstractPage {
     property string company
     headerColor: "#006E29"
     headerLabelColor: "white"
-    title: qsTr("Journeys")
+    title: station
     tools: ToolBarLayout {
         ToolIcon {
             iconId: "toolbar-back"
@@ -40,22 +40,12 @@ AbstractPage {
         Item {
             id: labelItem
             anchors.top: parent.top; anchors.left: parent.left; anchors.right: parent.right
-            height: 3 * Ui.MARGIN_DEFAULT + Ui.MARGIN_SMALL + stationText.height
-                    + companyText.height + lineAndDirectionText.height
-
-            Label {
-                id: stationText
-                anchors.top: parent.top; anchors.topMargin: Ui.MARGIN_SMALL
-                anchors.left: parent.left; anchors.leftMargin: Ui.MARGIN_DEFAULT
-                anchors.right: parent.right; anchors.rightMargin: Ui.MARGIN_DEFAULT
-                text: page.station
-                font.pixelSize: Ui.FONT_SIZE_XLARGE
-                color: !theme.inverted ? Ui.FONT_COLOR_PRIMARY : Ui.FONT_COLOR_INVERTED_PRIMARY
-            }
+            height: 2 * Ui.MARGIN_DEFAULT + Ui.MARGIN_SMALL + companyText.height
+                    + lineAndDirectionText.height
 
             Label {
                 id: lineAndDirectionText
-                anchors.top: stationText.bottom; anchors.topMargin: Ui.MARGIN_DEFAULT
+                anchors.top: parent.top; anchors.topMargin: Ui.MARGIN_DEFAULT
                 anchors.left: parent.left; anchors.leftMargin: Ui.MARGIN_DEFAULT
                 anchors.right: parent.right; anchors.rightMargin: Ui.MARGIN_DEFAULT
                 text: "<b>" + page.line + "</b>   " + page.journey

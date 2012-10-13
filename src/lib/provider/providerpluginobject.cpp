@@ -28,6 +28,11 @@ ProviderPluginObject::~ProviderPluginObject()
 {
 }
 
+void ProviderPluginObject::retrieveCopyright(const QString &request)
+{
+    emit copyrightRetrieved(request, "Please implement the copyright");
+}
+
 void ProviderPluginObject::retrieveSuggestedStations(const QString &request,
                                                      const QString &partialStation)
 {

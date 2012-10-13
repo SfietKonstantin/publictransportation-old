@@ -85,33 +85,40 @@ class AbstractBackendWrapperPrivate;
  * - setCapabilities()
  * - setLastError()
  *
- * @section informationStorage Information storage
+ * @section relayingReplies Relaying replies
  *
- * This class is also used to store informations that
- * the backend retrieved. These informations can be
- * stored and access through
- * - setCapabilities()
- * - setCompanies()
- * - setLines()
- * - setJourneys()
- * - setStations()
- * - setWaitingTime()
+ * This class is also used to relay replies from the backend,
+ * using specific combinaison of signals and slots. When the
+ * backend replied, a slot like \b registerAbc should be called.
+ * This signal will emit \b abcRegistered. Here is the list of
+ * signals / slots used for the relay
+ * - registerError()
+ * - registerCopyright()
+ * - registerSuggestedStations()
+ * - registerJourneysFromStation()
+ * - registerWaitingTime()
  *
- * as well as
- * - capabilities()
- * - companies()
- * - lines()
- * - journeys()
- * - stations()
- * - waitingTime()
+ * - errorRegistered()
+ * - copyrightRegistered()
+ * - suggestedStationsRegistered()
+ * - journeysFromStationRegistered()
+ * - waitingTimeRegistered()
  *
  * This class also provides interfaces for implementing some capabilities
- * of the providers, that should be implemented in subclasses:
- * - requestListCompanies()
- * - requestListLines()
- * - requestListJourneys()
- * - requestListStations()
+ * of the providers, that should be implemented in subclasses. They are all
+ * of the form \b requestAbc.
+ * - requestCopyright()
+ * - requestSuggestStations()
+ * - requestJourneysFromStation()
  * - requestWaitingTime()
+ *
+ * All these requests returns a request identifier, and all responses will
+ * provide the same identifier, in order to identify the request more easily.
+ *
+ * Implementing requests can be done by calling createRequest(). This method
+ * provides a request identifier, and register the request as pending. When
+ * requests are answered, they are removed. The abstract backend wrapper can
+ * then takes care of request tracking.
  *
  * Remark that there is no request for capabilities. It is because
  * registering capabilities is something that backends should do
@@ -153,9 +160,26 @@ public:
          */
         Invalid
     };
+
+    /**
+     * @brief Enumeration describing request types
+     */
     enum RequestType {
+        /**
+         * @short Request copyright
+         */
+        CopyrightType,
+        /**
+         * @short Request suggested stations
+         */
         SuggestStationType,
+        /**
+         * @short Request journeys from a station
+         */
         JourneysFromStationType,
+        /**
+         * @short Request waiting time
+         */
         WaitingTimeType
     };
 
@@ -198,9 +222,23 @@ public:
      * @return capabilities.
      */
     QStringList capabilities() const;
-
-
+    /**
+     * @brief Request copyright
+     * @return request identifier.
+     */
+    virtual QString requestCopyright() = 0;
+    /**
+     * @brief Request suggested stations
+     * @param partialStation partial station name.
+     * @return request identifier.
+     */
     virtual QString requestSuggestStations(const QString &partialStation) = 0;
+    /**
+     * @brief Request journeys from a given station
+     * @param station station.
+     * @param limit limit the number of entries.
+     * @return request identifier.
+     */
     virtual QString requestJourneysFromStation(const Station &station, int limit) = 0;
     virtual QString requestWaitingTime(const Company &company, const Line &line,
                                        const Journey &journey, const Station &station) = 0;
@@ -237,6 +275,7 @@ public Q_SLOTS:
      */
     virtual void kill() = 0;
     void registerError(const QString &request, const QString &error);
+    void registerCopyright(const QString &request, const QString &copyright);
     void registerSuggestedStations(const QString &request,
                                    const QList<PublicTransportation::Station> &suggestedStations);
     void registerJourneysFromStation(const QString &request,
@@ -254,6 +293,7 @@ Q_SIGNALS:
     void capabilitiesChanged();
 
     void errorRegistered(const QString &request, const QString &error);
+    void copyrightRegistered(const QString &request, const QString &copyright);
     void suggestedStationsRegistered(const QString & request,
                                      const QList<PublicTransportation::Station> &suggestedStations);
     void journeysFromStationRegistered(const QString &request,

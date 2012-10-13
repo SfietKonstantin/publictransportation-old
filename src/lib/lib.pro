@@ -20,7 +20,6 @@ HEADERS =   publictransportation_global.h \
             common/infojourneys.h \
             common/waitingtime.h \
             common/dbus/dbusconstants.h \
-            common/dbus/dbushelper.h \
             manager/desktopfileparser_p.h \
             manager/backendinfo.h \
             manager/abstractbackendwrapper.h \

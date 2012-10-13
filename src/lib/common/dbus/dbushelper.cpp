@@ -211,14 +211,14 @@ const QDBusArgument & operator>>(const QDBusArgument &argument,
     return argument;
 }
 
-QDBusArgument & operator<<(QDBusArgument &argument, const InfoJourneys &lineJourneys)
+QDBusArgument & operator<<(QDBusArgument &argument, const InfoJourneys &infoJourneys)
 {
     argument.beginStructure();
-    argument << lineJourneys.company();
-    argument << lineJourneys.line();
+    argument << infoJourneys.company();
+    argument << infoJourneys.line();
 
     argument.beginArray(qMetaTypeId<PublicTransportation::JourneyAndStation>());
-    foreach(JourneyAndStation journeyStation, lineJourneys.journeysAndStations()) {
+    foreach(JourneyAndStation journeyStation, infoJourneys.journeysAndStations()) {
         argument << journeyStation;
     }
     argument.endArray();
@@ -226,15 +226,15 @@ QDBusArgument & operator<<(QDBusArgument &argument, const InfoJourneys &lineJour
     return argument;
 }
 
-const QDBusArgument & operator>>(const QDBusArgument &argument, InfoJourneys &lineJourneys)
+const QDBusArgument & operator>>(const QDBusArgument &argument, InfoJourneys &infoJourneys)
 {
     argument.beginStructure();
     Company company;
     argument >> company;
-    lineJourneys.setCompany(company);
+    infoJourneys.setCompany(company);
     Line line;
     argument >> line;
-    lineJourneys.setLine(line);
+    infoJourneys.setLine(line);
 
     argument.beginArray();
     QList<JourneyAndStation> journeysStations;
@@ -244,7 +244,7 @@ const QDBusArgument & operator>>(const QDBusArgument &argument, InfoJourneys &li
         journeysStations.append(journeyStation);
     }
     argument.endArray();
-    lineJourneys.setJourneysAndStations(journeysStations);
+    infoJourneys.setJourneysAndStations(journeysStations);
 
     argument.endStructure();
     return argument;

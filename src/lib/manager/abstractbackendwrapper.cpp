@@ -25,7 +25,6 @@
 #include <QtCore/QUuid>
 
 #include "debug.h"
-#include "common/commonhelper.h"
 
 namespace PublicTransportation
 {
@@ -98,12 +97,34 @@ void AbstractBackendWrapper::registerError(const QString &request, const QString
     }
 }
 
+void AbstractBackendWrapper::registerCopyright(const QString &request, const QString &copyright)
+{
+    Q_D(AbstractBackendWrapper);
+    if (d->requests.contains(request)) {
+        if (d->requests.value(request)->type != AbstractBackendWrapper::CopyrightType) {
+            registerError(request, "Invalid request type");
+            return;
+        }
+
+        debug("abs-backend-wrapper") << "Copyright registered";
+        debug("abs-backend-wrapper") << "(Request" << request << ")";
+        debug("abs-backend-wrapper") << copyright;
+
+        delete d->requests.take(request);
+        emit copyrightRegistered(request, copyright);
+    }
+}
+
 void AbstractBackendWrapper::registerSuggestedStations(const QString & request,
                                                        const QList<Station> &suggestedStations)
 {
     Q_D(AbstractBackendWrapper);
     if (d->requests.contains(request)) {
-        delete d->requests.take(request);
+        if (d->requests.value(request)->type != AbstractBackendWrapper::SuggestStationType) {
+            registerError(request, "Invalid request type");
+            return;
+        }
+
         debug("abs-backend-wrapper") << "Suggested stations registered";
         debug("abs-backend-wrapper") << "(Request" << request << ")";
         debug("abs-backend-wrapper") << "list of suggested stations";
@@ -111,6 +132,7 @@ void AbstractBackendWrapper::registerSuggestedStations(const QString & request,
             debug("abs-backend-wrapper") << station.name();
         }
 
+        delete d->requests.take(request);
         emit suggestedStationsRegistered(request, suggestedStations);
     }
 }
@@ -120,7 +142,11 @@ void AbstractBackendWrapper::registerJourneysFromStation(const QString &request,
 {
     Q_D(AbstractBackendWrapper);
     if (d->requests.contains(request)) {
-        delete d->requests.take(request);
+        if (d->requests.value(request)->type != AbstractBackendWrapper::JourneysFromStationType) {
+            registerError(request, "Invalid request type");
+            return;
+        }
+
         debug("abs-backend-wrapper") << "Journeys from station registered";
         debug("abs-backend-wrapper") << "(Request" << request << ")";
         debug("abs-backend-wrapper") << "list of lines";
@@ -128,6 +154,7 @@ void AbstractBackendWrapper::registerJourneysFromStation(const QString &request,
             debug("abs-backend-wrapper") << infoJourneys.line().name();
         }
 
+        delete d->requests.take(request);
         emit journeysFromStationRegistered(request, infoJourneys);
     }
 }
@@ -137,7 +164,11 @@ void AbstractBackendWrapper::registerWaitingTime(const QString &request,
 {
     Q_D(AbstractBackendWrapper);
     if (d->requests.contains(request)) {
-        delete d->requests.take(request);
+        if (d->requests.value(request)->type != AbstractBackendWrapper::WaitingTimeType) {
+            registerError(request, "Invalid request type");
+            return;
+        }
+
         debug("abs-backend-wrapper") << "Waiting time registered";
         debug("abs-backend-wrapper") << "(Request" << request << ")";
         debug("abs-backend-wrapper") << "list of waiting time";
@@ -145,6 +176,7 @@ void AbstractBackendWrapper::registerWaitingTime(const QString &request,
             debug("abs-backend-wrapper") << waitingTime.waitingTime();
         }
 
+        delete d->requests.take(request);
         emit waitingTimeRegistered(request, waitingTimeList);
     }
 }

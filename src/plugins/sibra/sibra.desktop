@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=SIBRA
+Comment=Transports urbains de l'agglomération d'Annecy
+Icon=
+Type=Service
+Exec=$PROVIDER libsibra.so
+X-PublicTransportation-BackendInfo-Id=org.SfietKonstantin.publictransportation.sibra
+X-PublicTransportation-BackendInfo-Author=Lucien XU
+X-PublicTransportation-BackendInfo-Email=sfietkonstantin@free.fr
+X-PublicTransportation-BackendInfo-Website=
+X-PublicTransportation-BackendInfo-Version=1.0.0

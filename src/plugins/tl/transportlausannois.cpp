@@ -91,6 +91,7 @@ void TransportLausannoisPrivate::slotWaitingTimeFinished()
     }
 
     QVariantList waitTimeList = parsedValue.toList();
+    QTime currentTime = QTime::currentTime();
 
     foreach (QVariant waitTimeEntry, waitTimeList) {
         QVariantMap waitTimeMap = waitTimeEntry.toMap();
@@ -106,7 +107,6 @@ void TransportLausannoisPrivate::slotWaitingTimeFinished()
 
         QRegExp timeRegExp("(\\d\\d):(\\d\\d)");
         QRegExp realtimeRegExp("(\\d+)");
-        QTime currentTime = QTime::currentTime();
         if (time.indexOf(timeRegExp) != -1) {
             QTime nextTime = QTime(timeRegExp.capturedTexts().at(1).toInt(),
                                    timeRegExp.capturedTexts().at(2).toInt());
@@ -149,6 +149,12 @@ QStringList TransportLausannois::capabilities() const
     return capabilities;
 }
 
+void TransportLausannois::retrieveCopyright(const QString &request)
+{
+    QString copyright = tr("(c) Copyright tl, 2001-2012, tous droits réservés.");
+    emit copyrightRetrieved(request, copyright);
+}
+
 void TransportLausannois::retrieveSuggestedStations(const QString &request,
                                                     const QString &partialStation)
 {
@@ -167,9 +173,24 @@ void TransportLausannois::retrieveSuggestedStations(const QString &request,
 
 
     foreach (QString stationName, d->stations) {
-        if (stationName.toLower().contains(partialStation.toLower())) {
+        if (stationName.toLower().startsWith(partialStation.toLower())) {
             Station station (disambiguation, stationName, properties);
             suggestedStations.append(station);
+        }
+    }
+    foreach (QString stationName, d->stations) {
+        if (stationName.toLower().contains(partialStation.toLower())) {
+            bool added = false;
+            foreach (Station station, suggestedStations) {
+                if (station.name() == stationName) {
+                    added = true;
+                }
+            }
+
+            if (!added) {
+                Station station (disambiguation, stationName, properties);
+                suggestedStations.append(station);
+            }
         }
     }
 
