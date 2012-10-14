@@ -60,12 +60,12 @@ OpenDataChPrivate::OpenDataChPrivate(OpenDataCh *q):
 void OpenDataChPrivate::slotSuggestedStationsFinished()
 {
     Q_Q(OpenDataCh);
-    QNetworkReply *reply = qobject_cast<QNetworkReply *>(q->sender());
 
-    debug("opendatach-plugin") << "Data retrieved from url" << reply->url().toString();
+    debug("opendatach-plugin") << "Data retrieved from url"
+                               << suggestedStationsReply->url().toString();
     QJson::Parser parser;
 
-    QVariantMap data = parser.parse(reply).toMap();
+    QVariantMap data = parser.parse(suggestedStationsReply).toMap();
     QVariantList stationDataList = data.value("stations").toList();
 
     QList<Station> suggestedStations;
@@ -131,4 +131,4 @@ void OpenDataCh::retrieveSuggestedStations(const QString &request, const QString
 
 #include "moc_opendatach.cpp"
 
-Q_EXPORT_PLUGIN2(tl, PublicTransportation::Provider::OpenDataCh)
+Q_EXPORT_PLUGIN2(opendatach, PublicTransportation::Provider::OpenDataCh)

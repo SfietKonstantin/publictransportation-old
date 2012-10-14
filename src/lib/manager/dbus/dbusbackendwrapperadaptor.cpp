@@ -45,10 +45,10 @@ void PublictransportationAdaptor::registerCopyright(const QString &request, cons
     parent()->registerCopyright(request, copyright);
 }
 
-void PublictransportationAdaptor::registerError(const QString &request, const QString &error)
+void PublictransportationAdaptor::registerError(const QString &request, const QString &errorId, const QString &error)
 {
     // handle method call org.SfietKonstantin.publictransportation.registerError
-    parent()->registerError(request, error);
+    parent()->registerError(request, errorId, error);
 }
 
 void PublictransportationAdaptor::registerJourneysFromStation(const QString &request, const QList<PublicTransportation::InfoJourneys> & infoJourneys)

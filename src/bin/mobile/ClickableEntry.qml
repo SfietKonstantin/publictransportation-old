@@ -94,6 +94,7 @@ Item
             id: preText
             anchors.left: parent.left; anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
+            maximumLineCount: 1
         }
     }
 
@@ -108,6 +109,8 @@ Item
         Label {
             id: mainText
             anchors.left: parent.left; anchors.right: parent.right
+            maximumLineCount: subText.text == "" ? 2 : 1
+            elide: Text.ElideRight
             platformStyle: LabelStyle {
                 fontPixelSize: Ui.FONT_SIZE_MLARGE
                 textColor: theme.inverted ? Ui.FONT_COLOR_INVERTED_PRIMARY :
@@ -119,6 +122,7 @@ Item
             id: subText
             anchors.top: mainText.bottom; anchors.topMargin: Ui.MARGIN_XSMALL
             anchors.left: parent.left; anchors.right: parent.right
+            maximumLineCount: 1
             elide: Text.ElideRight
             platformStyle: LabelStyle {
                 fontPixelSize: Ui.FONT_SIZE_SMALL

@@ -115,7 +115,7 @@ private:
     Q_DECLARE_PRIVATE(SearchStationModel)
     Q_PRIVATE_SLOT(d_func(), void slotBackendAdded(QString,AbstractBackendWrapper*))
     Q_PRIVATE_SLOT(d_func(), void slotStatusChanged())
-    Q_PRIVATE_SLOT(d_func(), void slotErrorRegistered(QString,QString))
+    Q_PRIVATE_SLOT(d_func(), void slotErrorRegistered(QString,QString,QString))
     Q_PRIVATE_SLOT(d_func(),
                    void slotSuggestedStationsRegistered(QString,
                                                         QList<PublicTransportation::Station>))

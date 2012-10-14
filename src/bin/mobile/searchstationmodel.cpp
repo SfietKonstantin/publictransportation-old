@@ -50,7 +50,8 @@ public:
     SearchStationModelPrivate(SearchStationModel *q);
     void slotBackendAdded(const QString &identifier, AbstractBackendWrapper *backend);
     void slotStatusChanged();
-    void slotErrorRegistered(const QString &request, const QString &errorString);
+    void slotErrorRegistered(const QString &request, const QString &errorId,
+                             const QString &errorString);
     void slotSuggestedStationsRegistered(const QString & request,
                                          const QList<PublicTransportation::Station> &stations);
     /**
@@ -98,8 +99,8 @@ void SearchStationModelPrivate::slotStatusChanged()
                                                       QList<PublicTransportation::Station>)),
                    q, SLOT(slotSuggestedStationsRegistered(QString,
                                                            QList<PublicTransportation::Station>)));
-        q->connect(backend, SIGNAL(errorRegistered(QString,QString)),
-                   q, SLOT(slotErrorRegistered(QString,QString)));
+        q->connect(backend, SIGNAL(errorRegistered(QString,QString,QString)),
+                   q, SLOT(slotErrorRegistered(QString,QString,QString)));
     }
 
     if (backend->status() == AbstractBackendWrapper::Stopping) {
@@ -115,6 +116,7 @@ void SearchStationModelPrivate::slotStatusChanged()
 }
 
 void SearchStationModelPrivate::slotErrorRegistered(const QString &request,
+                                                    const QString &errorId,
                                                     const QString &errorString)
 {
     Q_UNUSED(errorString)

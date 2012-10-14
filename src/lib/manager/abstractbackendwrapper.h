@@ -274,7 +274,7 @@ public Q_SLOTS:
      * situations.
      */
     virtual void kill() = 0;
-    void registerError(const QString &request, const QString &error);
+    void registerError(const QString &request, const QString &errorId, const QString &error);
     void registerCopyright(const QString &request, const QString &copyright);
     void registerSuggestedStations(const QString &request,
                                    const QList<PublicTransportation::Station> &suggestedStations);
@@ -292,7 +292,7 @@ Q_SIGNALS:
      */
     void capabilitiesChanged();
 
-    void errorRegistered(const QString &request, const QString &error);
+    void errorRegistered(const QString &request, const QString &errorId, const QString &error);
     void copyrightRegistered(const QString &request, const QString &copyright);
     void suggestedStationsRegistered(const QString & request,
                                      const QList<PublicTransportation::Station> &suggestedStations);

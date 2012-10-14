@@ -40,4 +40,9 @@ target.path = $${APPLICATION_FOLDER}
 qmlFiles.path = $${QML_FOLDER}
 qmlFiles.files = $${OTHER_FILES}
 
-INSTALLS += target qmlFiles
+contains(MEEGO_EDITION,harmattan):{
+desktopFile.path = /usr/share/applications
+desktopFile.files = publictransportation.desktop
+}
+
+INSTALLS += target qmlFiles desktopFile

@@ -9,8 +9,8 @@
  * before re-generating it.
  */
 
-#ifndef DBUSBACKENDWRAPPERADAPTOR_H_1350055340
-#define DBUSBACKENDWRAPPERADAPTOR_H_1350055340
+#ifndef DBUSBACKENDWRAPPERADAPTOR_H_1350203983
+#define DBUSBACKENDWRAPPERADAPTOR_H_1350203983
 
 #include <QtCore/QObject>
 #include <QtDBus/QtDBus>
@@ -38,6 +38,7 @@ class PublictransportationAdaptor: public QDBusAbstractAdaptor
 "    <!-- Method used to transmit that something wrong happened -->\n"
 "    <method name=\"registerError\">\n"
 "      <arg direction=\"in\" type=\"s\" name=\"request\"/>\n"
+"      <arg direction=\"in\" type=\"s\" name=\"errorId\"/>\n"
 "      <arg direction=\"in\" type=\"s\" name=\"error\"/>\n"
 "    </method>\n"
 "    <!-- Copyright -->\n"
@@ -100,7 +101,7 @@ public: // PROPERTIES
 public Q_SLOTS: // METHODS
     void registerBackend(const QStringList &capabilities);
     void registerCopyright(const QString &request, const QString &copyright);
-    void registerError(const QString &request, const QString &error);
+    void registerError(const QString &request, const QString &errorId, const QString &error);
     void registerJourneysFromStation(const QString &request, const QList<PublicTransportation::InfoJourneys> & infoJourneys);
     void registerSuggestedStations(const QString &request, const QList<PublicTransportation::Station> & suggestedStations);
     void registerWaitingTime(const QString &request, const QList<PublicTransportation::WaitingTime> & waitingTimeList);

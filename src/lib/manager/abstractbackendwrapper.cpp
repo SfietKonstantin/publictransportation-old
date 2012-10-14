@@ -25,6 +25,7 @@
 #include <QtCore/QUuid>
 
 #include "debug.h"
+#include "common/errorid.h"
 
 namespace PublicTransportation
 {
@@ -85,15 +86,17 @@ void AbstractBackendWrapper::waitForStopped()
 {
 }
 
-void AbstractBackendWrapper::registerError(const QString &request, const QString &error)
+void AbstractBackendWrapper::registerError(const QString &request, const QString &errorId,
+                                           const QString &error)
 {
     Q_D(AbstractBackendWrapper);
     if (d->requests.contains(request)) {
         debug("abs-backend-wrapper") << "Request" << request << "failed";
+        debug("abs-backend-wrapper") << errorId;
         debug("abs-backend-wrapper") << error;
 
         delete d->requests.take(request);
-        emit errorRegistered(request, error);
+        emit errorRegistered(request, errorId, error);
     }
 }
 
@@ -102,7 +105,7 @@ void AbstractBackendWrapper::registerCopyright(const QString &request, const QSt
     Q_D(AbstractBackendWrapper);
     if (d->requests.contains(request)) {
         if (d->requests.value(request)->type != AbstractBackendWrapper::CopyrightType) {
-            registerError(request, "Invalid request type");
+            registerError(request, INVALID_REQUEST_TYPE, "Invalid request type");
             return;
         }
 
@@ -121,7 +124,7 @@ void AbstractBackendWrapper::registerSuggestedStations(const QString & request,
     Q_D(AbstractBackendWrapper);
     if (d->requests.contains(request)) {
         if (d->requests.value(request)->type != AbstractBackendWrapper::SuggestStationType) {
-            registerError(request, "Invalid request type");
+            registerError(request, INVALID_REQUEST_TYPE, "Invalid request type");
             return;
         }
 
@@ -143,7 +146,7 @@ void AbstractBackendWrapper::registerJourneysFromStation(const QString &request,
     Q_D(AbstractBackendWrapper);
     if (d->requests.contains(request)) {
         if (d->requests.value(request)->type != AbstractBackendWrapper::JourneysFromStationType) {
-            registerError(request, "Invalid request type");
+            registerError(request, INVALID_REQUEST_TYPE, "Invalid request type");
             return;
         }
 
@@ -165,7 +168,7 @@ void AbstractBackendWrapper::registerWaitingTime(const QString &request,
     Q_D(AbstractBackendWrapper);
     if (d->requests.contains(request)) {
         if (d->requests.value(request)->type != AbstractBackendWrapper::WaitingTimeType) {
-            registerError(request, "Invalid request type");
+            registerError(request, INVALID_REQUEST_TYPE, "Invalid request type");
             return;
         }
 

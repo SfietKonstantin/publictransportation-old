@@ -68,7 +68,7 @@ public Q_SLOTS:
                                      const PublicTransportation::Journey &journey,
                                      const PublicTransportation::Station &station);
 Q_SIGNALS:
-    void errorRetrieved(const QString &request, const QString &error);
+    void errorRetrieved(const QString &request, const QString &errorId, const QString &error);
     void copyrightRetrieved(const QString &request, const QString &copyright);
     void suggestedStationsRetrieved(const QString &request,
                                     const QList<PublicTransportation::Station> &suggestedStations);

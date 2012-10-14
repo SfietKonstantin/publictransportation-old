@@ -15,6 +15,7 @@
  ****************************************************************************************/
 
 #include "providerpluginobject.h"
+#include "common/errorid.h"
 
 namespace PublicTransportation
 {
@@ -37,7 +38,8 @@ void ProviderPluginObject::retrieveSuggestedStations(const QString &request,
                                                      const QString &partialStation)
 {
     Q_UNUSED(partialStation)
-    emit errorRetrieved(request, tr("SUGGEST_STATIONS capability is not implemented"));
+    emit errorRetrieved(request, NOT_IMPLEMENTED,
+                        tr("SUGGEST_STATIONS capability is not implemented"));
 }
 
 void ProviderPluginObject::retrieveJourneysFromStation(const QString &request,
@@ -45,7 +47,8 @@ void ProviderPluginObject::retrieveJourneysFromStation(const QString &request,
 {
     Q_UNUSED(station)
     Q_UNUSED(limit)
-    emit errorRetrieved(request, tr("JOURNEYS_FROM_STATION capability is not implemented"));
+    emit errorRetrieved(request, NOT_IMPLEMENTED,
+                        tr("JOURNEYS_FROM_STATION capability is not implemented"));
 }
 
 void ProviderPluginObject::retrieveWaitingTime(const QString &request, const Company &company,
@@ -56,7 +59,8 @@ void ProviderPluginObject::retrieveWaitingTime(const QString &request, const Com
     Q_UNUSED(line)
     Q_UNUSED(journey)
     Q_UNUSED(station)
-    emit errorRetrieved(request, tr("WAITING_TIME capability is not implemented"));
+    emit errorRetrieved(request, NOT_IMPLEMENTED,
+                        tr("WAITING_TIME capability is not implemented"));
 }
 
 }

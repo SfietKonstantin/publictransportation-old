@@ -26,6 +26,7 @@
 #include <parser.h>
 
 #include "debug.h"
+#include "common/errorid.h"
 #include "common/capabilitiesconstants.h"
 #include "common/company.h"
 #include "common/line.h"
@@ -85,7 +86,8 @@ void TransportLausannoisPrivate::slotWaitingTimeFinished()
     QList<WaitingTime> waitingTimes;
     QVariant parsedValue = parser.parse(reply);
     if (!parsedValue.isValid()) {
-        q->errorRetrieved(waitTimeRequest, "Failed to get information from TL website");
+        q->errorRetrieved(waitTimeRequest, BACKEND_WARNING,
+                          "Failed to get information from TL website");
         reply->deleteLater();
         return;
     }
@@ -206,7 +208,7 @@ void TransportLausannois::retrieveJourneysFromStation(const QString &request,
     QFile file (fileName);
     if (!file.open(QIODevice::ReadOnly)) {
         debug("tl-plugin") << "Failed to read" << fileName.toAscii().constData();
-        emit errorRetrieved(request, QString("Failed to read %1").arg(fileName));
+        emit errorRetrieved(request, BACKEND_WARNING, QString("Failed to read %1").arg(fileName));
         return;
     }
 
@@ -227,7 +229,8 @@ void TransportLausannois::retrieveJourneysFromStation(const QString &request,
 
     if (foundElement.isNull()) {
         debug("tl-plugin") << "Failed to find station" << station.name().toAscii().constData();
-        emit errorRetrieved(request, QString("Failed to find station %1").arg(station.name()));
+        emit errorRetrieved(request, BACKEND_WARNING,
+                            QString("Failed to find station %1").arg(station.name()));
         return;
     }
 

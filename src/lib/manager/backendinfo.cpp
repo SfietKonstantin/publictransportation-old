@@ -82,6 +82,8 @@ static const char *DESKTOP_FILE_EXEC = "Exec";
  * Used in PublicTransportation::BackendInfo.
  */
 static const char *DESKTOP_FILE_BACKENDINFO_ID = "X-PublicTransportation-BackendInfo-Id";
+static const char *DESKTOP_FILE_BACKENDINFO_COUNTRY = "X-PublicTransportation-BackendInfo-Country";
+static const char *DESKTOP_FILE_BACKENDINFO_CITIES = "X-PublicTransportation-BackendInfo-Cities";
 /**
  * @internal
  * @brief DESKTOP_FILE_BACKENDINFO_AUTHOR
@@ -167,6 +169,9 @@ BackendInfo::BackendInfo(const QString &file):
     }
     d->name = name;
     d->description = description;
+    d->country = parser.value(DESKTOP_FILE_BACKENDINFO_COUNTRY).toString();
+    QString cities = parser.value(DESKTOP_FILE_BACKENDINFO_CITIES).toString();
+    d->cities = cities.split(",");
     d->executable = parser.value(DESKTOP_FILE_EXEC).toString();
     d->identifier = parser.value(DESKTOP_FILE_BACKENDINFO_ID).toString();
     d->author = parser.value(DESKTOP_FILE_BACKENDINFO_AUTHOR).toString();

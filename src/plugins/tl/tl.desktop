@@ -1,10 +1,13 @@
 [Desktop Entry]
 Name=Transports lausannois
-Comment=Provides information about TL
+Comment=Transports de la région Lausannoise
+Comment[fr]=Transports de la région Lausannoise
 Icon=
 Type=Service
 Exec=$PROVIDER libtl.so
 X-PublicTransportation-BackendInfo-Id=org.SfietKonstantin.publictransportation.tl
+X-PublicTransportation-BackendInfo-Country=Switzerland
+X-PublicTransportation-BackendInfo-Cities=Lausanne
 X-PublicTransportation-BackendInfo-Author=Lucien XU
 X-PublicTransportation-BackendInfo-Email=sfietkonstantin@free.fr
 X-PublicTransportation-BackendInfo-Website=

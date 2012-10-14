@@ -1,13 +1,13 @@
 [Desktop Entry]
-Name=SIBRA
-Comment=Transports de la région d'Annecy
-Comment[fr]=Transports de la région d'Annecy
+Name=Transpole
+Comment=Transports de la région de Lille
+Comment[fr]=Transports de la région de Lille
 Icon=
 Type=Service
-Exec=$PROVIDER libsibra.so
-X-PublicTransportation-BackendInfo-Id=org.SfietKonstantin.publictransportation.sibra
+Exec=$PROVIDER libtranspole.so
+X-PublicTransportation-BackendInfo-Id=org.SfietKonstantin.publictransportation.transpole
 X-PublicTransportation-BackendInfo-Country=France
-X-PublicTransportation-BackendInfo-Cities=Annency
+X-PublicTransportation-BackendInfo-Cities=Lille
 X-PublicTransportation-BackendInfo-Author=Lucien XU
 X-PublicTransportation-BackendInfo-Email=sfietkonstantin@free.fr
 X-PublicTransportation-BackendInfo-Website=

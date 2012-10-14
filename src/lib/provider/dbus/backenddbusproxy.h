@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef BACKENDDBUSPROXY_H_1350055340
-#define BACKENDDBUSPROXY_H_1350055340
+#ifndef BACKENDDBUSPROXY_H_1350203983
+#define BACKENDDBUSPROXY_H_1350203983
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -56,10 +56,10 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("registerCopyright"), argumentList);
     }
 
-    inline QDBusPendingReply<> registerError(const QString &request, const QString &error)
+    inline QDBusPendingReply<> registerError(const QString &request, const QString &errorId, const QString &error)
     {
         QList<QVariant> argumentList;
-        argumentList << QVariant::fromValue(request) << QVariant::fromValue(error);
+        argumentList << QVariant::fromValue(request) << QVariant::fromValue(errorId) << QVariant::fromValue(error);
         return asyncCallWithArgumentList(QLatin1String("registerError"), argumentList);
     }
 

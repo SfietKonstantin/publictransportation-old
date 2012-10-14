@@ -1,10 +1,13 @@
 [Desktop Entry]
 Name=transport.opendata.ch
-Comment=Provides information about transportation in Switzerland
+Comment=Transports en Suisse
+Comment[fr]=Transports en Suisse
 Icon=
 Type=Service
 Exec=$PROVIDER libopendatach.so
 X-PublicTransportation-BackendInfo-Id=org.SfietKonstantin.publictransportation.opendatach
+X-PublicTransportation-BackendInfo-Country=Switzerland
+X-PublicTransportation-BackendInfo-Cities=All
 X-PublicTransportation-BackendInfo-Author=Lucien XU
 X-PublicTransportation-BackendInfo-Email=sfietkonstantin@free.fr
 X-PublicTransportation-BackendInfo-Website=

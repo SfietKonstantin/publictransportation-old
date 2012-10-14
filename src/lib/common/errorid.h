@@ -14,36 +14,13 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-import QtQuick 1.1
-import com.nokia.meego 1.0
+#ifndef ERRORCODE_H
+#define ERRORCODE_H
 
-AbstractPage {
-    headerColor: "#006E29"
-    headerLabelColor: "white"
-    title: qsTr("Manage information sources")
-    tools: ToolBarLayout {
-        ToolIcon {
-            iconId: "toolbar-back"
-            onClicked: window.pageStack.pop()
-        }
-    }
+#define INVALID_REQUEST_TYPE "invalid_request_type"
+#define NOT_IMPLEMENTED "not_implemented"
+#define BACKEND_WARNING "backend_warning"
+#define BACKEND_FAILURE "backend_failure"
+#define OTHER_ERROR "other_error"
 
-    content: ListView {
-        id: view
-        clip: true
-        anchors.fill: parent
-        model: BackendModelInstance
-        delegate: BackendEntry {
-            text: model.name
-            subText: model.description
-            status: model.status
-            onChecked: {
-                if (checked) {
-                    BackendModelInstance.runBackend(model.identifier, model.executable)
-                } else {
-                    BackendModelInstance.stopBackend(model.identifier)
-                }
-            }
-        }
-    }
-}
+#endif // ERRORCODE_H

@@ -10,6 +10,7 @@
         <!-- Method used to transmit that something wrong happened -->
         <method name="registerError">
             <arg name="request" type="s" direction="in" />
+            <arg name="errorId" type="s" direction="in" />
             <arg name="error" type="s" direction="in" />
         </method>
 

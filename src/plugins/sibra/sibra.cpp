@@ -71,18 +71,15 @@ SibraPrivate::SibraPrivate(Sibra *q):
 
 void SibraPrivate::slotSuggestedStationsFinished()
 {
-    Q_Q(Sibra);
-    QNetworkReply *reply = qobject_cast<QNetworkReply *>(q->sender());
-
-    debug("sibra-plugin") << "Data retrieved from url" << reply->url().toString();
+    debug("sibra-plugin") << "Data retrieved from url" << suggestedStationsReply->url().toString();
 
     QRegExp stationRegExp
             = QRegExp("<li><a class=\"lien_arret[^\"]*\" href=\"([^\"]*)\"><span>([^<]*)<");
 
     QVariantMap disambiguation;
     disambiguation.insert("id", "org.SfietKonstantin.publictransportation.sibra");
-    while (!reply->atEnd()) {
-        QString data = reply->readLine();
+    while (!suggestedStationsReply->atEnd()) {
+        QString data = suggestedStationsReply->readLine();
         if (data.indexOf(stationRegExp) != -1) {
             Station station;
             QString name = stationRegExp.cap(2).toLower();
@@ -110,9 +107,8 @@ void SibraPrivate::slotSuggestedStationsFinished()
 void SibraPrivate::slotJourneysFromStationFinished()
 {
     Q_Q(Sibra);
-    QNetworkReply *reply = qobject_cast<QNetworkReply *>(q->sender());
-
-    debug("sibra-plugin") << "Data retrieved from url" << reply->url().toString();
+    debug("sibra-plugin") << "Data retrieved from url"
+                          << journeysFromStationReply->url().toString();
 
     QRegExp journeysRegExp = QRegExp("<span class=\"picto-arret-ligne picto-arret-l[^\"]\"><span>\
 ([^<]*)</span></span><span class=\"horaire\">Prochain bus à <strong>([^<]*)[^D]*Direction <strong>\
@@ -124,8 +120,8 @@ void SibraPrivate::slotJourneysFromStationFinished()
     QTime currentTime = QTime::currentTime();
     QList<InfoJourneys> infoJourneysList;
 
-    while (!reply->atEnd()) {
-        QString data = reply->readLine();
+    while (!journeysFromStationReply->atEnd()) {
+        QString data = journeysFromStationReply->readLine();
         if (data.indexOf(journeysRegExp) != -1) {
 
             InfoJourneys infoJourneys;
@@ -300,4 +296,4 @@ void Sibra::retrieveWaitingTime(const QString &request, const Company &company,
 
 #include "moc_sibra.cpp"
 
-Q_EXPORT_PLUGIN2(tl, PublicTransportation::Provider::Sibra)
+Q_EXPORT_PLUGIN2(sibra, PublicTransportation::Provider::Sibra)

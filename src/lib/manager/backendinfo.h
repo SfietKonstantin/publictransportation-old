@@ -84,6 +84,8 @@ struct BackendInfoPrivate: public QSharedData
      * @brief Version
      */
     QString version;
+    QString country;
+    QStringList cities;
 };
 
 /**
@@ -107,6 +109,8 @@ struct BackendInfoPrivate: public QSharedData
  * Exec=$PROVIDER plugin.so
  * # Exec=python myscript.py
  * X-PublicTransportation-BackendInfo-Id=com.mycompany.backendname
+ * X-PublicTransportation-BackendInfo-Country=Some country (or All for international)
+ * X-PublicTransportation-BackendInfo-Cities=City 1,City 2 (or All for national)
  * X-PublicTransportation-BackendInfo-Author=Some author
  * X-PublicTransportation-BackendInfo-Email=some.author@mycompany.com
  * X-PublicTransportation-BackendInfo-Website=http://www.mycompany.com
