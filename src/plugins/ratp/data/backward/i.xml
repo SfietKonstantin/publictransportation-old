@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="Invalides">
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="312" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="312" to="Balard"/>
+        </line>
+        <line id="M13" name="13" network="metro">
+            <journey id="A" name="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université" stationId="312" to="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université"/>
+            <journey id="R" name="Châtillon-Montrouge" stationId="312" to="Châtillon-Montrouge"/>
+        </line>
+    </station>
+    <station name="Iéna">
+        <line id="M9" name="9" network="metro">
+            <journey id="A" name="Mairie de Montreuil" stationId="310" to="Mairie de Montreuil"/>
+            <journey id="R" name="Pont de Sèvres" stationId="310" to="Pont de Sèvres"/>
+        </line>
+    </station>
+</stations>

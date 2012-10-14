@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="Val d'Europe-Serris">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="35" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="35" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+    </station>
+    <station name="Val de Fontenay">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="33" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="33" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+    </station>
+    <station name="Vaneau">
+        <line id="M10" name="10" network="metro">
+            <journey id="A" name="Gare d'Austerlitz" stationId="630" to="Gare d'Austerlitz"/>
+            <journey id="R" name="Boulogne Pont de Saint-Cloud" stationId="630" to="Boulogne Pont de Saint-Cloud"/>
+        </line>
+    </station>
+    <station name="Varenne">
+        <line id="M13" name="13" network="metro">
+            <journey id="A" name="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université" stationId="631" to="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université"/>
+            <journey id="R" name="Châtillon-Montrouge" stationId="631" to="Châtillon-Montrouge"/>
+        </line>
+    </station>
+    <station name="Vaugirard">
+        <line id="M12" name="12" network="metro">
+            <journey id="A" name="Porte de la Chapelle" stationId="633" to="Porte de la Chapelle"/>
+            <journey id="R" name="Mairie d'Issy" stationId="633" to="Mairie d'Issy"/>
+        </line>
+    </station>
+    <station name="Vavin">
+        <line id="M4" name="4" network="metro">
+            <journey id="A" name="Porte d'Orléans" stationId="634" to="Porte d'Orléans"/>
+            <journey id="R" name="Porte de Clignancourt" stationId="634" to="Porte de Clignancourt"/>
+        </line>
+    </station>
+    <station name="Victor Hugo">
+        <line id="M2" name="2" network="metro">
+            <journey id="A" name="Porte Dauphine" stationId="638" to="Porte Dauphine"/>
+            <journey id="R" name="Nation" stationId="638" to="Nation"/>
+        </line>
+    </station>
+    <station name="Villejuif Louis Aragon">
+        <line id="M7" name="7" network="metro">
+            <journey id="R" name="La Courneuve 8 mai 1945" stationId="641" to="La Courneuve 8 mai 1945"/>
+        </line>
+    </station>
+    <station name="Villejuif Léo Lagrange">
+        <line id="M7" name="7" network="metro">
+            <journey id="A" name="Mairie d'Ivry - Villejuif Louis Aragon" stationId="640" to="Mairie d'Ivry - Villejuif Louis Aragon"/>
+            <journey id="R" name="La Courneuve 8 mai 1945" stationId="640" to="La Courneuve 8 mai 1945"/>
+        </line>
+    </station>
+    <station name="Villejuif Paul Vaillant-Couturier">
+        <line id="M7" name="7" network="metro">
+            <journey id="A" name="Mairie d'Ivry - Villejuif Louis Aragon" stationId="642" to="Mairie d'Ivry - Villejuif Louis Aragon"/>
+            <journey id="R" name="La Courneuve 8 mai 1945" stationId="642" to="La Courneuve 8 mai 1945"/>
+        </line>
+    </station>
+    <station name="Villiers">
+        <line id="M2" name="2" network="metro">
+            <journey id="A" name="Porte Dauphine" stationId="649" to="Porte Dauphine"/>
+            <journey id="R" name="Nation" stationId="649" to="Nation"/>
+        </line>
+        <line id="M3" name="3" network="metro">
+            <journey id="A" name="Pont de Levallois Bécon" stationId="649" to="Pont de Levallois Bécon"/>
+            <journey id="R" name="Gallieni" stationId="649" to="Gallieni"/>
+        </line>
+    </station>
+    <station name="Vincennes">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="0" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="0" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+    </station>
+    <station name="Volontaires">
+        <line id="M12" name="12" network="metro">
+            <journey id="A" name="Porte de la Chapelle" stationId="656" to="Porte de la Chapelle"/>
+            <journey id="R" name="Mairie d'Issy" stationId="656" to="Mairie d'Issy"/>
+        </line>
+    </station>
+    <station name="Voltaire">
+        <line id="M9" name="9" network="metro">
+            <journey id="A" name="Mairie de Montreuil" stationId="657" to="Mairie de Montreuil"/>
+            <journey id="R" name="Pont de Sèvres" stationId="657" to="Pont de Sèvres"/>
+        </line>
+    </station>
+</stations>

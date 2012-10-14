@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="Temple">
+        <line id="M3" name="3" network="metro">
+            <journey id="A" name="Pont de Levallois Bécon" stationId="619" to="Pont de Levallois Bécon"/>
+            <journey id="R" name="Gallieni" stationId="619" to="Gallieni"/>
+        </line>
+    </station>
+    <station name="Ternes">
+        <line id="M2" name="2" network="metro">
+            <journey id="A" name="Porte Dauphine" stationId="620" to="Porte Dauphine"/>
+            <journey id="R" name="Nation" stationId="620" to="Nation"/>
+        </line>
+    </station>
+    <station name="Tolbiac">
+        <line id="M7" name="7" network="metro">
+            <journey id="A" name="Mairie d'Ivry - Villejuif Louis Aragon" stationId="622" to="Mairie d'Ivry - Villejuif Louis Aragon"/>
+            <journey id="R" name="La Courneuve 8 mai 1945" stationId="622" to="La Courneuve 8 mai 1945"/>
+        </line>
+    </station>
+    <station name="Torcy">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="26" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="26" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+    </station>
+    <station name="Trinité d'Estienne d'Orves">
+        <line id="M12" name="12" network="metro">
+            <journey id="A" name="Porte de la Chapelle" stationId="625" to="Porte de la Chapelle"/>
+            <journey id="R" name="Mairie d'Issy" stationId="625" to="Mairie d'Issy"/>
+        </line>
+    </station>
+    <station name="Trocadéro">
+        <line id="M6" name="6" network="metro">
+            <journey id="A" name="Charles de Gaulle Etoile" stationId="626" to="Charles de Gaulle Etoile"/>
+            <journey id="R" name="Nation" stationId="626" to="Nation"/>
+        </line>
+        <line id="M9" name="9" network="metro">
+            <journey id="A" name="Mairie de Montreuil" stationId="626" to="Mairie de Montreuil"/>
+            <journey id="R" name="Pont de Sèvres" stationId="626" to="Pont de Sèvres"/>
+        </line>
+    </station>
+    <station name="Tuileries">
+        <line id="M1" name="1" network="metro">
+            <journey id="A" name="La Défense" stationId="627" to="La Défense"/>
+            <journey id="R" name="Château de Vincennes" stationId="627" to="Château de Vincennes"/>
+        </line>
+    </station>
+    <station name="Télégraphe">
+        <line id="M11" name="11" network="metro">
+            <journey id="A" name="Châtelet" stationId="618" to="Châtelet"/>
+            <journey id="R" name="Mairie des Lilas" stationId="618" to="Mairie des Lilas"/>
+        </line>
+    </station>
+</stations>

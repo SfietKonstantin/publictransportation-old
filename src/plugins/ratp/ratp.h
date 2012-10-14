@@ -14,8 +14,8 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_PROVIDER_TRANSPOLE_H
-#define PUBLICTRANSPORTATION_PROVIDER_TRANSPOLE_H
+#ifndef PUBLICTRANSPORTATION_PROVIDER_RATP_H
+#define PUBLICTRANSPORTATION_PROVIDER_RATP_H
 
 #include <QtCore/QObject>
 #include "provider/providerpluginobject.h"
@@ -26,13 +26,13 @@ namespace PublicTransportation
 namespace Provider
 {
 
-class TranspolePrivate;
-class Transpole : public ProviderPluginObject
+class RatpPrivate;
+class Ratp : public ProviderPluginObject
 {
     Q_OBJECT
     Q_INTERFACES(PublicTransportation::ProviderPluginInterface)
 public:
-    explicit Transpole(QObject *parent = 0);
+    explicit Ratp(QObject *parent = 0);
     virtual QStringList capabilities() const;
 public Q_SLOTS:
     virtual void retrieveCopyright(const QString &request);
@@ -43,17 +43,14 @@ public Q_SLOTS:
                                      const Line &line, const Journey &journey,
                                      const Station &station);
 protected:
-    QScopedPointer<TranspolePrivate> d_ptr;
+    QScopedPointer<RatpPrivate> d_ptr;
 private:
-    Q_DECLARE_PRIVATE(Transpole)
-    Q_PRIVATE_SLOT(d_func(), void slotSuggestedStationsFinished())
-    Q_PRIVATE_SLOT(d_func(), void slotJourneysFromStationFinished())
+    Q_DECLARE_PRIVATE(Ratp)
     Q_PRIVATE_SLOT(d_func(), void slotWaitingTimeFinished())
-    Q_PRIVATE_SLOT(d_func(), void slotWaitingTimePhase2Finished())
 };
 
 }
 
 }
 
-#endif // PUBLICTRANSPORTATION_PROVIDER_TRANSPOLE_H
+#endif // PUBLICTRANSPORTATION_PROVIDER_RATP_H

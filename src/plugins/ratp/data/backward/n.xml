@@ -1,0 +1,89 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="Nanterre Prefecture">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="14-34" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="14-34" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+    </station>
+    <station name="Nanterre Universite">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="13" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="13" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+    </station>
+    <station name="Nanterre Ville">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="12" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="12" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+    </station>
+    <station name="Nation">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="1" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="1" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+        <line id="M1" name="1" network="metro">
+            <journey id="A" name="La Défense" stationId="444" to="La Défense"/>
+            <journey id="R" name="Château de Vincennes" stationId="444" to="Château de Vincennes"/>
+        </line>
+        <line id="M2" name="2" network="metro">
+            <journey id="A" name="Porte Dauphine" stationId="444" to="Porte Dauphine"/>
+        </line>
+        <line id="M6" name="6" network="metro">
+            <journey id="A" name="Charles de Gaulle Etoile" stationId="444" to="Charles de Gaulle Etoile"/>
+        </line>
+        <line id="M9" name="9" network="metro">
+            <journey id="A" name="Mairie de Montreuil" stationId="444" to="Mairie de Montreuil"/>
+            <journey id="R" name="Pont de Sèvres" stationId="444" to="Pont de Sèvres"/>
+        </line>
+    </station>
+    <station name="Nationale">
+        <line id="M6" name="6" network="metro">
+            <journey id="A" name="Charles de Gaulle Etoile" stationId="445" to="Charles de Gaulle Etoile"/>
+            <journey id="R" name="Nation" stationId="445" to="Nation"/>
+        </line>
+    </station>
+    <station name="Neuilly-Plaisance">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="32" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="32" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+    </station>
+    <station name="Nogent Sur Marne">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="22" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="22" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+    </station>
+    <station name="Noisiel">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="28" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="28" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+    </station>
+    <station name="Noisy le Grand-Mont d'Est">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="30" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="30" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+    </station>
+    <station name="Noisy-Champs">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="29" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="29" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+    </station>
+    <station name="Notre-Dame-de-Lorette">
+        <line id="M12" name="12" network="metro">
+            <journey id="A" name="Porte de la Chapelle" stationId="454" to="Porte de la Chapelle"/>
+            <journey id="R" name="Mairie d'Issy" stationId="454" to="Mairie d'Issy"/>
+        </line>
+    </station>
+    <station name="Notre-Dame-des-Champs">
+        <line id="M12" name="12" network="metro">
+            <journey id="A" name="Porte de la Chapelle" stationId="455" to="Porte de la Chapelle"/>
+            <journey id="R" name="Mairie d'Issy" stationId="455" to="Mairie d'Issy"/>
+        </line>
+    </station>
+</stations>

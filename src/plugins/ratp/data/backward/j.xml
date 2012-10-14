@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="Jacques Bonsergent">
+        <line id="M5" name="5" network="metro">
+            <journey id="A" name="Place d'Italie" stationId="316" to="Place d'Italie"/>
+            <journey id="R" name="Bobigny Pablo Picasso" stationId="316" to="Bobigny Pablo Picasso"/>
+        </line>
+    </station>
+    <station name="Jasmin">
+        <line id="M9" name="9" network="metro">
+            <journey id="A" name="Mairie de Montreuil" stationId="318" to="Mairie de Montreuil"/>
+            <journey id="R" name="Pont de Sèvres" stationId="318" to="Pont de Sèvres"/>
+        </line>
+    </station>
+    <station name="Jaurès">
+        <line id="M2" name="2" network="metro">
+            <journey id="A" name="Porte Dauphine" stationId="319" to="Porte Dauphine"/>
+            <journey id="R" name="Nation" stationId="319" to="Nation"/>
+        </line>
+        <line id="M5" name="5" network="metro">
+            <journey id="A" name="Place d'Italie" stationId="319" to="Place d'Italie"/>
+            <journey id="R" name="Bobigny Pablo Picasso" stationId="319" to="Bobigny Pablo Picasso"/>
+        </line>
+        <line id="M7B" name="7B" network="metro">
+            <journey id="A" name="Louis Blanc" stationId="319" to="Louis Blanc"/>
+            <journey id="R" name="Pré-St-Gervais" stationId="319" to="Pré-St-Gervais"/>
+        </line>
+    </station>
+    <station name="Javel André Citroën">
+        <line id="M10" name="10" network="metro">
+            <journey id="A" name="Gare d'Austerlitz" stationId="321" to="Gare d'Austerlitz"/>
+            <journey id="R" name="Boulogne Pont de Saint-Cloud" stationId="321" to="Boulogne Pont de Saint-Cloud"/>
+        </line>
+    </station>
+    <station name="Joinville le Pont">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="21" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="21" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+    </station>
+    <station name="Jourdain">
+        <line id="M11" name="11" network="metro">
+            <journey id="A" name="Châtelet" stationId="324" to="Châtelet"/>
+            <journey id="R" name="Mairie des Lilas" stationId="324" to="Mairie des Lilas"/>
+        </line>
+    </station>
+    <station name="Jules Joffrin">
+        <line id="M12" name="12" network="metro">
+            <journey id="A" name="Porte de la Chapelle" stationId="326" to="Porte de la Chapelle"/>
+            <journey id="R" name="Mairie d'Issy" stationId="326" to="Mairie d'Issy"/>
+        </line>
+    </station>
+    <station name="Jussieu">
+        <line id="M7" name="7" network="metro">
+            <journey id="A" name="Mairie d'Ivry - Villejuif Louis Aragon" stationId="327" to="Mairie d'Ivry - Villejuif Louis Aragon"/>
+            <journey id="R" name="La Courneuve 8 mai 1945" stationId="327" to="La Courneuve 8 mai 1945"/>
+        </line>
+        <line id="M10" name="10" network="metro">
+            <journey id="A" name="Gare d'Austerlitz" stationId="327" to="Gare d'Austerlitz"/>
+            <journey id="R" name="Boulogne Pont de Saint-Cloud" stationId="327" to="Boulogne Pont de Saint-Cloud"/>
+        </line>
+    </station>
+</stations>

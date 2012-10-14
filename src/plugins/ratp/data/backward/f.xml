@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="Faidherbe-Chaligny">
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="266" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="266" to="Balard"/>
+        </line>
+    </station>
+    <station name="Falguière">
+        <line id="M12" name="12" network="metro">
+            <journey id="A" name="Porte de la Chapelle" stationId="267" to="Porte de la Chapelle"/>
+            <journey id="R" name="Mairie d'Issy" stationId="267" to="Mairie d'Issy"/>
+        </line>
+    </station>
+    <station name="Filles du Calvaire">
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="269" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="269" to="Balard"/>
+        </line>
+    </station>
+    <station name="Fontaine Michalon">
+        <line id="RB" name="RER B" network="rer">
+            <journey id="A" name="Charles-de-Gaulle. Mitry-Claye." stationId="18" to="Charles-de-Gaulle. Mitry-Claye."/>
+            <journey id="R" name="Robinson. Saint-Rémy-les-Chevreuse." stationId="18" to="Robinson. Saint-Rémy-les-Chevreuse."/>
+        </line>
+    </station>
+    <station name="Fontenay Sous Bois">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="23" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="23" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+    </station>
+    <station name="Fontenay aux Roses">
+        <line id="RB" name="RER B" network="rer">
+            <journey id="A" name="Charles-de-Gaulle. Mitry-Claye." stationId="10" to="Charles-de-Gaulle. Mitry-Claye."/>
+            <journey id="R" name="Robinson. Saint-Rémy-les-Chevreuse." stationId="10" to="Robinson. Saint-Rémy-les-Chevreuse."/>
+        </line>
+    </station>
+    <station name="Fort d'Aubervilliers">
+        <line id="M7" name="7" network="metro">
+            <journey id="A" name="Mairie d'Ivry - Villejuif Louis Aragon" stationId="273" to="Mairie d'Ivry - Villejuif Louis Aragon"/>
+            <journey id="R" name="La Courneuve 8 mai 1945" stationId="273" to="La Courneuve 8 mai 1945"/>
+        </line>
+    </station>
+    <station name="Franklin D. Roosevelt">
+        <line id="M1" name="1" network="metro">
+            <journey id="A" name="La Défense" stationId="275" to="La Défense"/>
+            <journey id="R" name="Château de Vincennes" stationId="275" to="Château de Vincennes"/>
+        </line>
+        <line id="M9" name="9" network="metro">
+            <journey id="A" name="Mairie de Montreuil" stationId="275" to="Mairie de Montreuil"/>
+            <journey id="R" name="Pont de Sèvres" stationId="275" to="Pont de Sèvres"/>
+        </line>
+    </station>
+    <station name="Félix Faure">
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="268" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="268" to="Balard"/>
+        </line>
+    </station>
+</stations>

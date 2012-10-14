@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="Wagram">
+        <line id="M3" name="3" network="metro">
+            <journey id="A" name="Pont de Levallois Bécon" stationId="658" to="Pont de Levallois Bécon"/>
+            <journey id="R" name="Gallieni" stationId="658" to="Gallieni"/>
+        </line>
+    </station>
+</stations>

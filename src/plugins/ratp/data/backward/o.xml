@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="Oberkampf">
+        <line id="M5" name="5" network="metro">
+            <journey id="A" name="Place d'Italie" stationId="456" to="Place d'Italie"/>
+            <journey id="R" name="Bobigny Pablo Picasso" stationId="456" to="Bobigny Pablo Picasso"/>
+        </line>
+        <line id="M9" name="9" network="metro">
+            <journey id="A" name="Mairie de Montreuil" stationId="456" to="Mairie de Montreuil"/>
+            <journey id="R" name="Pont de Sèvres" stationId="456" to="Pont de Sèvres"/>
+        </line>
+    </station>
+    <station name="Odéon">
+        <line id="M4" name="4" network="metro">
+            <journey id="A" name="Porte d'Orléans" stationId="457" to="Porte d'Orléans"/>
+            <journey id="R" name="Porte de Clignancourt" stationId="457" to="Porte de Clignancourt"/>
+        </line>
+        <line id="M10" name="10" network="metro">
+            <journey id="A" name="Gare d'Austerlitz" stationId="457" to="Gare d'Austerlitz"/>
+            <journey id="R" name="Boulogne Pont de Saint-Cloud" stationId="457" to="Boulogne Pont de Saint-Cloud"/>
+        </line>
+    </station>
+    <station name="Olympiades">
+        <line id="M14" name="14" network="metro">
+            <journey id="A" name="Saint-Lazare" stationId="660" to="Saint-Lazare"/>
+        </line>
+    </station>
+    <station name="Opéra">
+        <line id="M3" name="3" network="metro">
+            <journey id="A" name="Pont de Levallois Bécon" stationId="458" to="Pont de Levallois Bécon"/>
+            <journey id="R" name="Gallieni" stationId="458" to="Gallieni"/>
+        </line>
+        <line id="M7" name="7" network="metro">
+            <journey id="A" name="Mairie d'Ivry - Villejuif Louis Aragon" stationId="458" to="Mairie d'Ivry - Villejuif Louis Aragon"/>
+            <journey id="R" name="La Courneuve 8 mai 1945" stationId="458" to="La Courneuve 8 mai 1945"/>
+        </line>
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="458" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="458" to="Balard"/>
+        </line>
+    </station>
+    <station name="Orsay Ville">
+        <line id="RB" name="RER B" network="rer">
+            <journey id="A" name="Charles-de-Gaulle. Mitry-Claye." stationId="28" to="Charles-de-Gaulle. Mitry-Claye."/>
+            <journey id="R" name="Robinson. Saint-Rémy-les-Chevreuse." stationId="28" to="Robinson. Saint-Rémy-les-Chevreuse."/>
+        </line>
+    </station>
+    <station name="Ourcq">
+        <line id="M5" name="5" network="metro">
+            <journey id="A" name="Place d'Italie" stationId="465" to="Place d'Italie"/>
+            <journey id="R" name="Bobigny Pablo Picasso" stationId="465" to="Bobigny Pablo Picasso"/>
+        </line>
+    </station>
+</stations>

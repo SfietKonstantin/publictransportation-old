@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="Quai de la Gare">
+        <line id="M6" name="6" network="metro">
+            <journey id="A" name="Charles de Gaulle Etoile" stationId="537" to="Charles de Gaulle Etoile"/>
+            <journey id="R" name="Nation" stationId="537" to="Nation"/>
+        </line>
+    </station>
+    <station name="Quai de la Rapée">
+        <line id="M5" name="5" network="metro">
+            <journey id="A" name="Place d'Italie" stationId="538" to="Place d'Italie"/>
+            <journey id="R" name="Bobigny Pablo Picasso" stationId="538" to="Bobigny Pablo Picasso"/>
+        </line>
+    </station>
+    <station name="Quatre-Septembre">
+        <line id="M3" name="3" network="metro">
+            <journey id="A" name="Pont de Levallois Bécon" stationId="539" to="Pont de Levallois Bécon"/>
+            <journey id="R" name="Gallieni" stationId="539" to="Gallieni"/>
+        </line>
+    </station>
+</stations>

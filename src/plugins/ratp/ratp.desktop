@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=RATP
+Comment=Régie autonome des transports parisiens
+Comment[fr]=Régie autonome des transports parisiens
+Icon=
+Type=Service
+Exec=$PROVIDER libratp.so
+X-PublicTransportation-BackendInfo-Id=org.SfietKonstantin.publictransportation.ratp
+X-PublicTransportation-BackendInfo-Country=France
+X-PublicTransportation-BackendInfo-Cities=Paris
+X-PublicTransportation-BackendInfo-Author=Lucien XU
+X-PublicTransportation-BackendInfo-Email=sfietkonstantin@free.fr
+X-PublicTransportation-BackendInfo-Website=
+X-PublicTransportation-BackendInfo-Version=1.0.0

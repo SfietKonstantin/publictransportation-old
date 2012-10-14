@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="Kléber">
+        <line id="M6" name="6" network="metro">
+            <journey id="A" name="Charles de Gaulle Etoile" stationId="329" to="Charles de Gaulle Etoile"/>
+            <journey id="R" name="Nation" stationId="329" to="Nation"/>
+        </line>
+    </station>
+</stations>

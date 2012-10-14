@@ -1,0 +1,223 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="Mabillon">
+        <line id="M10" name="10" network="metro">
+            <journey id="A" name="Gare d'Austerlitz" stationId="391" to="Gare d'Austerlitz"/>
+            <journey id="R" name="Boulogne Pont de Saint-Cloud" stationId="391" to="Boulogne Pont de Saint-Cloud"/>
+        </line>
+    </station>
+    <station name="Madeleine">
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="392" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="392" to="Balard"/>
+        </line>
+        <line id="M12" name="12" network="metro">
+            <journey id="A" name="Porte de la Chapelle" stationId="392" to="Porte de la Chapelle"/>
+            <journey id="R" name="Mairie d'Issy" stationId="392" to="Mairie d'Issy"/>
+        </line>
+        <line id="M14" name="14" network="metro">
+            <journey id="A" name="Saint-Lazare" stationId="392" to="Saint-Lazare"/>
+            <journey id="R" name="Olympiades" stationId="392" to="Olympiades"/>
+        </line>
+    </station>
+    <station name="Mairie d'Issy">
+        <line id="M12" name="12" network="metro">
+            <journey id="A" name="Porte de la Chapelle" stationId="398" to="Porte de la Chapelle"/>
+        </line>
+    </station>
+    <station name="Mairie d'Ivry">
+        <line id="M7" name="7" network="metro">
+            <journey id="R" name="La Courneuve 8 mai 1945" stationId="399" to="La Courneuve 8 mai 1945"/>
+        </line>
+    </station>
+    <station name="Mairie de Clichy">
+        <line id="M13" name="13" network="metro">
+            <journey id="A" name="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université" stationId="304" to="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université"/>
+            <journey id="R" name="Châtillon-Montrouge" stationId="304" to="Châtillon-Montrouge"/>
+        </line>
+    </station>
+    <station name="Mairie de Montreuil">
+        <line id="M9" name="9" network="metro">
+            <journey id="R" name="Pont de Sèvres" stationId="395" to="Pont de Sèvres"/>
+        </line>
+    </station>
+    <station name="Mairie de Saint-Ouen">
+        <line id="M13" name="13" network="metro">
+            <journey id="A" name="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université" stationId="396" to="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université"/>
+            <journey id="R" name="Châtillon-Montrouge" stationId="396" to="Châtillon-Montrouge"/>
+        </line>
+    </station>
+    <station name="Mairie des Lilas">
+        <line id="M11" name="11" network="metro">
+            <journey id="A" name="Châtelet" stationId="397" to="Châtelet"/>
+        </line>
+    </station>
+    <station name="Maison Blanche">
+        <line id="M7" name="7" network="metro">
+            <journey id="A" name="Mairie d'Ivry - Villejuif Louis Aragon" stationId="400" to="Mairie d'Ivry - Villejuif Louis Aragon"/>
+            <journey id="R" name="La Courneuve 8 mai 1945" stationId="400" to="La Courneuve 8 mai 1945"/>
+        </line>
+    </station>
+    <station name="Maisons-Alfort Les Juilliottes">
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="402" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="402" to="Balard"/>
+        </line>
+    </station>
+    <station name="Maisons-Alfort Stade">
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="403" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="403" to="Balard"/>
+        </line>
+    </station>
+    <station name="Malakoff Plateau de Vanves">
+        <line id="M13" name="13" network="metro">
+            <journey id="A" name="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université" stationId="406" to="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université"/>
+            <journey id="R" name="Châtillon-Montrouge" stationId="406" to="Châtillon-Montrouge"/>
+        </line>
+    </station>
+    <station name="Malakoff Rue Etienne Dolet">
+        <line id="M13" name="13" network="metro">
+            <journey id="A" name="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université" stationId="407" to="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université"/>
+            <journey id="R" name="Châtillon-Montrouge" stationId="407" to="Châtillon-Montrouge"/>
+        </line>
+    </station>
+    <station name="Malesherbes">
+        <line id="M3" name="3" network="metro">
+            <journey id="A" name="Pont de Levallois Bécon" stationId="408" to="Pont de Levallois Bécon"/>
+            <journey id="R" name="Gallieni" stationId="408" to="Gallieni"/>
+        </line>
+    </station>
+    <station name="Maraîchers">
+        <line id="M9" name="9" network="metro">
+            <journey id="A" name="Mairie de Montreuil" stationId="410" to="Mairie de Montreuil"/>
+            <journey id="R" name="Pont de Sèvres" stationId="410" to="Pont de Sèvres"/>
+        </line>
+    </station>
+    <station name="Marcadet Poissonniers">
+        <line id="M4" name="4" network="metro">
+            <journey id="A" name="Porte d'Orléans" stationId="411" to="Porte d'Orléans"/>
+            <journey id="R" name="Porte de Clignancourt" stationId="411" to="Porte de Clignancourt"/>
+        </line>
+        <line id="M12" name="12" network="metro">
+            <journey id="A" name="Porte de la Chapelle" stationId="411" to="Porte de la Chapelle"/>
+            <journey id="R" name="Mairie d'Issy" stationId="411" to="Mairie d'Issy"/>
+        </line>
+    </station>
+    <station name="Marcel Sembat">
+        <line id="M9" name="9" network="metro">
+            <journey id="A" name="Mairie de Montreuil" stationId="412" to="Mairie de Montreuil"/>
+            <journey id="R" name="Pont de Sèvres" stationId="412" to="Pont de Sèvres"/>
+        </line>
+    </station>
+    <station name="Marne la Vallee-Chessy">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="24" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="24" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+    </station>
+    <station name="Marx Dormoy">
+        <line id="M12" name="12" network="metro">
+            <journey id="A" name="Porte de la Chapelle" stationId="416" to="Porte de la Chapelle"/>
+            <journey id="R" name="Mairie d'Issy" stationId="416" to="Mairie d'Issy"/>
+        </line>
+    </station>
+    <station name="Massy Palaiseau">
+        <line id="RB" name="RER B" network="rer">
+            <journey id="A" name="Charles-de-Gaulle. Mitry-Claye." stationId="15" to="Charles-de-Gaulle. Mitry-Claye."/>
+            <journey id="R" name="Robinson. Saint-Rémy-les-Chevreuse." stationId="15" to="Robinson. Saint-Rémy-les-Chevreuse."/>
+        </line>
+    </station>
+    <station name="Massy Verrieres">
+        <line id="RB" name="RER B" network="rer">
+            <journey id="A" name="Charles-de-Gaulle. Mitry-Claye." stationId="16" to="Charles-de-Gaulle. Mitry-Claye."/>
+            <journey id="R" name="Robinson. Saint-Rémy-les-Chevreuse." stationId="16" to="Robinson. Saint-Rémy-les-Chevreuse."/>
+        </line>
+    </station>
+    <station name="Maubert Mutualité">
+        <line id="M10" name="10" network="metro">
+            <journey id="A" name="Gare d'Austerlitz" stationId="419" to="Gare d'Austerlitz"/>
+            <journey id="R" name="Boulogne Pont de Saint-Cloud" stationId="419" to="Boulogne Pont de Saint-Cloud"/>
+        </line>
+    </station>
+    <station name="Michel Bizot">
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="426" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="426" to="Balard"/>
+        </line>
+    </station>
+    <station name="Michel-Ange Auteuil">
+        <line id="M9" name="9" network="metro">
+            <journey id="A" name="Mairie de Montreuil" stationId="427" to="Mairie de Montreuil"/>
+            <journey id="R" name="Pont de Sèvres" stationId="427" to="Pont de Sèvres"/>
+        </line>
+    </station>
+    <station name="Michel-Ange Molitor">
+        <line id="M9" name="9" network="metro">
+            <journey id="A" name="Mairie de Montreuil" stationId="428" to="Mairie de Montreuil"/>
+            <journey id="R" name="Pont de Sèvres" stationId="428" to="Pont de Sèvres"/>
+        </line>
+        <line id="M10" name="10" network="metro">
+            <journey id="A" name="Gare d'Austerlitz" stationId="428" to="Gare d'Austerlitz"/>
+            <journey id="R" name="Boulogne Pont de Saint-Cloud" stationId="428" to="Boulogne Pont de Saint-Cloud"/>
+        </line>
+    </station>
+    <station name="Mirabeau">
+        <line id="M10" name="10" network="metro">
+            <journey id="A" name="Gare d'Austerlitz" stationId="429" to="Gare d'Austerlitz"/>
+            <journey id="R" name="Boulogne Pont de Saint-Cloud" stationId="429" to="Boulogne Pont de Saint-Cloud"/>
+        </line>
+    </station>
+    <station name="Miromesnil">
+        <line id="M9" name="9" network="metro">
+            <journey id="A" name="Mairie de Montreuil" stationId="430" to="Mairie de Montreuil"/>
+            <journey id="R" name="Pont de Sèvres" stationId="430" to="Pont de Sèvres"/>
+        </line>
+        <line id="M13" name="13" network="metro">
+            <journey id="A" name="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université" stationId="430" to="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université"/>
+            <journey id="R" name="Châtillon-Montrouge" stationId="430" to="Châtillon-Montrouge"/>
+        </line>
+    </station>
+    <station name="Monceau">
+        <line id="M2" name="2" network="metro">
+            <journey id="A" name="Porte Dauphine" stationId="432" to="Porte Dauphine"/>
+            <journey id="R" name="Nation" stationId="432" to="Nation"/>
+        </line>
+    </station>
+    <station name="Montgallet">
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="433" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="433" to="Balard"/>
+        </line>
+    </station>
+    <station name="Montparnasse Bienvenüe">
+        <line id="M4" name="4" network="metro">
+            <journey id="A" name="Porte d'Orléans" stationId="436" to="Porte d'Orléans"/>
+            <journey id="R" name="Porte de Clignancourt" stationId="436" to="Porte de Clignancourt"/>
+        </line>
+        <line id="M6" name="6" network="metro">
+            <journey id="A" name="Charles de Gaulle Etoile" stationId="436" to="Charles de Gaulle Etoile"/>
+            <journey id="R" name="Nation" stationId="436" to="Nation"/>
+        </line>
+        <line id="M12" name="12" network="metro">
+            <journey id="A" name="Porte de la Chapelle" stationId="436" to="Porte de la Chapelle"/>
+            <journey id="R" name="Mairie d'Issy" stationId="436" to="Mairie d'Issy"/>
+        </line>
+        <line id="M13" name="13" network="metro">
+            <journey id="A" name="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université" stationId="436" to="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université"/>
+            <journey id="R" name="Châtillon-Montrouge" stationId="436" to="Châtillon-Montrouge"/>
+        </line>
+    </station>
+    <station name="Mouton-Duvernet">
+        <line id="M4" name="4" network="metro">
+            <journey id="A" name="Porte d'Orléans" stationId="438" to="Porte d'Orléans"/>
+            <journey id="R" name="Porte de Clignancourt" stationId="438" to="Porte de Clignancourt"/>
+        </line>
+    </station>
+    <station name="Ménilmontant">
+        <line id="M2" name="2" network="metro">
+            <journey id="A" name="Porte Dauphine" stationId="422" to="Porte Dauphine"/>
+            <journey id="R" name="Nation" stationId="422" to="Nation"/>
+        </line>
+    </station>
+</stations>

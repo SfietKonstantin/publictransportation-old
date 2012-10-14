@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="Danube">
+        <line id="M7B" name="7B" network="metro">
+            <journey id="A" name="Louis Blanc" stationId="237" to="Louis Blanc"/>
+            <journey id="R" name="Pré-St-Gervais" stationId="237" to="Pré-St-Gervais"/>
+        </line>
+    </station>
+    <station name="Daumesnil">
+        <line id="M6" name="6" network="metro">
+            <journey id="A" name="Charles de Gaulle Etoile" stationId="238" to="Charles de Gaulle Etoile"/>
+            <journey id="R" name="Nation" stationId="238" to="Nation"/>
+        </line>
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="238" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="238" to="Balard"/>
+        </line>
+    </station>
+    <station name="Denfert-Rochereau">
+        <line id="RB" name="RER B" network="rer">
+            <journey id="A" name="Charles-de-Gaulle. Mitry-Claye." stationId="5" to="Charles-de-Gaulle. Mitry-Claye."/>
+            <journey id="R" name="Robinson. Saint-Rémy-les-Chevreuse." stationId="5" to="Robinson. Saint-Rémy-les-Chevreuse."/>
+        </line>
+        <line id="M4" name="4" network="metro">
+            <journey id="A" name="Porte d'Orléans" stationId="239" to="Porte d'Orléans"/>
+            <journey id="R" name="Porte de Clignancourt" stationId="239" to="Porte de Clignancourt"/>
+        </line>
+        <line id="M6" name="6" network="metro">
+            <journey id="A" name="Charles de Gaulle Etoile" stationId="239" to="Charles de Gaulle Etoile"/>
+            <journey id="R" name="Nation" stationId="239" to="Nation"/>
+        </line>
+    </station>
+    <station name="Dugommier">
+        <line id="M6" name="6" network="metro">
+            <journey id="A" name="Charles de Gaulle Etoile" stationId="244" to="Charles de Gaulle Etoile"/>
+            <journey id="R" name="Nation" stationId="244" to="Nation"/>
+        </line>
+    </station>
+    <station name="Dupleix">
+        <line id="M6" name="6" network="metro">
+            <journey id="A" name="Charles de Gaulle Etoile" stationId="245" to="Charles de Gaulle Etoile"/>
+            <journey id="R" name="Nation" stationId="245" to="Nation"/>
+        </line>
+    </station>
+    <station name="Duroc">
+        <line id="M10" name="10" network="metro">
+            <journey id="A" name="Gare d'Austerlitz" stationId="246" to="Gare d'Austerlitz"/>
+            <journey id="R" name="Boulogne Pont de Saint-Cloud" stationId="246" to="Boulogne Pont de Saint-Cloud"/>
+        </line>
+        <line id="M13" name="13" network="metro">
+            <journey id="A" name="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université" stationId="246" to="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université"/>
+            <journey id="R" name="Châtillon-Montrouge" stationId="246" to="Châtillon-Montrouge"/>
+        </line>
+    </station>
+</stations>

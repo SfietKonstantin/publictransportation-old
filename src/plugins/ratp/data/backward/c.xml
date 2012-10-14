@@ -1,0 +1,306 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="Cadet">
+        <line id="M7" name="7" network="metro">
+            <journey id="A" name="Mairie d'Ivry - Villejuif Louis Aragon" stationId="176" to="Mairie d'Ivry - Villejuif Louis Aragon"/>
+            <journey id="R" name="La Courneuve 8 mai 1945" stationId="176" to="La Courneuve 8 mai 1945"/>
+        </line>
+    </station>
+    <station name="Cambronne">
+        <line id="M6" name="6" network="metro">
+            <journey id="A" name="Charles de Gaulle Etoile" stationId="177" to="Charles de Gaulle Etoile"/>
+            <journey id="R" name="Nation" stationId="177" to="Nation"/>
+        </line>
+    </station>
+    <station name="Campo-Formio">
+        <line id="M5" name="5" network="metro">
+            <journey id="A" name="Place d'Italie" stationId="178" to="Place d'Italie"/>
+            <journey id="R" name="Bobigny Pablo Picasso" stationId="178" to="Bobigny Pablo Picasso"/>
+        </line>
+    </station>
+    <station name="Cardinal Lemoine">
+        <line id="M10" name="10" network="metro">
+            <journey id="A" name="Gare d'Austerlitz" stationId="179" to="Gare d'Austerlitz"/>
+            <journey id="R" name="Boulogne Pont de Saint-Cloud" stationId="179" to="Boulogne Pont de Saint-Cloud"/>
+        </line>
+    </station>
+    <station name="Carrefour Pleyel">
+        <line id="M13" name="13" network="metro">
+            <journey id="A" name="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université" stationId="180" to="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université"/>
+            <journey id="R" name="Châtillon-Montrouge" stationId="180" to="Châtillon-Montrouge"/>
+        </line>
+    </station>
+    <station name="Censier Daubenton">
+        <line id="M7" name="7" network="metro">
+            <journey id="A" name="Mairie d'Ivry - Villejuif Louis Aragon" stationId="181" to="Mairie d'Ivry - Villejuif Louis Aragon"/>
+            <journey id="R" name="La Courneuve 8 mai 1945" stationId="181" to="La Courneuve 8 mai 1945"/>
+        </line>
+    </station>
+    <station name="Champigny">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="18" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="18" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+    </station>
+    <station name="Champs-Elysées - Clémenceau">
+        <line id="M1" name="1" network="metro">
+            <journey id="A" name="La Défense" stationId="190" to="La Défense"/>
+            <journey id="R" name="Château de Vincennes" stationId="190" to="Château de Vincennes"/>
+        </line>
+        <line id="M13" name="13" network="metro">
+            <journey id="A" name="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université" stationId="190" to="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université"/>
+            <journey id="R" name="Châtillon-Montrouge" stationId="190" to="Châtillon-Montrouge"/>
+        </line>
+    </station>
+    <station name="Chardon-Lagache">
+        <line id="M10" name="10" network="metro">
+            <journey id="A" name="Gare d'Austerlitz" stationId="191" to="Gare d'Austerlitz"/>
+            <journey id="R" name="Boulogne Pont de Saint-Cloud" stationId="191" to="Boulogne Pont de Saint-Cloud"/>
+        </line>
+    </station>
+    <station name="Charenton-Ecoles">
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="192" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="192" to="Balard"/>
+        </line>
+    </station>
+    <station name="Charles Michels">
+        <line id="M10" name="10" network="metro">
+            <journey id="A" name="Gare d'Austerlitz" stationId="194" to="Gare d'Austerlitz"/>
+            <journey id="R" name="Boulogne Pont de Saint-Cloud" stationId="194" to="Boulogne Pont de Saint-Cloud"/>
+        </line>
+    </station>
+    <station name="Charles de Gaulle - Etoile">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="5" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="5" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+        <line id="M1" name="1" network="metro">
+            <journey id="A" name="La Défense" stationId="193" to="La Défense"/>
+            <journey id="R" name="Château de Vincennes" stationId="193" to="Château de Vincennes"/>
+        </line>
+        <line id="M2" name="2" network="metro">
+            <journey id="A" name="Porte Dauphine" stationId="193" to="Porte Dauphine"/>
+            <journey id="R" name="Nation" stationId="193" to="Nation"/>
+        </line>
+        <line id="M6" name="6" network="metro">
+            <journey id="A" name="Charles de Gaulle Etoile" stationId="193" to="Charles de Gaulle Etoile"/>
+            <journey id="R" name="Nation" stationId="193" to="Nation"/>
+        </line>
+    </station>
+    <station name="Charonne">
+        <line id="M9" name="9" network="metro">
+            <journey id="A" name="Mairie de Montreuil" stationId="195" to="Mairie de Montreuil"/>
+            <journey id="R" name="Pont de Sèvres" stationId="195" to="Pont de Sèvres"/>
+        </line>
+    </station>
+    <station name="Chatou-Croissy">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="10" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="10" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+    </station>
+    <station name="Chaussée d'Antin La Fayette">
+        <line id="M7" name="7" network="metro">
+            <journey id="A" name="Mairie d'Ivry - Villejuif Louis Aragon" stationId="204" to="Mairie d'Ivry - Villejuif Louis Aragon"/>
+            <journey id="R" name="La Courneuve 8 mai 1945" stationId="204" to="La Courneuve 8 mai 1945"/>
+        </line>
+        <line id="M9" name="9" network="metro">
+            <journey id="A" name="Mairie de Montreuil" stationId="204" to="Mairie de Montreuil"/>
+            <journey id="R" name="Pont de Sèvres" stationId="204" to="Pont de Sèvres"/>
+        </line>
+    </station>
+    <station name="Chemin Vert">
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="208" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="208" to="Balard"/>
+        </line>
+    </station>
+    <station name="Chevaleret">
+        <line id="M6" name="6" network="metro">
+            <journey id="A" name="Charles de Gaulle Etoile" stationId="209" to="Charles de Gaulle Etoile"/>
+            <journey id="R" name="Nation" stationId="209" to="Nation"/>
+        </line>
+    </station>
+    <station name="Château Rouge">
+        <line id="M4" name="4" network="metro">
+            <journey id="A" name="Porte d'Orléans" stationId="198" to="Porte d'Orléans"/>
+            <journey id="R" name="Porte de Clignancourt" stationId="198" to="Porte de Clignancourt"/>
+        </line>
+    </station>
+    <station name="Château d'Eau">
+        <line id="M4" name="4" network="metro">
+            <journey id="A" name="Porte d'Orléans" stationId="197" to="Porte d'Orléans"/>
+            <journey id="R" name="Porte de Clignancourt" stationId="197" to="Porte de Clignancourt"/>
+        </line>
+    </station>
+    <station name="Château de Vincennes">
+        <line id="M1" name="1" network="metro">
+            <journey id="A" name="La Défense" stationId="196" to="La Défense"/>
+        </line>
+    </station>
+    <station name="Château-Landon">
+        <line id="M7" name="7" network="metro">
+            <journey id="A" name="Mairie d'Ivry - Villejuif Louis Aragon" stationId="199" to="Mairie d'Ivry - Villejuif Louis Aragon"/>
+            <journey id="R" name="La Courneuve 8 mai 1945" stationId="199" to="La Courneuve 8 mai 1945"/>
+        </line>
+    </station>
+    <station name="Châtelet">
+        <line id="M1" name="1" network="metro">
+            <journey id="A" name="La Défense" stationId="200" to="La Défense"/>
+            <journey id="R" name="Château de Vincennes" stationId="200" to="Château de Vincennes"/>
+        </line>
+        <line id="M4" name="4" network="metro">
+            <journey id="A" name="Porte d'Orléans" stationId="200" to="Porte d'Orléans"/>
+            <journey id="R" name="Porte de Clignancourt" stationId="200" to="Porte de Clignancourt"/>
+        </line>
+        <line id="M7" name="7" network="metro">
+            <journey id="A" name="Mairie d'Ivry - Villejuif Louis Aragon" stationId="200" to="Mairie d'Ivry - Villejuif Louis Aragon"/>
+            <journey id="R" name="La Courneuve 8 mai 1945" stationId="200" to="La Courneuve 8 mai 1945"/>
+        </line>
+        <line id="M11" name="11" network="metro">
+            <journey id="R" name="Mairie des Lilas" stationId="200" to="Mairie des Lilas"/>
+        </line>
+        <line id="M14" name="14" network="metro">
+            <journey id="A" name="Saint-Lazare" stationId="200" to="Saint-Lazare"/>
+            <journey id="R" name="Olympiades" stationId="200" to="Olympiades"/>
+        </line>
+    </station>
+    <station name="Châtelet-Les-Halles">
+        <line id="RA" name="RER A" network="rer">
+            <journey id="A" name="St-Germain-en-Laye. Poissy. Cergy." stationId="3" to="St-Germain-en-Laye. Poissy. Cergy."/>
+            <journey id="R" name="Boissy-St-Léger. Marne-la-Vallée." stationId="3" to="Boissy-St-Léger. Marne-la-Vallée."/>
+        </line>
+        <line id="RB" name="RER B" network="rer">
+            <journey id="A" name="Charles-de-Gaulle. Mitry-Claye." stationId="1" to="Charles-de-Gaulle. Mitry-Claye."/>
+            <journey id="R" name="Robinson. Saint-Rémy-les-Chevreuse." stationId="1" to="Robinson. Saint-Rémy-les-Chevreuse."/>
+        </line>
+    </station>
+    <station name="Châtillon-Montrouge">
+        <line id="M13" name="13" network="metro">
+            <journey id="A" name="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université" stationId="202" to="Asnières-Gennevilliers Les Courtilles - Saint-Denis-Université"/>
+        </line>
+    </station>
+    <station name="Cite Universitaire">
+        <line id="RB" name="RER B" network="rer">
+            <journey id="A" name="Charles-de-Gaulle. Mitry-Claye." stationId="6" to="Charles-de-Gaulle. Mitry-Claye."/>
+            <journey id="R" name="Robinson. Saint-Rémy-les-Chevreuse." stationId="6" to="Robinson. Saint-Rémy-les-Chevreuse."/>
+        </line>
+    </station>
+    <station name="Cité">
+        <line id="M4" name="4" network="metro">
+            <journey id="A" name="Porte d'Orléans" stationId="213" to="Porte d'Orléans"/>
+            <journey id="R" name="Porte de Clignancourt" stationId="213" to="Porte de Clignancourt"/>
+        </line>
+    </station>
+    <station name="Cluny La Sorbonne">
+        <line id="M10" name="10" network="metro">
+            <journey id="A" name="Gare d'Austerlitz" stationId="215" to="Gare d'Austerlitz"/>
+            <journey id="R" name="Boulogne Pont de Saint-Cloud" stationId="215" to="Boulogne Pont de Saint-Cloud"/>
+        </line>
+    </station>
+    <station name="Colonel Fabien">
+        <line id="M2" name="2" network="metro">
+            <journey id="A" name="Porte Dauphine" stationId="216" to="Porte Dauphine"/>
+            <journey id="R" name="Nation" stationId="216" to="Nation"/>
+        </line>
+    </station>
+    <station name="Commerce">
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="218" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="218" to="Balard"/>
+        </line>
+    </station>
+    <station name="Concorde">
+        <line id="M1" name="1" network="metro">
+            <journey id="A" name="La Défense" stationId="219" to="La Défense"/>
+            <journey id="R" name="Château de Vincennes" stationId="219" to="Château de Vincennes"/>
+        </line>
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="219" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="219" to="Balard"/>
+        </line>
+        <line id="M12" name="12" network="metro">
+            <journey id="A" name="Porte de la Chapelle" stationId="219" to="Porte de la Chapelle"/>
+            <journey id="R" name="Mairie d'Issy" stationId="219" to="Mairie d'Issy"/>
+        </line>
+    </station>
+    <station name="Convention">
+        <line id="M12" name="12" network="metro">
+            <journey id="A" name="Porte de la Chapelle" stationId="221" to="Porte de la Chapelle"/>
+            <journey id="R" name="Mairie d'Issy" stationId="221" to="Mairie d'Issy"/>
+        </line>
+    </station>
+    <station name="Corentin Cariou">
+        <line id="M7" name="7" network="metro">
+            <journey id="A" name="Mairie d'Ivry - Villejuif Louis Aragon" stationId="223" to="Mairie d'Ivry - Villejuif Louis Aragon"/>
+            <journey id="R" name="La Courneuve 8 mai 1945" stationId="223" to="La Courneuve 8 mai 1945"/>
+        </line>
+    </station>
+    <station name="Corentin Celton">
+        <line id="M12" name="12" network="metro">
+            <journey id="A" name="Porte de la Chapelle" stationId="224" to="Porte de la Chapelle"/>
+            <journey id="R" name="Mairie d'Issy" stationId="224" to="Mairie d'Issy"/>
+        </line>
+    </station>
+    <station name="Corvisart">
+        <line id="M6" name="6" network="metro">
+            <journey id="A" name="Charles de Gaulle Etoile" stationId="225" to="Charles de Gaulle Etoile"/>
+            <journey id="R" name="Nation" stationId="225" to="Nation"/>
+        </line>
+    </station>
+    <station name="Cour Saint-Emilion">
+        <line id="M14" name="14" network="metro">
+            <journey id="A" name="Saint-Lazare" stationId="227" to="Saint-Lazare"/>
+            <journey id="R" name="Olympiades" stationId="227" to="Olympiades"/>
+        </line>
+    </station>
+    <station name="Courcelles">
+        <line id="M2" name="2" network="metro">
+            <journey id="A" name="Porte Dauphine" stationId="228" to="Porte Dauphine"/>
+            <journey id="R" name="Nation" stationId="228" to="Nation"/>
+        </line>
+    </station>
+    <station name="Courcelles Sur Yvette">
+        <line id="RB" name="RER B" network="rer">
+            <journey id="A" name="Charles-de-Gaulle. Mitry-Claye." stationId="24" to="Charles-de-Gaulle. Mitry-Claye."/>
+            <journey id="R" name="Robinson. Saint-Rémy-les-Chevreuse." stationId="24" to="Robinson. Saint-Rémy-les-Chevreuse."/>
+        </line>
+    </station>
+    <station name="Couronnes">
+        <line id="M2" name="2" network="metro">
+            <journey id="A" name="Porte Dauphine" stationId="230" to="Porte Dauphine"/>
+            <journey id="R" name="Nation" stationId="230" to="Nation"/>
+        </line>
+    </station>
+    <station name="Crimée">
+        <line id="M7" name="7" network="metro">
+            <journey id="A" name="Mairie d'Ivry - Villejuif Louis Aragon" stationId="234" to="Mairie d'Ivry - Villejuif Louis Aragon"/>
+            <journey id="R" name="La Courneuve 8 mai 1945" stationId="234" to="La Courneuve 8 mai 1945"/>
+        </line>
+    </station>
+    <station name="Croix de Chavaux">
+        <line id="M9" name="9" network="metro">
+            <journey id="A" name="Mairie de Montreuil" stationId="235" to="Mairie de Montreuil"/>
+            <journey id="R" name="Pont de Sèvres" stationId="235" to="Pont de Sèvres"/>
+        </line>
+    </station>
+    <station name="Créteil-L'Echat">
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="231" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="231" to="Balard"/>
+        </line>
+    </station>
+    <station name="Créteil-Préfecture">
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="232" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="232" to="Balard"/>
+        </line>
+    </station>
+    <station name="Créteil-Université">
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="233" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="233" to="Balard"/>
+        </line>
+    </station>
+</stations>

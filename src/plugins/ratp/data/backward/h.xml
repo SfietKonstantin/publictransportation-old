@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="Havre-Caumartin">
+        <line id="M3" name="3" network="metro">
+            <journey id="A" name="Pont de Levallois Bécon" stationId="302" to="Pont de Levallois Bécon"/>
+            <journey id="R" name="Gallieni" stationId="302" to="Gallieni"/>
+        </line>
+        <line id="M9" name="9" network="metro">
+            <journey id="A" name="Mairie de Montreuil" stationId="302" to="Mairie de Montreuil"/>
+            <journey id="R" name="Pont de Sèvres" stationId="302" to="Pont de Sèvres"/>
+        </line>
+    </station>
+    <station name="Hoche">
+        <line id="M5" name="5" network="metro">
+            <journey id="A" name="Place d'Italie" stationId="303" to="Place d'Italie"/>
+            <journey id="R" name="Bobigny Pablo Picasso" stationId="303" to="Bobigny Pablo Picasso"/>
+        </line>
+    </station>
+    <station name="Hôtel de Ville">
+        <line id="M1" name="1" network="metro">
+            <journey id="A" name="La Défense" stationId="306" to="La Défense"/>
+            <journey id="R" name="Château de Vincennes" stationId="306" to="Château de Vincennes"/>
+        </line>
+        <line id="M11" name="11" network="metro">
+            <journey id="A" name="Châtelet" stationId="306" to="Châtelet"/>
+            <journey id="R" name="Mairie des Lilas" stationId="306" to="Mairie des Lilas"/>
+        </line>
+    </station>
+</stations>

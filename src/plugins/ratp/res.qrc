@@ -1,0 +1,27 @@
+<RCC>
+    <qresource prefix="/">
+        <file>data/backward/a.xml</file>
+        <file>data/backward/b.xml</file>
+        <file>data/backward/c.xml</file>
+        <file>data/backward/d.xml</file>
+        <file>data/backward/e.xml</file>
+        <file>data/backward/f.xml</file>
+        <file>data/backward/g.xml</file>
+        <file>data/backward/h.xml</file>
+        <file>data/backward/i.xml</file>
+        <file>data/backward/j.xml</file>
+        <file>data/backward/k.xml</file>
+        <file>data/backward/l.xml</file>
+        <file>data/backward/m.xml</file>
+        <file>data/backward/n.xml</file>
+        <file>data/backward/o.xml</file>
+        <file>data/backward/p.xml</file>
+        <file>data/backward/q.xml</file>
+        <file>data/backward/r.xml</file>
+        <file>data/backward/s.xml</file>
+        <file>data/backward/stations.txt</file>
+        <file>data/backward/t.xml</file>
+        <file>data/backward/v.xml</file>
+        <file>data/backward/w.xml</file>
+    </qresource>
+</RCC>

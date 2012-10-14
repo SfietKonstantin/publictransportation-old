@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<stations>
+    <station name="Ecole Militaire">
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="247" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="247" to="Balard"/>
+        </line>
+    </station>
+    <station name="Ecole Vétérinaire de Maisons-Alfort">
+        <line id="M8" name="8" network="metro">
+            <journey id="A" name="Pointe du Lac" stationId="248" to="Pointe du Lac"/>
+            <journey id="R" name="Balard" stationId="248" to="Balard"/>
+        </line>
+    </station>
+    <station name="Edgar Quinet">
+        <line id="M6" name="6" network="metro">
+            <journey id="A" name="Charles de Gaulle Etoile" stationId="249" to="Charles de Gaulle Etoile"/>
+            <journey id="R" name="Nation" stationId="249" to="Nation"/>
+        </line>
+    </station>
+    <station name="Eglise de Pantin">
+        <line id="M5" name="5" network="metro">
+            <journey id="A" name="Place d'Italie" stationId="251" to="Place d'Italie"/>
+            <journey id="R" name="Bobigny Pablo Picasso" stationId="251" to="Bobigny Pablo Picasso"/>
+        </line>
+    </station>
+    <station name="Esplanade de La Défense">
+        <line id="M1" name="1" network="metro">
+            <journey id="A" name="La Défense" stationId="258" to="La Défense"/>
+            <journey id="R" name="Château de Vincennes" stationId="258" to="Château de Vincennes"/>
+        </line>
+    </station>
+    <station name="Etienne Marcel">
+        <line id="M4" name="4" network="metro">
+            <journey id="A" name="Porte d'Orléans" stationId="260" to="Porte d'Orléans"/>
+            <journey id="R" name="Porte de Clignancourt" stationId="260" to="Porte de Clignancourt"/>
+        </line>
+    </station>
+    <station name="Europe">
+        <line id="M3" name="3" network="metro">
+            <journey id="A" name="Pont de Levallois Bécon" stationId="262" to="Pont de Levallois Bécon"/>
+            <journey id="R" name="Gallieni" stationId="262" to="Gallieni"/>
+        </line>
+    </station>
+    <station name="Exelmans">
+        <line id="M9" name="9" network="metro">
+            <journey id="A" name="Mairie de Montreuil" stationId="265" to="Mairie de Montreuil"/>
+            <journey id="R" name="Pont de Sèvres" stationId="265" to="Pont de Sèvres"/>
+        </line>
+    </station>
+</stations>
