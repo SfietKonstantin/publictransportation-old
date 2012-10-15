@@ -86,8 +86,8 @@ AbstractPage {
 
         BusyIndicator {
             anchors.centerIn: parent
-            visible: WaitingTimeModelInstance.updating && page.visible
-            running: WaitingTimeModelInstance.updating
+            visible: WaitingTimeModelInstance.loading && page.visible
+            running: WaitingTimeModelInstance.loading
             platformStyle: BusyIndicatorStyle {size: "large"}
         }
     }

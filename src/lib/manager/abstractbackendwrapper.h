@@ -235,11 +235,19 @@ public:
     virtual QString requestSuggestStations(const QString &partialStation) = 0;
     /**
      * @brief Request journeys from a given station
-     * @param station station.
-     * @param limit limit the number of entries.
+     * @param station station to query.
+     * @param limit limit of the number of journeys.
      * @return request identifier.
      */
     virtual QString requestJourneysFromStation(const Station &station, int limit) = 0;
+    /**
+     * @brief Request waiting time
+     * @param company company.
+     * @param line line for which the waiting time should be queried.
+     * @param journey journey for which the waiting time should be queried.
+     * @param station station for which the waiting time should be queried.
+     * @return request identifier.
+     */
     virtual QString requestWaitingTime(const Company &company, const Line &line,
                                        const Journey &journey, const Station &station) = 0;
 public Q_SLOTS:
@@ -274,12 +282,69 @@ public Q_SLOTS:
      * situations.
      */
     virtual void kill() = 0;
+    /**
+     * @brief Register error
+     *
+     * This method is used to reply to any request and to note that there were an
+     * error during the request. Error categories can be found in file @ref errorid.h
+     *
+     * @param request request identifier.
+     * @param errorId a predefined string that provides the error category.
+     * @param error a human-readable string describing the error.
+     */
     void registerError(const QString &request, const QString &errorId, const QString &error);
+    /**
+     * @brief Register copyright
+     *
+     * This method is used to register the copyright information that belongs to this backend.
+     * Copyright informations should be provided by all the providers, because most of the online
+     * public transportation websites requires that the copyright and other legal informations
+     * should be provided.
+     *
+     * @param request request identifier.
+     * @param copyright copyright and other legal informations.
+     */
     void registerCopyright(const QString &request, const QString &copyright);
+    /**
+     * @brief Register suggested stations
+     *
+     * This method is used to register a list of suggested stations. Returned stations are used in
+     * other signals, so these stations can store additional properties. An interesting property
+     * to also set is "backendName", that provides to the GUI an information about the backend
+     * used for getting this station. It can be used by the user to distinguish between two
+     * stations that have the same name, but are provided by different backends.
+     *
+     * @param request request request identifier.
+     * @param suggestedStations suggested stations, as a list of stations.
+     */
     void registerSuggestedStations(const QString &request,
                                    const QList<PublicTransportation::Station> &suggestedStations);
+    /**
+     * @brief Register journeys from station
+     *
+     * This method is used to register the list of companies, lines and journeys This reply should
+     * send a list of PublicTransportation;;InfoJourneys. Each information about journeys contains
+     * the journeys for a given company and a given line, but in a station, there might be several
+     * journeys for the same line heading to different directions, so an information about journeys
+     * contains a list of journey-station pairs. Adding a station to the journey help giving
+     * more accurate results, since the station might contain some station-specific properties
+     * that might help for other methods. All the components, that are the company, the line, the
+     * journey and the station are used by other signals.
+     *
+     * @param request request request identifier.
+     * @param infoJourneys a list of informations about journeys.
+     */
     void registerJourneysFromStation(const QString &request,
                                      const QList<PublicTransportation::InfoJourneys> &infoJourneys);
+    /**
+     * @brief Register waiting time
+     *
+     * This method is used to register the list of waiting time,as a list of
+     * PublicTransportation::WaitingTime.
+     *
+     * @param request request request identifier.
+     * @param waitingTimeList a list of waiting time.
+     */
     void registerWaitingTime(const QString &request,
                              const QList<PublicTransportation::WaitingTime> &waitingTimeList);
 Q_SIGNALS:
@@ -291,13 +356,53 @@ Q_SIGNALS:
      * @brief Capabilities changed
      */
     void capabilitiesChanged();
-
+    /**
+     * @brief Error registered
+     *
+     * This signal is used to relay registered errors.
+     *
+     * @param request request identifier.
+     * @param errorId a predefined string that provides the error category.
+     * @param error a human-readable string describing the error.
+     */
     void errorRegistered(const QString &request, const QString &errorId, const QString &error);
+    /**
+     * @brief Copyright registered
+     *
+     * This signal is used to relay registered copyright.
+     *
+     * @param request request identifier.
+     * @param copyright copyright and other legal informations.
+     */
     void copyrightRegistered(const QString &request, const QString &copyright);
+    /**
+     * @brief Suggested stations registered
+     *
+     * This signal is used to relay registered suggested stations.
+     *
+     * @param request request identifier.
+     * @param suggestedStations suggested stations, as a list of stations.
+     */
     void suggestedStationsRegistered(const QString & request,
                                      const QList<PublicTransportation::Station> &suggestedStations);
+    /**
+     * @brief Journeys from station registered
+     *
+     * This signal is used to relay registered journeys from station.
+     *
+     * @param request request identifier.
+     * @param infoJourneys a list of informations about journeys.
+     */
     void journeysFromStationRegistered(const QString &request,
                                        const QList<PublicTransportation::InfoJourneys> &infoJourneys);
+    /**
+     * @brief Waiting time registered
+     *
+     * This signal is used to relay registered waiting time.
+     *
+     * @param request request identifier.
+     * @param waitimgTimeList a list of waiting time.
+     */
     void waitingTimeRegistered(const QString &request,
                                const QList<PublicTransportation::WaitingTime> &waitimgTimeList);
 protected:
@@ -332,6 +437,16 @@ protected:
      * @param capabilities capabilities to set.
      */
     void setCapabilities(const QStringList &capabilities);
+    /**
+     * @brief Create request
+     *
+     * This method is used to create a request, and register it in the
+     * backend wrapper. This method is useful whenever a request is
+     * performed, in order to get a request identifier.
+     *
+     * @param requestType request type.
+     * @return request identifier.
+     */
     QString createRequest(RequestType requestType);
 
     /**

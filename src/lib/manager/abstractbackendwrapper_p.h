@@ -35,9 +35,21 @@
 namespace PublicTransportation
 {
 
+/**
+ * @internal
+ * @brief Private class used in PublicTransportation::AbstractBackendWrapper
+ */
 struct RequestData
 {
+    /**
+     * @internal
+     * @brief Request
+     */
     QString request;
+    /**
+     * @internal
+     * @brief Request type
+     */
     AbstractBackendWrapper::RequestType type;
 };
 
@@ -83,6 +95,10 @@ public:
      * @brief Capabilities
      */
     QStringList capabilities;
+    /**
+     * @internal
+     * @brief Requests
+     */
     QMap<QString, RequestData *> requests;
 };
 

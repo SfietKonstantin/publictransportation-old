@@ -84,7 +84,15 @@ struct BackendInfoPrivate: public QSharedData
      * @brief Version
      */
     QString version;
+    /**
+     * @internal
+     * @brief Country
+     */
     QString country;
+    /**
+     * @internal
+     * @brief Cities
+     */
     QStringList cities;
 };
 
@@ -184,6 +192,16 @@ public:
      * @return backend identifier.
      */
     QString backendIdentifier() const;
+    /**
+     * @brief Backend country
+     * @return backend country.
+     */
+    QString backendCountry() const;
+    /**
+     * @brief Backend cities
+     * @return backend cities.
+     */
+    QStringList backendCities() const;
     /**
      * @brief Backend author
      * @return backend author.

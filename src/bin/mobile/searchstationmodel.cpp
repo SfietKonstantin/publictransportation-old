@@ -15,8 +15,8 @@
  ****************************************************************************************/
 
 /**
- * @file backendmodel.cpp
- * @short Implementation of PublicTransportation::BackendModel
+ * @file searchstationmodel.cpp
+ * @short Implementation of PublicTransportation::Gui::SearchStationModel
  */
 
 #include "searchstationmodel.h"
@@ -28,16 +28,35 @@
 namespace PublicTransportation
 {
 
+namespace Gui
+{
+
+/**
+ * @internal
+ * @brief Private class used in PublicTransportation::Gui::SearchStationModel
+ */
 struct SearchStationModelData
 {
+    /**
+     * @internal
+     * @brief Station
+     */
     Station station;
+    /**
+     * @internal
+     * @brief Backend identifier
+     */
     QString backendIdentifier;
+    /**
+     * @internal
+     * @brief If the backend support journeys from station
+     */
     bool supportJourneysFromStation;
 };
 
 /**
  * @internal
- * @short Private class for PublicTransportation::SearchStationModel
+ * @short Private class for PublicTransportation::Gui::SearchStationModel
  */
 class SearchStationModelPrivate
 {
@@ -48,10 +67,33 @@ public:
      * @param q Q-pointer.
      */
     SearchStationModelPrivate(SearchStationModel *q);
+    /**
+     * @internal
+     * @brief Slot backend added
+     * @param identifier identifier.
+     * @param backend backend.
+     */
     void slotBackendAdded(const QString &identifier, AbstractBackendWrapper *backend);
+    /**
+     * @internal
+     * @brief Slot status changed
+     */
     void slotStatusChanged();
+    /**
+     * @internal
+     * @brief Slot error registered
+     * @param request request identifier.
+     * @param errorId error identifier.
+     * @param errorString error string.
+     */
     void slotErrorRegistered(const QString &request, const QString &errorId,
                              const QString &errorString);
+    /**
+     * @internal
+     * @brief Slot suggested stations registered
+     * @param request request identifier.
+     * @param stations stations.
+     */
     void slotSuggestedStationsRegistered(const QString & request,
                                          const QList<PublicTransportation::Station> &stations);
     /**
@@ -59,7 +101,15 @@ public:
      * @brief Backend manager
      */
     AbstractBackendManager *backendManager;
+    /**
+     * @internal
+     * @brief Data
+     */
     QList<SearchStationModelData *> data;
+    /**
+     * @internal
+     * @brief Requests
+     */
     QList<QString> requests;
 private:
     /**
@@ -119,11 +169,12 @@ void SearchStationModelPrivate::slotErrorRegistered(const QString &request,
                                                     const QString &errorId,
                                                     const QString &errorString)
 {
+    Q_UNUSED(errorId)
     Q_UNUSED(errorString)
     Q_Q(SearchStationModel);
     requests.removeAll(request);
     if (requests.isEmpty()) {
-        emit q->updatingChanged();
+        emit q->loadingChanged();
     }
 }
 
@@ -143,7 +194,7 @@ void SearchStationModelPrivate::slotSuggestedStationsRegistered(const QString & 
 
     requests.removeAll(request);
     if (requests.isEmpty()) {
-        emit q->updatingChanged();
+        emit q->loadingChanged();
     }
 
     QList<SearchStationModelData *> addedData;
@@ -215,7 +266,7 @@ int SearchStationModel::rowCount(const QModelIndex &parent) const
     return d->data.count();
 }
 
-bool SearchStationModel::isUpdating() const
+bool SearchStationModel::isLoading() const
 {
     Q_D(const SearchStationModel);
     return !d->requests.isEmpty();
@@ -242,7 +293,7 @@ QVariant SearchStationModel::data(const QModelIndex &index, int role) const
         return data->supportJourneysFromStation;
         break;
     case ProviderNameRole:
-        return data->station.properties().value("providerName", QString());
+        return data->station.properties().value("backendName", QString());
         break;
     default:
         return QVariant();
@@ -268,7 +319,7 @@ void SearchStationModel::search(const QString &partialStation)
         }
     }
 
-    emit updatingChanged();
+    emit loadingChanged();
 }
 
 void SearchStationModel::clear()
@@ -312,6 +363,8 @@ void SearchStationModel::requestJourneysFromStation(int index)
 
     QString request = backend->requestJourneysFromStation(data->station, 20);
     emit journeysFromStationRequested(backend, request, data->station);
+}
+
 }
 
 }

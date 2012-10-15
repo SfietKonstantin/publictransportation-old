@@ -43,26 +43,8 @@ class Station;
  * like the need to compiling and linking against
  * libpublictransportation.
  *
- * @section implementing Implementing a provider plugin
- *
- * Implementation should be done using
- * PublicTransportation::ProviderPluginObject, that
- * provides a QObject base instead of a plain interface,
- * but the methods to be implemented are still the same.
- *
- * capabilities() list the capabilities of the provider,
- * and must be implemented properly. Other methods like
- * listCompanies(), listLines(), listJourneys(),
- * listStations() etc. must be implemented as well, but,
- * depending to the supported capabilities of the provider,
- * they might return, or do nothing.
- *
- * @section asynchronous Asynchronous calls
- *
- * Some methods should returns nothing when called. Instead,
- * they should trigger an asynchronous call, and emit signals
- * that are declared in PublicTransportation::ProviderPluginObject
- * when the operation is terminated.
+ * For more information about creating a provider plugin,
+ * see \ref PublicTransportation::ProviderPluginObject.
  *
  */
 class ProviderPluginInterface
@@ -77,12 +59,35 @@ public:
      * @return capabilities.
      */
     virtual QStringList capabilities() const = 0;
+    /**
+     * @brief Retrieve copyright
+     * @param request request identifier.
+     */
     virtual void retrieveCopyright(const QString &request) = 0;
+    /**
+     * @brief Retrieve suggested stations
+     * @param request request identifier.
+     * @param partialStation partial station name.
+     */
     virtual void retrieveSuggestedStations(const QString &request,
                                            const QString &partialStation) = 0;
+    /**
+     * @brief Retrieve journeys from station
+     * @param request request identifier.
+     * @param station station to query.
+     * @param limit limit of the number of journeys.
+     */
     virtual void retrieveJourneysFromStation(const QString &request,
                                              const PublicTransportation::Station &station,
                                              int limit) = 0;
+    /**
+     * @brief Retrieve waiting time
+     * @param request request identifier.
+     * @param company company.
+     * @param line line for which the waiting time should be queried.
+     * @param journey journey for which the waiting time should be queried.
+     * @param station station for which the waiting time should be queried.
+     */
     virtual void retrieveWaitingTime(const QString &request,
                                      const PublicTransportation::Company &company,
                                      const PublicTransportation::Line &line,

@@ -16,11 +16,11 @@
 
 /**
  * @file backendmodel.h
- * @short Definition of PublicTransportation::BackendModel
+ * @short Definition of PublicTransportation::Gui::BackendModel
  */
 
-#ifndef PUBLICTRANSPORTATION_BACKENDMODEL_H
-#define PUBLICTRANSPORTATION_BACKENDMODEL_H
+#ifndef PUBLICTRANSPORTATION_GUI_BACKENDMODEL_H
+#define PUBLICTRANSPORTATION_GUI_BACKENDMODEL_H
 
 #include <QtCore/QAbstractListModel>
 #include "manager/abstractbackendwrapper.h"
@@ -29,6 +29,10 @@ namespace PublicTransportation
 {
 
 class AbstractBackendManager;
+
+namespace Gui
+{
+
 class BackendModelPrivate;
 
 /**
@@ -103,11 +107,7 @@ public:
         /**
          * @short Identifier role
          */
-        IdentifierRole,
-        /**
-         * @short Executable role
-         */
-        ExecutableRole
+        IdentifierRole
     };
     /**
      * @short Default constructor
@@ -153,9 +153,8 @@ public Q_SLOTS:
     /**
      * @brief Run a backend
      * @param identifier backend identifier.
-     * @param executable backend executable.
      */
-    void runBackend(const QString &identifier, const QString &executable);
+    void runBackend(const QString &identifier);
     /**
      * @brief Stop a backend.
      * @param identifier backend identifier.
@@ -179,4 +178,6 @@ private:
 
 }
 
-#endif // PUBLICTRANSPORTATION_BACKENDMODEL_H
+}
+
+#endif // PUBLICTRANSPORTATION_GUI_BACKENDMODEL_H

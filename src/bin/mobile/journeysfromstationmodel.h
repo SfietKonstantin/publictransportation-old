@@ -15,12 +15,12 @@
  ****************************************************************************************/
 
 /**
- * @file backendmodel.h
- * @short Definition of PublicTransportation::BackendModel
+ * @file journeysfromstationmodel.h
+ * @short Definition of PublicTransportation::Gui::JourneysFromStationModel
  */
 
-#ifndef PUBLICTRANSPORTATION_JOURNEYSFROMSTATIONSMODEL_H
-#define PUBLICTRANSPORTATION_JOURNEYSFROMSTATIONSMODEL_H
+#ifndef PUBLICTRANSPORTATION_GUI_JOURNEYSFROMSTATIONSMODEL_H
+#define PUBLICTRANSPORTATION_GUI_JOURNEYSFROMSTATIONSMODEL_H
 
 #include <QtCore/QAbstractListModel>
 
@@ -34,24 +34,17 @@ class Line;
 class Journey;
 class Station;
 
+namespace Gui
+{
+
 class JourneysFromStationModelPrivate;
 /**
- * @brief A model for available backends
+ * @brief A model for journeys going from a station
  *
  * This class provides a model for QML that contains
- * the available backends. It also provides control
- * over the backends, as well as feedback on backend
- * status.
- *
- * It mostly mirrors PublicTransportation::AbstractBackendManager,
- * adding only a feature, that is starting previously started
- * backend when reloading the backend list.
- *
- * When a backend have been previously started, and not
- * stopped, it is considered as useful, and should be
- * restart. When the list of backends are reloaded, these
- * backends are then restarted automatically (that happen,
- * for example, while the application is launched again).
+ * a list of journeys for a given station. It also provides
+ * a method to interact with the journey, and query the
+ * waiting time for the given journey.
  */
 class JourneysFromStationModel : public QAbstractListModel
 {
@@ -60,7 +53,10 @@ class JourneysFromStationModel : public QAbstractListModel
      * @short Count
      */
     Q_PROPERTY(int count READ count NOTIFY countChanged)
-    Q_PROPERTY(bool updating READ isUpdating NOTIFY updatingChanged)
+    /**
+     * @short Loading
+     */
+    Q_PROPERTY(bool loading READ isLoading NOTIFY loadingChanged)
 public:
     /**
      * @short Model roles
@@ -82,6 +78,9 @@ public:
          * @short Station role
          */
         StationRole,
+        /**
+         * @short If the backend support waiting time
+         */
         SupportWaitingTimeRole
     };
     /**
@@ -105,7 +104,11 @@ public:
      * @return the number of rows in this model.
      */
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    bool isUpdating() const;
+    /**
+     * @brief Is loading
+     * @return if this model is loading.
+     */
+    bool isLoading() const;
     /**
      * @short Count
      * @return count.
@@ -120,16 +123,41 @@ public:
      */
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 public Q_SLOTS:
+    /**
+     * @brief A request for journeys from station has been sent
+     * @param backend backend answering the request.
+     * @param request request identifier.
+     * @param station station to query.
+     */
     void load(AbstractBackendWrapper *backend, const QString &request,
               const PublicTransportation::Station &station);
+    /**
+     * @brief Request waiting time
+     * @param index index of the journey.
+     */
     void requestWaitingTime(int index);
+    /**
+     * @brief Clear
+     */
     void clear();
 Q_SIGNALS:
-    void updatingChanged();
+    /**
+     * @brief Loading changed
+     */
+    void loadingChanged();
     /**
      * @short Count changed
      */
     void countChanged();
+    /**
+     * @brief Waiting time requested
+     * @param backend backend answering the request.
+     * @param request request id.
+     * @param company company.
+     * @param line line.
+     * @param journey journey.
+     * @param station station.
+     */
     void waitingTimeRequested(AbstractBackendWrapper *backend, const QString &request,
                               const PublicTransportation::Company &company,
                               const PublicTransportation::Line &line,
@@ -148,4 +176,6 @@ private:
 
 }
 
-#endif // PUBLICTRANSPORTATION_JOURNEYSFROMSTATIONSMODEL_H
+}
+
+#endif // PUBLICTRANSPORTATION_GUI_JOURNEYSFROMSTATIONSMODEL_H

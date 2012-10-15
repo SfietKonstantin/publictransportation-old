@@ -14,13 +14,55 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef ERRORCODE_H
-#define ERRORCODE_H
+#ifndef ERRORID_H
+#define ERRORID_H
 
+/**
+ * @file errorid.h
+ * @short Definition of constants that describes error categories
+ */
+
+/**
+ * @short INVALID_REQUEST_TYPE
+ *
+ * The error is sent when the backend wrapper receive
+ * a response from the backend that do not correspond
+ * to the type of data that were requested.
+ *
+ * This error should help for debugging backends, and
+ * is not displayed in a GUI.
+ */
 #define INVALID_REQUEST_TYPE "invalid_request_type"
+/**
+ * @short NOT_IMPLEMENTED
+ *
+ * The error is sent when the capability is not implemented
+ * in the backend, but still requested.
+ *
+ * This error should help for debugging backends, and
+ * is not displayed in a GUI.
+ */
 #define NOT_IMPLEMENTED "not_implemented"
+/**
+ * @short BACKEND_WARNING
+ *
+ * The error is sent because something happened in the backend
+ * side, because of some external reasons. Reasons can be lack
+ * of internet connection, server timeout, or invalid data retrieved
+ * from a server.
+ *
+ * This error is displayed in a GUI, in order to help the user
+ * to understand why there is a failure in an operation.
+ */
 #define BACKEND_WARNING "backend_warning"
-#define BACKEND_FAILURE "backend_failure"
+/**
+ * @short OTHER_ERROR
+ *
+ * Other error happened.
+ *
+ * This error code should not be set, unless there is a specific
+ * reason. It is not displayed in a GUI.
+ */
 #define OTHER_ERROR "other_error"
 
-#endif // ERRORCODE_H
+#endif // ERRORID_H

@@ -31,6 +31,16 @@
 #include "journeysfromstationmodel.h"
 #include "waitingtimemodel.h"
 
+namespace PublicTransportation
+{
+
+/**
+ * @short Namespce for GUI
+ */
+namespace Gui {}
+
+}
+
 using namespace PublicTransportation;
 
 /**
@@ -53,10 +63,10 @@ int main(int argc, char **argv)
     DBusBackendManager::registerDBusService();
 
     // Setup models and manager
-    BackendModel backendModel;
-    SearchStationModel searchStationModel;
-    JourneysFromStationModel journeysFromStationModel;
-    WaitingTimeModel waitingTimeModel;
+    Gui::BackendModel backendModel;
+    Gui::SearchStationModel searchStationModel;
+    Gui::JourneysFromStationModel journeysFromStationModel;
+    Gui::WaitingTimeModel waitingTimeModel;
 
     DBusBackendManager dbusBackendManager;
     backendModel.setBackendManager(&dbusBackendManager);
@@ -86,9 +96,9 @@ int main(int argc, char **argv)
     backendModel.reload();
 
     // Set QML context
-    qmlRegisterUncreatableType<BackendModel>("org.SfietKonstantin.publictransportation",
-                                             1, 0, "BackendModel",
-                                             "BackendModel cannot be created");
+    qmlRegisterUncreatableType<Gui::BackendModel>("org.SfietKonstantin.publictransportation",
+                                                  1, 0, "BackendModel",
+                                                 "BackendModel cannot be created");
 
     QSettings settings;
     bool backendFirstTime = !settings.contains("backend/firstTime");

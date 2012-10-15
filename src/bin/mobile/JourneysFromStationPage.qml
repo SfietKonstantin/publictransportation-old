@@ -108,8 +108,8 @@ AbstractPage {
 
         BusyIndicator {
             anchors.centerIn: parent
-            visible: JourneysFromStationModelInstance.updating && page.visible
-            running: JourneysFromStationModelInstance.updating
+            visible: JourneysFromStationModelInstance.loading && page.visible
+            running: JourneysFromStationModelInstance.loading
             platformStyle: BusyIndicatorStyle {size: "large"}
         }
     }

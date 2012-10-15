@@ -172,7 +172,7 @@ void TransportLausannois::retrieveSuggestedStations(const QString &request,
     disambiguation.insert("id", "org.SfietKonstantin.publictransportation.tl");
 
     QVariantMap properties;
-    properties.insert("providerName", "Transports Lausannois");
+    properties.insert("backendName", "Transports Lausannois");
 
 
     foreach (QString stationName, d->stations) {

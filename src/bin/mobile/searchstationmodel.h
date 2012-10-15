@@ -15,12 +15,12 @@
  ****************************************************************************************/
 
 /**
- * @file backendmodel.h
- * @short Definition of PublicTransportation::BackendModel
+ * @file searchstationmodel.h
+ * @short Definition of PublicTransportation::Gui::SearchStationModel
  */
 
-#ifndef PUBLICTRANSPORTATION_SEARCHSTATIONMODEL_H
-#define PUBLICTRANSPORTATION_SEARCHSTATIONMODEL_H
+#ifndef PUBLICTRANSPORTATION_GUI_SEARCHSTATIONMODEL_H
+#define PUBLICTRANSPORTATION_GUI_SEARCHSTATIONMODEL_H
 
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QSettings>
@@ -31,11 +31,25 @@ namespace PublicTransportation
 
 class AbstractBackendManager;
 
+namespace Gui
+{
+
 class SearchStationModelPrivate;
+/**
+ * @brief A model for stations being searched
+ *
+ * This class provides a model for QML that contains
+ * a list of stations that were searched. It also provides
+ * a method to interact with the station, and query the
+ * journeys from the station.
+ */
 class SearchStationModel : public QAbstractListModel
 {
     Q_OBJECT
-    Q_PROPERTY(bool updating READ isUpdating NOTIFY updatingChanged)
+    /**
+     * @short Loading
+     */
+    Q_PROPERTY(bool loading READ isLoading NOTIFY loadingChanged)
     /**
      * @short Count
      */
@@ -49,11 +63,14 @@ public:
          * @short Name role
          */
         NameRole = Qt::UserRole + 1,
-        SupportJourneysFromStationRole,
         /**
          * @short Company role
          */
-        ProviderNameRole
+        ProviderNameRole,
+        /**
+         * @short If the backend support getting journeys from station
+         */
+        SupportJourneysFromStationRole
     };
     /**
      * @short Default constructor
@@ -76,7 +93,11 @@ public:
      * @return the number of rows in this model.
      */
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    bool isUpdating() const;
+    /**
+     * @brief Is loading
+     * @return if this model is loading.
+     */
+    bool isLoading() const;
     /**
      * @short Count
      * @return count.
@@ -93,16 +114,33 @@ public:
 public Q_SLOTS:
     /**
      * @brief Search
+     * @param partialStation partial station name.
      */
     void search(const QString &partialStation);
+    /**
+     * @brief Clear
+     */
     void clear();
+    /**
+     * @brief Request journeys from station
+     * @param index index of the station.
+     */
     void requestJourneysFromStation(int index);
 Q_SIGNALS:
-    void updatingChanged();
+    /**
+     * @brief Loading changed
+     */
+    void loadingChanged();
     /**
      * @short Count changed
      */
     void countChanged();
+    /**
+     * @brief Journeys from station requested
+     * @param backend backend answering the request.
+     * @param request request id.
+     * @param station station.
+     */
     void journeysFromStationRequested(AbstractBackendWrapper *backend,
                                       const QString &request,
                                       const PublicTransportation::Station &station);
@@ -113,15 +151,19 @@ protected:
     const QScopedPointer<SearchStationModelPrivate> d_ptr;
 private:
     Q_DECLARE_PRIVATE(SearchStationModel)
+    /// \cond buggy-doxygen-doc
     Q_PRIVATE_SLOT(d_func(), void slotBackendAdded(QString,AbstractBackendWrapper*))
     Q_PRIVATE_SLOT(d_func(), void slotStatusChanged())
     Q_PRIVATE_SLOT(d_func(), void slotErrorRegistered(QString,QString,QString))
     Q_PRIVATE_SLOT(d_func(),
                    void slotSuggestedStationsRegistered(QString,
                                                         QList<PublicTransportation::Station>))
+    /// \endcond
 
 };
 
 }
 
-#endif // PUBLICTRANSPORTATION_SEARCHSTATIONMODEL_H
+}
+
+#endif // PUBLICTRANSPORTATION_GUI_SEARCHSTATIONMODEL_H

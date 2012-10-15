@@ -87,7 +87,7 @@ void SibraPrivate::slotSuggestedStationsFinished()
 
             QVariantMap properties;
             properties.insert("subUrl", stationRegExp.cap(1));
-            properties.insert("providerName", "SIBRA");
+            properties.insert("backendNames", "SIBRA");
 
             station.setDisambiguation(disambiguation);
             station.setName(name);

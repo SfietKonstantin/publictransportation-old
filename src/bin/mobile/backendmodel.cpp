@@ -16,7 +16,7 @@
 
 /**
  * @file backendmodel.cpp
- * @short Implementation of PublicTransportation::BackendModel
+ * @short Implementation of PublicTransportation::Gui::BackendModel
  */
 
 #include "backendmodel.h"
@@ -31,10 +31,12 @@
 namespace PublicTransportation
 {
 
+namespace Gui
+{
 
 /**
  * @internal
- * @short Private class for PublicTransportation::BackendModel
+ * @short Private class for PublicTransportation::Gui::BackendModel
  */
 class BackendModelPrivate
 {
@@ -142,7 +144,6 @@ BackendModel::BackendModel(QObject *parent):
     roles.insert(DescriptionRole, "description");
     roles.insert(StatusRole, "status");
     roles.insert(IdentifierRole, "identifier");
-    roles.insert(ExecutableRole, "executable");
     setRoleNames(roles);
 }
 
@@ -191,9 +192,6 @@ QVariant BackendModel::data(const QModelIndex &index, int role) const
     case IdentifierRole:
         return backendInfo.backendIdentifier();
         break;
-    case ExecutableRole:
-        return backendInfo.executable();
-        break;
     default:
         return QVariant();
         break;
@@ -220,24 +218,17 @@ void BackendModel::reload()
     settings.beginGroup("backend");
     QStringList keys = settings.allKeys();
 
-    QMap<QString, BackendInfo> identifierToBackend;
-    foreach (BackendInfo backendInfo, availableBackendList) {
-        identifierToBackend.insert(backendInfo.backendIdentifier(), backendInfo);
-    }
-
     foreach (QString key, keys) {
         if (key.startsWith("run-")) {
             QString identifier = key.right(key.size() - 4);
-            if (identifierToBackend.contains(identifier)) {
-                runBackend(identifier, identifierToBackend.value(identifier).executable());
-            }
+            runBackend(identifier);
         }
     }
 
     settings.endGroup();
 }
 
-void BackendModel::runBackend(const QString &identifier, const QString &executable)
+void BackendModel::runBackend(const QString &identifier)
 {
     Q_D(BackendModel);
     if (!d->backendManager) {
@@ -257,10 +248,16 @@ void BackendModel::runBackend(const QString &identifier, const QString &executab
         }
     }
 
+    QMap<QString, BackendInfo> identifierToBackend;
+    foreach (BackendInfo backendInfo, d->backendListManager->backendList()) {
+        identifierToBackend.insert(backendInfo.backendIdentifier(), backendInfo);
+    }
+
     QSettings settings;
     settings.setValue(QString("backend/run-") + identifier, QVariant(true));
 
-    d->backendManager->addBackend(identifier, executable, QMap<QString, QString>());
+    d->backendManager->addBackend(identifier, identifierToBackend.value(identifier).executable(),
+                                  QMap<QString, QString>());
 
     connect(d->backendManager->backend(identifier), SIGNAL(statusChanged()),
             this, SLOT(slotStatusChanged()));
@@ -284,6 +281,7 @@ void BackendModel::stopBackend(const QString &identifier)
     d->backendManager->stopBackend(identifier);
 }
 
+}
 
 }
 

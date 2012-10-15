@@ -78,8 +78,8 @@ AbstractPage {
 
         BusyIndicator {
             anchors.centerIn: parent
-            visible: SearchStationModelInstance.updating && page.visible
-            running: SearchStationModelInstance.updating
+            visible: SearchStationModelInstance.loading && page.visible
+            running: SearchStationModelInstance.loading
             platformStyle: BusyIndicatorStyle {size: "large"}
         }
     }

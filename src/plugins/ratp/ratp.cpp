@@ -204,7 +204,7 @@ void Ratp::retrieveSuggestedStations(const QString &request,
     disambiguation.insert("id", "org.SfietKonstantin.publictransportation.ratp");
 
     QVariantMap properties;
-    properties.insert("providerName", "RATP");
+    properties.insert("backendName", "RATP");
 
 
     foreach (QString stationName, d->stations) {

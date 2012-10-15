@@ -82,7 +82,19 @@ static const char *DESKTOP_FILE_EXEC = "Exec";
  * Used in PublicTransportation::BackendInfo.
  */
 static const char *DESKTOP_FILE_BACKENDINFO_ID = "X-PublicTransportation-BackendInfo-Id";
+/**
+ * @internal
+ * @brief DESKTOP_FILE_BACKENDINFO_COUNTRY
+ *
+ * Used in PublicTransportation::BackendInfo.
+ */
 static const char *DESKTOP_FILE_BACKENDINFO_COUNTRY = "X-PublicTransportation-BackendInfo-Country";
+/**
+ * @internal
+ * @brief DESKTOP_FILE_BACKENDINFO_CITIES
+ *
+ * Used in PublicTransportation::BackendInfo.
+ */
 static const char *DESKTOP_FILE_BACKENDINFO_CITIES = "X-PublicTransportation-BackendInfo-Cities";
 /**
  * @internal
@@ -223,6 +235,18 @@ QString BackendInfo::backendIdentifier() const
 {
     Q_D(const BackendInfo);
     return d->identifier;
+}
+
+QString BackendInfo::backendCountry() const
+{
+    Q_D(const BackendInfo);
+    return d->country;
+}
+
+QStringList BackendInfo::backendCities() const
+{
+    Q_D(const BackendInfo);
+    return d->cities;
 }
 
 QString BackendInfo::backendAuthor() const

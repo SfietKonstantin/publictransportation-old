@@ -15,8 +15,8 @@
  ****************************************************************************************/
 
 /**
- * @file backendmodel.cpp
- * @short Implementation of PublicTransportation::BackendModel
+ * @file waitingtimemodel.cpp
+ * @short Implementation of PublicTransportation::Gui::WaitingTimeModel
  */
 
 #include "waitingtimemodel.h"
@@ -27,8 +27,19 @@
 namespace PublicTransportation
 {
 
+namespace Gui
+{
+
+/**
+ * @internal
+ * @brief Private class used in PublicTransportation::Gui::WaitingTimeModel
+ */
 struct WaitingTimeModelData
 {
+    /**
+     * @internal
+     * @brief Waiting time
+     */
     WaitingTime waitingTime;
 };
 
@@ -45,6 +56,11 @@ public:
      * @param q Q-pointer.
      */
     WaitingTimeModelPrivate(WaitingTimeModel *q);
+    /**
+     * @brief Slot waiting time registered
+     * @param request request.
+     * @param waitingTimeList waiting time list.
+     */
     void slotWaitingTimeRegistered(const QString &request,
                                    const QList<PublicTransportation::WaitingTime> &waitingTimeList);
     /**
@@ -52,12 +68,40 @@ public:
      * @brief Backend list manager
      */
     AbstractBackendManager *backendManager;
+    /**
+     * @internal
+     * @brief Backend identifier
+     */
     QString backendIdentifier;
+    /**
+     * @internal
+     * @brief Company
+     */
     Company company;
+    /**
+     * @internal
+     * @brief Line
+     */
     Line line;
+    /**
+     * @internal
+     * @brief Journey
+     */
     Journey journey;
+    /**
+     * @internal
+     * @brief Station
+     */
     Station station;
+    /**
+     * @internal
+     * @brief Current request
+     */
     QString currentRequest;
+    /**
+     * @internal
+     * @brief Data
+     */
     QList<WaitingTimeModelData *> data;
 private:
     /**
@@ -93,7 +137,7 @@ void WaitingTimeModelPrivate::slotWaitingTimeRegistered(const QString &request,
     q->endInsertRows();
 
     currentRequest = QString();
-    emit q->updatingChanged();
+    emit q->loadingChanged();
 }
 
 
@@ -129,7 +173,7 @@ int WaitingTimeModel::rowCount(const QModelIndex &parent) const
     return d->data.count();
 }
 
-bool WaitingTimeModel::isUpdating() const
+bool WaitingTimeModel::isLoading() const
 {
     Q_D(const WaitingTimeModel);
     return !d->currentRequest.isNull();
@@ -176,7 +220,7 @@ void WaitingTimeModel::load(AbstractBackendWrapper *backend, const QString &requ
     d->journey = journey;
     d->station = station;
     d->currentRequest = request;
-    emit updatingChanged();
+    emit loadingChanged();
 
     clear();
 }
@@ -190,6 +234,8 @@ void WaitingTimeModel::clear()
     }
     emit countChanged();
     endRemoveRows();
+}
+
 }
 
 }

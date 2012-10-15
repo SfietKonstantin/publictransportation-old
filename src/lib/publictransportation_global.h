@@ -44,15 +44,15 @@
  *
  * libpublictransportation is designed to be flexible
  * and to load information from several sources. It
- * provides a DBus API that allows interfacing with
+ * provides a   API that allows interfacing with
  * nearly all programming languages. It also provides
  * a helper app, that is called a provider, and that can
  * load C++/Qt plugin to retrieve information.
  *
  * Extending libpublictransportation can be done
  * in two ways
- * - write a program or a script that profits from the DBus API
- * - write a provider plugin and profit from the C++ API.
+ * - write a program or a script that profits from the \ref dbusApi
+ * - write a provider plugin and profit from the \ref cppApi.
  *
  * publictransportation manages providers and scripts and
  * launch them when needed, and communicate with DBus to them.
@@ -79,7 +79,7 @@
  *
  * publictransportation runs several helper programs or scripts, called
  * \e backends, that uses DBus to react to user input and return replies.
- * These backends are represented using the AbstractBackendWrapper class.
+ * These backends are represented using the PublicTransportation::AbstractBackendWrapper class.
  * This class provides a bridge between the DBus API and the GUI.
  *
  * A typical call is described as follow
@@ -91,33 +91,33 @@
  * -# The backend wrapper get the data and send \b fooRegistered to notify the
  *    GUI that information is available.
  *
- * \section DBus API
+ * \section dbusApi DBus API
  *
  * publictransportation uses \e org.SfietKonstantin.publictransportation as
  * service name, and all backends have a specific path (\e /backend/somepath) that
  * should be used to communicate. The path is provided as an argument while the
- * backend is launched, using --identifier <somepath>.
+ * backend is launched, using --identifier \<somepath\>.
  *
- * \subsection registerBackend org.SfietKonstantin.publictransportation.registerBackend
+ * \subsection registerBackend registerBackend
  *
  * This method is used to register the backend. It should be called when the backend
  * is launched in order or publictransportation to know about it's capabilities.
+ * Capabilities can be found in file \ref capabilitiesconstants.h
  *
  * \b Parameters
  * - as \e capabilities Backend capabilities, that are send as a list of strings.
  *
- * \subsection registerError org.SfietKonstantin.publictransportation.registerError
+ * \subsection registerError registerError
  *
  * This method is used to reply to any request and to note that there were an
- * error during the request.
- *
- * @todo this method is still WIP
+ * error during the request. Error categories can be found in file @ref errorid.h
  *
  * \b Parameters
  * - s \e request Request identifier.
- * - s \e error A string describing the error.
+ * - s \e errorId A predefined string that provides the error category.
+ * - s \e error A human-readable string describing the error.
  *
- * \subsection copyrightRequested org.SfietKonstantin.publictransportation.copyrightRequested
+ * \subsection copyrightRequested copyrightRequested [signal]
  *
  * This signal is used to notify that copyright informations are requested. Copyright
  * informations should be provided by all the providers, because most of the online
@@ -126,7 +126,131 @@
  *
  * \b Parameters
  * - s \e request Request identifier.
+ *
+ * \subsection registerCopyright registerCopyright
+ *
+ * This method is used to register the copyright information that belongs to this backend.
+ * It should be used to reply to \ref copyrightRequested. Copyright
+ * informations should be provided by all the providers, because most of the online
+ * public transportation websites requires that the copyright and other legal informations
+ * should be provided.
+ *
+ * \b Parameters
+ * - s \e request Request identifier.
  * - s \e copyright Copyright and other legal informations.
+ *
+ * \subsection suggestStationsRequested suggestStationsRequested [signal]
+ *
+ * This signal is used to notify that the backend should suggest stations based on a partial
+ * station name. This method is used for searching and autocompletion.
+ *
+ * \b Parameters
+ * - s \e request Request identifier.
+ * - s \e partialStation Partial station name.
+ *
+ * \subsection registerSuggestedStations registerSuggestedStations
+ *
+ * This method is used to register a list of suggested stations. It should reply to
+ * \ref suggestStationsRequested. Returned stations are used in \ref journeysFromStationRequested,
+ * so these stations can store additional properties. An interesting property to also set is
+ * "backendName", that provides to the GUI an information about the backend used for getting
+ * this station. It can be used by the user to distinguish between two stations that have
+ * the same name, but are provided by different backends.
+ *
+ * \b Parameters
+ * - s \e request Request identifier.
+ * - a\ref transportationObject "(a{sv}sa{sv})" \e suggestedStations Suggested stations,
+ *   as a list of stations.
+ *
+ * \subsection journeysFromStationRequested journeysFromStationRequested [signal]
+ *
+ * This signal is used to notify that the backend should provide a list of informations,
+ * combining a company, a line, and several journeys from the same line, like the following
+ *
+ * \code
+ * Company 1 & Line 1
+ *   Journey 1
+ *   Journey 2
+ * Company 2 & Line 3
+ *   Journey 1
+ *   Journey 2
+ *   Journey 3
+ * \endcode
+ *
+ * A limit of the number of journeys that should be listed is provided, but it is not a
+ * hard limit. It can be used for some information sources that, otherwise, might download
+ * a lot of data.
+ *
+ * \b Parameters
+ * - s \e request Request identifier.
+ * - \ref transportationObject "(a{sv}sa{sv})" \e station Station to query.
+ * - i \e limit Limit of the number of journeys.
+ *
+ * \subsection registerJourneysFromStation registerJourneysFromStation
+ *
+ * This method is used to register the list of companies, lines and journeys, in order to
+ * respond to \ref journeysFromStationRequested. This reply should send a list of
+ * \ref infoJourneys "informations about journeys". Each information about journeys contains
+ * the journeys for a given company and a given line, but in a station, there might be several
+ * journeys for the same line heading to different directions, so an information about journeys
+ * contains a list of journey-station pairs. Adding a station to the journey help giving
+ * more accurate results, since the station might contain some station-specific properties
+ * that might help for other methods. All the components, that are the company, the line, the
+ * journey and the station are used by \ref waitingTimeRequested.
+ *
+ * \b Parameters
+ * - s \e request Request identifier.
+ * - a\ref infoJourneys "((a{sv}sa{sv})(a{sv}sa{sv})a((a{sv}sa{sv})(a{sv}sa{sv})))"
+ *   \e infoJourneys A list of informations about journeys.
+ *
+ * \subsection waitingTimeRequested waitingTimeRequested
+ *
+ * This signal is used to notify that the backend should provide a list of waiting time at
+ * a given station, providing also a given company, line and journey.
+ *
+ * \b Parameters
+ * - s \e request Request identifier.
+ * - \ref transportationObject "(a{sv}sa{sv})" \e company Company.
+ * - \ref transportationObject "(a{sv}sa{sv})" \e line Line for which the waiting time should
+ *   be queried.
+ * - \ref transportationObject "(a{sv}sa{sv})" \e journey Journey for which the waiting time should
+ *   be queried.
+ * - \ref transportationObject "(a{sv}sa{sv})" \e station Station for which the waiting time should
+ *   be queried.
+ *
+ * \subsection registerWaitingTime registerWaitingTime
+ *
+ * This method is used to register the list of waiting time, in order to respond to
+ * \ref waitingTimeRequested.
+ *
+ * \b Parameters
+ * - s \e request Request identifier.
+ * - a\ref waitingTime "(ia{sv})" A list of waiting time.
+ *
+ * \section cppApi C++ API
+ *
+ * The C++ API is basically an interface (actually a QObject) that should be subclassed and
+ * compiled as a plugin. This interface provides all the methods that allows to interact in a
+ * way that is similar to the DBus API.
+ *
+ * However, methods in this interface have different names, and are the antagonist of those
+ * used in the DBus API.
+ *
+ * The previous typical call is now completed with calls to the plugin methods:
+ * -# Replying to user input, a request is sent. It is done using by calling
+ *    requestFoo method on the backend wrapper.
+ * -# The backend wrapper send a DBus signal, fooRequested
+ * -# The plugin, loaded in a backend, reply to the signal with \b retrieveFoo,
+ *    a virtual method that is subclassed in order to retrieve the information.
+ * -# When the information is retrieved, the plugin emit \b fooRetrieved, that
+ *    automatically trigger registerFoo.
+ * -# The backend wrapper get the data and send fooRegistered to notify the
+ *    GUI that information is available.
+ *
+ * All DBus signals will then correspond to a Qt slot in the interface, with the
+ * same signature, and all DBus methods will correspond to a Qt signal.
+ *
+ * See PublicTransportation::ProviderPluginObject for more information.
  */
 
 /**

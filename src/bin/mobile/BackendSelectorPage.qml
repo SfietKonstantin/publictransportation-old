@@ -39,7 +39,7 @@ AbstractPage {
             status: model.status
             onChecked: {
                 if (checked) {
-                    BackendModelInstance.runBackend(model.identifier, model.executable)
+                    BackendModelInstance.runBackend(model.identifier)
                 } else {
                     BackendModelInstance.stopBackend(model.identifier)
                 }

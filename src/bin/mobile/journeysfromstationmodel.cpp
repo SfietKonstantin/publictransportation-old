@@ -15,8 +15,8 @@
  ****************************************************************************************/
 
 /**
- * @file backendmodel.cpp
- * @short Implementation of PublicTransportation::BackendModel
+ * @file journeysfromstationmodel.cpp
+ * @short Implementation of PublicTransportation::Gui::JourneysFromStationModel
  */
 
 #include "journeysfromstationmodel.h"
@@ -28,18 +28,45 @@
 namespace PublicTransportation
 {
 
+namespace Gui
+{
+
+/**
+ * @internal
+ * @brief Private class used in PublicTransportation::Gui::JourneysFromStationModel
+ */
 struct JourneysFromStationsModelData
 {
+    /**
+     * @internal
+     * @brief Company
+     */
     Company company;
+    /**
+     * @internal
+     * @brief Line
+     */
     Line line;
+    /**
+     * @internal
+     * @brief Journey
+     */
     Journey journey;
+    /**
+     * @internal
+     * @brief Station
+     */
     Station station;
+    /**
+     * @internal
+     * @brief If the backend support waiting time
+     */
     bool supportWaitingTime;
 };
 
 /**
  * @internal
- * @short Private class for PublicTransportation::BackendModel
+ * @short Private class for PublicTransportation::Gui::JourneysFromStationModel
  */
 class JourneysFromStationModelPrivate
 {
@@ -50,6 +77,12 @@ public:
      * @param q Q-pointer.
      */
     JourneysFromStationModelPrivate(JourneysFromStationModel *q);
+    /**
+     * @internal
+     * @brief Slot journeys registered
+     * @param request request.
+     * @param infoJourneys informations about journey.
+     */
     void slotJourneysRegistered(const QString &request,
                                 const QList<PublicTransportation::InfoJourneys> &infoJourneys);
     /**
@@ -57,9 +90,25 @@ public:
      * @brief Backend list manager
      */
     AbstractBackendManager *backendManager;
+    /**
+     * @internal
+     * @brief Backend identifier
+     */
     QString backendIdentifier;
+    /**
+     * @internal
+     * @brief Station
+     */
     Station station;
+    /**
+     * @internal
+     * @brief Current request
+     */
     QString currentRequest;
+    /**
+     * @internal
+     * @brief Data
+     */
     QList<JourneysFromStationsModelData *> data;
 private:
     /**
@@ -110,7 +159,7 @@ void JourneysFromStationModelPrivate::slotJourneysRegistered(const QString &requ
     q->endInsertRows();
 
     currentRequest = QString();
-    emit q->updatingChanged();
+    emit q->loadingChanged();
 }
 
 
@@ -149,7 +198,7 @@ int JourneysFromStationModel::rowCount(const QModelIndex &parent) const
     return d->data.count();
 }
 
-bool JourneysFromStationModel::isUpdating() const
+bool JourneysFromStationModel::isLoading() const
 {
     Q_D(const JourneysFromStationModel);
     return !d->currentRequest.isNull();
@@ -201,7 +250,7 @@ void JourneysFromStationModel::load(AbstractBackendWrapper *backend, const QStri
     d->backendIdentifier = backend->identifier();
     d->station = station;
     d->currentRequest = request;
-    emit updatingChanged();
+    emit loadingChanged();
 
     clear();
 }
@@ -245,6 +294,8 @@ void JourneysFromStationModel::clear()
     }
     emit countChanged();
     endRemoveRows();
+}
+
 }
 
 }

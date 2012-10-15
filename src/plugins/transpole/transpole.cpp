@@ -169,7 +169,7 @@ void TranspolePrivate::slotSuggestedStationsFinished()
                 station.setName(unstripHtmlAccents(foundRegExp.cap(1).trimmed()));
                 QVariantMap properties;
                 properties.insert("code", foundRegExp.cap(2));
-                properties.insert("providerName", "Transpole");
+                properties.insert("backendName", "Transpole");
                 station.setProperties(properties);
                 suggestedStations.append(station);
                 break;

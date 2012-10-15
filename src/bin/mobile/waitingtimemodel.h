@@ -15,12 +15,12 @@
  ****************************************************************************************/
 
 /**
- * @file backendmodel.h
- * @short Definition of PublicTransportation::BackendModel
+ * @file waitingtimemodel.h
+ * @short Definition of PublicTransportation::Gui::WaitingTimeModel
  */
 
-#ifndef PUBLICTRANSPORTATION_WAITINGTIMEMODEL_H
-#define PUBLICTRANSPORTATION_WAITINGTIMEMODEL_H
+#ifndef PUBLICTRANSPORTATION_GUI_WAITINGTIMEMODEL_H
+#define PUBLICTRANSPORTATION_GUI_WAITINGTIMEMODEL_H
 
 #include <QtCore/QAbstractListModel>
 
@@ -34,33 +34,27 @@ class Line;
 class Journey;
 class Station;
 
+namespace Gui
+{
+
 class WaitingTimeModelPrivate;
 /**
- * @brief A model for available backends
+ * @brief A model for waiting time
  *
  * This class provides a model for QML that contains
- * the available backends. It also provides control
- * over the backends, as well as feedback on backend
- * status.
- *
- * It mostly mirrors PublicTransportation::AbstractBackendManager,
- * adding only a feature, that is starting previously started
- * backend when reloading the backend list.
- *
- * When a backend have been previously started, and not
- * stopped, it is considered as useful, and should be
- * restart. When the list of backends are reloaded, these
- * backends are then restarted automatically (that happen,
- * for example, while the application is launched again).
+ * a list of waiting time.
  */
 class WaitingTimeModel : public QAbstractListModel
 {
     Q_OBJECT
     /**
+     * @short Loading
+     */
+    Q_PROPERTY(bool loading READ isLoading NOTIFY loadingChanged)
+    /**
      * @short Count
      */
     Q_PROPERTY(int count READ count NOTIFY countChanged)
-    Q_PROPERTY(bool updating READ isUpdating NOTIFY updatingChanged)
 public:
     /**
      * @short Model roles
@@ -96,7 +90,11 @@ public:
      * @return the number of rows in this model.
      */
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    bool isUpdating() const;
+    /**
+     * @brief Is loading
+     * @return if this model is loading.
+     */
+    bool isLoading() const;
     /**
      * @short Count
      * @return count.
@@ -111,14 +109,29 @@ public:
      */
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 public Q_SLOTS:
+    /**
+     * @brief A request for journeys from waiting time has been sent
+     * @param backend backend answering the request.
+     * @param request request identifier.
+     * @param company company.
+     * @param line line.
+     * @param journey journey.
+     * @param station station.
+     */
     void load(AbstractBackendWrapper *backend, const QString &request,
               const PublicTransportation::Company &company,
               const PublicTransportation::Line &line,
               const PublicTransportation::Journey &journey,
               const PublicTransportation::Station &station);
+    /**
+     * @brief Clear
+     */
     void clear();
 Q_SIGNALS:
-    void updatingChanged();
+    /**
+     * @brief Loading changed
+     */
+    void loadingChanged();
     /**
      * @short Count changed
      */
@@ -136,4 +149,6 @@ private:
 
 }
 
-#endif // PUBLICTRANSPORTATION_WAITINGTIMEMODEL_H
+}
+
+#endif // PUBLICTRANSPORTATION_GUI_WAITINGTIMEMODEL_H

@@ -78,18 +78,54 @@ public Q_SLOTS:
      * @brief Kill the backend
      */
     virtual void kill();
+    /**
+     * @brief Register backend
+     *
+     * This method is used to register the backend. It should be called when the backend
+     * is launched in order or publictransportation to know about it's capabilities.
+     * Capabilities can be found in file \ref capabilitiesconstants.h
+     *
+     * @param capabilities backend capabilities, that are send as a list of strings.
+     */
     void registerBackend(const QStringList &capabilities);
 Q_SIGNALS:
+    /**
+     * @brief Copyright requested
+     * @param request request identifier.
+     */
     void copyrightRequested(const QString &request);
     /**
-     * @brief Request suggested stations
+     * @brief Suggested stations requested
      *
      * This is a DBus proxy signal.
+     *
+     * @param request request identifier.
+     * @param partialStation partial station name.
      */
     void suggestStationsRequested(const QString &request, const QString &partialStation);
+    /**
+     * @brief Journeys from station requested
+     *
+     * This is a DBus proxy signal.
+     *
+     * @param request request identifier.
+     * @param station station to query.
+     * @param limit limit of the number of journeys.
+     */
     void journeysFromStationRequested(const QString &request,
                                       const PublicTransportation::Station &station,
                                       int limit);
+    /**
+     * @brief Journeys from station requested
+     *
+     * This is a DBus proxy signal.
+     *
+     * @param request request identifier.
+     * @param company company.
+     * @param line line for which the waiting time should be queried.
+     * @param journey journey for which the waiting time should be queried.
+     * @param station station for which the waiting time should be queried.
+     */
     void waitingTimeRequested(const QString &request, const PublicTransportation::Company &company,
                               const PublicTransportation::Line &line,
                               const PublicTransportation::Journey &journey,

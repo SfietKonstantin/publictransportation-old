@@ -52,11 +52,38 @@ class QDBusArgument;
  * - A name, that is a string
  * - Some properties, that is another dictionnary of variant.
  *
- * The signature of a transportation object is then
+ * The signature of a transportation object is
  * \code
  * (a{sv}sa{sv})
  * \endcode
  *
+ * @section waitingTime Waiting time
+ *
+ * Waiting time contains the time to wait before a transportation mode
+ * arrives. Those entities are stored using
+ * - The time before arrival, in minutes
+ * - Some properties, that are a dictionnary of variant.
+ *
+ * The signature of a waiting time entity is
+ * \code
+ * (ia{sv})
+ * \endcode
+ *
+ *
+ * @section infoJourneys Informations about journeys
+ *
+ * Information about journeys are stored as a complex structure, that
+ * takes in account the company that provide the journey, the line
+ * on which the journey is performed, and additional information about
+ * the departure station (if needed). It then stores
+ * - A company
+ * - A line
+ * - A list of journey-station pair
+ *
+ * The signature for an information about journeys is
+ * \code
+ * ((a{sv}sa{sv})(a{sv}sa{sv})a((a{sv}sa{sv})(a{sv}sa{sv})))
+ * \endcode
  */
 
 namespace PublicTransportation

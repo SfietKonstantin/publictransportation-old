@@ -47,16 +47,21 @@
             <annotation name="org.qtproject.QtDBus.QtTypeName.In1"
                         value="const QList&lt;PublicTransportation::InfoJourneys&gt; &amp;"/>
             <arg name="request" type="s" direction="in" />
-            <arg name="infoJourneys" type="a((a{sv}sa{sv})(a{sv}sa{sv})a((a{sv}sa{sv})(a{sv}sa{sv})))"
+            <arg name="infoJourneys"
+                 type="a((a{sv}sa{sv})(a{sv}sa{sv})a((a{sv}sa{sv})(a{sv}sa{sv})))"
                  direction="in" />
         </method>
 
         <!-- Waiting time for a journey -->
         <signal name="waitingTimeRequested">
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="const PublicTransportation::Company &amp;"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="const PublicTransportation::Line &amp;"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In3" value="const PublicTransportation::Journey &amp;"/>
-            <annotation name="org.qtproject.QtDBus.QtTypeName.In4" value="const PublicTransportation::Station &amp;"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In1"
+                        value="const PublicTransportation::Company &amp;"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In2"
+                        value="const PublicTransportation::Line &amp;"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In3"
+                        value="const PublicTransportation::Journey &amp;"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In4"
+                        value="const PublicTransportation::Station &amp;"/>
             <arg name="request" type="s" direction="out" />
             <arg name="company" type="(a{sv}sa{sv})" direction="out" />
             <arg name="line" type="(a{sv}sa{sv})" direction="out" />
