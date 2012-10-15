@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=transport.opendata.ch
-Comment=Transports en Suisse
-Comment[fr]=Transports en Suisse
-Icon=
+Comment=Public transportation in Switzerland
+Comment[fr_FR]=Transports en commun en Suisse
+Icon=/usr/share/hicolor/80x80/apps/publictransportation.png
 Type=Service
 Exec=$PROVIDER libopendatach.so
 X-PublicTransportation-BackendInfo-Id=org.SfietKonstantin.publictransportation.opendatach

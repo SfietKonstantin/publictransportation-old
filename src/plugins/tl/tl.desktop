@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=Transports lausannois
-Comment=Transports de la région Lausannoise
-Comment[fr]=Transports de la région Lausannoise
-Icon=
+Comment=Public transportation in Lausanne
+Comment[fr_FR]=Transports en commun de Lausanne
+Icon=/usr/share/hicolor/80x80/apps/publictransportation.png
 Type=Service
 Exec=$PROVIDER libtl.so
 X-PublicTransportation-BackendInfo-Id=org.SfietKonstantin.publictransportation.tl

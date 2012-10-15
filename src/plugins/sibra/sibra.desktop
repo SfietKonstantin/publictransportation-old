@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=SIBRA
-Comment=Transports de la région d'Annecy
-Comment[fr]=Transports de la région d'Annecy
-Icon=
+Comment=Public transportation in Annency
+Comment[fr_FR]=Transports en commun à Annency
+Icon=/usr/share/hicolor/80x80/apps/publictransportation.png
 Type=Service
 Exec=$PROVIDER libsibra.so
 X-PublicTransportation-BackendInfo-Id=org.SfietKonstantin.publictransportation.sibra

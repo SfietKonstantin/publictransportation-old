@@ -19,17 +19,21 @@
  * @short Entry point of the mobile application
  */
 
+#include <QtCore/QLocale>
 #include <QtCore/QSettings>
+#include <QtCore/QTranslator>
 #include <QtGui/QApplication>
 #include <QtDeclarative/QtDeclarative>
 #include <QtDeclarative/QDeclarativeContext>
 #include <QtDeclarative/QDeclarativeView>
 
+#include "debug.h"
 #include "manager/dbus/dbusbackendmanager.h"
 #include "backendmodel.h"
 #include "searchstationmodel.h"
 #include "journeysfromstationmodel.h"
 #include "waitingtimemodel.h"
+
 
 namespace PublicTransportation
 {
@@ -58,6 +62,12 @@ int main(int argc, char **argv)
     QApplication app(argc, argv);
     app.setOrganizationName("SfietKonstantin");
     app.setApplicationName("PublicTransportation");
+
+    // Localization
+    QTranslator translator;
+    debug("test") << translator.load(QLocale::system().name(), I18N_FOLDER);
+    debug("test") << QLocale::system().name();
+    app.installTranslator(&translator);
 
     // Setup DBus
     DBusBackendManager::registerDBusService();
@@ -107,7 +117,11 @@ int main(int argc, char **argv)
     }
 
     QDeclarativeView view;
+    QString version = QString("%1.%2.%3");
+    version = version.arg(QString::number(VERSION_MAJOR), QString::number(VERSION_MINOR),
+                          QString::number(VERSION_PATCH));
     view.rootContext()->setContextProperty("ICON_FILE", QVariant(ICON_FILE));
+    view.rootContext()->setContextProperty("VERSION", QVariant(version));
     view.rootContext()->setContextProperty("BACKEND_FIRST_TIME", QVariant(backendFirstTime));
     view.rootContext()->setContextProperty("BackendModelInstance", &backendModel);
     view.rootContext()->setContextProperty("SearchStationModelInstance", &searchStationModel);

@@ -6,7 +6,7 @@ Terminal=false
 Name=Public transportation
 Name[fr]=Transports
 Exec=/usr/bin/invoker --type=e -s /opt/publictransportation/bin/publictransportation
-Icon=/usr/share/hicolor/80x80/apps/publictransportation.png
+Icon=/usr/share/icons/hicolor/80x80/apps/publictransportation.png
 X-Window-Icon=
 X-HildonDesk-ShowInToolbar=true
 X-Osso-Type=application/x-executable

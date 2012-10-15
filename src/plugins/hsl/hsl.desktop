@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Hsl
 Comment=Public transportation in Helsinki
-Icon=
+Icon=/usr/share/hicolor/80x80/apps/publictransportation.png
 Type=Service
 Exec=$PROVIDER libhsl.so
 X-PublicTransportation-BackendInfo-Id=org.SfietKonstantin.publictransportation.hsl

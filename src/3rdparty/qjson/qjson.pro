@@ -4,7 +4,6 @@ TEMPLATE = lib
 TARGET = qjson
 
 INCLUDE_HEADERS +=  src/parser.h \
-                    src/parser \
                     src/qobjecthelper.h \
                     src/parserrunnable.h \
                     src/serializer.h \

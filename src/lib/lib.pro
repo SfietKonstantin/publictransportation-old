@@ -12,7 +12,6 @@ HEADERS =   publictransportation_global.h \
             debug.h \
             common/capabilitiesconstants.h \
             common/errorid.h \
-            common/commonhelper.h \
             common/transportationobject.h \
             common/company.h \
             common/line.h \

@@ -4,7 +4,7 @@ NAME = publictransportation
 # version
 VERSION_MAJOR = 0
 VERSION_MINOR = 1
-VERSION_PATCH = 53
+VERSION_PATCH = 54
 
 isEmpty(DEPLOYMENT_PREFIX) {
     DEPLOYMENT_PREFIX = /usr
@@ -50,12 +50,14 @@ contains(MEEGO_EDITION,harmattan):{
     DATA_FOLDER = $${OPTDIR}/data
     PLUGIN_FOLDER = $${OPTDIR}/plugins
     DATA_FOLDER = $${OPTDIR}/data
+    I18N_FOLDER = $${OPTDIR}/i18n
     QML_FOLDER = $${OPTDIR}/qml
 } else {
     APPLICATION_FOLDER  = $${BINDIR}
     DATA_FOLDER = $${SHAREDIR}/data
     PLUGIN_FOLDER = $${SHAREDIR}/plugins
     DATA_FOLDER = $${SHAREDIR}/data
+    I18N_FOLDER = $${SHAREDIR}/i18n
     QML_FOLDER = $${SHAREDIR}/qml
 }
 

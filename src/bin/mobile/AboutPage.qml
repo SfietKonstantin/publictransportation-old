@@ -33,7 +33,8 @@ AbstractPage {
         id: flickable
         clip: true
         anchors.fill: parent
-        contentHeight: Ui.MARGIN_DEFAULT + icon.height
+        contentHeight: Ui.MARGIN_LARGE + icon.height
+                       + Ui.MARGIN_DEFAULT + appText.height
                        + Ui.MARGIN_DEFAULT + aboutText.height
                        + Ui.MARGIN_DEFAULT + copyrightText.height
         contentWidth: parent.width
@@ -48,10 +49,19 @@ AbstractPage {
         }
 
         Label {
+            id: appText
+            anchors.left: parent.left; anchors.leftMargin: Ui.MARGIN_DEFAULT
+            anchors.right: parent.right; anchors.rightMargin: Ui.MARGIN_DEFAULT
+            anchors.top: icon.bottom; anchors.topMargin: Ui.MARGIN_LARGE
+            wrapMode: Text.WordWrap
+            text: "publictransportation (version " + VERSION + ")"
+        }
+
+        Label {
             id: aboutText
             anchors.left: parent.left; anchors.leftMargin: Ui.MARGIN_DEFAULT
             anchors.right: parent.right; anchors.rightMargin: Ui.MARGIN_DEFAULT
-            anchors.top: icon.bottom; anchors.topMargin: Ui.MARGIN_DEFAULT
+            anchors.top: appText.bottom; anchors.topMargin: Ui.MARGIN_LARGE
             wrapMode: Text.WordWrap
             text: qsTr("publictransportation is an attempt to give the user the \
 best transportation application. Instead of multiple clients that do not share anything in \

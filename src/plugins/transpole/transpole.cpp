@@ -385,7 +385,7 @@ QStringList Transpole::capabilities() const
 
 void Transpole::retrieveCopyright(const QString &request)
 {
-    QString copyright = "Copyright à préciser";
+    QString copyright = tr("Copyright to be registered");
     emit copyrightRetrieved(request, copyright);
 }
 

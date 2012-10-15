@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=RATP
-Comment=Régie autonome des transports parisiens
-Comment[fr]=Régie autonome des transports parisiens
-Icon=
+Comment=Public transportation in Paris
+Comment[fr_FR]=Transports en commun à Paris
+Icon=/usr/share/hicolor/80x80/apps/publictransportation.png
 Type=Service
 Exec=$PROVIDER libratp.so
 X-PublicTransportation-BackendInfo-Id=org.SfietKonstantin.publictransportation.ratp

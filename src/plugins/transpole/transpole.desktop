@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=Transpole
-Comment=Transports de la région de Lille
-Comment[fr]=Transports de la région de Lille
-Icon=
+Comment=Public transportation in Lille
+Comment[fr_FR]=Transports en commun de Lille
+Icon=/usr/share/hicolor/80x80/apps/publictransportation.png
 Type=Service
 Exec=$PROVIDER libtranspole.so
 X-PublicTransportation-BackendInfo-Id=org.SfietKonstantin.publictransportation.transpole

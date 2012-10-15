@@ -5,6 +5,7 @@ TARGET = $${NAME}
 
 DEFINES += 'MAIN_QML_FILE=\'\"$${QML_FOLDER}/main.qml\"\''
 DEFINES += 'ICON_FILE=\'\"$${DATA_FOLDER}/publictransportation-big.png\"\''
+DEFINES += 'I18N_FOLDER=\'\"$${I18N_FOLDER}/\"\''
 
 QT = core gui declarative
 INCLUDEPATH += ../../lib/
@@ -38,6 +39,8 @@ OTHER_FILES +=  main.qml \
 
 DATA_FILES +=   publictransportation-big.png
 
+TRANSLATIONS_FILES += i18n/*qm
+
 # deployment
 target.path = $${APPLICATION_FOLDER}
 
@@ -47,6 +50,9 @@ qmlFiles.files = $${OTHER_FILES}
 dataFiles.path = $${DATA_FOLDER}
 dataFiles.files = $${DATA_FILES}
 
+translationsFiles.path = $${I18N_FOLDER}
+translationsFiles.files = $${TRANSLATIONS_FILES}
+
 contains(MEEGO_EDITION,harmattan):{
 desktopFile.path = /usr/share/applications
 desktopFile.files = publictransportation.desktop
@@ -55,4 +61,8 @@ iconFile.path = /usr/share/icons/hicolor/80x80/apps
 iconFile.files = publictransportation.png
 }
 
-INSTALLS += target qmlFiles dataFiles desktopFile iconFile
+INSTALLS += target qmlFiles dataFiles translationsFiles
+
+contains(MEEGO_EDITION,harmattan):{
+INSTALLS += desktopFile iconFile
+}
