@@ -43,6 +43,9 @@ qmlFiles.files = $${OTHER_FILES}
 contains(MEEGO_EDITION,harmattan):{
 desktopFile.path = /usr/share/applications
 desktopFile.files = publictransportation.desktop
+
+icon.path = /usr/share/icons/hicolor/80x80/apps
+icon.files = publictransportation.png
 }
 
 INSTALLS += target qmlFiles desktopFile

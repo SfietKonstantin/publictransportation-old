@@ -4,7 +4,7 @@ NAME = publictransportation
 # version
 VERSION_MAJOR = 0
 VERSION_MINOR = 1
-VERSION_PATCH = 52
+VERSION_PATCH = 53
 
 isEmpty(DEPLOYMENT_PREFIX) {
     DEPLOYMENT_PREFIX = /usr
