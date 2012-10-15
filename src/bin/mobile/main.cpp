@@ -107,6 +107,7 @@ int main(int argc, char **argv)
     }
 
     QDeclarativeView view;
+    view.rootContext()->setContextProperty("ICON_FILE", QVariant(ICON_FILE));
     view.rootContext()->setContextProperty("BACKEND_FIRST_TIME", QVariant(backendFirstTime));
     view.rootContext()->setContextProperty("BackendModelInstance", &backendModel);
     view.rootContext()->setContextProperty("SearchStationModelInstance", &searchStationModel);

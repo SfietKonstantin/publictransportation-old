@@ -144,7 +144,7 @@ void RatpPrivate::slotWaitingTimeFinished()
 
         if (!minutesString.isEmpty()) {
             int minutes = -1;
-            if (minutesString.contains("quai")) {
+            if (minutesString.contains("Train")) {
                 minutes = 0;
             } else if (minutesString.contains("mn")) {
                 minutes = minutesString.remove("mn").trimmed().toInt();

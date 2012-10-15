@@ -142,7 +142,6 @@ void SibraPrivate::slotJourneysFromStationFinished()
 
             QTime nextTime = QTime::fromString(journeysRegExp.cap(2), "hh:mm");
             int minutes = ((currentTime.secsTo(nextTime) / 60) + 1440) % 1440;
-            debug("sibra-plugin") << journeysRegExp.capturedTexts();
 
             Journey journey;
             journey.setDisambiguation(disambiguation);
@@ -277,7 +276,6 @@ void Sibra::retrieveWaitingTime(const QString &request, const Company &company,
 {
     Q_UNUSED(company);
     Q_UNUSED(line);
-    Q_UNUSED(journey);
 
     WaitingTime waitingTime;
     QVariantMap properties;

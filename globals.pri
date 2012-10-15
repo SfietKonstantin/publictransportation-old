@@ -49,11 +49,13 @@ contains(MEEGO_EDITION,harmattan):{
     APPLICATION_FOLDER  = $${OPTDIR}/bin
     DATA_FOLDER = $${OPTDIR}/data
     PLUGIN_FOLDER = $${OPTDIR}/plugins
+    DATA_FOLDER = $${OPTDIR}/data
     QML_FOLDER = $${OPTDIR}/qml
 } else {
     APPLICATION_FOLDER  = $${BINDIR}
     DATA_FOLDER = $${SHAREDIR}/data
     PLUGIN_FOLDER = $${SHAREDIR}/plugins
+    DATA_FOLDER = $${SHAREDIR}/data
     QML_FOLDER = $${SHAREDIR}/qml
 }
 

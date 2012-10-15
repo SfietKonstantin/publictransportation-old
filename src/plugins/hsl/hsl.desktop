@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Hsl
+Comment=Public transportation in Helsinki
+Icon=
+Type=Service
+Exec=$PROVIDER libhsl.so
+X-PublicTransportation-BackendInfo-Id=org.SfietKonstantin.publictransportation.hsl
+X-PublicTransportation-BackendInfo-Country=Finland
+X-PublicTransportation-BackendInfo-Cities=Helsinki
+X-PublicTransportation-BackendInfo-Author=Lucien XU
+X-PublicTransportation-BackendInfo-Email=sfietkonstantin@free.fr
+X-PublicTransportation-BackendInfo-Website=
+X-PublicTransportation-BackendInfo-Version=1.0.0

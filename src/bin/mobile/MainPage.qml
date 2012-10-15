@@ -59,11 +59,15 @@ AbstractNavigationPage {
                 text: qsTr("Switch color theme")
                 onClicked: theme.inverted = !theme.inverted
             }
+            MenuItem {
+                text: qsTr("About")
+                onClicked: window.pageStack.push(aboutPage)
+            }
         }
     }
 
     SearchStationPage {id: searchStationPage}
     BackendSelectorPage {id: backendSelectorPage}
-
+    AboutPage {id: aboutPage}
 
 }
