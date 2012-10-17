@@ -47,6 +47,8 @@ Page {
             text: title
             color: theme.inverted ? "white" : container.headerLabelColor
             font.pixelSize: Ui.FONT_SIZE_XLARGE
+            wrapMode: Text.NoWrap
+            elide: Text.ElideRight
         }
     }
 

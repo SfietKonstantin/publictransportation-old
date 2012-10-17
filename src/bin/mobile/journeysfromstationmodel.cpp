@@ -133,6 +133,8 @@ void JourneysFromStationModelPrivate::slotJourneysRegistered(const QString &requ
         return;
     }
 
+    q->clear();
+
     QObject *sender = q->sender();
     AbstractBackendWrapper *backend = qobject_cast<AbstractBackendWrapper *>(sender);
     if (!backend) {
@@ -255,6 +257,24 @@ void JourneysFromStationModel::load(AbstractBackendWrapper *backend, const QStri
     clear();
 }
 
+void JourneysFromStationModel::reload()
+{
+    Q_D(JourneysFromStationModel);
+
+    if (d->backendIdentifier.isEmpty()) {
+        return;
+    }
+
+    if (d->station.isNull()) {
+        return;
+    }
+
+    AbstractBackendWrapper *backend = d->backendManager->backend(d->backendIdentifier);
+
+    d->currentRequest = backend->requestJourneysFromStation(d->station, 20);
+    emit loadingChanged();
+}
+
 void JourneysFromStationModel::requestWaitingTime(int index)
 {
     Q_D(JourneysFromStationModel);
@@ -282,7 +302,7 @@ void JourneysFromStationModel::requestWaitingTime(int index)
     QString request = backend->requestWaitingTime(data->company, data->line,
                                                   data->journey, data->station);
     emit waitingTimeRequested(backend, request, data->company, data->line, data->journey,
-                              d->station);
+                              data->station);
 }
 
 void JourneysFromStationModel::clear()

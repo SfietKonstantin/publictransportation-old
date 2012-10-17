@@ -132,6 +132,10 @@ public Q_SLOTS:
     void load(AbstractBackendWrapper *backend, const QString &request,
               const PublicTransportation::Station &station);
     /**
+     * @brief Reload
+     */
+    void reload();
+    /**
      * @brief Request waiting time
      * @param index index of the journey.
      */

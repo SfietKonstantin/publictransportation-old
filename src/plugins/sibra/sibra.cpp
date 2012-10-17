@@ -34,6 +34,9 @@
 
 static const char *USER_AGENT = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) \
 AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16";
+static const char *JOURNEYS_REGEXP = "<span class=\"picto-arret-ligne picto-arret-l[^\"]\"><span>\
+([^<]*)</span></span><span class=\"horaire\">Prochain bus à <strong>([^<]*)[^D]*Direction <strong>\
+([^<]*)";
 
 namespace PublicTransportation
 {
@@ -44,17 +47,26 @@ namespace Provider
 class SibraPrivate
 {
 public:
+    enum OperationType {
+        Nothing,
+        RetrieveJourneys,
+        RetrieveWaitingTime
+    };
     SibraPrivate(Sibra *q);
     void slotSuggestedStationsFinished();
-    void slotJourneysFromStationFinished();
+    void slotJourneysOrWaitingTimeFinished();
     void emitSuggestedStationsRetrieved(const QString &request, const QString &partialStation);
+    void createJourneysFromStation();
+    void createWaitingTime();
     QNetworkAccessManager *nam;
     QNetworkReply *suggestedStationsReply;
-    QNetworkReply *journeysFromStationReply;
     QString suggestedStationsRequest;
     QString suggestedStationsPartialStation;
-    QString journeysFromStationRequest;
-    Station journeysFromStationStation;
+    QNetworkReply *journeysOrWaitingTimeReply;
+    OperationType journeysOrWaitingTimeOperation;
+    QString journeysOrWaitingTimeRequest;
+    Station journeysOrWaitingTimeStation;
+    QString journeysOrWaitingTimeJourneyName;
     QList<Station> stations;
 
 private:
@@ -66,7 +78,8 @@ SibraPrivate::SibraPrivate(Sibra *q):
     q_ptr(q)
 {
     suggestedStationsReply = 0;
-    journeysFromStationReply = 0;
+    journeysOrWaitingTimeReply = 0;
+    journeysOrWaitingTimeOperation = Nothing;
 }
 
 void SibraPrivate::slotSuggestedStationsFinished()
@@ -87,7 +100,7 @@ void SibraPrivate::slotSuggestedStationsFinished()
 
             QVariantMap properties;
             properties.insert("subUrl", stationRegExp.cap(1));
-            properties.insert("backendNames", "SIBRA");
+            properties.insert("backendName", "SIBRA");
 
             station.setDisambiguation(disambiguation);
             station.setName(name);
@@ -104,69 +117,27 @@ void SibraPrivate::slotSuggestedStationsFinished()
     suggestedStationsReply = 0;
 }
 
-void SibraPrivate::slotJourneysFromStationFinished()
+void SibraPrivate::slotJourneysOrWaitingTimeFinished()
 {
-    Q_Q(Sibra);
     debug("sibra-plugin") << "Data retrieved from url"
-                          << journeysFromStationReply->url().toString();
-
-    QRegExp journeysRegExp = QRegExp("<span class=\"picto-arret-ligne picto-arret-l[^\"]\"><span>\
-([^<]*)</span></span><span class=\"horaire\">Prochain bus à <strong>([^<]*)[^D]*Direction <strong>\
-([^<]*)");
-
-    QVariantMap disambiguation;
-    disambiguation.insert("id", "org.SfietKonstantin.publictransportation.sibra");
-
-    QTime currentTime = QTime::currentTime();
-    QList<InfoJourneys> infoJourneysList;
-
-    while (!journeysFromStationReply->atEnd()) {
-        QString data = journeysFromStationReply->readLine();
-        if (data.indexOf(journeysRegExp) != -1) {
-
-            InfoJourneys infoJourneys;
-
-            Company company;
-            company.setDisambiguation(disambiguation);
-            company.setName("SIBRA");
-            infoJourneys.setCompany(company);
+                          << journeysOrWaitingTimeReply->url().toString();
 
 
-            Line line;
-            line.setDisambiguation(disambiguation);
-            line.setName(journeysRegExp.cap(1));
-            infoJourneys.setLine(line);
-
-            QList <QPair<Journey, Station> > journeysAndStations;
-            QPair<Journey, Station> journeyAndStation;
-
-            QTime nextTime = QTime::fromString(journeysRegExp.cap(2), "hh:mm");
-            int minutes = ((currentTime.secsTo(nextTime) / 60) + 1440) % 1440;
-
-            Journey journey;
-            journey.setDisambiguation(disambiguation);
-            journey.setName(journeysRegExp.cap(3));
-            journeyAndStation.first = journey;
-
-            Station station;
-            station.setName(journeysFromStationStation.name());
-            station.setDisambiguation(disambiguation);
-            QVariantMap properties;
-            properties.insert("waitingTime", minutes);
-            station.setProperties(properties);
-            journeyAndStation.second = station;
-
-            journeysAndStations.append(journeyAndStation);
-            infoJourneys.setJourneysAndStations(journeysAndStations);
-            infoJourneysList.append(infoJourneys);
-        }
+    switch (journeysOrWaitingTimeOperation) {
+    case RetrieveJourneys:
+        createJourneysFromStation();
+        break;
+    case RetrieveWaitingTime:
+        createWaitingTime();
+        break;
+    default:
+        break;
     }
 
-    emit q->journeysFromStationRetrieved(journeysFromStationRequest, infoJourneysList);
-    journeysFromStationRequest = QString();
-    journeysFromStationStation = Station();
-    journeysFromStationReply->deleteLater();
-    journeysFromStationReply = 0;
+    journeysOrWaitingTimeRequest = QString();
+    journeysOrWaitingTimeStation = Station();
+    journeysOrWaitingTimeReply->deleteLater();
+    journeysOrWaitingTimeReply = 0;
 }
 
 void SibraPrivate::emitSuggestedStationsRetrieved(const QString &request,
@@ -186,6 +157,121 @@ void SibraPrivate::emitSuggestedStationsRetrieved(const QString &request,
         }
     }
     emit q->suggestedStationsRetrieved(request, suggestedStations);
+}
+
+void SibraPrivate::createJourneysFromStation()
+{
+    Q_Q(Sibra);
+
+    QRegExp journeysRegExp = QRegExp(JOURNEYS_REGEXP);
+
+    QVariantMap disambiguation;
+    disambiguation.insert("id", "org.SfietKonstantin.publictransportation.sibra");
+    Company company (disambiguation, "SIBRA", QVariantMap());
+
+    QMap<QString, QMap<QString, QList<int> > > lineToJourneysToWaitingTime;
+
+    QTime currentTime = QTime::currentTime();
+
+    while (!journeysOrWaitingTimeReply->atEnd()) {
+        QString data = journeysOrWaitingTimeReply->readLine();
+        if (data.indexOf(journeysRegExp) != -1) {
+
+            QString line = journeysRegExp.cap(1);
+            QString journey = journeysRegExp.cap(3);
+
+            QTime nextTime = QTime::fromString(journeysRegExp.cap(2), "hh:mm");
+            if (nextTime.isValid()) {
+                int minutes = ((currentTime.secsTo(nextTime) / 60) + 1440) % 1440;
+
+                if (!lineToJourneysToWaitingTime.contains(line)) {
+                    lineToJourneysToWaitingTime.insert(line, QMap<QString, QList<int> >());
+                }
+
+                if (!lineToJourneysToWaitingTime[line].contains(journey)) {
+                    lineToJourneysToWaitingTime[line].insert(journey, QList<int>());
+                }
+
+                lineToJourneysToWaitingTime[line][journey].append(minutes);
+            }
+        }
+    }
+
+    QList<InfoJourneys> infoJourneysList;
+    foreach (QString lineName, lineToJourneysToWaitingTime.keys()) {
+        InfoJourneys infoJourneys;
+        Line line (disambiguation, lineName, QVariantMap());
+        infoJourneys.setCompany(company);
+        infoJourneys.setLine(line);
+        QList <QPair<Journey, Station> > journeysAndStations;
+
+        bool ok = true;
+        foreach (QString journeyName, lineToJourneysToWaitingTime.value(lineName).keys()) {
+            Journey journey (disambiguation, journeyName, QVariantMap());
+
+            QVariantMap properties;
+            QList<int> waitingTimes
+                    = lineToJourneysToWaitingTime.value(lineName).value(journeyName);
+            properties.insert("lastUpdateTime", currentTime.toString("hh:mm:ss"));
+            properties.insert("subUrl", journeysOrWaitingTimeStation.properties().value("subUrl"));
+            properties.insert("waitingTimeCount", waitingTimes.count());
+
+            if (waitingTimes.count() == 0) {
+                ok = false;
+            }
+
+            for (int i = 0; i < waitingTimes.count(); i++) {
+                properties.insert(QString("waitingTime%1").arg(i), waitingTimes.at(i));
+            }
+
+            Station station (disambiguation, journeysOrWaitingTimeStation.name(), properties);
+            QPair <Journey, Station> journeyAndStation;
+            journeyAndStation.first = journey;
+            journeyAndStation.second = station;
+            journeysAndStations.append(journeyAndStation);
+        }
+
+        infoJourneys.setJourneysAndStations(journeysAndStations);
+        if (ok) {
+            infoJourneysList.append(infoJourneys);
+        }
+    }
+
+
+    emit q->journeysFromStationRetrieved(journeysOrWaitingTimeRequest, infoJourneysList);
+}
+
+void SibraPrivate::createWaitingTime()
+{
+    Q_Q(Sibra);
+
+    QRegExp journeysRegExp = QRegExp(JOURNEYS_REGEXP);
+
+    QVariantMap disambiguation;
+    disambiguation.insert("id", "org.SfietKonstantin.publictransportation.sibra");
+
+    QTime currentTime = QTime::currentTime();
+    QList<WaitingTime> waitingTimeList;
+
+    while (!journeysOrWaitingTimeReply->atEnd()) {
+        QString data = journeysOrWaitingTimeReply->readLine();
+        if (data.indexOf(journeysRegExp) != -1) {
+            if (journeysRegExp.cap(3) == journeysOrWaitingTimeJourneyName) {
+                QTime nextTime = QTime::fromString(journeysRegExp.cap(2), "hh:mm");
+                int minutes = ((currentTime.secsTo(nextTime) / 60) + 1440) % 1440;
+
+                QVariantMap properties;
+                properties.insert("destination", journeysOrWaitingTimeJourneyName);
+                WaitingTime waitingTime;
+                waitingTime.setProperties(properties);
+                waitingTime.setWaitingTime(minutes);
+                waitingTimeList.append(waitingTime);
+            }
+        }
+    }
+
+    emit q->waitingTimeRetrieved(journeysOrWaitingTimeRequest, waitingTimeList);
+    journeysOrWaitingTimeJourneyName = QString();
 }
 
 ////// End of private class //////
@@ -248,11 +334,11 @@ void Sibra::retrieveJourneysFromStation(const QString &request, const Station &s
 {
     Q_D(Sibra);
     Q_UNUSED(limit)
-    if (d->journeysFromStationReply) {
-        if (!d->journeysFromStationReply->isFinished()) {
-            d->journeysFromStationReply->abort();
+    if (d->journeysOrWaitingTimeReply) {
+        if (!d->journeysOrWaitingTimeReply->isFinished()) {
+            d->journeysOrWaitingTimeReply->abort();
         }
-        d->journeysFromStationReply->deleteLater();
+        d->journeysOrWaitingTimeReply->deleteLater();
     }
 
     QString urlString = "http://m.sibra.fr/%1";
@@ -262,28 +348,58 @@ void Sibra::retrieveJourneysFromStation(const QString &request, const Station &s
     networkRequest.setUrl(QUrl(urlString));
     networkRequest.setRawHeader("User-Agent", USER_AGENT);
 
-    d->journeysFromStationRequest = request;
-    d->journeysFromStationStation = station;
-    d->journeysFromStationReply = d->nam->get(networkRequest);
-    connect(d->journeysFromStationReply, SIGNAL(finished()),
-            this, SLOT(slotJourneysFromStationFinished()));
+    d->journeysOrWaitingTimeOperation = SibraPrivate::RetrieveJourneys;
+    d->journeysOrWaitingTimeRequest = request;
+    d->journeysOrWaitingTimeStation = station;
+    d->journeysOrWaitingTimeReply = d->nam->get(networkRequest);
+    connect(d->journeysOrWaitingTimeReply, SIGNAL(finished()),
+            this, SLOT(slotJourneysOrWaitingTimeFinished()));
 
 }
 
 void Sibra::retrieveWaitingTime(const QString &request, const Company &company,
                                 const Line &line, const Journey &journey, const Station &station)
 {
+    Q_D(Sibra);
     Q_UNUSED(company);
     Q_UNUSED(line);
 
-    WaitingTime waitingTime;
+
+    QTime lastUpdate = QTime::fromString(station.properties().value("lastUpdateTime").toString(),
+                                         "hh:mm:ss");
+    QTime currentTime = QTime::currentTime();
+    int secondsTo = lastUpdate.secsTo(currentTime);
+    if (secondsTo < 0 || secondsTo > 20) {
+        d->journeysOrWaitingTimeJourneyName = journey.name();
+
+        QString urlString = "http://m.sibra.fr/%1";
+        urlString = urlString.arg(station.properties().value("subUrl").toString());
+
+        QNetworkRequest networkRequest;
+        networkRequest.setUrl(QUrl(urlString));
+        networkRequest.setRawHeader("User-Agent", USER_AGENT);
+
+        d->journeysOrWaitingTimeOperation = SibraPrivate::RetrieveWaitingTime;
+        d->journeysOrWaitingTimeRequest = request;
+        d->journeysOrWaitingTimeStation = station;
+        d->journeysOrWaitingTimeReply = d->nam->get(networkRequest);
+        connect(d->journeysOrWaitingTimeReply, SIGNAL(finished()),
+                this, SLOT(slotJourneysOrWaitingTimeFinished()));
+        return;
+    }
+
     QVariantMap properties;
     properties.insert("destination", journey.name());
-    waitingTime.setWaitingTime(station.properties().value("waitingTime").toInt());
-    waitingTime.setProperties(properties);
 
     QList<WaitingTime> waitingTimeList;
-    waitingTimeList.append(waitingTime);
+    for (int i = 0; i < station.properties().value("waitingTimeCount").toInt(); i++) {
+        WaitingTime waitingTime;
+        waitingTime.setProperties(properties);
+        int minutes = station.properties().value(QString("waitingTime%1").arg(i)).toInt();
+        waitingTime.setWaitingTime(minutes);
+        waitingTimeList.append(waitingTime);
+    }
+
     emit waitingTimeRetrieved(request, waitingTimeList);
 }
 

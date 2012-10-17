@@ -79,9 +79,11 @@ AbstractPage {
         }
 
         ListView {
+            id: view
             anchors.top: horizontalSeparator.bottom//; anchors.topMargin: Ui.MARGIN_DEFAULT
             anchors.left: parent.left; anchors.right: parent.right
             anchors.bottom: parent.bottom
+            opacity: !JourneysFromStationModelInstance.loading ? 1 : 0.5
             clip: true
             model: JourneysFromStationModelInstance
             delegate: ClickableEntry {
@@ -101,7 +103,19 @@ AbstractPage {
             section.delegate: GroupIndicator {
                 id: groupIndicator
                 text: qsTr("Line") + " " + section
-        }
+            }
+
+            UpdateHeader {
+                id: updateHeader
+                view: view
+            }
+
+            onMovingChanged: {
+                if (!moving && atXBeginning && updateHeader.needUpdate) {
+                    JourneysFromStationModelInstance.reload()
+                }
+                updateHeader.needUpdate = false
+            }
 
             ScrollDecorator { flickableItem: parent }
         }

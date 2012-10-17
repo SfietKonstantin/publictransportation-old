@@ -26,6 +26,7 @@ OTHER_FILES +=  main.qml \
                 UiConstants.js \
                 HorizontalSeparator.qml \
                 GroupIndicator.qml \
+                UpdateHeader.qml \
                 AbstractPage.qml \
                 AbstractNavigationPage.qml \
                 ClickableEntry.qml \

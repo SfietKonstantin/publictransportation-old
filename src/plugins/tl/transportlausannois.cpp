@@ -301,6 +301,7 @@ void TransportLausannois::retrieveWaitingTime(const QString &request, const Comp
     Q_D(TransportLausannois);
     Q_UNUSED(company);
     Q_UNUSED(journey);
+
     QString urlString = "http://m.t-l.ch/ressources/horaire.php?level=4&id=%1&line=%2";
     urlString = urlString.arg(station.properties().value("id").toString(),
                               line.properties().value("id").toString());

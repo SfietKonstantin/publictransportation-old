@@ -65,8 +65,7 @@ int main(int argc, char **argv)
 
     // Localization
     QTranslator translator;
-    debug("test") << translator.load(QLocale::system().name(), I18N_FOLDER);
-    debug("test") << QLocale::system().name();
+    translator.load(QLocale::system().name(), I18N_FOLDER);
     app.installTranslator(&translator);
 
     // Setup DBus

@@ -9,7 +9,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../AboutPage.qml" line="56"/>
+        <location filename="../AboutPage.qml" line="66"/>
         <source>publictransportation is an attempt to give the user the best transportation application. Instead of multiple clients that do not share anything in common (no consistency in UI, in navigation etc.), publictransportation brings an unified UI for different information sources about different transportation companies.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -35,17 +35,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../JourneysFromStationPage.qml" line="103"/>
+        <location filename="../JourneysFromStationPage.qml" line="105"/>
         <source>Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../JourneysFromStationPage.qml" line="124"/>
+        <location filename="../JourneysFromStationPage.qml" line="138"/>
         <source>Hide categories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../JourneysFromStationPage.qml" line="124"/>
+        <location filename="../JourneysFromStationPage.qml" line="138"/>
         <source>Display categories</source>
         <translation type="unfinished"></translation>
     </message>
@@ -88,6 +88,19 @@
     <message>
         <location filename="../SearchStationPage.qml" line="52"/>
         <source>Search for a station</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>UpdateHeader</name>
+    <message>
+        <location filename="../UpdateHeader.qml" line="58"/>
+        <source>Pull down to update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UpdateHeader.qml" line="59"/>
+        <source>Release to update</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

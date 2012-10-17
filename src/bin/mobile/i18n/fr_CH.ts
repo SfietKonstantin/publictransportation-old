@@ -9,7 +9,7 @@
     <message>
         <location filename="../AboutPage.qml" line="56"/>
         <source>publictransportation is an attempt to give the user the best transportation application. Instead of multiple clients that do not share anything in common (no consistency in UI, in navigation etc.), publictransportation brings an unified UI for different information sources about different transportation companies.</source>
-        <translation type="unfinished"/>
+        <translation>publictransportation souhaite fournir à l&apos;utilisateur la meilleure application pour les transports publics. Au lieu d&apos;avoir plusieurs clients qui ne partagent rien en commun (pas d&apos;uniformité dans l&apos;interface utilisateur et la navigation), publictransportation apporte une interface unifiée pour différentes sources d&apos;informations à propos de différentes companies.</translation>
     </message>
 </context>
 <context>
@@ -68,7 +68,7 @@
     <message>
         <location filename="../MainPage.qml" line="59"/>
         <source>Switch color theme</source>
-        <translation type="unfinished"/>
+        <translation>Inverser le thème de couleur</translation>
     </message>
     <message>
         <location filename="../MainPage.qml" line="63"/>
@@ -94,22 +94,22 @@
     <message>
         <location filename="../main.qml" line="34"/>
         <source>Configure information sources</source>
-        <translation type="unfinished"/>
+        <translation>Configurer les sources d&apos;information</translation>
     </message>
     <message>
         <location filename="../main.qml" line="35"/>
         <source>Do you want to configure the information sources now? Informations sources are used to provide informations about the public transport you are using.</source>
-        <translation type="unfinished"/>
+        <translation>Voulez-vous configurer les sources d&apos;information maintenant ? Les sources sont utilisées pour fournir des informations sur les transports en commun que vous utilisez.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="37"/>
         <source>Yes</source>
-        <translation type="unfinished"/>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../main.qml" line="38"/>
         <source>No</source>
-        <translation type="unfinished"/>
+        <translation>Non</translation>
     </message>
 </context>
 </TS>

@@ -124,6 +124,10 @@ public Q_SLOTS:
               const PublicTransportation::Journey &journey,
               const PublicTransportation::Station &station);
     /**
+     * @brief Reload
+     */
+    void reload();
+    /**
      * @brief Clear
      */
     void clear();

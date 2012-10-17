@@ -126,6 +126,8 @@ void WaitingTimeModelPrivate::slotWaitingTimeRegistered(const QString &request,
         return;
     }
 
+    q->clear();
+
     foreach (WaitingTime waitingTime, waitingTimeList) {
         WaitingTimeModelData * dataItem = new WaitingTimeModelData;
         dataItem->waitingTime = waitingTime;
@@ -223,6 +225,24 @@ void WaitingTimeModel::load(AbstractBackendWrapper *backend, const QString &requ
     emit loadingChanged();
 
     clear();
+}
+
+void WaitingTimeModel::reload()
+{
+    Q_D(WaitingTimeModel);
+
+    if (d->backendIdentifier.isEmpty()) {
+        return;
+    }
+
+    if (d->company.isNull() || d->line.isNull() || d->journey.isNull() || d->station.isNull()) {
+        return;
+    }
+
+    AbstractBackendWrapper *backend = d->backendManager->backend(d->backendIdentifier);
+
+    d->currentRequest = backend->requestWaitingTime(d->company, d->line, d->journey, d->station);
+    emit loadingChanged();
 }
 
 void WaitingTimeModel::clear()

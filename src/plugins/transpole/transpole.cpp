@@ -323,6 +323,7 @@ void TranspolePrivate::slotWaitingTimePhase2Finished()
 {
     Q_Q(Transpole);
 
+    debug("transpole-plugin") << "Phase 2 using ran" << waitingTimeRan;
     debug("transpole-plugin") << "Data retrieved from url"
                               << waitingTimePhase2Reply->url().toString();
 
@@ -353,12 +354,14 @@ void TranspolePrivate::slotWaitingTimePhase2Finished()
                 waitingTime.setWaitingTime(minutes);
                 properties.insert("type", "timetable");
             } else {
+                warning("transpole-plugin") << time;
                 waitingTime.setWaitingTime(-1);
             }
             waitingTime.setProperties(properties);
             waitingTimes.append(waitingTime);
         }
     }
+
     emit q->waitingTimeRetrieved(waitingTimeRequest, waitingTimes);
     waitingTimeRequest = QString();
     waitingTimePhase2Reply->deleteLater();
@@ -458,6 +461,8 @@ void Transpole::retrieveWaitingTime(const QString &request, const Company &compa
         d->waitingTimeReply->deleteLater();
     }
 
+    d->waitingTimeRequest = request;
+
     if (station.properties().value("id") == d->waitingTimeStation.properties().value("id")
         && !d->waitingTimeRan.isEmpty()) {
         d->perforWaitingTimePhase2();
@@ -487,7 +492,6 @@ void Transpole::retrieveWaitingTime(const QString &request, const Company &compa
     QNetworkRequest networkRequest;
     networkRequest.setUrl(QUrl(urlString));
 
-    d->waitingTimeRequest = request;
     d->waitingTimeStation = station;
     d->waitingTimeDirection = journey.name();
     d->waitingTimeReply = d->nam->post(networkRequest, postData);

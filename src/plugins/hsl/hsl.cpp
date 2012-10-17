@@ -48,23 +48,14 @@ class HslPrivate
 {
 public:
     HslPrivate(Hsl *q);
-//    void perforWaitingTimePhase2();
     void slotSuggestedStationsFinished();
     void slotJourneysFromStationFinished();
-//    void slotWaitingTimeFinished();
-//    void slotWaitingTimePhase2Finished();
     QNetworkAccessManager *nam;
     QNetworkReply *suggestedStationsReply;
     QString suggestedStationsRequest;
     QNetworkReply *journeysFromStationReply;
     QString journeysFromStationRequest;
     Station journeysFromStationStation;
-//    QNetworkReply *waitingTimeReply;
-//    QString waitingTimeRequest;
-//    Station waitingTimeStation;
-//    QString waitingTimeRan;
-//    QNetworkReply *waitingTimePhase2Reply;
-//    QString waitingTimeDirection;
 
 
 private:
@@ -77,40 +68,7 @@ HslPrivate::HslPrivate(Hsl *q):
 {
     suggestedStationsReply = 0;
     journeysFromStationReply = 0;
-//    waitingTimeReply = 0;
-//    waitingTimePhase2Reply = 0;
 }
-
-//void TranspolePrivate::perforWaitingTimePhase2()
-//{
-//    Q_Q(Transpole);
-
-//    if (waitingTimePhase2Reply) {
-//        if (!waitingTimePhase2Reply->isFinished()) {
-//            waitingTimePhase2Reply->abort();
-//        }
-//        waitingTimePhase2Reply->deleteLater();
-//    }
-
-//    QString fullId = waitingTimeStation.properties().value("id").toString();
-//    QStringList idAndLigneSens = fullId.split("_");
-//    QString id = idAndLigneSens.at(0);
-
-//    QString urlString = "http://www.transpole.mobi/index.php?id=690";
-
-//    QByteArray postData = "a=refresh&refs=";
-//    postData.append(QUrl::toPercentEncoding(id));
-//    postData.append("&ran=");
-//    postData.append(QUrl::toPercentEncoding(waitingTimeRan));
-
-//    QNetworkRequest networkRequest;
-//    networkRequest.setUrl(QUrl(urlString));
-
-//    waitingTimePhase2Reply = nam->post(networkRequest, postData);
-
-//    q->connect(waitingTimePhase2Reply, SIGNAL(finished()),
-//               q, SLOT(slotWaitingTimePhase2Finished()));
-//}
 
 void HslPrivate::slotSuggestedStationsFinished()
 {
@@ -240,7 +198,7 @@ void HslPrivate::slotJourneysFromStationFinished()
 
 ////// End of private class //////
 
-Hsl::Hsl(QObject *parent) :
+Hsl::Hsl(QObject *parent):
     ProviderPluginObject(parent), d_ptr(new HslPrivate(this))
 {
     Q_D(Hsl);
@@ -319,12 +277,11 @@ void Hsl::retrieveWaitingTime(const QString &request, const Company &company,
 {
     Q_UNUSED(company);
     Q_UNUSED(line);
-
+    /// @todo do better here !
     QVariantMap properties;
     properties.insert("destination", journey.name());
 
     QList<WaitingTime> waitingTimeList;
-    debug("test") << station.properties().value("waitingTimes");
     for (int i = 0; i < station.properties().value("waitingTimeCount").toInt(); i++) {
         WaitingTime waitingTime;
         waitingTime.setProperties(properties);

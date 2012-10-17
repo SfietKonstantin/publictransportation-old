@@ -57,6 +57,7 @@ AbstractPage {
             anchors.top: searchField.bottom; anchors.topMargin: Ui.MARGIN_DEFAULT
             anchors.left: parent.left; anchors.right: parent.right
             anchors.bottom: parent.bottom
+            opacity: !SearchStationModelInstance.loading ? 1 : 0.5
             clip: true
             model: SearchStationModelInstance
             delegate: ClickableEntry {

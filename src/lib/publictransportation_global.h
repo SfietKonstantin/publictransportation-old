@@ -181,6 +181,10 @@
  * hard limit. It can be used for some information sources that, otherwise, might download
  * a lot of data.
  *
+ * Please pay attention that the list of journeys can be refreshed by the user, therefore,
+ * this signal can be emitted several times. Be sure not to abusively cache data, and provide
+ * outdated information.
+ *
  * \b Parameters
  * - s \e request Request identifier.
  * - \ref transportationObject "(a{sv}sa{sv})" \e station Station to query.
@@ -207,6 +211,10 @@
  *
  * This signal is used to notify that the backend should provide a list of waiting time at
  * a given station, providing also a given company, line and journey.
+ *
+ * Please pay attention that the list of waiting time can be refreshed by the user, therefore,
+ * this signal can be emitted several times. Be sure not to abusively cache data, and provide
+ * outdated information.
  *
  * \b Parameters
  * - s \e request Request identifier.

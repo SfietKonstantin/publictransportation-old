@@ -70,15 +70,29 @@ AbstractPage {
         }
 
         ListView {
+            id: view
             anchors.top: horizontalSeparator.bottom
             anchors.left: parent.left; anchors.right: parent.right
             anchors.bottom: parent.bottom
+            opacity: !WaitingTimeModelInstance.loading ? 1 : 0.5
             clip: true
             model: WaitingTimeModelInstance
             delegate: ClickableEntry {
                 enabled: false
                 preText: model.waitingTime
                 text: model.destination
+            }
+
+            UpdateHeader {
+                id: updateHeader
+                view: view
+            }
+
+            onMovingChanged: {
+                if (!moving && atXBeginning && updateHeader.needUpdate) {
+                    WaitingTimeModelInstance.reload()
+                }
+                updateHeader.needUpdate = false
             }
 
             ScrollDecorator { flickableItem: parent }

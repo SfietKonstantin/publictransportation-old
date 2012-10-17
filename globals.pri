@@ -45,7 +45,7 @@ isEmpty(INCLUDEDIR) {
 }
 
 # Application + data + qml folders
-contains(MEEGO_EDITION,harmattan):{
+maemo5|contains(MEEGO_EDITION,harmattan):{
     APPLICATION_FOLDER  = $${OPTDIR}/bin
     DATA_FOLDER = $${OPTDIR}/data
     PLUGIN_FOLDER = $${OPTDIR}/plugins

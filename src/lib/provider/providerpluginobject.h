@@ -64,6 +64,10 @@ class WaitingTime;
  * In order to perform a task, a backend should implement some
  * of these methods.
  *
+ * Please pay attention that retrieveJourneysFromStation() and retrieveWaitingTime() can be
+ * refreshed by the user, therefore, this signal can be emitted several times. Be sure not
+ * to abusively cache data, and provide outdated information.
+ *
  * All calls are done asynchronously, and replies to called methods
  * are done though signals. The corresponding signals to the previously
  * listed methods are
