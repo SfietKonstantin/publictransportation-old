@@ -16,6 +16,7 @@
 
 import QtQuick 1.1
 import com.nokia.meego 1.0
+import "UiConstants.js" as Ui
 
 AbstractPage {
     headerColor: "#006E29"
@@ -28,20 +29,82 @@ AbstractPage {
         }
     }
 
-    content: ListView {
-        id: view
-        clip: true
+    content: Item {
         anchors.fill: parent
-        model: BackendModelInstance
-        delegate: BackendEntry {
-            text: model.name
-            subText: model.description
-            status: model.status
-            onChecked: {
-                if (checked) {
-                    BackendModelInstance.runBackend(model.identifier)
-                } else {
-                    BackendModelInstance.stopBackend(model.identifier)
+
+        ClickableEntry {
+            id: countrySelector
+            text: CountriesModelInstance.currentCountry
+            indicatorIcon: "icon-m-" + (!theme.inverted ? "common" : "textinput")
+                           + "-combobox-arrow"
+            onClicked: countrySelectorSheet.open()
+        }
+
+        HorizontalSeparator {
+            id: horizontalSeparator
+            anchors.top: countrySelector.bottom
+        }
+
+        ListView {
+            id: view
+            clip: true
+            anchors.top: horizontalSeparator.bottom
+            anchors.left: parent.left; anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            model: BackendModelInstance
+            delegate: BackendEntry {
+                text: model.name
+                subText: model.description
+                status: model.status
+                onChecked: {
+                    if (checked) {
+                        BackendModelInstance.runBackend(model.identifier)
+                    } else {
+                        BackendModelInstance.stopBackend(model.identifier)
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+    Sheet {
+        id: countrySelectorSheet
+        rejectButtonText: qsTr("Cancel")
+        onStatusChanged: {
+            if (status == DialogStatus.Closed) {
+                searchField.text = ""
+            }
+        }
+
+        content: Item {
+            anchors.fill: parent
+
+            TextField {
+                id: searchField
+                anchors.top: parent.top; anchors.topMargin: Ui.MARGIN_SMALL
+                anchors.left: parent.left; anchors.leftMargin: Ui.MARGIN_DEFAULT
+                anchors.right: parent.right; anchors.rightMargin: Ui.MARGIN_DEFAULT
+                placeholderText: qsTr("Filter countries")
+                onTextChanged: CountriesModelInstance.filter = text
+            }
+
+            ListView {
+                anchors.top: searchField.bottom; anchors.topMargin: Ui.MARGIN_DEFAULT
+                anchors.left: parent.left; anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                clip: true
+                model: CountriesModelInstance
+                delegate: ClickableEntry {
+                    indicatorIcon: ""
+                    text: model.name
+                    onClicked: {
+                        CountriesModelInstance.select(model.index)
+                        BackendModelInstance.filter = CountriesModelInstance.currentIsoCode
+                        countrySelectorSheet.accept()
+                    }
                 }
             }
         }

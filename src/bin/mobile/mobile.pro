@@ -15,12 +15,14 @@ HEADERS +=      backendmodel.h \
                 searchstationmodel.h \
                 journeysfromstationmodel.h \
                 waitingtimemodel.h \
+                support/countriesmodel.h \
 
 SOURCES +=      main.cpp \
                 backendmodel.cpp \
                 searchstationmodel.cpp \
                 journeysfromstationmodel.cpp \
                 waitingtimemodel.cpp \
+                support/countriesmodel.cpp \
 
 OTHER_FILES +=  main.qml \
                 UiConstants.js \

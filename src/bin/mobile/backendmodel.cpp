@@ -56,9 +56,19 @@ public:
     BackendModel::BackendStatus status(const BackendInfo &backendInfo) const;
     /**
      * @internal
+     * @brief Apply filter
+     */
+    void applyfilter();
+    /**
+     * @internal
      * @brief Slot for status changed
      */
     void slotStatusChanged();
+    /**
+     * @internal
+     * @brief Filter
+     */
+    QString filter;
     /**
      * @internal
      * @brief Backend list manager
@@ -69,6 +79,11 @@ public:
      * @brief Backend manager
      */
     AbstractBackendManager *backendManager;
+    /**
+     * @internal
+     * @short Backends
+     */
+    QList<BackendInfo> backends;
     /**
      * @internal
      * @short Data
@@ -102,6 +117,24 @@ BackendModel::BackendStatus BackendModelPrivate::status(const BackendInfo &backe
     return (BackendModel::BackendStatus) backendWrapper->status();
 }
 
+void BackendModelPrivate::applyfilter()
+{
+    Q_Q(BackendModel);
+    q->beginRemoveRows(QModelIndex(), 0, data.count() - 1);
+    data.clear();
+    q->endRemoveRows();
+
+    foreach (BackendInfo backendInfo, backends) {
+        if (filter.isEmpty() || backendInfo.backendCountry() == filter) {
+            data.append(backendInfo);
+        }
+    }
+
+    q->beginInsertRows(QModelIndex(), 0, data.count() - 1);
+    emit q->countChanged();
+    q->endInsertRows();
+}
+
 void BackendModelPrivate::slotStatusChanged()
 {
     Q_Q(BackendModel);
@@ -119,7 +152,7 @@ void BackendModelPrivate::slotStatusChanged()
 
     int index = -1;
     for (int i = 0; i < data.size(); i++) {
-        if (data.at(i).backendIdentifier() == identifier) {
+        if (backends.at(i).backendIdentifier() == identifier) {
             index = i;
         }
     }
@@ -166,6 +199,12 @@ int  BackendModel::rowCount(const QModelIndex &parent) const
     return d->data.count();
 }
 
+QString BackendModel::filter() const
+{
+    Q_D(const BackendModel);
+    return d->filter;
+}
+
 int BackendModel::count() const
 {
     return rowCount();
@@ -198,19 +237,27 @@ QVariant BackendModel::data(const QModelIndex &index, int role) const
     }
 }
 
+void BackendModel::setFilter(const QString &filter)
+{
+    Q_D(BackendModel);
+    if (d->filter != filter) {
+        d->filter = filter;
+        d->applyfilter();
+    }
+}
+
 void BackendModel::reload()
 {
     Q_D(BackendModel);
     d->backendListManager->reload();
 
     beginRemoveRows(QModelIndex(), 0, rowCount() - 1);
-    d->data.clear();
+    d->backends.clear();
     endRemoveRows();
 
     QList<BackendInfo> availableBackendList = d->backendListManager->backendList();
-    beginInsertRows(QModelIndex(), 0, availableBackendList.count() - 1);
-    d->data = availableBackendList;
-    endInsertRows();
+    d->backends = availableBackendList;
+    d->applyfilter();
 
     debug("backend-model") << "Reloaded information in the model. Number of rows:" << rowCount();
 

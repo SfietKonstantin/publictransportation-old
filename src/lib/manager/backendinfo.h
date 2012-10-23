@@ -117,7 +117,7 @@ struct BackendInfoPrivate: public QSharedData
  * Exec=$PROVIDER plugin.so
  * # Exec=python myscript.py
  * X-PublicTransportation-BackendInfo-Id=com.mycompany.backendname
- * X-PublicTransportation-BackendInfo-Country=Some country (or All for international)
+ * X-PublicTransportation-BackendInfo-Country=COUNTRY-ISO-CODE (nothing for international)
  * X-PublicTransportation-BackendInfo-Cities=City 1,City 2 (or All for national)
  * X-PublicTransportation-BackendInfo-Author=Some author
  * X-PublicTransportation-BackendInfo-Email=some.author@mycompany.com
@@ -131,7 +131,7 @@ struct BackendInfoPrivate: public QSharedData
  * keys. The \b Id key is mandatory, and should be unique, since it is used to
  * identify the backend.
  *
- *\b Exec should provide the executable name. It can provide either a script,
+ * \b Exec should provide the executable name. It can provide either a script,
  * or use the provider loader to load C++ plugin. In that case, you should use
  * $PROVIDER to replace the path of the provider. Please note that, while being
  * executed, one more parameter, that is "\-\-identifier someidentifier" is passed

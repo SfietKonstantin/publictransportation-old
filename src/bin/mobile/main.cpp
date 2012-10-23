@@ -29,6 +29,7 @@
 
 #include "debug.h"
 #include "manager/dbus/dbusbackendmanager.h"
+#include "support/countriesmodel.h"
 #include "backendmodel.h"
 #include "searchstationmodel.h"
 #include "journeysfromstationmodel.h"
@@ -72,6 +73,7 @@ int main(int argc, char **argv)
     DBusBackendManager::registerDBusService();
 
     // Setup models and manager
+    Gui::CountriesModel countriesModel;
     Gui::BackendModel backendModel;
     Gui::SearchStationModel searchStationModel;
     Gui::JourneysFromStationModel journeysFromStationModel;
@@ -122,6 +124,7 @@ int main(int argc, char **argv)
     view.rootContext()->setContextProperty("ICON_FILE", QVariant(ICON_FILE));
     view.rootContext()->setContextProperty("VERSION", QVariant(version));
     view.rootContext()->setContextProperty("BACKEND_FIRST_TIME", QVariant(backendFirstTime));
+    view.rootContext()->setContextProperty("CountriesModelInstance", &countriesModel);
     view.rootContext()->setContextProperty("BackendModelInstance", &backendModel);
     view.rootContext()->setContextProperty("SearchStationModelInstance", &searchStationModel);
     view.rootContext()->setContextProperty("JourneysFromStationModelInstance",

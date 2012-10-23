@@ -52,11 +52,19 @@ class BackendModelPrivate;
  * restart. When the list of backends are reloaded, these
  * backends are then restarted automatically (that happen,
  * for example, while the application is launched again).
+ *
+ * This model can also be filtered, using the filter() property.
+ * This filter takes a country code, or an empty string for all countries,
+ * and will filter the list by countries.
  */
 class BackendModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_ENUMS(BackendStatus)
+    /**
+     * @short Filter
+     */
+    Q_PROPERTY(QString filter READ filter WRITE setFilter NOTIFY filterChanged)
     /**
      * @short Count
      */
@@ -131,6 +139,11 @@ public:
      */
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
     /**
+     * @brief Filter
+     * @return filter.
+     */
+    QString filter() const;
+    /**
      * @short Count
      * @return count.
      */
@@ -144,6 +157,11 @@ public:
      */
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 public Q_SLOTS:
+    /**
+     * @brief Set filter
+     * @param filter filter to set.
+     */
+    void setFilter(const QString &filter);
     /**
      * @brief Reload
      *
@@ -161,6 +179,10 @@ public Q_SLOTS:
      */
     void stopBackend(const QString &identifier);
 Q_SIGNALS:
+    /**
+     * @brief Filter changed
+     */
+    void filterChanged();
     /**
      * @short Count changed
      */
