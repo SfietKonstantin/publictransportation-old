@@ -24,6 +24,7 @@
 #include <QtCore/QMap>
 #include <QtCore/QDir>
 
+#include "abstractbackendwrapper.h"
 #include "debug.h"
 
 namespace PublicTransportation

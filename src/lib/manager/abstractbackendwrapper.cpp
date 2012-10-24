@@ -26,6 +26,12 @@
 
 #include "debug.h"
 #include "common/errorid.h"
+#include "common/company.h"
+#include "common/line.h"
+#include "common/journey.h"
+#include "common/station.h"
+#include "common/waitingtime.h"
+#include "common/infojourneys.h"
 
 namespace PublicTransportation
 {

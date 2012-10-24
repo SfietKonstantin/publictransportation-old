@@ -26,11 +26,10 @@
 
 #include <QtCore/QObject>
 
-#include "backendinfo.h"
-
 namespace PublicTransportation
 {
 
+class BackendInfo;
 class BackendListManagerPrivate;
 
 /**

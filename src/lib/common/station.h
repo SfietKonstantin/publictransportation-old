@@ -24,7 +24,6 @@
 
 #include "publictransportation_global.h"
 #include "transportationobject.h"
-#include <QtCore/QVariantMap>
 
 namespace PublicTransportation
 {

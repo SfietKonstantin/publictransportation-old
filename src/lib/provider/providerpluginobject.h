@@ -23,7 +23,9 @@
  */
 
 #include "publictransportation_global.h"
+
 #include <QtCore/QObject>
+
 #include "providerplugininterface.h"
 
 namespace PublicTransportation

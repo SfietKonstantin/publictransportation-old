@@ -14,71 +14,31 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-/**
- * @file backendlistmanager.cpp
- * @short Implementation of PublicTransportation::BackendListManager
- */
+#ifndef PUBLICTRANSPORTATION_GUI_XMLCONVERSIONHELPER_H
+#define PUBLICTRANSPORTATION_GUI_XMLCONVERSIONHELPER_H
 
-#include "backendlistmanager.h"
+#include <QtCore/QVariantMap>
 
-#include <QtCore/QDir>
-
-#include "backendinfo.h"
-#include "debug.h"
-
+class QDomDocument;
+class QDomElement;
 namespace PublicTransportation
 {
 
-/**
- * @internal
- * @brief Private class for PublicTransportation::BackendListManager
- */
-struct BackendListManagerPrivate
+class Station;
+
+namespace Gui
+{
+
+class XmlConversionHelper
 {
 public:
-    /**
-     * @internal
-     * @brief List of backends
-     */
-    QList<BackendInfo> backendList;
+    static QDomElement toXml(const QVariantMap &variantMap, const QString &tagName,
+                             QDomDocument *document);
+    static QDomElement toXml(const Station &station, QDomDocument *document);
 };
 
-////// End of private class //////
-
-BackendListManager::BackendListManager(QObject *parent) :
-    QObject(parent), d_ptr(new BackendListManagerPrivate())
-{
-}
-
-BackendListManager::~BackendListManager()
-{
-}
-
-QList<BackendInfo> BackendListManager::backendList() const
-{
-    Q_D(const BackendListManager);
-    return d->backendList;
-}
-
-void BackendListManager::reload()
-{
-    Q_D(BackendListManager);
-    d->backendList.clear();
-
-    QDir pluginDir = QDir(PLUGIN_FOLDER);
-    QStringList nameFilters;
-    nameFilters.append("*.desktop");
-
-    foreach (QString file, pluginDir.entryList(nameFilters, QDir::Files)) {
-        BackendInfo info (pluginDir.absoluteFilePath(file));
-        if (info.isValid()) {
-            d->backendList.append(info);
-        }
-    }
-
-    debug("backend-list-manager") << "Backend list reloaded";
-    debug("backend-list-manager") << "Number of backends:" << d->backendList.count();
-    emit backendListChanged();
 }
 
 }
+
+#endif // PUBLICTRANSPORTATION_GUI_XMLCONVERSIONHELPER_H

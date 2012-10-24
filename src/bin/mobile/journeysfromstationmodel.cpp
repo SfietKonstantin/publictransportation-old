@@ -21,7 +21,13 @@
 
 #include "journeysfromstationmodel.h"
 
+#include "common/company.h"
+#include "common/line.h"
+#include "common/journey.h"
+#include "common/station.h"
+#include "common/infojourneys.h"
 #include "common/capabilitiesconstants.h"
+#include "manager/abstractbackendwrapper.h"
 #include "manager/abstractbackendmanager.h"
 #include "debug.h"
 

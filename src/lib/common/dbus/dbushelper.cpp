@@ -27,6 +27,7 @@
 #include "common/line.h"
 #include "common/waitingtime.h"
 #include "common/infojourneys.h"
+#include "common/infojourneywaitingtime.h"
 
 namespace PublicTransportation
 {
@@ -250,6 +251,38 @@ const QDBusArgument & operator>>(const QDBusArgument &argument, InfoJourneys &in
     return argument;
 }
 
+QDBusArgument & operator<<(QDBusArgument &argument,
+                           const InfoJourneyWaitingTime &infoJourneyWaitingTime)
+{
+    argument.beginStructure();
+    argument << infoJourneyWaitingTime.company();
+    argument << infoJourneyWaitingTime.line();
+    argument << infoJourneyWaitingTime.journey();
+    argument << infoJourneyWaitingTime.station();
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument & operator>>(const QDBusArgument &argument,
+                                 InfoJourneyWaitingTime &infoJourneyWaitingTime)
+{
+    argument.beginStructure();
+    Company company;
+    argument >> company;
+    infoJourneyWaitingTime.setCompany(company);
+    Line line;
+    argument >> line;
+    infoJourneyWaitingTime.setLine(line);
+    Journey journey;
+    argument >> journey;
+    infoJourneyWaitingTime.setJourney(journey);
+    Station station;
+    argument >> station;
+    infoJourneyWaitingTime.setStation(station);
+    argument.endStructure();
+    return argument;
+}
+
 void registerDBusTypes()
 {
     qDBusRegisterMetaType<PublicTransportation::Company>();
@@ -266,6 +299,8 @@ void registerDBusTypes()
     qDBusRegisterMetaType<QList<PublicTransportation::JourneyAndStation> >();
     qDBusRegisterMetaType<PublicTransportation::InfoJourneys>();
     qDBusRegisterMetaType<QList<PublicTransportation::InfoJourneys> >();
+    qDBusRegisterMetaType<PublicTransportation::InfoJourneyWaitingTime>();
+    qDBusRegisterMetaType<QList<PublicTransportation::InfoJourneyWaitingTime> >();
 }
 
 }

@@ -21,7 +21,13 @@
 
 #include "waitingtimemodel.h"
 
+#include "common/company.h"
+#include "common/line.h"
+#include "common/journey.h"
+#include "common/station.h"
+#include "common/waitingtime.h"
 #include "manager/abstractbackendmanager.h"
+#include "manager/abstractbackendwrapper.h"
 #include "debug.h"
 
 namespace PublicTransportation

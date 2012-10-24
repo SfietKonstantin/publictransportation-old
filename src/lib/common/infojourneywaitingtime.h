@@ -14,19 +14,17 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_INFOJOURNEYS_H
-#define PUBLICTRANSPORTATION_INFOJOURNEYS_H
+#ifndef PUBLICTRANSPORTATION_INFOJOURNEYWAITINGTIME_H
+#define PUBLICTRANSPORTATION_INFOJOURNEYWAITINGTIME_H
 
 /**
- * @file infojourneys.h
- * @short Definition of PublicTransportation::InfoJourneys
+ * @file infojourneywaitingtime.h
+ * @short Definition of PublicTransportation::InfoJourneyWaitingTime
  */
 
 #include "publictransportation_global.h"
 
 #include <QtCore/QExplicitlySharedDataPointer>
-#include <QtCore/QList>
-#include <QtCore/QPair>
 
 #include "company.h"
 #include "line.h"
@@ -35,14 +33,15 @@
 
 namespace PublicTransportation
 {
+
 /**
  * @internal
- * @brief Private class for PublicTransportation::InfoJourneys
+ * @brief Private class for PublicTransportation::InfoJourneyWaitingTime
  *
  * This class is used to store the explicitly shared
- * data for PublicTransportation::InfoJourneys.
+ * data for PublicTransportation::InfoJourneyWaitingTime.
  */
-class InfoJourneysPrivate: public QSharedData
+class InfoJourneyWaitingTimePrivate: public QSharedData
 {
 public:
     /**
@@ -57,68 +56,50 @@ public:
     Line line;
     /**
      * @internal
-     * @brief List of journeys and stations
+     * @brief Journey
      */
-    QList<QPair<Journey, Station> > journeysStations;
+    Journey journey;
+    /**
+     * @internal
+     * @brief Station
+     */
+    Station station;
 };
 
-/**
- * @brief Class to provide informations about journeys
- *
- * This class is used to provide informations related to journeys.
- * From a station, a list of journeys, associated to a given company,
- * on a given line. For each journey, a station is associated, in order
- * to provide more information (like some id, that are specific to the
- * station on the journey). This class then provide a list of
- * journey-station pairs.
- *
- * Properties for an information about journeys are then
- * - company()
- * - line()
- * - journeysAndStations()
- *
- * and can be set using
- * - setCompany()
- * - setLine()
- * - setJourneysAndStations()
- *
- * This class is an explicitely shared class, that means that
- * any copy of this class refers to the same instance, and
- * changing one copy will change all the others.
- */
-class PUBLICTRANSPORTATION_EXPORT InfoJourneys
+class PUBLICTRANSPORTATION_EXPORT InfoJourneyWaitingTime
 {
 public:
     /**
      * @brief Default constructor
      */
-    explicit InfoJourneys();
+    explicit InfoJourneyWaitingTime();
     /**
      * @brief Constructor
      * @param company company.
      * @param line line.
-     * @param journeysStations journeys and stations.
+     * @param journey journey.
+     * @param station station.
      */
-    explicit InfoJourneys(const Company &company, const Line &line,
-                          const QList<QPair<Journey, Station> > &journeysStations);
+    explicit InfoJourneyWaitingTime(const Company &company, const Line &line,
+                                    const Journey &journey, const Station &station);
     /**
      * @brief Copy constructor
-     * @param other other information about journeys object.
+     * @param other other information about journey object.
      */
-    InfoJourneys(const InfoJourneys &other);
+    InfoJourneyWaitingTime(const InfoJourneyWaitingTime &other);
     /**
      * @brief Destructor
      */
-    virtual ~InfoJourneys();
+    virtual ~InfoJourneyWaitingTime();
     /**
      * @brief Equality
-     * @param other information about journeys to compare to.
-     * @return if the two information about journeys are equal.
+     * @param other information about journey to compare to.
+     * @return if the two information about journey are equal.
      */
-    bool operator==(const InfoJourneys &other) const;
+    bool operator==(const InfoJourneyWaitingTime &other) const;
     /**
-     * @brief If the information about journeys is null
-     * @return if the information about journeys is null.
+     * @brief If the information about journey is null
+     * @return if the information about journey is null.
      */
     bool isNull() const;
     /**
@@ -142,27 +123,37 @@ public:
      */
     void setLine(const Line &line);
     /**
-     * @brief Journeys and stations
-     * @return journeys and stations.
+     * @brief Journey
+     * @return journey.
      */
-    QList<QPair<Journey, Station> > journeysAndStations() const;
+    Journey journey() const;
     /**
-     * @brief Set journeys and stations
-     * @param journeysStations journeys and stations to set.
+     * @brief Set the journey
+     * @param journey journey to set.
      */
-    void setJourneysAndStations(const QList<QPair<Journey, Station> > &journeysStations);
+    void setJourney(const Journey &journey);
+    /**
+     * @brief Station
+     * @return line.
+     */
+    Station station() const;
+    /**
+     * @brief Set the station
+     * @param station station to set.
+     */
+    void setStation(const Station &station);
 protected:
     /**
      * @brief D-pointer
      */
-    QExplicitlySharedDataPointer<InfoJourneysPrivate> d_ptr;
+    QExplicitlySharedDataPointer<InfoJourneyWaitingTimePrivate> d_ptr;
 private:
-    Q_DECLARE_PRIVATE(InfoJourneys)
+    Q_DECLARE_PRIVATE(InfoJourneyWaitingTime)
 };
 
 }
 
-Q_DECLARE_METATYPE(PublicTransportation::InfoJourneys)
-Q_DECLARE_METATYPE(QList<PublicTransportation::InfoJourneys>)
+Q_DECLARE_METATYPE(PublicTransportation::InfoJourneyWaitingTime)
+Q_DECLARE_METATYPE(QList<PublicTransportation::InfoJourneyWaitingTime>)
 
-#endif // PUBLICTRANSPORTATION_INFOJOURNEYS_H
+#endif // PUBLICTRANSPORTATION_INFOJOURNEYWAITINGTIME_H

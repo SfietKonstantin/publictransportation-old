@@ -24,8 +24,6 @@
 
 #include "publictransportation_global.h"
 #include "manager/abstractbackendwrapper.h"
-#include <QtCore/QProcess>
-#include <QtDBus/QDBusArgument>
 
 namespace PublicTransportation
 {

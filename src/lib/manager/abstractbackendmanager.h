@@ -27,13 +27,11 @@
 #include <QtCore/QObject>
 #include <QtCore/QStringList>
 
-#include "abstractbackendwrapper.h"
-
 namespace PublicTransportation
 {
 
+class AbstractBackendWrapper;
 class AbstractBackendManagerPrivate;
-
 /**
  * @brief Base class for a backend manager
  *

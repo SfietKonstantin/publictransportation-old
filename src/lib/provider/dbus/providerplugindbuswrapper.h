@@ -23,6 +23,7 @@
  */
 
 #include "publictransportation_global.h"
+
 #include <QtCore/QObject>
 
 namespace PublicTransportation

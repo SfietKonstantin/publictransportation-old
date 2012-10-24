@@ -94,6 +94,7 @@ class Company;
 class Line;
 class WaitingTime;
 class InfoJourneys;
+class InfoJourneyWaitingTime;
 
 
 
@@ -235,6 +236,22 @@ QDBusArgument & operator<<(QDBusArgument &argument, const InfoJourneys &infoJour
  * @return DBus argument without the informations about journeys.
  */
 const QDBusArgument & operator>>(const QDBusArgument &argument, InfoJourneys &infoJourneys);
+/**
+ * @brief Marshall an informations about journeys
+ * @param[out] argument DBus argument.
+ * @param[in] infoJourneys an informations about journeys.
+ * @return DBus argument containing the informations about journeys.
+ */
+QDBusArgument & operator<<(QDBusArgument &argument,
+                           const InfoJourneyWaitingTime &infoJourneyWaitingTime);
+/**
+ * @brief Demarshall an informations about journeys
+ * @param[out] argument DBus argument.
+ * @param[in] infoJourneys an informations about journeys.
+ * @return DBus argument without the informations about journeys.
+ */
+const QDBusArgument & operator>>(const QDBusArgument &argument,
+                                 InfoJourneyWaitingTime &infoJourneyWaitingTime);
 
 /**
  * @brief Register DBus types

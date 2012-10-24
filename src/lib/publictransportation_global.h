@@ -69,6 +69,49 @@
  * scripts using the DBus API won't work.
  */
 /**
+ * \page glossary Glossary
+ *
+ * \section company Company
+ *
+ * A company provides a transportation service. A company can
+ * use buses, trains, planes, boats to provide this service, and
+ * can use different ways.
+ *
+ * Companies are usually described by a name. They can also have a
+ * logo or other features.
+ *
+ * \section line Line
+ *
+ * A transportation line is a way that companies uses to classify
+ * their transportation offer. A line often serve fixed destinations
+ * or at least, fixed areas.
+ *
+ * Lines are usually described by a code, sometimes a name. They can
+ * also have a more verbose description, a color and other features.
+ *
+ * \section journey Journey
+ *
+ * A direction describes a particular travel. If a line serves city
+ * A and B, a direction might be from A to B and another is from B to A.
+ *
+ * Journeys are usually described by a name, that is often the name
+ * of the destination city / area. They can also have some other features.
+ *
+ * For some cases, there is no difference between a line and a journey.
+ * For example, plane travels may have a code, that is the code of the
+ * line, and this line might only have one direction, that is from the
+ * initial city to the destination.
+ *
+ * \section station Station
+ *
+ * A station describes a stopping point on the journey. For a given line and
+ * different journeys, there might be difference in stopping points (like express
+ * trains compared to local trains).
+ *
+ * Station are usually described by a name. They can also have some other
+ * features.
+ */
+/**
  * \page api API
  *
  * \section Design

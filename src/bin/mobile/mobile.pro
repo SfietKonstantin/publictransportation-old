@@ -7,17 +7,20 @@ DEFINES += 'MAIN_QML_FILE=\'\"$${QML_FOLDER}/main.qml\"\''
 DEFINES += 'ICON_FILE=\'\"$${DATA_FOLDER}/publictransportation-big.png\"\''
 DEFINES += 'I18N_FOLDER=\'\"$${I18N_FOLDER}/\"\''
 
-QT = core gui declarative
+QT = core gui xml declarative
 INCLUDEPATH += ../../lib/
 LIBS += -L../../lib/ -l$${NAME}
 
-HEADERS +=      backendmodel.h \
+HEADERS +=      xmlconversionhelper.h \
+                backendmodel.h \
                 searchstationmodel.h \
                 journeysfromstationmodel.h \
                 waitingtimemodel.h \
                 support/countriesmodel.h \
 
+
 SOURCES +=      main.cpp \
+                xmlconversionhelper.cpp \
                 backendmodel.cpp \
                 searchstationmodel.cpp \
                 journeysfromstationmodel.cpp \

@@ -24,18 +24,19 @@
 
 
 #include "publictransportation_global.h"
+
 #include <QtCore/QObject>
 #include <QtCore/QStringList>
-#include "common/company.h"
-#include "common/line.h"
-#include "common/journey.h"
-#include "common/station.h"
-#include "common/waitingtime.h"
-#include "common/infojourneys.h"
 
 namespace PublicTransportation
 {
 
+class Company;
+class Line;
+class Journey;
+class Station;
+class WaitingTime;
+class InfoJourneys;
 class AbstractBackendWrapperPrivate;
 
 /**

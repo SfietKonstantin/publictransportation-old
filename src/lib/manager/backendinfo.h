@@ -22,9 +22,8 @@
  * @short Definition of PublicTransportation::BackendInfo
  */
 
-#include <QtCore/QtCore>
 #include <QtCore/QExplicitlySharedDataPointer>
-#include <QtCore/QString>
+#include <QtCore/QStringList>
 
 namespace PublicTransportation
 {

@@ -23,14 +23,17 @@
  * @short Definition of PublicTransportation::AbstractBackendWrapperPrivate
  */
 
-#include "abstractbackendwrapper.h"
-
 // Warning
 //
 // This file exists for the convenience
 // of other publictransportation classes.
 // This header file may change from version
 // to version without notice or even be removed.
+
+#include "abstractbackendwrapper.h"
+
+#include <QtCore/QMap>
+
 
 namespace PublicTransportation
 {

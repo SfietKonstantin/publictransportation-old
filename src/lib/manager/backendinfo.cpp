@@ -22,9 +22,9 @@
 #include "backendinfo.h"
 #include "desktopfileparser_p.h"
 
-#include <QtCore/QDebug>
 #include <QtCore/QLocale>
 #include <QtCore/QSharedData>
+#include <QtCore/QVariant>
 
 #ifdef MEEGO_EDITION_HARMATTAN
 #include <MLocale>
