@@ -45,7 +45,7 @@ OTHER_FILES +=  main.qml \
 
 DATA_FILES +=   publictransportation-big.png
 
-TRANSLATIONS_FILES += i18n/*qm
+TRANSLATIONS_FILES += i18n/*.qm
 
 # deployment
 target.path = $${APPLICATION_FOLDER}

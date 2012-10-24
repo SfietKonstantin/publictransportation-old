@@ -177,7 +177,7 @@ for line in f:
     name = splittedLine[1]
     isoCode = splittedLine[0]
     countriesSource += "    CountriesModelItem *item" + isoCode + " = new CountriesModelItem;\n"
-    countriesSource += "    item" + isoCode + "->name = QObject::tr(\"" + name + "\");\n"
+    countriesSource += "    item" + isoCode + "->name = QObject::trUtf8(\"" + name + "\");\n"
     countriesSource += "    item" + isoCode + "->isoCode = \"" + isoCode + "\";\n"
     countriesSource += "    countries.append(item" + isoCode + ");\n"
 
@@ -242,6 +242,14 @@ public:
     CountriesModelPrivate();
     /**
      * @internal
+     * @short Unaccent strings
+     *
+     * @param string string to unaccent.
+     * @return unaccented string.
+     */
+    static QString unaccent(const QString &string);
+    /**
+     * @internal
      * @short Filter
      */
     QString filter;
@@ -279,6 +287,20 @@ sourceData2 = """
 
     data = countries;
     data.prepend(all);
+}
+
+QString CountriesModelPrivate::unaccent(const QString &string)
+{
+    QString canonicalForm = string.toLower().normalized(QString::NormalizationForm_D);
+    QString returnedString;
+    foreach (QChar c, canonicalForm) {
+        if (c.category() != QChar::Mark_NonSpacing &&
+            c.category() != QChar::Mark_SpacingCombining) {
+              returnedString.append(c);
+         }
+    }
+
+    return returnedString;
 }
 
 ////// End of private class //////
@@ -370,7 +392,7 @@ void CountriesModel::setFilter(const QString &filter)
             d->data.prepend(d->all);
         } else {
             foreach (CountriesModelItem *item, d->countries) {
-                if (item->name.toLower().startsWith(filter.toLower())) {
+                if (d->unaccent(item->name).startsWith(d->unaccent(filter))) {
                     d->data.append(item);
                 }
             }

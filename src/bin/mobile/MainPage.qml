@@ -38,12 +38,15 @@ AbstractNavigationPage {
             window.pageStack.push(searchStationPage)
         }
     }
+    translationContext: "MainPage"
     model: ListModel {
         ListElement {
             identifier: "showSearchStation"
             text: QT_TR_NOOP("Search station")
         }
     }
+
+    SelectionDialog {}
 
     Menu {
         id: mainMenu

@@ -44,6 +44,7 @@ class RatpPrivate
 {
 public:
     RatpPrivate(Ratp *q);
+    static QString unaccent(const QString &string);
     static QString unstripHtmlAccents(const QString &string);
     void slotWaitingTimeFinished();
     QStringList stations;
@@ -72,6 +73,20 @@ RatpPrivate::RatpPrivate(Ratp *q):
 
     file.close();
 
+}
+
+QString RatpPrivate::unaccent(const QString &string)
+{
+    QString canonicalForm = string.toLower().normalized(QString::NormalizationForm_D);
+    QString returnedString;
+    foreach (QChar c, canonicalForm) {
+        if (c.category() != QChar::Mark_NonSpacing &&
+            c.category() != QChar::Mark_SpacingCombining) {
+              returnedString.append(c);
+         }
+    }
+
+    return returnedString;
 }
 
 QString RatpPrivate::unstripHtmlAccents(const QString &string)
@@ -208,13 +223,13 @@ void Ratp::retrieveSuggestedStations(const QString &request,
 
 
     foreach (QString stationName, d->stations) {
-        if (stationName.toLower().startsWith(partialStation.toLower())) {
+        if (d->unaccent(stationName).startsWith(d->unaccent(partialStation))) {
             Station station (disambiguation, stationName, properties);
             suggestedStations.append(station);
         }
     }
     foreach (QString stationName, d->stations) {
-        if (stationName.toLower().contains(partialStation.toLower())) {
+        if (d->unaccent(stationName).contains(d->unaccent(partialStation))) {
             bool added = false;
             foreach (Station station, suggestedStations) {
                 if (station.name() == stationName) {

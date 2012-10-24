@@ -53,6 +53,7 @@ public:
         RetrieveWaitingTime
     };
     SibraPrivate(Sibra *q);
+    static QString unaccent(const QString &string);
     void slotSuggestedStationsFinished();
     void slotJourneysOrWaitingTimeFinished();
     void emitSuggestedStationsRetrieved(const QString &request, const QString &partialStation);
@@ -80,6 +81,20 @@ SibraPrivate::SibraPrivate(Sibra *q):
     suggestedStationsReply = 0;
     journeysOrWaitingTimeReply = 0;
     journeysOrWaitingTimeOperation = Nothing;
+}
+
+QString SibraPrivate::unaccent(const QString &string)
+{
+    QString canonicalForm = string.toLower().normalized(QString::NormalizationForm_D);
+    QString returnedString;
+    foreach (QChar c, canonicalForm) {
+        if (c.category() != QChar::Mark_NonSpacing &&
+            c.category() != QChar::Mark_SpacingCombining) {
+              returnedString.append(c);
+         }
+    }
+
+    return returnedString;
 }
 
 void SibraPrivate::slotSuggestedStationsFinished()
@@ -146,12 +161,12 @@ void SibraPrivate::emitSuggestedStationsRetrieved(const QString &request,
     Q_Q(Sibra);
     QList<Station> suggestedStations;
     foreach (Station station, stations) {
-        if (station.name().toLower().startsWith(partialStation.toLower())) {
+        if (unaccent(station.name()).startsWith(unaccent(partialStation))) {
             suggestedStations.append(station);
         }
     }
     foreach (Station station, stations) {
-        if (station.name().toLower().contains(partialStation.toLower())
+        if (unaccent(station.name()).contains(unaccent(partialStation))
             && !suggestedStations.contains(station)) {
             suggestedStations.append(station);
         }

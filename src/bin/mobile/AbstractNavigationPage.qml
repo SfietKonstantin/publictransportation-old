@@ -20,6 +20,7 @@ import com.nokia.meego 1.0
 AbstractPage {
     id: container
     signal show(string page)
+    property string translationContext: ""
     property variant model
 
     content: Item {
@@ -30,7 +31,7 @@ AbstractPage {
             model: container.model
             clip: true
             delegate: ClickableEntry {
-                text: qsTranslate("", model.text)
+                text: qsTranslate(container.translationContext, model.text)
                 onClicked: container.show(model.identifier)
             }
         }
