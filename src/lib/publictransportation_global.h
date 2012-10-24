@@ -138,7 +138,7 @@
  * @section dBusTypes DBus types
  *
  * Several structures are used in publictransportation, and send through
- * DBus. This page describes the content of those structures.
+ * DBus. This section describes the content of those structures.
  *
  * @subsection transportationObject Transportation object
  *
