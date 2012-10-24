@@ -58,27 +58,32 @@ Item
                 "-background-pressed-center"
     }
 
-    Image {
-        id: icon
+    Item {
+        id: iconContainer
         anchors.left: parent.left;
         anchors.leftMargin: container.icon != "" ? Ui.MARGIN_DEFAULT : 0
         anchors.verticalCenter: parent.verticalCenter
         width: container.icon != "" ? Ui.ICON_SIZE_LARGE : 0
         height: Ui.ICON_SIZE_LARGE
-        visible: container.icon != ""
-        smooth: true
-        source: container.icon != "" ? container.icon : ""
-        asynchronous: true
-        opacity: 0
-        states: State {
-            name: "visible"; when: status == Image.Ready
-            PropertyChanges {
-                target: icon
-                opacity: 1
+
+        Image {
+            id: icon
+            anchors.centerIn: parent
+            visible: container.icon != ""
+            smooth: true
+            source: container.icon != "" ? container.icon : ""
+            asynchronous: true
+            opacity: 0
+            states: State {
+                name: "visible"; when: icon.status == Image.Ready
+                PropertyChanges {
+                    target: icon
+                    opacity: 1
+                }
             }
-        }
-        Behavior on opacity {
-            NumberAnimation {duration: Ui.ANIMATION_DURATION_FAST}
+            Behavior on opacity {
+                NumberAnimation {duration: Ui.ANIMATION_DURATION_FAST}
+            }
         }
     }
 
@@ -86,7 +91,7 @@ Item
         id: preTextContainer
         anchors.top: parent.top;
         anchors.bottom: parent.bottom
-        anchors.left: icon.right
+        anchors.left: iconContainer.right
         anchors.leftMargin: preText.text == "" ? 0 : Ui.MARGIN_DEFAULT
         width: preText.text == "" ? 0 : Math.max(80, preText.width)
 

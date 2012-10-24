@@ -37,6 +37,7 @@ class Station;
 namespace Gui
 {
 
+class FavouriteManager;
 class JourneysFromStationModelPrivate;
 /**
  * @brief A model for journeys going from a station
@@ -57,6 +58,7 @@ class JourneysFromStationModel : public QAbstractListModel
      * @short Loading
      */
     Q_PROPERTY(bool loading READ isLoading NOTIFY loadingChanged)
+    Q_PROPERTY(bool favourite READ isFavourite WRITE setFavourite NOTIFY favouriteChanged)
 public:
     /**
      * @short Model roles
@@ -97,6 +99,7 @@ public:
      * @param backendManager backend manager to set.
      */
     void setBackendManager(AbstractBackendManager *backendManager);
+    void setFavouriteManager(FavouriteManager *favouriteManager);
     /**
      * @short Reimplementation of rowCount
      *
@@ -109,6 +112,7 @@ public:
      * @return if this model is loading.
      */
     bool isLoading() const;
+    bool isFavourite() const;
     /**
      * @short Count
      * @return count.
@@ -123,6 +127,7 @@ public:
      */
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 public Q_SLOTS:
+    void setFavourite(bool favourite);
     /**
      * @brief A request for journeys from station has been sent
      * @param backend backend answering the request.
@@ -146,13 +151,14 @@ public Q_SLOTS:
     void clear();
 Q_SIGNALS:
     /**
-     * @brief Loading changed
-     */
-    void loadingChanged();
-    /**
      * @short Count changed
      */
     void countChanged();
+    /**
+     * @brief Loading changed
+     */
+    void loadingChanged();
+    void favouriteChanged();
     /**
      * @brief Waiting time requested
      * @param backend backend answering the request.

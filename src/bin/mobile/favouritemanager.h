@@ -14,33 +14,42 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_GUI_XMLCONVERSIONHELPER_H
-#define PUBLICTRANSPORTATION_GUI_XMLCONVERSIONHELPER_H
+#ifndef PUBLICTRANSPORTATION_GUI_FAVOURITEMANAGER_H
+#define PUBLICTRANSPORTATION_GUI_FAVOURITEMANAGER_H
 
-#include <QtCore/QVariantMap>
+#include <QtCore/QObject>
+#include <QtCore/QPair>
 
-class QDomDocument;
-class QDomElement;
 namespace PublicTransportation
 {
 
 class Station;
-
 namespace Gui
 {
 
-class XmlConversionHelper
+class FavouriteManagerPrivate;
+class FavouriteManager : public QObject
 {
+    Q_OBJECT
 public:
-    static QDomElement toXml(const QVariantMap &variantMap, const QString &tagName,
-                             QDomDocument *document);
-    static QVariantMap fromXmlToVariantMap(const QDomElement &element);
-    static QDomElement toXml(const Station &station, QDomDocument *document);
-    static Station fromXmlToStation(const QDomElement &element);
+    explicit FavouriteManager(const QString &fileName, QObject *parent = 0);
+    virtual ~FavouriteManager();
+    bool isFavourite(const QString &backend, const Station &station) const;
+    QList<QPair<QString, Station> > favourites() const;
+public Q_SLOTS:
+    void addStation(const QString &backend, const Station &station);
+    void removeStation(const QString &backend, const Station &station);
+Q_SIGNALS:
+    void favouritesChanged();
+protected:
+    virtual bool event(QEvent *event);
+    QScopedPointer<FavouriteManagerPrivate> d_ptr;
+private:
+    Q_DECLARE_PRIVATE(FavouriteManager)
 };
 
 }
 
 }
 
-#endif // PUBLICTRANSPORTATION_GUI_XMLCONVERSIONHELPER_H
+#endif // PUBLICTRANSPORTATION_GUI_FAVOURITEMANAGER_H

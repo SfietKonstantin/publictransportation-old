@@ -33,7 +33,10 @@ AbstractPage {
         }
 
         ToolIcon {
-            iconId: "toolbar-favorite-unmark"
+            iconId: JourneysFromStationModelInstance.favourite ? "toolbar-favorite-mark"
+                                                               : "toolbar-favorite-unmark"
+            onClicked: JourneysFromStationModelInstance.favourite =
+                       !JourneysFromStationModelInstance.favourite
         }
 
         ToolIcon {

@@ -34,7 +34,6 @@ namespace Gui
 {
 
 class BackendModelPrivate;
-
 /**
  * @brief A model for available backends
  *

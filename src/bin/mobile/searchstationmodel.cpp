@@ -25,6 +25,7 @@
 #include "common/station.h"
 #include "manager/abstractbackendmanager.h"
 #include "debug.h"
+#include "favouritemanager.h"
 
 namespace PublicTransportation
 {
@@ -36,7 +37,7 @@ namespace Gui
  * @internal
  * @brief Private class used in PublicTransportation::Gui::SearchStationModel
  */
-struct SearchStationModelData
+struct SearchStationModelItem
 {
     /**
      * @internal
@@ -53,6 +54,7 @@ struct SearchStationModelData
      * @brief If the backend support journeys from station
      */
     bool supportJourneysFromStation;
+    bool favourite;
 };
 
 /**
@@ -68,6 +70,7 @@ public:
      * @param q Q-pointer.
      */
     SearchStationModelPrivate(SearchStationModel *q);
+    void displayFavourites();
     /**
      * @internal
      * @brief Slot backend added
@@ -102,11 +105,12 @@ public:
      * @brief Backend manager
      */
     AbstractBackendManager *backendManager;
+    FavouriteManager *favouriteManager;
     /**
      * @internal
      * @brief Data
      */
-    QList<SearchStationModelData *> data;
+    QList<SearchStationModelItem *> data;
     /**
      * @internal
      * @brief Requests
@@ -125,6 +129,60 @@ SearchStationModelPrivate::SearchStationModelPrivate(SearchStationModel *q):
     q_ptr(q)
 {
     backendManager = 0;
+    favouriteManager = 0;
+}
+
+void SearchStationModelPrivate::displayFavourites()
+{
+    Q_Q(SearchStationModel);
+
+    if (!favouriteManager) {
+        return;
+    }
+
+    if (!backendManager) {
+        return;
+    }
+
+    bool dataOk = true;
+    foreach (SearchStationModelItem *item, data) {
+        if (!item->favourite) {
+            dataOk = false;
+            break;
+        }
+    }
+
+    if (!dataOk) {
+        return;
+    }
+
+    if (!data.isEmpty()) {
+        q->clear();
+    }
+
+    QListIterator<QPair<QString, Station> > iterator
+            = QListIterator<QPair<QString, Station> >(favouriteManager->favourites());
+    while (iterator.hasNext()) {
+        QPair<QString, Station> entry = iterator.next();
+        QString identifier = entry.first;
+        Station station = entry.second;
+
+        if (backendManager->contains(identifier)) {
+            AbstractBackendWrapper *backend = backendManager->backend(identifier);
+
+            SearchStationModelItem *item = new SearchStationModelItem;
+            item->station = station;
+            item->backendIdentifier = identifier;
+            item->supportJourneysFromStation
+                    = backend->capabilities().contains(JOURNEYS_FROM_STATION);
+            item->favourite = true;
+            data.append(item);
+        }
+    }
+
+    q->beginInsertRows(QModelIndex(), 0, data.count() - 1);
+    emit q->countChanged();
+    q->endInsertRows();
 }
 
 void SearchStationModelPrivate::slotBackendAdded(const QString &identifier,
@@ -152,6 +210,7 @@ void SearchStationModelPrivate::slotStatusChanged()
                                                            QList<PublicTransportation::Station>)));
         q->connect(backend, SIGNAL(errorRegistered(QString,QString,QString)),
                    q, SLOT(slotErrorRegistered(QString,QString,QString)));
+        displayFavourites();
     }
 
     if (backend->status() == AbstractBackendWrapper::Stopping) {
@@ -163,6 +222,7 @@ void SearchStationModelPrivate::slotStatusChanged()
                                                            QList<PublicTransportation::Station>)));
         q->disconnect(backend, SIGNAL(errorRegistered(QString,QString)),
                       q, SLOT(slotErrorRegistered(QString,QString)));
+        displayFavourites();
     }
 }
 
@@ -198,21 +258,22 @@ void SearchStationModelPrivate::slotSuggestedStationsRegistered(const QString & 
         emit q->loadingChanged();
     }
 
-    QList<SearchStationModelData *> addedData;
+    QList<SearchStationModelItem *> addedData;
     foreach (Station station, stations) {
         bool found = false;
-        foreach(SearchStationModelData *dataItem, data) {
+        foreach(SearchStationModelItem *dataItem, data) {
             if (dataItem->station == station) {
                 found = true;
             }
         }
 
         if (!found) {
-            SearchStationModelData *dataItem = new SearchStationModelData;
+            SearchStationModelItem *dataItem = new SearchStationModelItem;
             dataItem->station = station;
             dataItem->backendIdentifier = backend->identifier();
             dataItem->supportJourneysFromStation
                     = backend->capabilities().contains(JOURNEYS_FROM_STATION);
+            dataItem->favourite = false;
             addedData.append(dataItem);
         }
     }
@@ -235,6 +296,7 @@ SearchStationModel::SearchStationModel(QObject *parent):
     roles.insert(NameRole, "name");
     roles.insert(SupportJourneysFromStationRole, "supportJourneysFromStation");
     roles.insert(ProviderNameRole, "providerName");
+    roles.insert(FavouriteRole, "favourite");
     setRoleNames(roles);
 }
 
@@ -258,6 +320,19 @@ void SearchStationModel::setBackendManager(AbstractBackendManager *backendManage
 
         d->backendManager = backendManager;
     }
+
+    d->displayFavourites();
+}
+
+void SearchStationModel::setFavouriteManager(FavouriteManager *favouriteManager)
+{
+    Q_D(SearchStationModel);
+    if (d->favouriteManager != favouriteManager) {
+        d->favouriteManager = favouriteManager;
+        connect(d->favouriteManager, SIGNAL(favouritesChanged()), this, SLOT(displayFavourites()));
+    }
+
+    d->displayFavourites();
 }
 
 int SearchStationModel::rowCount(const QModelIndex &parent) const
@@ -284,7 +359,7 @@ QVariant SearchStationModel::data(const QModelIndex &index, int role) const
     if (index.row() < 0 or index.row() >= rowCount()) {
         return QVariant();
     }
-    SearchStationModelData *data = d->data.at(index.row());
+    SearchStationModelItem *data = d->data.at(index.row());
 
     switch(role) {
     case NameRole:
@@ -295,6 +370,9 @@ QVariant SearchStationModel::data(const QModelIndex &index, int role) const
         break;
     case ProviderNameRole:
         return data->station.properties().value("backendName", QString());
+        break;
+    case FavouriteRole:
+        return data->favourite;
         break;
     default:
         return QVariant();
@@ -310,6 +388,7 @@ void SearchStationModel::search(const QString &partialStation)
 
     QString partialStationTrimmed = partialStation.trimmed();
     if (partialStationTrimmed.isEmpty()) {
+        d->displayFavourites();
         return;
     }
 
@@ -321,6 +400,13 @@ void SearchStationModel::search(const QString &partialStation)
     }
 
     emit loadingChanged();
+}
+
+void SearchStationModel::reset()
+{
+    Q_D(SearchStationModel);
+    clear();
+    d->displayFavourites();
 }
 
 void SearchStationModel::clear()
@@ -345,7 +431,7 @@ void SearchStationModel::requestJourneysFromStation(int index)
         return;
     }
 
-    SearchStationModelData *data = d->data.at(index);
+    SearchStationModelItem *data = d->data.at(index);
 
     if (!data->supportJourneysFromStation) {
         return;

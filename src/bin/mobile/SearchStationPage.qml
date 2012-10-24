@@ -35,7 +35,7 @@ AbstractPage {
     }
     onVisibleChanged: {
         if (!visible && shouldClean) {
-            SearchStationModelInstance.clear()
+            SearchStationModelInstance.reset()
             searchField.text = ""
             shouldClean = false
         }
@@ -64,6 +64,8 @@ AbstractPage {
                 text: model.name
                 subText: model.providerName
                 enabled: model.supportJourneysFromStation
+                icon: !model.favourite ? "" : "image://theme/icon-m-common-favorite-mark"
+                                              + (theme.inverted ? "-inverse" : "")
                 onClicked: {
                     SearchStationModelInstance.requestJourneysFromStation(model.index)
                     journeysFromStationPage.station = model.name

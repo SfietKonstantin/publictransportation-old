@@ -40,7 +40,7 @@ namespace Gui
  * @internal
  * @brief Private class used in PublicTransportation::Gui::WaitingTimeModel
  */
-struct WaitingTimeModelData
+struct WaitingTimeModelItem
 {
     /**
      * @internal
@@ -108,7 +108,7 @@ public:
      * @internal
      * @brief Data
      */
-    QList<WaitingTimeModelData *> data;
+    QList<WaitingTimeModelItem *> data;
 private:
     /**
      * @internal
@@ -135,7 +135,7 @@ void WaitingTimeModelPrivate::slotWaitingTimeRegistered(const QString &request,
     q->clear();
 
     foreach (WaitingTime waitingTime, waitingTimeList) {
-        WaitingTimeModelData * dataItem = new WaitingTimeModelData;
+        WaitingTimeModelItem * dataItem = new WaitingTimeModelItem;
         dataItem->waitingTime = waitingTime;
         data.append(dataItem);
     }
@@ -198,7 +198,7 @@ QVariant WaitingTimeModel::data(const QModelIndex &index, int role) const
     if (index.row() < 0 or index.row() >= rowCount()) {
         return QVariant();
     }
-    WaitingTimeModelData *data = d->data.at(index.row());
+    WaitingTimeModelItem *data = d->data.at(index.row());
 
     switch(role) {
     case WaitingTimeRole:

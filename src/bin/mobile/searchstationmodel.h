@@ -34,6 +34,7 @@ class AbstractBackendManager;
 namespace Gui
 {
 
+class FavouriteManager;
 class SearchStationModelPrivate;
 /**
  * @brief A model for stations being searched
@@ -70,7 +71,8 @@ public:
         /**
          * @short If the backend support getting journeys from station
          */
-        SupportJourneysFromStationRole
+        SupportJourneysFromStationRole,
+        FavouriteRole
     };
     /**
      * @short Default constructor
@@ -86,6 +88,7 @@ public:
      * @param backendManager backend manager to set.
      */
     void setBackendManager(AbstractBackendManager *backendManager);
+    void setFavouriteManager(FavouriteManager *favouriteManager);
     /**
      * @short Reimplementation of rowCount
      *
@@ -117,6 +120,7 @@ public Q_SLOTS:
      * @param partialStation partial station name.
      */
     void search(const QString &partialStation);
+    void reset();
     /**
      * @brief Clear
      */
@@ -158,6 +162,7 @@ private:
     Q_PRIVATE_SLOT(d_func(),
                    void slotSuggestedStationsRegistered(QString,
                                                         QList<PublicTransportation::Station>))
+    Q_PRIVATE_SLOT(d_func(), void displayFavourites())
     /// \endcond
 
 };

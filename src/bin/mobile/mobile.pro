@@ -17,6 +17,7 @@ HEADERS +=      xmlconversionhelper.h \
                 journeysfromstationmodel.h \
                 waitingtimemodel.h \
                 support/countriesmodel.h \
+    favouritemanager.h
 
 
 SOURCES +=      main.cpp \
@@ -26,6 +27,7 @@ SOURCES +=      main.cpp \
                 journeysfromstationmodel.cpp \
                 waitingtimemodel.cpp \
                 support/countriesmodel.cpp \
+    favouritemanager.cpp
 
 OTHER_FILES +=  main.qml \
                 UiConstants.js \

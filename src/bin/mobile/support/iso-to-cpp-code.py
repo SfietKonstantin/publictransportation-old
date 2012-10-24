@@ -275,6 +275,20 @@ public:
     QList<CountriesModelItem *> countries;
 };
 
+/**
+ * @internal
+ * @short Function to compare CountriesModelItem
+ *
+ * @param item1 first item to compare.
+ * @param item2 second item to compare.
+ * @return if the first item is lesser than the second item.
+ */
+bool countriesModelItemLesser(CountriesModelItem *item1, CountriesModelItem *item2)
+{
+    return (CountriesModelPrivate::unaccent(item1->name)
+            < CountriesModelPrivate::unaccent(item2->name));
+}
+
 CountriesModelPrivate::CountriesModelPrivate()
 {
     all = new CountriesModelItem;
@@ -286,6 +300,7 @@ CountriesModelPrivate::CountriesModelPrivate()
 sourceData2 = """
 
     data = countries;
+    qSort(data.begin(), data.end(), countriesModelItemLesser);
     data.prepend(all);
 }
 

@@ -30,6 +30,7 @@
 #include "debug.h"
 #include "manager/dbus/dbusbackendmanager.h"
 #include "support/countriesmodel.h"
+#include "favouritemanager.h"
 #include "backendmodel.h"
 #include "searchstationmodel.h"
 #include "journeysfromstationmodel.h"
@@ -73,6 +74,7 @@ int main(int argc, char **argv)
     DBusBackendManager::registerDBusService();
 
     // Setup models and manager
+    Gui::FavouriteManager searchFavouriteManager ("search.xml");
     Gui::CountriesModel countriesModel;
     Gui::BackendModel backendModel;
     Gui::SearchStationModel searchStationModel;
@@ -82,7 +84,9 @@ int main(int argc, char **argv)
     DBusBackendManager dbusBackendManager;
     backendModel.setBackendManager(&dbusBackendManager);
     searchStationModel.setBackendManager(&dbusBackendManager);
+    searchStationModel.setFavouriteManager(&searchFavouriteManager);
     journeysFromStationModel.setBackendManager(&dbusBackendManager);
+    journeysFromStationModel.setFavouriteManager(&searchFavouriteManager);
     waitingTimeModel.setBackendManager(&dbusBackendManager);
 
     QObject::connect(&searchStationModel,

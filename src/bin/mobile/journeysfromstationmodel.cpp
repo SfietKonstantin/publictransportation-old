@@ -31,6 +31,8 @@
 #include "manager/abstractbackendmanager.h"
 #include "debug.h"
 
+#include "favouritemanager.h"
+
 namespace PublicTransportation
 {
 
@@ -83,6 +85,7 @@ public:
      * @param q Q-pointer.
      */
     JourneysFromStationModelPrivate(JourneysFromStationModel *q);
+    void updateFavourite();
     /**
      * @internal
      * @brief Slot journeys registered
@@ -96,6 +99,8 @@ public:
      * @brief Backend list manager
      */
     AbstractBackendManager *backendManager;
+    bool favourite;
+    FavouriteManager *favouriteManager;
     /**
      * @internal
      * @brief Backend identifier
@@ -129,6 +134,21 @@ JourneysFromStationModelPrivate::JourneysFromStationModelPrivate(JourneysFromSta
     q_ptr(q)
 {
     backendManager = 0;
+    favourite = false;
+    favouriteManager = 0;
+}
+
+void JourneysFromStationModelPrivate::updateFavourite()
+{
+    Q_Q(JourneysFromStationModel);
+    if (!favouriteManager) {
+        return;
+    }
+    bool newFavourite = favouriteManager->isFavourite(backendIdentifier, station);
+    if (favourite != newFavourite) {
+        favourite = newFavourite;
+        emit q->favouriteChanged();
+    }
 }
 
 void JourneysFromStationModelPrivate::slotJourneysRegistered(const QString &request,
@@ -199,6 +219,15 @@ void JourneysFromStationModel::setBackendManager(AbstractBackendManager *backend
     }
 }
 
+void JourneysFromStationModel::setFavouriteManager(FavouriteManager *favouriteManager)
+{
+    Q_D(JourneysFromStationModel);
+    if (d->favouriteManager != favouriteManager) {
+        d->favouriteManager = favouriteManager;
+    }
+    d->updateFavourite();
+}
+
 int JourneysFromStationModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
@@ -210,6 +239,12 @@ bool JourneysFromStationModel::isLoading() const
 {
     Q_D(const JourneysFromStationModel);
     return !d->currentRequest.isNull();
+}
+
+bool JourneysFromStationModel::isFavourite() const
+{
+    Q_D(const JourneysFromStationModel);
+    return d->favourite;
 }
 
 int JourneysFromStationModel::count() const
@@ -247,6 +282,21 @@ QVariant JourneysFromStationModel::data(const QModelIndex &index, int role) cons
     }
 }
 
+void JourneysFromStationModel::setFavourite(bool favourite)
+{
+    Q_D(JourneysFromStationModel);
+    if (!d->favouriteManager) {
+        return;
+    }
+
+    if (favourite) {
+        d->favouriteManager->addStation(d->backendIdentifier, d->station);
+    } else {
+        d->favouriteManager->removeStation(d->backendIdentifier, d->station);
+    }
+    d->updateFavourite();
+}
+
 void JourneysFromStationModel::load(AbstractBackendWrapper *backend, const QString &request,
                                     const Station &station)
 {
@@ -259,6 +309,8 @@ void JourneysFromStationModel::load(AbstractBackendWrapper *backend, const QStri
     d->station = station;
     d->currentRequest = request;
     emit loadingChanged();
+
+    d->updateFavourite();
 
     clear();
 }
