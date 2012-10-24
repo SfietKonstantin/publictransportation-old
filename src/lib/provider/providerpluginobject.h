@@ -32,6 +32,7 @@ namespace PublicTransportation
 {
 
 class InfoJourneys;
+class InfoJourneyWaitingTime;
 class WaitingTime;
 /**
  * @brief Base for a provider plugin
@@ -60,13 +61,15 @@ class WaitingTime;
  * - retrieveCopyright()
  * - retrieveSuggestedStations()
  * - retrieveJourneysFromStation()
+ * - retrieveJourneysAndWaitingTimesFromStation()
  * - retrieveWaitingTime()
  *
  * These methods are already implemented by default, but do nothing.
  * In order to perform a task, a backend should implement some
  * of these methods.
  *
- * Please pay attention that retrieveJourneysFromStation() and retrieveWaitingTime() can be
+ * Please pay attention that retrieveJourneysFromStation(),
+ * retrieveJourneysAndWaitingTimesFromStation() and retrieveWaitingTime() can be
  * refreshed by the user, therefore, this signal can be emitted several times. Be sure not
  * to abusively cache data, and provide outdated information.
  *
@@ -76,6 +79,7 @@ class WaitingTime;
  * - copyrightRetrieved()
  * - suggestedStationsRetrieved()
  * - journeysFromStationRetrieved()
+ * - journeysAndWaitingTimesFromStationRetrieved()
  * - waitingTimeRetrieved()
  *
  * A specific signal, errorRetrieved() can also be sent in order
@@ -118,6 +122,15 @@ public Q_SLOTS:
                                              const PublicTransportation::Station &station,
                                              int limit);
     /**
+     * @brief Retrieve journeys and waiting time from station
+     * @param request request identifier.
+     * @param station station to query.
+     * @param limit limit of the number of journeys.
+     */
+    virtual void retrieveJourneysAndWaitingTimesFromStation(const QString &request,
+                                                       const PublicTransportation::Station &station,
+                                                            int limit);
+    /**
      * @brief Retrieve waiting time
      * @param request request identifier.
      * @param company company.
@@ -147,17 +160,24 @@ Q_SIGNALS:
     /**
      * @brief Suggested stations retrieved
      * @param request request identifier.
-     * @param suggestedStations suggested stations, as a list of stations.
+     * @param suggestedStationList suggested stations, as a list of stations.
      */
     void suggestedStationsRetrieved(const QString &request,
-                                    const QList<PublicTransportation::Station> &suggestedStations);
+                                  const QList<PublicTransportation::Station> &suggestedStationList);
     /**
      * @brief Journeys from station retrieved
      * @param request request identifier.
-     * @param infoJourneys a list of informations about journeys.
+     * @param infoJourneysList a list of informations about journeys.
      */
     void journeysFromStationRetrieved(const QString &request,
-                                      const QList<PublicTransportation::InfoJourneys> &infoJourneys);
+                                 const QList<PublicTransportation::InfoJourneys> &infoJourneysList);
+    /**
+     * @brief Journeys and waiting times from station retrieved
+     * @param request request identifier.
+     * @param infoJourneyWaitingTimeList a list of informations about journeys and waiting times.
+     */
+    void journeysAndWaitingTimesFromStationRetrieved(const QString &request,
+             const QList<PublicTransportation::InfoJourneyWaitingTime> &infoJourneyWaitingTimeList);
     /**
      * @brief Waiting time retrieved
      * @param request request identifier.

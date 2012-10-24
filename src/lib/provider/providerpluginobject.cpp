@@ -51,6 +51,16 @@ void ProviderPluginObject::retrieveJourneysFromStation(const QString &request,
                         tr("JOURNEYS_FROM_STATION capability is not implemented"));
 }
 
+void ProviderPluginObject::retrieveJourneysAndWaitingTimesFromStation(const QString &request,
+                                                                      const Station &station,
+                                                                      int limit)
+{
+    Q_UNUSED(station)
+    Q_UNUSED(limit)
+    emit errorRetrieved(request, NOT_IMPLEMENTED,
+                        tr("JOURNEYS_WAITING_TIMES_FROM_STATION capability is not implemented"));
+}
+
 void ProviderPluginObject::retrieveWaitingTime(const QString &request, const Company &company,
                                                const Line &line, const Journey &journey,
                                                const Station &station)

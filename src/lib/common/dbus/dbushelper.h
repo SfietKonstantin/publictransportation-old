@@ -31,61 +31,6 @@
 
 class QDBusArgument;
 
-/**
- * @page dBusTypes DBus types used in publictransportation
- *
- * Several structures are used in publictransportation, and send through
- * DBus. This page describes the content of those structures.
- *
- * @section transportationObject Transportation object
- *
- * A transportation object contains the properties describing an entity
- * related to public transportation. The following entities are
- * transportation objects.
- * - A transportation company
- * - A line
- * - A journey
- * - A station
- *
- * All these entities are stored the same way, using
- * - A disambiguation parameter, that is a dictionnary of variant
- * - A name, that is a string
- * - Some properties, that is another dictionnary of variant.
- *
- * The signature of a transportation object is
- * \code
- * (a{sv}sa{sv})
- * \endcode
- *
- * @section waitingTime Waiting time
- *
- * Waiting time contains the time to wait before a transportation mode
- * arrives. Those entities are stored using
- * - The time before arrival, in minutes
- * - Some properties, that are a dictionnary of variant.
- *
- * The signature of a waiting time entity is
- * \code
- * (ia{sv})
- * \endcode
- *
- *
- * @section infoJourneys Informations about journeys
- *
- * Information about journeys are stored as a complex structure, that
- * takes in account the company that provide the journey, the line
- * on which the journey is performed, and additional information about
- * the departure station (if needed). It then stores
- * - A company
- * - A line
- * - A list of journey-station pair
- *
- * The signature for an information about journeys is
- * \code
- * ((a{sv}sa{sv})(a{sv}sa{sv})a((a{sv}sa{sv})(a{sv}sa{sv})))
- * \endcode
- */
-
 namespace PublicTransportation
 {
 
@@ -239,16 +184,16 @@ const QDBusArgument & operator>>(const QDBusArgument &argument, InfoJourneys &in
 /**
  * @brief Marshall an informations about journeys
  * @param[out] argument DBus argument.
- * @param[in] infoJourneys an informations about journeys.
- * @return DBus argument containing the informations about journeys.
+ * @param[in] infoJourneyWaitingTime an informations about journey and waiting time.
+ * @return DBus argument containing the informations about journey and waiting time.
  */
 QDBusArgument & operator<<(QDBusArgument &argument,
                            const InfoJourneyWaitingTime &infoJourneyWaitingTime);
 /**
  * @brief Demarshall an informations about journeys
  * @param[out] argument DBus argument.
- * @param[in] infoJourneys an informations about journeys.
- * @return DBus argument without the informations about journeys.
+ * @param[in] infoJourneyWaitingTime an informations about journey and waiting time.
+ * @return DBus argument without the informations about journey and waiting time.
  */
 const QDBusArgument & operator>>(const QDBusArgument &argument,
                                  InfoJourneyWaitingTime &infoJourneyWaitingTime);

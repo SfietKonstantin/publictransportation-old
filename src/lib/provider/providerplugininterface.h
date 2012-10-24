@@ -81,6 +81,15 @@ public:
                                              const PublicTransportation::Station &station,
                                              int limit) = 0;
     /**
+     * @brief Retrieve journeys and waiting time from station
+     * @param request request identifier.
+     * @param station station to query.
+     * @param limit limit of the number of journeys.
+     */
+    virtual void retrieveJourneysAndWaitingTimesFromStation(const QString &request,
+                                                       const PublicTransportation::Station &station,
+                                                            int limit) = 0;
+    /**
      * @brief Retrieve waiting time
      * @param request request identifier.
      * @param company company.

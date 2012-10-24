@@ -134,6 +134,78 @@
  * -# The backend wrapper get the data and send \b fooRegistered to notify the
  *    GUI that information is available.
  *
+**
+ * @section dBusTypes DBus types
+ *
+ * Several structures are used in publictransportation, and send through
+ * DBus. This page describes the content of those structures.
+ *
+ * @subsection transportationObject Transportation object
+ *
+ * A transportation object contains the properties describing an entity
+ * related to public transportation. The following entities are
+ * transportation objects.
+ * - A transportation company
+ * - A line
+ * - A journey
+ * - A station
+ *
+ * All these entities are stored the same way, using
+ * - A disambiguation parameter, that is a dictionnary of variant
+ * - A name, that is a string
+ * - Some properties, that is another dictionnary of variant.
+ *
+ * The signature of a transportation object is
+ * \code
+ * (a{sv}sa{sv})
+ * \endcode
+ *
+ * @subsection waitingTime Waiting time
+ *
+ * Waiting time contains the time to wait before a transportation mode
+ * arrives. Those entities are stored using
+ * - The time before arrival, in minutes
+ * - Some properties, that are a dictionnary of variant.
+ *
+ * The signature of a waiting time entity is
+ * \code
+ * (ia{sv})
+ * \endcode
+ *
+ *
+ * @subsection infoJourneys Informations about journeys
+ *
+ * Information about journeys are stored as a complex structure, that
+ * takes in account the company that provide the journey, the line
+ * on which the journey is performed, and additional information about
+ * the departure station (if needed). It then stores
+ * - A company
+ * - A line
+ * - A list of journey-station pair
+ *
+ * The signature for an information about journeys is
+ * \code
+ * ((a{sv}sa{sv})(a{sv}sa{sv})a((a{sv}sa{sv})(a{sv}sa{sv})))
+ * \endcode
+ *
+ * @subsection infoJourneyWaitingTime Informations about a journey and waiting time
+ *
+ * Information about a journey and waiting time are stored as a complex
+ * structure, that takes in account the company that provide the journey,
+ * the line on which the journey is performed, additional information
+ * about the departure station (if needed) and the waiting time. It then stores
+ * - A company
+ * - A line
+ * - A journey
+ * - A station
+ * - A waiting time
+ *
+ * The signature for an information about journeys is
+ * \code
+ * ((a{sv}sa{sv})(a{sv}sa{sv})(a{sv}sa{sv})(a{sv}sa{sv})(ia{sv}))
+ * \endcode
+ *
+ *
  * \section dbusApi DBus API
  *
  * publictransportation uses \e org.SfietKonstantin.publictransportation as
@@ -202,7 +274,7 @@
  *
  * \b Parameters
  * - s \e request Request identifier.
- * - a\ref transportationObject "(a{sv}sa{sv})" \e suggestedStations Suggested stations,
+ * - a\ref transportationObject "(a{sv}sa{sv})" \e suggestedStationList Suggested stations,
  *   as a list of stations.
  *
  * \subsection journeysFromStationRequested journeysFromStationRequested [signal]
@@ -248,7 +320,43 @@
  * \b Parameters
  * - s \e request Request identifier.
  * - a\ref infoJourneys "((a{sv}sa{sv})(a{sv}sa{sv})a((a{sv}sa{sv})(a{sv}sa{sv})))"
- *   \e infoJourneys A list of informations about journeys.
+ *   \e infoJourneysList A list of informations about journeys.
+ *
+ * \subsection journeysAndWaitingTimesFromStationRequested journeysAndWaitingTimesFromStationRequested [signal]
+ *
+ * This signal is used to notify that the backend should provide a list of informations,
+ * combining a company, a line, a journey and a station, as well as a waiting time. This
+ * list of information have the same role as \ref journeysFromStationRequested, but might be
+ * more suited for some backends that lists results for planes or trains.
+ *
+ * A limit of the number of journeys that should be listed is provided, but it is not a
+ * hard limit. It can be used for some information sources that, otherwise, might download
+ * a lot of data.
+ *
+ * Please pay attention that the list of journeys can be refreshed by the user, therefore,
+ * this signal can be emitted several times. Be sure not to abusively cache data, and provide
+ * outdated information.
+ *
+ * \b Parameters
+ * - s \e request Request identifier.
+ * - \ref transportationObject "(a{sv}sa{sv})" \e station Station to query.
+ * - i \e limit Limit of the number of journeys.
+ *
+ * \subsection registerJourneysAndWaitingTimesFromStation registerJourneysAndWaitingTimesFromStation
+ *
+ * This method is used to register the list of companies, lines and journeys, in order to
+ * respond to \ref journeysAndWaitingTimesFromStationRequested. This reply should send a list of
+ * \ref infoJourneyWaitingTime "informations about journeys and waiting times". Each information
+ * about journeys and waiting times contains a journey for a given company and a given line as well
+ * as the waiting time. Adding a station to the journey help giving more accurate results, since
+ * the station might contain some station-specific properties that might help for other methods.
+ * All the components, that are the company, the line, the journey and the station are used by
+ * \ref waitingTimeRequested.
+ *
+ * \b Parameters
+ * - s \e request Request identifier.
+ * - a\ref infoJourneyWaitingTime "(a{sv}sa{sv})(a{sv}sa{sv})(a{sv}sa{sv})(a{sv}sa{sv})(ia{sv}))"
+ *   \e infoJourneyWaitingTimeList A list of informations about journeys and waiting times.
  *
  * \subsection waitingTimeRequested waitingTimeRequested
  *
@@ -276,7 +384,7 @@
  *
  * \b Parameters
  * - s \e request Request identifier.
- * - a\ref waitingTime "(ia{sv})" A list of waiting time.
+ * - a\ref waitingTime "(ia{sv})" \e waitingTimeList A list of waiting time.
  *
  * \section cppApi C++ API
  *

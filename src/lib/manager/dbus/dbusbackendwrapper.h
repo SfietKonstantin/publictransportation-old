@@ -57,6 +57,7 @@ public:
     virtual QString requestCopyright();
     virtual QString requestSuggestStations(const QString &partialStation);
     virtual QString requestJourneysFromStation(const Station &station, int limit);
+    virtual QString requestJourneysAndWaitingTimesFromStation(const Station &station, int limit);
     virtual QString requestWaitingTime(const Company &company, const Line &line,
                                        const Journey &journey, const Station &station);
 public Q_SLOTS:
@@ -113,6 +114,18 @@ Q_SIGNALS:
     void journeysFromStationRequested(const QString &request,
                                       const PublicTransportation::Station &station,
                                       int limit);
+    /**
+     * @brief Journeys and waiting times from station requested
+     *
+     * This is a DBus proxy signal.
+     *
+     * @param request request identifier.
+     * @param station station to query.
+     * @param limit limit of the number of journeys.
+     */
+    void journeysAndWaitingTimesFromStationRequested(const QString &request,
+                                                     const PublicTransportation::Station &station,
+                                                     int limit);
     /**
      * @brief Journeys from station requested
      *

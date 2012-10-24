@@ -37,6 +37,7 @@ class Journey;
 class Station;
 class WaitingTime;
 class InfoJourneys;
+class InfoJourneyWaitingTime;
 class AbstractBackendWrapperPrivate;
 
 /**
@@ -179,6 +180,10 @@ public:
          */
         JourneysFromStationType,
         /**
+         * @short Request journeys and waiting times from a station
+         */
+        JourneysAndWaitingTimesFromStationType,
+        /**
          * @short Request waiting time
          */
         WaitingTimeType
@@ -241,6 +246,14 @@ public:
      * @return request identifier.
      */
     virtual QString requestJourneysFromStation(const Station &station, int limit) = 0;
+    /**
+     * @brief Request journeys and waiting times from a given station
+     * @param station station to query.
+     * @param limit limit of the number of journeys.
+     * @return request identifier.
+     */
+    virtual QString requestJourneysAndWaitingTimesFromStation(const Station &station,
+                                                              int limit) = 0;
     /**
      * @brief Request waiting time
      * @param company company.
@@ -316,15 +329,15 @@ public Q_SLOTS:
      * stations that have the same name, but are provided by different backends.
      *
      * @param request request request identifier.
-     * @param suggestedStations suggested stations, as a list of stations.
+     * @param suggestedStationList suggested stations, as a list of stations.
      */
     void registerSuggestedStations(const QString &request,
-                                   const QList<PublicTransportation::Station> &suggestedStations);
+                                  const QList<PublicTransportation::Station> &suggestedStationList);
     /**
      * @brief Register journeys from station
      *
-     * This method is used to register the list of companies, lines and journeys This reply should
-     * send a list of PublicTransportation;;InfoJourneys. Each information about journeys contains
+     * This method is used to register the list of companies, lines and journeys. This reply should
+     * send a list of PublicTransportation::InfoJourneys. Each information about journeys contains
      * the journeys for a given company and a given line, but in a station, there might be several
      * journeys for the same line heading to different directions, so an information about journeys
      * contains a list of journey-station pairs. Adding a station to the journey help giving
@@ -333,10 +346,25 @@ public Q_SLOTS:
      * journey and the station are used by other signals.
      *
      * @param request request request identifier.
-     * @param infoJourneys a list of informations about journeys.
+     * @param infoJourneyList a list of informations about journeys.
      */
     void registerJourneysFromStation(const QString &request,
-                                     const QList<PublicTransportation::InfoJourneys> &infoJourneys);
+                                  const QList<PublicTransportation::InfoJourneys> &infoJourneyList);
+    /**
+     * @brief Register journeys and waiting times from station
+     *
+     * This method is used to register the list of companies, lines and journeys. This reply should
+     * send a list of PublicTransportation::InfoJourneyWaitingTime. Each information about journeys
+     * contains a company, line, journey and station. Contrary to registerJourneysFromStation(),
+     * this method register different journeys for the same line in different entries, that might
+     * be more suited for some providers (especially for planes and trains). All the components,
+     * that are the company, the line, the journey and the station are used by other signals.
+     *
+     * @param request request request identifier.
+     * @param infoJourneyWaitingTimeList a list of informations about journeys and waiting times.
+     */
+    void registerJourneysAndWaitingTimesFromStation(const QString &request,
+             const QList<PublicTransportation::InfoJourneyWaitingTime> &infoJourneyWaitingTimeList);
     /**
      * @brief Register waiting time
      *
@@ -395,7 +423,18 @@ Q_SIGNALS:
      * @param infoJourneys a list of informations about journeys.
      */
     void journeysFromStationRegistered(const QString &request,
-                                       const QList<PublicTransportation::InfoJourneys> &infoJourneys);
+                                     const QList<PublicTransportation::InfoJourneys> &infoJourneys);
+    /**
+     * @brief Journeys and waiting times from station registered
+     *
+     * This signal is used to relay registered journeys and waiting times
+     * from station.
+     *
+     * @param request request identifier.
+     * @param infoJourneyAndWaitingTimes a list of informations about journeys and waiting times.
+     */
+    void journeysAndWaitingTimesFromStationRegistered(const QString &request,
+             const QList<PublicTransportation::InfoJourneyWaitingTime> &infoJourneyAndWaitingTimes);
     /**
      * @brief Waiting time registered
      *

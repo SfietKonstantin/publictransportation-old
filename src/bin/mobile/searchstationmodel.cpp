@@ -22,6 +22,7 @@
 #include "searchstationmodel.h"
 
 #include "common/capabilitiesconstants.h"
+#include "common/station.h"
 #include "manager/abstractbackendmanager.h"
 #include "debug.h"
 

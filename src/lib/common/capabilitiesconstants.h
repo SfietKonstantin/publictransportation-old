@@ -36,11 +36,11 @@
  */
 #define JOURNEYS_FROM_STATION "journeys_from_station"
 /**
- * @short JOURNEYS_WAITING_TIME_FROM_STATION
+ * @short JOURNEYS_WAITING_TIMES_FROM_STATION
  *
  * The backend is able to get journeys with waiting time from a station.
  */
-#define JOURNEYS_WAITING_TIME_FROM_STATION "journeys_waiting_time_from_station"
+#define JOURNEYS_WAITING_TIMES_FROM_STATION "journeys_waiting_times_from_station"
 /**
  * @short WAITING_TIME
  *

@@ -30,7 +30,8 @@ InfoJourneyWaitingTime::InfoJourneyWaitingTime():
 }
 
 InfoJourneyWaitingTime::InfoJourneyWaitingTime(const Company &company, const Line &line,
-                                               const Journey &journey, const Station &station):
+                                               const Journey &journey, const Station &station,
+                                               const WaitingTime &waitingTime):
     d_ptr(new InfoJourneyWaitingTimePrivate())
 {
     Q_D(InfoJourneyWaitingTime);
@@ -38,6 +39,7 @@ InfoJourneyWaitingTime::InfoJourneyWaitingTime(const Company &company, const Lin
     d->line = line;
     d->journey = journey;
     d->station = station;
+    d->waitingTime = waitingTime;
 }
 
 InfoJourneyWaitingTime::InfoJourneyWaitingTime(const InfoJourneyWaitingTime &other):
@@ -110,6 +112,18 @@ void InfoJourneyWaitingTime::setStation(const Station &station)
 {
     Q_D(InfoJourneyWaitingTime);
     d->station = station;
+}
+
+WaitingTime InfoJourneyWaitingTime::waitingTime() const
+{
+    Q_D(const InfoJourneyWaitingTime);
+    return d->waitingTime;
+}
+
+void InfoJourneyWaitingTime::setWaitingTime(const WaitingTime &waitingTime)
+{
+    Q_D(InfoJourneyWaitingTime);
+    d->waitingTime = waitingTime;
 }
 
 }

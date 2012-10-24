@@ -146,6 +146,14 @@ bool ProviderPluginDBusWrapper::load(const QString &plugin)
             SIGNAL(journeysFromStationRetrieved(QString,QList<PublicTransportation::InfoJourneys>)),
             d->proxy,
             SLOT(registerJourneysFromStation(QString,QList<PublicTransportation::InfoJourneys>)));
+    connect(d->proxy,
+     SIGNAL(journeysAndWaitingTimesFromStationRequested(QString,PublicTransportation::Station,int)),
+            d->provider,
+       SLOT(retrieveJourneysAndWaitingTimesFromStation(QString,PublicTransportation::Station,int)));
+    connect(d->provider,
+            SIGNAL(journeysAndWaitingTimesFromStationRetrieved(QString,QList<PublicTransportation::InfoJourneyWaitingTime>)),
+            d->proxy,
+            SLOT(registerJourneysAndWaitingTimesFromStation(QString,QList<PublicTransportation::InfoJourneyWaitingTime>)));
     connect(d->proxy, SIGNAL(waitingTimeRequested(QString,PublicTransportation::Company,
                                                   PublicTransportation::Line,
                                                   PublicTransportation::Journey,

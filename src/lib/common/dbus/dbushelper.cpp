@@ -259,6 +259,7 @@ QDBusArgument & operator<<(QDBusArgument &argument,
     argument << infoJourneyWaitingTime.line();
     argument << infoJourneyWaitingTime.journey();
     argument << infoJourneyWaitingTime.station();
+    argument << infoJourneyWaitingTime.waitingTime();
     argument.endStructure();
     return argument;
 }
@@ -279,6 +280,9 @@ const QDBusArgument & operator>>(const QDBusArgument &argument,
     Station station;
     argument >> station;
     infoJourneyWaitingTime.setStation(station);
+    WaitingTime waitingTime;
+    argument >> waitingTime;
+    infoJourneyWaitingTime.setWaitingTime(waitingTime);
     argument.endStructure();
     return argument;
 }

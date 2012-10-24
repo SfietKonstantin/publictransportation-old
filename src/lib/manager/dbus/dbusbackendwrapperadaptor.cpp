@@ -51,16 +51,22 @@ void PublictransportationAdaptor::registerError(const QString &request, const QS
     parent()->registerError(request, errorId, error);
 }
 
-void PublictransportationAdaptor::registerJourneysFromStation(const QString &request, const QList<PublicTransportation::InfoJourneys> & infoJourneys)
+void PublictransportationAdaptor::registerJourneysAndWaitingTimesFromStation(const QString &request, const QList<PublicTransportation::InfoJourneyWaitingTime> & infoJourneyWaitingTimeList)
 {
-    // handle method call org.SfietKonstantin.publictransportation.registerJourneysFromStation
-    parent()->registerJourneysFromStation(request, infoJourneys);
+    // handle method call org.SfietKonstantin.publictransportation.registerJourneysAndWaitingTimesFromStation
+    parent()->registerJourneysAndWaitingTimesFromStation(request, infoJourneyWaitingTimeList);
 }
 
-void PublictransportationAdaptor::registerSuggestedStations(const QString &request, const QList<PublicTransportation::Station> & suggestedStations)
+void PublictransportationAdaptor::registerJourneysFromStation(const QString &request, const QList<PublicTransportation::InfoJourneys> & infoJourneysList)
+{
+    // handle method call org.SfietKonstantin.publictransportation.registerJourneysFromStation
+    parent()->registerJourneysFromStation(request, infoJourneysList);
+}
+
+void PublictransportationAdaptor::registerSuggestedStations(const QString &request, const QList<PublicTransportation::Station> & suggestedStationList)
 {
     // handle method call org.SfietKonstantin.publictransportation.registerSuggestedStations
-    parent()->registerSuggestedStations(request, suggestedStations);
+    parent()->registerSuggestedStations(request, suggestedStationList);
 }
 
 void PublictransportationAdaptor::registerWaitingTime(const QString &request, const QList<PublicTransportation::WaitingTime> & waitingTimeList)

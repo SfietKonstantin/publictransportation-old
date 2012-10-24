@@ -287,6 +287,14 @@ QString DBusBackendWrapper::requestJourneysFromStation(const Station &station, i
     return request;
 }
 
+QString DBusBackendWrapper::requestJourneysAndWaitingTimesFromStation(const Station &station,
+                                                                      int limit)
+{
+    QString request = createRequest(JourneysAndWaitingTimesFromStationType);
+    emit journeysAndWaitingTimesFromStationRequested(request, station, limit);
+    return request;
+}
+
 QString DBusBackendWrapper::requestWaitingTime(const Company &company, const Line &line,
                                                const Journey &journey, const Station &station)
 {

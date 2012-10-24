@@ -30,6 +30,7 @@
 #include "line.h"
 #include "journey.h"
 #include "station.h"
+#include "waitingtime.h"
 
 namespace PublicTransportation
 {
@@ -64,6 +65,11 @@ public:
      * @brief Station
      */
     Station station;
+    /**
+     * @internal
+     * @brief Waiting time
+     */
+    WaitingTime waitingTime;
 };
 
 class PUBLICTRANSPORTATION_EXPORT InfoJourneyWaitingTime
@@ -79,9 +85,11 @@ public:
      * @param line line.
      * @param journey journey.
      * @param station station.
+     * @param waitingTime waiting time.
      */
     explicit InfoJourneyWaitingTime(const Company &company, const Line &line,
-                                    const Journey &journey, const Station &station);
+                                    const Journey &journey, const Station &station,
+                                    const WaitingTime &waitingTime);
     /**
      * @brief Copy constructor
      * @param other other information about journey object.
@@ -134,7 +142,7 @@ public:
     void setJourney(const Journey &journey);
     /**
      * @brief Station
-     * @return line.
+     * @return station.
      */
     Station station() const;
     /**
@@ -142,6 +150,16 @@ public:
      * @param station station to set.
      */
     void setStation(const Station &station);
+    /**
+     * @brief Waiting time
+     * @return waiting time.
+     */
+    WaitingTime waitingTime() const;
+    /**
+     * @brief Set the waiting time
+     * @param waitingTime waiting time to set.
+     */
+    void setWaitingTime(const WaitingTime &waitingTime);
 protected:
     /**
      * @brief D-pointer
