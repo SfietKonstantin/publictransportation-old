@@ -70,7 +70,7 @@
     <message>
         <location filename="../MainPage.qml" line="44"/>
         <source>Search station</source>
-        <translation>Recherche</translation>
+        <translation>Rechercher une station</translation>
     </message>
     <message>
         <location filename="../MainPage.qml" line="52"/>
@@ -373,7 +373,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="315"/>
         <source>Cuba</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuba</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="319"/>
@@ -1321,7 +1321,7 @@
     <message>
         <location filename="../SearchStationPage.qml" line="26"/>
         <source>Search stations</source>
-        <translation>Recherche</translation>
+        <translation>Rechercher une station</translation>
     </message>
     <message>
         <location filename="../SearchStationPage.qml" line="52"/>
