@@ -478,7 +478,7 @@ CountriesModelPrivate::CountriesModelPrivate()
     itemGN->isoCode = "GN";
     countries.append(itemGN);
     CountriesModelItem *itemGW = new CountriesModelItem;
-    itemGW->name = QObject::trUtf8("Guinea-bissau");
+    itemGW->name = QObject::trUtf8("Guinea-Bissau");
     itemGW->isoCode = "GW";
     countries.append(itemGW);
     CountriesModelItem *itemGY = new CountriesModelItem;

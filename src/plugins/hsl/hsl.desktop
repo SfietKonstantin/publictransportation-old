@@ -11,3 +11,18 @@ X-PublicTransportation-BackendInfo-Author=Lucien XU
 X-PublicTransportation-BackendInfo-Email=sfietkonstantin@free.fr
 X-PublicTransportation-BackendInfo-Website=
 X-PublicTransportation-BackendInfo-Version=1.0.0
+
+
+# Translations
+Comment[de]=Öffentliche Verkehrsmittel Helsinki
+Name[de]=Hsl
+Icon[de]=/usr/share/hicolor/80x80/apps/publictransportation.png
+Comment[it_IT]=Trasporti pubblici di Helsinki
+Name[it_IT]=Hsl
+Icon[it_IT]=/usr/share/hicolor/80x80/apps/publictransportation.png
+Comment[fr_CH]=Transports en communs à Helsinki gérés par Hsl
+Name[fr_CH]=Hsl
+Icon[fr_CH]=/usr/share/hicolor/80x80/apps/publictransportation.png
+Comment[fr_FR]=Transports en communs à Helsinki gérés par Hsl
+Name[fr_FR]=Hsl
+Icon[fr_FR]=/usr/share/hicolor/80x80/apps/publictransportation.png

@@ -89,7 +89,7 @@ GU:Guam
 GT:Guatemala
 GG:Guernsey
 GN:Guinea
-GW:Guinea-bissau
+GW:Guinea-Bissau
 GY:Guyana
 HT:Haiti
 HM:Heard Island and Mcdonald Islands

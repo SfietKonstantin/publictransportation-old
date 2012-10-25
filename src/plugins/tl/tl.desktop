@@ -1,7 +1,6 @@
 [Desktop Entry]
 Name=Transports lausannois
 Comment=Public transportation in Lausanne
-Comment[fr_FR]=Transports en commun de Lausanne
 Icon=/usr/share/hicolor/80x80/apps/publictransportation.png
 Type=Service
 Exec=$PROVIDER libtl.so
@@ -12,3 +11,18 @@ X-PublicTransportation-BackendInfo-Author=Lucien XU
 X-PublicTransportation-BackendInfo-Email=sfietkonstantin@free.fr
 X-PublicTransportation-BackendInfo-Website=
 X-PublicTransportation-BackendInfo-Version=1.0.0
+
+
+# Translations
+Comment[de]=Öffentliche Verkehrsmittel in Lausanne
+Name[de]=Transports lausannois
+Icon[de]=/usr/share/hicolor/80x80/apps/publictransportation.png
+Comment[it_IT]=Trasporti pubblici di Losanna
+Name[it_IT]=Transports Lausannois
+Icon[it_IT]=/usr/share/hicolor/80x80/apps/publictransportation.png
+Comment[fr_CH]=Transports en communs à Lausanne
+Name[fr_CH]=Transports lausannois
+Icon[fr_CH]=/usr/share/hicolor/80x80/apps/publictransportation.png
+Comment[fr_FR]=Transports en communs à Lausanne gérés par les tl
+Name[fr_FR]=Transports lausannois
+Icon[fr_FR]=/usr/share/hicolor/80x80/apps/publictransportation.png

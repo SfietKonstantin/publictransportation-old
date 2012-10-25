@@ -1,7 +1,6 @@
 [Desktop Entry]
 Name=transport.opendata.ch
 Comment=Public transportation in Switzerland
-Comment[fr_FR]=Transports en commun en Suisse
 Icon=/usr/share/hicolor/80x80/apps/publictransportation.png
 Type=Service
 Exec=$PROVIDER libopendatach.so
@@ -12,3 +11,18 @@ X-PublicTransportation-BackendInfo-Author=Lucien XU
 X-PublicTransportation-BackendInfo-Email=sfietkonstantin@free.fr
 X-PublicTransportation-BackendInfo-Website=
 X-PublicTransportation-BackendInfo-Version=1.0.0
+
+
+# Translations
+Comment[de]=Öffentliche Verkehrsmittel in der Schweiz
+Name[de]=transport.opendata.ch
+Icon[de]=/usr/share/hicolor/80x80/apps/publictransportation.png
+Comment[it_IT]=Trasporti pubblici svizzeri
+Name[it_IT]=transport.opendata.ch
+Icon[it_IT]=/usr/share/hicolor/80x80/apps/publictransportation.png
+Comment[fr_CH]=Transports en communs en Suisse
+Name[fr_CH]=transport.opendata.ch
+Icon[fr_CH]=/usr/share/hicolor/80x80/apps/publictransportation.png
+Comment[fr_FR]=Transports en communs en Suisse
+Name[fr_FR]=transport.opendata.ch
+Icon[fr_FR]=/usr/share/hicolor/80x80/apps/publictransportation.png
