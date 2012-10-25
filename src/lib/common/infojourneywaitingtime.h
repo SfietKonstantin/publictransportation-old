@@ -72,6 +72,36 @@ public:
     WaitingTime waitingTime;
 };
 
+
+/**
+ * @brief Class to provide informations about journeys and waiting times
+ *
+ * This class is used to provide informations related to journeys and
+ * waiting times. For some backends, it might be better to provide
+ * a list of entries, containing both a company, a line, a single journey
+ * and a waiting time for this journey. This class is used to provide
+ * those informations. Moreover, a station can be provided in order to
+ * give more informations, (like some id, that are specific to the
+ * station on the journey).
+ *
+ * Properties for an information about journeys and waiting times are then
+ * - company()
+ * - line()
+ * - journey()
+ * - station()
+ * - waitingTime()
+ *
+ * and can be set using
+ * - setCompany()
+ * - setLine()
+ * - setJourney()
+ * - setStation()
+ * - setWaitingTime()
+ *
+ * This class is an explicitely shared class, that means that
+ * any copy of this class refers to the same instance, and
+ * changing one copy will change all the others.
+ */
 class PUBLICTRANSPORTATION_EXPORT InfoJourneyWaitingTime
 {
 public:

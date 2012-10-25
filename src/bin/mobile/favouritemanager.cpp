@@ -14,6 +14,11 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+/**
+ * @file favouritemanager.h
+ * @short Implementation of PublicTransportation::Gui::FavouriteManager
+ */
+
 #include "favouritemanager.h"
 
 #include <QtCore/QCoreApplication>
@@ -35,12 +40,32 @@ namespace PublicTransportation
 namespace Gui
 {
 
+/**
+ * @internal
+ * @short Private class for PublicTransportation::Gui::FavouriteManager
+ */
 class FavouriteManagerPrivate
 {
 public:
+    /**
+     * @internal
+     * @brief Load
+     */
     void load();
+    /**
+     * @internal
+     * @brief Save
+     */
     void save();
+    /**
+     * @internal
+     * @brief Filename
+     */
     QString fileName;
+    /**
+     * @internal
+     * @brief Data
+     */
     QList<QPair<QString, Station> > data;
 };
 

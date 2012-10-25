@@ -54,6 +54,10 @@ struct SearchStationModelItem
      * @brief If the backend support journeys from station
      */
     bool supportJourneysFromStation;
+    /**
+     * @internal
+     * @brief If this station is a favourite
+     */
     bool favourite;
 };
 
@@ -70,6 +74,10 @@ public:
      * @param q Q-pointer.
      */
     SearchStationModelPrivate(SearchStationModel *q);
+    /**
+     * @internal
+     * @brief Display favourites
+     */
     void displayFavourites();
     /**
      * @internal
@@ -105,6 +113,10 @@ public:
      * @brief Backend manager
      */
     AbstractBackendManager *backendManager;
+    /**
+     * @internal
+     * @brief Favourite manager
+     */
     FavouriteManager *favouriteManager;
     /**
      * @internal

@@ -14,13 +14,13 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+#ifndef PUBLICTRANSPORTATION_GUI_BACKENDMODEL_H
+#define PUBLICTRANSPORTATION_GUI_BACKENDMODEL_H
+
 /**
  * @file backendmodel.h
  * @short Definition of PublicTransportation::Gui::BackendModel
  */
-
-#ifndef PUBLICTRANSPORTATION_GUI_BACKENDMODEL_H
-#define PUBLICTRANSPORTATION_GUI_BACKENDMODEL_H
 
 #include <QtCore/QAbstractListModel>
 #include "manager/abstractbackendwrapper.h"

@@ -17,6 +17,11 @@
 #ifndef PUBLICTRANSPORTATION_GUI_XMLCONVERSIONHELPER_H
 #define PUBLICTRANSPORTATION_GUI_XMLCONVERSIONHELPER_H
 
+/**
+ * @file xmlconversionhelper.h
+ * @short Definition of PublicTransportation::Gui::XmlConversionHelper
+ */
+
 #include <QtCore/QVariantMap>
 
 class QDomDocument;
@@ -29,13 +34,46 @@ class Station;
 namespace Gui
 {
 
+/**
+ * @brief Helper class managing serialization in XML
+ *
+ * This class is used to serialize data in some complex
+ * data objects like a PublicTransportation::Station in
+ * XML, in order to be stored and reused.
+ *
+ * This class provides static methods to deal with these
+ * conversions.
+ */
 class XmlConversionHelper
 {
 public:
+    /**
+     * @brief Convert a variant map to XML
+     * @param variantMap variant map to convert.
+     * @param tagName tag name of the root element.
+     * @param document document used to create elements.
+     * @return the variant map as an XML element.
+     */
     static QDomElement toXml(const QVariantMap &variantMap, const QString &tagName,
                              QDomDocument *document);
+    /**
+     * @brief Convert a XML element to a variant map
+     * @param element XML element to convert.
+     * @return the XML element as a variant map.
+     */
     static QVariantMap fromXmlToVariantMap(const QDomElement &element);
+    /**
+     * @brief Convert a PublicTransportation::Station to XML
+     * @param station station to convert.
+     * @param document document used to create elements.
+     * @return the station as an XML element.
+     */
     static QDomElement toXml(const Station &station, QDomDocument *document);
+    /**
+     * @brief Convert a XML element to a PublicTransportation::Station
+     * @param element XML element to convert.
+     * @return the XML element as a station.
+     */
     static Station fromXmlToStation(const QDomElement &element);
 };
 

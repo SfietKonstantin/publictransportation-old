@@ -14,13 +14,13 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+#ifndef PUBLICTRANSPORTATION_GUI_WAITINGTIMEMODEL_H
+#define PUBLICTRANSPORTATION_GUI_WAITINGTIMEMODEL_H
+
 /**
  * @file waitingtimemodel.h
  * @short Definition of PublicTransportation::Gui::WaitingTimeModel
  */
-
-#ifndef PUBLICTRANSPORTATION_GUI_WAITINGTIMEMODEL_H
-#define PUBLICTRANSPORTATION_GUI_WAITINGTIMEMODEL_H
 
 #include <QtCore/QAbstractListModel>
 

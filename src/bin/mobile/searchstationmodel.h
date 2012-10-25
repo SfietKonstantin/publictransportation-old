@@ -14,13 +14,13 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+#ifndef PUBLICTRANSPORTATION_GUI_SEARCHSTATIONMODEL_H
+#define PUBLICTRANSPORTATION_GUI_SEARCHSTATIONMODEL_H
+
 /**
  * @file searchstationmodel.h
  * @short Definition of PublicTransportation::Gui::SearchStationModel
  */
-
-#ifndef PUBLICTRANSPORTATION_GUI_SEARCHSTATIONMODEL_H
-#define PUBLICTRANSPORTATION_GUI_SEARCHSTATIONMODEL_H
 
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QSettings>
@@ -88,6 +88,10 @@ public:
      * @param backendManager backend manager to set.
      */
     void setBackendManager(AbstractBackendManager *backendManager);
+    /**
+     * @brief Set favourite manager
+     * @param favouriteManager favourite manager to set.
+     */
     void setFavouriteManager(FavouriteManager *favouriteManager);
     /**
      * @short Reimplementation of rowCount
@@ -120,6 +124,11 @@ public Q_SLOTS:
      * @param partialStation partial station name.
      */
     void search(const QString &partialStation);
+    /**
+     * @brief Reset the view
+     *
+     * Resetting the view displays the favourites.
+     */
     void reset();
     /**
      * @brief Clear

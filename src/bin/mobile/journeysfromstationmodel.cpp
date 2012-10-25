@@ -85,6 +85,10 @@ public:
      * @param q Q-pointer.
      */
     JourneysFromStationModelPrivate(JourneysFromStationModel *q);
+    /**
+     * @internal
+     * @brief Update favourite
+     */
     void updateFavourite();
     /**
      * @internal
@@ -99,7 +103,15 @@ public:
      * @brief Backend list manager
      */
     AbstractBackendManager *backendManager;
+    /**
+     * @internal
+     * @brief If this station is favourite
+     */
     bool favourite;
+    /**
+     * @internal
+     * @brief Favourite manager
+     */
     FavouriteManager *favouriteManager;
     /**
      * @internal

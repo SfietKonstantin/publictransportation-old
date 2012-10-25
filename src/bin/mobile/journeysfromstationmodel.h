@@ -14,13 +14,13 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+#ifndef PUBLICTRANSPORTATION_GUI_JOURNEYSFROMSTATIONSMODEL_H
+#define PUBLICTRANSPORTATION_GUI_JOURNEYSFROMSTATIONSMODEL_H
+
 /**
  * @file journeysfromstationmodel.h
  * @short Definition of PublicTransportation::Gui::JourneysFromStationModel
  */
-
-#ifndef PUBLICTRANSPORTATION_GUI_JOURNEYSFROMSTATIONSMODEL_H
-#define PUBLICTRANSPORTATION_GUI_JOURNEYSFROMSTATIONSMODEL_H
 
 #include <QtCore/QAbstractListModel>
 
@@ -58,6 +58,9 @@ class JourneysFromStationModel : public QAbstractListModel
      * @short Loading
      */
     Q_PROPERTY(bool loading READ isLoading NOTIFY loadingChanged)
+    /**
+     * @short If this station is favourite
+     */
     Q_PROPERTY(bool favourite READ isFavourite WRITE setFavourite NOTIFY favouriteChanged)
 public:
     /**
@@ -99,6 +102,10 @@ public:
      * @param backendManager backend manager to set.
      */
     void setBackendManager(AbstractBackendManager *backendManager);
+    /**
+     * @brief Set favourite manager
+     * @param favouriteManager favourite manager to set.
+     */
     void setFavouriteManager(FavouriteManager *favouriteManager);
     /**
      * @short Reimplementation of rowCount
@@ -112,6 +119,10 @@ public:
      * @return if this model is loading.
      */
     bool isLoading() const;
+    /**
+     * @brief If this station is favourite
+     * @return if this station is favourite.
+     */
     bool isFavourite() const;
     /**
      * @short Count
@@ -127,6 +138,10 @@ public:
      */
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 public Q_SLOTS:
+    /**
+     * @brief Add or remove this station from favourites
+     * @param favourite if this station should be favourited.
+     */
     void setFavourite(bool favourite);
     /**
      * @brief A request for journeys from station has been sent
@@ -158,6 +173,9 @@ Q_SIGNALS:
      * @brief Loading changed
      */
     void loadingChanged();
+    /**
+     * @brief State of this station as favourite changed
+     */
     void favouriteChanged();
     /**
      * @brief Waiting time requested

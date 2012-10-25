@@ -17,6 +17,11 @@
 #ifndef PUBLICTRANSPORTATION_GUI_FAVOURITEMANAGER_H
 #define PUBLICTRANSPORTATION_GUI_FAVOURITEMANAGER_H
 
+/**
+ * @file favouritemanager.h
+ * @short Definition of PublicTransportation::Gui::FavouriteManager
+ */
+
 #include <QtCore/QObject>
 #include <QtCore/QPair>
 
@@ -28,21 +33,83 @@ namespace Gui
 {
 
 class FavouriteManagerPrivate;
+
+/**
+ * @brief Favourite manager
+ *
+ * This class is used to provide a list of favourites
+ * stations. It stores the list as an XML document,
+ * given a name, and takes cares of loading or saving
+ * operations.
+ *
+ * Favourites are stored in QDesktopServices::DataLocation.
+ *
+ * The list of favourites is given as a pair of data,
+ * containing a backend identifier, associated to
+ * the requested station.
+ *
+ * Checking if a station is a favourite can be done
+ * with isFavourite(), while getting them is done with
+ * favourites().
+ *
+ * Adding and removing a station can be done with
+ * - addStation()
+ * - removeStation()
+ */
 class FavouriteManager : public QObject
 {
     Q_OBJECT
 public:
+    /**
+     * @brief Default constructor
+     * @param fileName favourite filename.
+     * @param parent parent object.
+     */
     explicit FavouriteManager(const QString &fileName, QObject *parent = 0);
+    /**
+     * @brief Destructor
+     */
     virtual ~FavouriteManager();
+    /**
+     * @brief If a station is a favourite
+     * @param backend backend identifier.
+     * @param station station.
+     * @return if the station is a favourite.
+     */
     bool isFavourite(const QString &backend, const Station &station) const;
+    /**
+     * @brief The list of favourites
+     * @return the list of favourites.
+     */
     QList<QPair<QString, Station> > favourites() const;
 public Q_SLOTS:
+    /**
+     * @brief Add station
+     * @param backend backend identifier.
+     * @param station station.
+     */
     void addStation(const QString &backend, const Station &station);
+    /**
+     * @brief Remove station
+     * @param backend backend identifier.
+     * @param station station.
+     */
     void removeStation(const QString &backend, const Station &station);
 Q_SIGNALS:
+    /**
+     * @brief Favourites changed
+     */
     void favouritesChanged();
 protected:
+    /**
+     * @brief Reimplementation of event
+     * @param event event.
+     * @return if the event was processed.
+     */
     virtual bool event(QEvent *event);
+    /**
+     * @brief D-pointer
+     */
     QScopedPointer<FavouriteManagerPrivate> d_ptr;
 private:
     Q_DECLARE_PRIVATE(FavouriteManager)

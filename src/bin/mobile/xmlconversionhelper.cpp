@@ -14,6 +14,11 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+/**
+ * @file xmlconversionhelper.cpp
+ * @short Implementation of PublicTransportation::Gui::XmlConversionHelper
+ */
+
 #include "xmlconversionhelper.h"
 
 #include <QtXml/QDomDocument>
@@ -21,15 +26,55 @@
 
 #include "common/station.h"
 
+/**
+ * @brief VARIANT_MAP_ENTRY_TAG
+ *
+ * Used in PublicTransportation::Gui::XmlConversionHelper.
+ */
 static const char *VARIANT_MAP_ENTRY_TAG = "map_entry";
+/**
+ * @brief VARIANT_MAP_ENTRY_KEY_ATTRIBUTE
+ *
+ * Used in PublicTransportation::Gui::XmlConversionHelper.
+ */
 static const char *VARIANT_MAP_ENTRY_KEY_ATTRIBUTE = "key";
+/**
+ * @brief VARIANT_MAP_ENTRY_TYPE_ATTRIBUTE
+ *
+ * Used in PublicTransportation::Gui::XmlConversionHelper.
+ */
 static const char *VARIANT_MAP_ENTRY_TYPE_ATTRIBUTE = "type";
+/**
+ * @brief VARIANT_MAP_ENTRY_VALUE_ATTRIBUTE
+ *
+ * Used in PublicTransportation::Gui::XmlConversionHelper.
+ */
 static const char *VARIANT_MAP_ENTRY_VALUE_ATTRIBUTE = "value";
 
+/**
+ * @brief TRANSPORTATION_OBJECT_DISAMBIGUATION_TAG
+ *
+ * Used in PublicTransportation::Gui::XmlConversionHelper.
+ */
 static const char *TRANSPORTATION_OBJECT_DISAMBIGUATION_TAG = "disambiguation";
+/**
+ * @brief TRANSPORTATION_OBJECT_PROPERTIES_TAG
+ *
+ * Used in PublicTransportation::Gui::XmlConversionHelper.
+ */
 static const char *TRANSPORTATION_OBJECT_PROPERTIES_TAG = "properties";
+/**
+ * @brief TRANSPORTATION_OBJECT_NAME_ATTRIBUTE
+ *
+ * Used in PublicTransportation::Gui::XmlConversionHelper.
+ */
 static const char *TRANSPORTATION_OBJECT_NAME_ATTRIBUTE = "name";
 
+/**
+ * @brief STATION_TAG
+ *
+ * Used in PublicTransportation::Gui::XmlConversionHelper.
+ */
 static const char *STATION_TAG = "station";
 
 namespace PublicTransportation
