@@ -170,13 +170,15 @@ void SearchStationModelPrivate::displayFavourites()
         if (backendManager->contains(identifier)) {
             AbstractBackendWrapper *backend = backendManager->backend(identifier);
 
-            SearchStationModelItem *item = new SearchStationModelItem;
-            item->station = station;
-            item->backendIdentifier = identifier;
-            item->supportJourneysFromStation
-                    = backend->capabilities().contains(JOURNEYS_FROM_STATION);
-            item->favourite = true;
-            data.append(item);
+            if (backend->status() == AbstractBackendWrapper::Launched) {
+                SearchStationModelItem *item = new SearchStationModelItem;
+                item->station = station;
+                item->backendIdentifier = identifier;
+                item->supportJourneysFromStation
+                        = backend->capabilities().contains(JOURNEYS_FROM_STATION);
+                item->favourite = true;
+                data.append(item);
+            }
         }
     }
 
@@ -220,8 +222,8 @@ void SearchStationModelPrivate::slotStatusChanged()
                       q,
                       SLOT(slotSuggestedStationsRegistered(QString,
                                                            QList<PublicTransportation::Station>)));
-        q->disconnect(backend, SIGNAL(errorRegistered(QString,QString)),
-                      q, SLOT(slotErrorRegistered(QString,QString)));
+        q->disconnect(backend, SIGNAL(errorRegistered(QString,QString,QString)),
+                      q, SLOT(slotErrorRegistered(QString,QString,QString)));
         displayFavourites();
     }
 }

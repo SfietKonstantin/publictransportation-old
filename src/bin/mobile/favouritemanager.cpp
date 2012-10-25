@@ -25,6 +25,7 @@
 
 #include "common/station.h"
 #include "xmlconversionhelper.h"
+#include "debug.h"
 
 static const char *BACKEND_ATTRIBUTE = "backend";
 
@@ -87,6 +88,11 @@ void FavouriteManagerPrivate::save()
     document.appendChild(rootElement);
 
     QDir favouriteDir = QDir(QDesktopServices::storageLocation(QDesktopServices::DataLocation));
+    if (!favouriteDir.exists()) {
+        QDir::root().mkpath(favouriteDir.absolutePath());
+    }
+
+
     QFile file (favouriteDir.absoluteFilePath(fileName));
     if (!file.open(QIODevice::WriteOnly)) {
         return;

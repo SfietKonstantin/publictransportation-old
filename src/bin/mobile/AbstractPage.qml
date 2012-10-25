@@ -61,7 +61,6 @@ Page {
     Item {
         id: content
         anchors.top: horizontalSeparator.bottom;
-        anchors.topMargin: theme.inverted ? Ui.MARGIN_DEFAULT : 0
         anchors.left: parent.left; anchors.right: parent.right
         anchors.bottom: parent.bottom
     }
