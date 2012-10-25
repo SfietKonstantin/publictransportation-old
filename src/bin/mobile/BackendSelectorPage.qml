@@ -106,6 +106,8 @@ AbstractPage {
                         countrySelectorSheet.accept()
                     }
                 }
+
+                ScrollDecorator {flickableItem: parent}
             }
         }
     }

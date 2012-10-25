@@ -26,10 +26,6 @@
 #include <QtCore/QSharedData>
 #include <QtCore/QVariant>
 
-#ifdef MEEGO_EDITION_HARMATTAN
-#include <MLocale>
-#endif
-
 namespace PublicTransportation
 {
 
@@ -153,12 +149,7 @@ BackendInfo::BackendInfo(const QString &file):
     // Get the name and description
     QStringList languages;
 #if (QT_VERSION < QT_VERSION_CHECK(4, 8, 0))
-#  ifdef MEEGO_EDITION_HARMATTAN
-    MLocale locale = MLocale();
-    languages.append(locale.name());
-    languages.append(locale.language());
-    languages.append(QString("%1_%2").arg(locale.language()).arg(locale.country()));
-#  endif
+    languages.append(QLocale::system().name());
 #else
     languages = QLocale::system().uiLanguages();
 #endif
