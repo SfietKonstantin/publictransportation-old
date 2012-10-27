@@ -60,6 +60,8 @@ public:
     virtual QString requestJourneysAndWaitingTimesFromStation(const Station &station, int limit);
     virtual QString requestWaitingTime(const Company &company, const Line &line,
                                        const Journey &journey, const Station &station);
+    virtual QString requestStationsFromJourney(const Company &company, const Line &line,
+                                               const Journey &journey, const Station &station);
 public Q_SLOTS:
     /**
      * @brief Launch the backend
@@ -127,7 +129,7 @@ Q_SIGNALS:
                                                      const PublicTransportation::Station &station,
                                                      int limit);
     /**
-     * @brief Journeys from station requested
+     * @brief Waiting time
      *
      * This is a DBus proxy signal.
      *
@@ -141,6 +143,22 @@ Q_SIGNALS:
                               const PublicTransportation::Line &line,
                               const PublicTransportation::Journey &journey,
                               const PublicTransportation::Station &station);
+    /**
+     * @brief Stations from journey requested
+     *
+     * This is a DBus proxy signal.
+     *
+     * @param request request identifier.
+     * @param company company.
+     * @param line line for which the waiting time should be queried.
+     * @param journey journey for which the waiting time should be queried.
+     * @param station station for which the waiting time should be queried.
+     */
+    void stationsFromJourneyRequested(const QString &request,
+                                      const PublicTransportation::Company &company,
+                                      const PublicTransportation::Line &line,
+                                      const PublicTransportation::Journey &journey,
+                                      const PublicTransportation::Station &station);
 private:
     Q_DECLARE_PRIVATE(DBusBackendWrapper)
     /// \cond buggy-doxygen-doc

@@ -303,6 +303,15 @@ QString DBusBackendWrapper::requestWaitingTime(const Company &company, const Lin
     return request;
 }
 
+QString DBusBackendWrapper::requestStationsFromJourney(const Company &company, const Line &line,
+                                                       const Journey &journey,
+                                                       const Station &station)
+{
+    QString request = createRequest(StationsFromJourneyType);
+    emit stationsFromJourneyRequested(request, company, line, journey, station);
+    return request;
+}
+
 }
 
 #include "moc_dbusbackendwrapper.cpp"
