@@ -1390,10 +1390,6 @@
         <source>Zimbabwe</source>
         <translation>Zimbabwe</translation>
     </message>
-    <message>
-        <source>Search for a station</source>
-        <translation type="obsolete">Search for a station</translation>
-    </message>
 </context>
 <context>
     <name>SearchStationPage</name>

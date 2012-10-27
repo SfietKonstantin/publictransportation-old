@@ -14,6 +14,11 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+/**
+ * @file backendcopyrightmanager.cpp
+ * @short Implementation of PublicTransportation::Gui::BackendCopyrightManager
+ */
+
 #include "backendcopyrightmanager.h"
 
 #include "common/capabilitiesconstants.h"
@@ -27,23 +32,67 @@ namespace PublicTransportation
 namespace Gui
 {
 
+/**
+ * @internal
+ * @short Private class for PublicTransportation::Gui::BackendCopyrightManager
+ */
 class BackendCopyrightManagerPrivate
 {
 public:
+    /**
+     * @internal
+     * @short Default constructor
+     * @param q Q-pointer.
+     */
     BackendCopyrightManagerPrivate(BackendCopyrightManager *q);
+    /**
+     * @internal
+     * @brief Query copyright
+     * @param backend backend.
+     */
     void queryCopyright(AbstractBackendWrapper *backend);
-    void createCapabilities(AbstractBackendWrapper *backend);
+    /**
+     * @internal
+     * @brief Set capabilities
+     * @param backend backend.
+     */
+    void setCapabilities(AbstractBackendWrapper *backend);
+    /**
+     * @internal
+     * @brief Slot for status changed
+     */
     void slotStatusChanged();
+    /**
+     * @brief Slot for copyright registered
+     * @param request request.
+     * @param newCopyright copyright.
+     */
     void slotCopyrightRegistered(const QString &request, const QString &newCopyright);
     /**
     * @internal
     * @brief Backend manager
     */
    AbstractBackendManager *backendManager;
+   /**
+    * @internal
+    * @brief Loading
+    */
+   bool loading;
+   /**
+     * @internal
+     * @brief Copyright
+     */
     QString copyright;
+    /**
+     * @internal
+     * @brief Capabilities
+     */
     QString capabilities;
-    bool loading;
 private:
+    /**
+     * @internal
+     * @short Q-pointer
+     */
     BackendCopyrightManager * const q_ptr;
     Q_DECLARE_PUBLIC(BackendCopyrightManager)
 };
@@ -61,7 +110,7 @@ void BackendCopyrightManagerPrivate::queryCopyright(AbstractBackendWrapper *back
     backend->requestCopyright();
 }
 
-void BackendCopyrightManagerPrivate::createCapabilities(AbstractBackendWrapper *backend)
+void BackendCopyrightManagerPrivate::setCapabilities(AbstractBackendWrapper *backend)
 {
     Q_Q(BackendCopyrightManager);
     QString newCapabilities;
@@ -115,7 +164,7 @@ void BackendCopyrightManagerPrivate::slotCopyrightRegistered(const QString &requ
         copyright = newCopyright;
         emit q->copyrightChanged();
     }
-    createCapabilities(backend);
+    setCapabilities(backend);
 
     loading = false;
     emit q->loadingChanged();

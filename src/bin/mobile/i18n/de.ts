@@ -13,6 +13,24 @@
     </message>
 </context>
 <context>
+    <name>BackendInfoSheet</name>
+    <message>
+        <location filename="../BackendInfoSheet.qml" line="22"/>
+        <source>Close</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../BackendInfoSheet.qml" line="33"/>
+        <source>Copyright</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../BackendInfoSheet.qml" line="47"/>
+        <source>Provider capabilities</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>BackendSelectorPage</name>
     <message>
         <location filename="../BackendSelectorPage.qml" line="24"/>
@@ -20,12 +38,12 @@
         <translation>Verwalte Datenquellen</translation>
     </message>
     <message>
-        <location filename="../BackendSelectorPage.qml" line="75"/>
+        <location filename="../BackendSelectorPage.qml" line="79"/>
         <source>Cancel</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../BackendSelectorPage.qml" line="90"/>
+        <location filename="../BackendSelectorPage.qml" line="94"/>
         <source>Filter countries</source>
         <translation type="unfinished"/>
     </message>
@@ -87,6 +105,63 @@
     </message>
 </context>
 <context>
+    <name>PublicTransportation::Gui::BackendCopyrightManager</name>
+    <message>
+        <location filename="../backendcopyrightmanager.cpp" line="73"/>
+        <source>Search for a station</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../backendcopyrightmanager.cpp" line="76"/>
+        <source>List journeys from a station</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../backendcopyrightmanager.cpp" line="79"/>
+        <source>Give waiting time at a station</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>PublicTransportation::Gui::BackendCopyrightManagerPrivate</name>
+    <message>
+        <source>Search for a station</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>PublicTransportation::Provider::Ratp</name>
+    <message>
+        <location filename="../../../plugins/ratp/ratp.cpp" line="204"/>
+        <source>This provider uses wap.ratp.fr.</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>PublicTransportation::Provider::Sibra</name>
+    <message>
+        <location filename="../../../plugins/sibra/sibra.cpp" line="312"/>
+        <source>This provider uses m.sibra.fr.</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>PublicTransportation::Provider::Transpole</name>
+    <message>
+        <location filename="../../../plugins/transpole/transpole.cpp" line="391"/>
+        <source>This provider uses www.transpole.mobi/.</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>PublicTransportation::Provider::TransportLausannois</name>
+    <message>
+        <location filename="../../../plugins/tl/transportlausannois.cpp" line="171"/>
+        <source>This provider uses tl live website.</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <location filename="../support/countriesmodel.cpp" line="112"/>
@@ -101,7 +176,7 @@
     <message utf8="true">
         <location filename="../support/countriesmodel.cpp" line="121"/>
         <source>Åland Islands</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="125"/>
@@ -936,7 +1011,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="789"/>
         <source>Palestinian Territory, Occupied</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="793"/>
@@ -1046,7 +1121,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="877"/>
         <source>Sao Tome and Principe</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="881"/>
@@ -1131,7 +1206,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="945"/>
         <source>Svalbard and Jan Mayen</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="949"/>
