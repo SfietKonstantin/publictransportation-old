@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="en" version="2.0">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="en">
 <context>
     <name>AboutPage</name>
     <message>
@@ -13,6 +15,24 @@
     </message>
 </context>
 <context>
+    <name>BackendInfoSheet</name>
+    <message>
+        <location filename="../BackendInfoSheet.qml" line="22"/>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../BackendInfoSheet.qml" line="33"/>
+        <source>Copyright</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../BackendInfoSheet.qml" line="47"/>
+        <source>Provider capabilities</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>BackendSelectorPage</name>
     <message>
         <location filename="../BackendSelectorPage.qml" line="24"/>
@@ -20,12 +40,12 @@
         <translation>Manage information sources</translation>
     </message>
     <message>
-        <location filename="../BackendSelectorPage.qml" line="75"/>
+        <location filename="../BackendSelectorPage.qml" line="79"/>
         <source>Cancel</source>
         <translation>Cancel</translation>
     </message>
     <message>
-        <location filename="../BackendSelectorPage.qml" line="90"/>
+        <location filename="../BackendSelectorPage.qml" line="94"/>
         <source>Filter countries</source>
         <translation>Filter countries</translation>
     </message>
@@ -84,6 +104,63 @@
         <location filename="../MainPage.qml" line="66"/>
         <source>About</source>
         <translation>About</translation>
+    </message>
+</context>
+<context>
+    <name>PublicTransportation::Gui::BackendCopyrightManager</name>
+    <message>
+        <location filename="../backendcopyrightmanager.cpp" line="73"/>
+        <source>Search for a station</source>
+        <translation type="unfinished">Search for a station</translation>
+    </message>
+    <message>
+        <location filename="../backendcopyrightmanager.cpp" line="76"/>
+        <source>List journeys from a station</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../backendcopyrightmanager.cpp" line="79"/>
+        <source>Give waiting time at a station</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PublicTransportation::Gui::BackendCopyrightManagerPrivate</name>
+    <message>
+        <source>Search for a station</source>
+        <translation type="obsolete">Search for a station</translation>
+    </message>
+</context>
+<context>
+    <name>PublicTransportation::Provider::Ratp</name>
+    <message>
+        <location filename="../../../plugins/ratp/ratp.cpp" line="204"/>
+        <source>This provider uses wap.ratp.fr.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PublicTransportation::Provider::Sibra</name>
+    <message>
+        <location filename="../../../plugins/sibra/sibra.cpp" line="312"/>
+        <source>This provider uses m.sibra.fr.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PublicTransportation::Provider::Transpole</name>
+    <message>
+        <location filename="../../../plugins/transpole/transpole.cpp" line="391"/>
+        <source>This provider uses www.transpole.mobi/.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PublicTransportation::Provider::TransportLausannois</name>
+    <message>
+        <location filename="../../../plugins/tl/transportlausannois.cpp" line="171"/>
+        <source>This provider uses tl live website.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1312,6 +1389,10 @@
         <location filename="../support/countriesmodel.cpp" line="1089"/>
         <source>Zimbabwe</source>
         <translation>Zimbabwe</translation>
+    </message>
+    <message>
+        <source>Search for a station</source>
+        <translation type="obsolete">Search for a station</translation>
     </message>
 </context>
 <context>

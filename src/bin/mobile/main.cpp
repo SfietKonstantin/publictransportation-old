@@ -30,6 +30,7 @@
 #include "debug.h"
 #include "manager/dbus/dbusbackendmanager.h"
 #include "support/countriesmodel.h"
+#include "backendcopyrightmanager.h"
 #include "favouritemanager.h"
 #include "backendmodel.h"
 #include "searchstationmodel.h"
@@ -67,13 +68,19 @@ int main(int argc, char **argv)
 
     // Localization
     QTranslator translator;
-    translator.load(QLocale::system().name(), I18N_FOLDER);
-    app.installTranslator(&translator);
+    if (!translator.load(QLocale::system().name(), I18N_FOLDER)) {
+        translator.load(QLocale::languageToString(QLocale::system().language()), I18N_FOLDER);
+    }
+
+    if (!translator.isEmpty()) {
+        app.installTranslator(&translator);
+    }
 
     // Setup DBus
     DBusBackendManager::registerDBusService();
 
     // Setup models and manager
+    Gui::BackendCopyrightManager backendCopyrightManager;
     Gui::FavouriteManager searchFavouriteManager ("search.xml");
     Gui::CountriesModel countriesModel;
     Gui::BackendModel backendModel;
@@ -82,6 +89,7 @@ int main(int argc, char **argv)
     Gui::WaitingTimeModel waitingTimeModel;
 
     DBusBackendManager dbusBackendManager;
+    backendCopyrightManager.setBackendManager(&dbusBackendManager);
     backendModel.setBackendManager(&dbusBackendManager);
     searchStationModel.setBackendManager(&dbusBackendManager);
     searchStationModel.setFavouriteManager(&searchFavouriteManager);
@@ -129,6 +137,8 @@ int main(int argc, char **argv)
     view.rootContext()->setContextProperty("VERSION", QVariant(version));
     view.rootContext()->setContextProperty("BACKEND_FIRST_TIME", QVariant(backendFirstTime));
     view.rootContext()->setContextProperty("CountriesModelInstance", &countriesModel);
+    view.rootContext()->setContextProperty("BackendCopyrightManagerInstance",
+                                           &backendCopyrightManager);
     view.rootContext()->setContextProperty("BackendModelInstance", &backendModel);
     view.rootContext()->setContextProperty("SearchStationModelInstance", &searchStationModel);
     view.rootContext()->setContextProperty("JourneysFromStationModelInstance",

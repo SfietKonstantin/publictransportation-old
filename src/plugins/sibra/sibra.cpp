@@ -309,7 +309,10 @@ QStringList Sibra::capabilities() const
 
 void Sibra::retrieveCopyright(const QString &request)
 {
-    QString copyright = tr("Copyright to be registered");
+    QString copyright = tr("This provider uses m.sibra.fr.") + "\n"
+                        + QString::fromUtf8("Le site www.sibra.fr est la propriété de la \
+Communauté de l'agglomération d'Annecy et de la Société Intercommunale des Bus de la Région \
+Annécienne (SIBRA).");
     emit copyrightRetrieved(request, copyright);
 }
 

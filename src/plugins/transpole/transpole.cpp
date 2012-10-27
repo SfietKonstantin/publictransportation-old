@@ -388,7 +388,9 @@ QStringList Transpole::capabilities() const
 
 void Transpole::retrieveCopyright(const QString &request)
 {
-    QString copyright = tr("Copyright to be registered");
+    QString copyright = tr("This provider uses www.transpole.mobi/.") + "\n"
+                        + "Transpole do not provide any copyright notice on the website, however\
+we can assume that all the provided data are copyrighted transpole.";
     emit copyrightRetrieved(request, copyright);
 }
 

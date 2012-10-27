@@ -149,6 +149,7 @@ BackendInfo::BackendInfo(const QString &file):
     // Get the name and description
     QStringList languages;
 #if (QT_VERSION < QT_VERSION_CHECK(4, 8, 0))
+    languages.append(QLocale::languageToString(QLocale::system().language()));
     languages.append(QLocale::system().name());
 #else
     languages = QLocale::system().uiLanguages();

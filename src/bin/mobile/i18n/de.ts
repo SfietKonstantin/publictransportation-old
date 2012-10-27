@@ -101,7 +101,7 @@
     <message utf8="true">
         <location filename="../support/countriesmodel.cpp" line="121"/>
         <source>Åland Islands</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="125"/>
@@ -176,7 +176,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="181"/>
         <source>Bahamas</source>
-        <translation type="unfinished"/>
+        <translation>Bahamas</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="185"/>
@@ -256,7 +256,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="245"/>
         <source>Brunei Darussalam</source>
-        <translation type="unfinished"/>
+        <translation>Brunei</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="249"/>
@@ -346,7 +346,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="317"/>
         <source>Congo, The Democratic Republic of The</source>
-        <translation type="unfinished"/>
+        <translation>Demokratische Republik Kongo</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="321"/>
@@ -441,7 +441,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="393"/>
         <source>Falkland Islands (Malvinas)</source>
-        <translation type="unfinished"/>
+        <translation>Falklandinseln</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="397"/>
@@ -476,7 +476,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="421"/>
         <source>French Southern Territories</source>
-        <translation type="unfinished"/>
+        <translation>Französische Süd- und Antarktisgebiete</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="425"/>
@@ -486,7 +486,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="429"/>
         <source>Gambia</source>
-        <translation type="unfinished"/>
+        <translation>Gambia</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="433"/>
@@ -551,7 +551,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="481"/>
         <source>Guinea-Bissau</source>
-        <translation type="unfinished"/>
+        <translation>Guinea-Bissau</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="485"/>
@@ -566,12 +566,12 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="493"/>
         <source>Heard Island and Mcdonald Islands</source>
-        <translation type="unfinished"/>
+        <translation>Heard und McDonaldinseln</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="497"/>
         <source>Holy See (Vatican City State)</source>
-        <translation type="unfinished"/>
+        <translation>Vatikanstadt</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="501"/>
@@ -606,7 +606,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="525"/>
         <source>Iran, Islamic Republic of</source>
-        <translation type="unfinished"/>
+        <translation>Iran</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="529"/>
@@ -676,7 +676,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="581"/>
         <source>Korea, Republic of</source>
-        <translation type="unfinished"/>
+        <translation>Südkorea</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="585"/>
@@ -716,7 +716,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="613"/>
         <source>Libyan Arab Jamahiriya</source>
-        <translation type="unfinished"/>
+        <translation>Libyen</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="617"/>
@@ -736,12 +736,12 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="629"/>
         <source>Macao</source>
-        <translation type="unfinished"/>
+        <translation>Macao</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="633"/>
         <source>Macedonia, The Former Yugoslav Republic of</source>
-        <translation type="unfinished"/>
+        <translation>Mazedonien</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="637"/>
@@ -806,12 +806,12 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="685"/>
         <source>Micronesia, Federated States of</source>
-        <translation type="unfinished"/>
+        <translation>Föderierte Staaten von Mikronesien</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="689"/>
         <source>Moldova, Republic of</source>
-        <translation type="unfinished"/>
+        <translation>Moldawien</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="693"/>
@@ -846,7 +846,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="717"/>
         <source>Myanmar</source>
-        <translation type="unfinished"/>
+        <translation>Myanmar</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="721"/>
@@ -936,7 +936,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="789"/>
         <source>Palestinian Territory, Occupied</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="793"/>
@@ -966,7 +966,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="813"/>
         <source>Pitcairn</source>
-        <translation type="unfinished"/>
+        <translation>Pitcairninseln</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="817"/>
@@ -1001,7 +1001,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="841"/>
         <source>Russian Federation</source>
-        <translation type="unfinished"/>
+        <translation>Russland</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="845"/>
@@ -1031,7 +1031,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="865"/>
         <source>Saint Vincent and The Grenadines</source>
-        <translation type="unfinished"/>
+        <translation>St. Vincent und die Grenadinen</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="869"/>
@@ -1046,7 +1046,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="877"/>
         <source>Sao Tome and Principe</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="881"/>
@@ -1106,7 +1106,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="925"/>
         <source>South Georgia and The South Sandwich Islands</source>
-        <translation type="unfinished"/>
+        <translation>Südgeorgien und die Südlichen Sandwichinseln</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="929"/>
@@ -1131,7 +1131,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="945"/>
         <source>Svalbard and Jan Mayen</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="949"/>
@@ -1151,12 +1151,12 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="961"/>
         <source>Syrian Arab Republic</source>
-        <translation type="unfinished"/>
+        <translation>Syrien</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="965"/>
         <source>Taiwan, Province of China</source>
-        <translation type="unfinished"/>
+        <translation>Republik China</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="969"/>
@@ -1166,7 +1166,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="973"/>
         <source>Tanzania, United Republic of</source>
-        <translation type="unfinished"/>
+        <translation>Tansania</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="977"/>
@@ -1176,7 +1176,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="981"/>
         <source>Timor-leste</source>
-        <translation type="unfinished"/>
+        <translation>Osttimor</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="985"/>
@@ -1276,17 +1276,17 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="1061"/>
         <source>Viet Nam</source>
-        <translation type="unfinished"/>
+        <translation>Vietnam</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="1065"/>
         <source>Virgin Islands, British</source>
-        <translation type="unfinished"/>
+        <translation>Britische Jungferninseln</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="1069"/>
         <source>Virgin Islands, U.S.</source>
-        <translation type="unfinished"/>
+        <translation>Amerikanische Jungferninseln</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="1073"/>

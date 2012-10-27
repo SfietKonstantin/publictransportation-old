@@ -1,4 +1,6 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 import argparse
 import urllib
 import urllib2
@@ -10,6 +12,11 @@ import re
 def fetchCountry(country, lang, dataRegExp, purgedDataRegExp):
     print "-----------"
     print "Fetching " + country
+
+    if country in replacementList:
+        print "Replacing " + country + " with " + replacementList[country]
+        country = replacementList[country]
+
     try:
         url = "http://en.wikipedia.org/w/api.php?action=query&titles=" + urllib.quote_plus(country)
         url += "&prop=langlinks&format=xml&lllimit=500&lllang=" + lang
@@ -58,6 +65,27 @@ This tool perform translation of countries using wikipedia.""")
     countriesfile = args.countriesfile
     lang = args.lang
     outputfile = args.outputfile
+
+    # Replacement list for countries that wikipedia fail to recognize
+    replacementList = {"Bahamas": "The Bahamas", "Brunei Darussalam": "Brunei",
+    "Congo, The Democratic Republic of The": "Democratic Republic of the Congo",
+    "Falkland Islands (Malvinas)": "Falkland Islands",
+    "French Southern Territories": "French Southern and Antarctic Lands",
+    "Gambia": "The Gambia", "Heard Island and Mcdonald Islands": "Heard Island and McDonald Islands",
+    "Holy See (Vatican City State)": "Vatican City", "Iran, Islamic Republic of": "Iran",
+    "Korea, Republic of": "South Korea", "Libyan Arab Jamahiriya": "Libya",
+    "Macao": "Macau", "Macedonia, The Former Yugoslav Republic of": "Republic of Macedonia",
+    "Micronesia, Federated States of": "Federated States of Micronesia",
+    "Moldova, Republic of": "Moldova", "Myanmar": "Burma",
+    "Pitcairn": "Pitcairn Islands", "Reunion": u"Réunion", "Russian Federation": "Russia",
+    "Saint Vincent and The Grenadines": "Saint Vincent and the Grenadines",
+    "Sao Tome and Principe": u"São Tomé and Príncipe",
+    "South Georgia and The South Sandwich Islands": "South Georgia and the South Sandwich Islands",
+    "Syrian Arab Republic": "Syria", "Taiwan, Province of China": "Taiwan",
+    "Tanzania, United Republic of": "Tanzania", "Timor-leste": "East Timor",
+    "Viet Nam": "Vietnam", "Virgin Islands, British": "British Virgin Islands",
+    "Virgin Islands, U.S.": "United States Virgin Islands"}
+
 
     # Load countries
     countries = []

@@ -168,7 +168,8 @@ QStringList TransportLausannois::capabilities() const
 
 void TransportLausannois::retrieveCopyright(const QString &request)
 {
-    QString copyright = tr("(c) Copyright tl, 2001-2012, tous droits réservés.");
+    QString copyright = tr("This provider uses tl live website.") + "\n"
+                        + QString::fromUtf8("(c) Copyright tl, 2001-2012, tous droits réservés.");
     emit copyrightRetrieved(request, copyright);
 }
 

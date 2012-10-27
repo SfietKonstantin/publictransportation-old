@@ -216,7 +216,7 @@ QStringList Hsl::capabilities() const
 
 void Hsl::retrieveCopyright(const QString &request)
 {
-    QString copyright = "Copyright HSL";
+    QString copyright = "(c) Copyright HSL";
     emit copyrightRetrieved(request, copyright);
 }
 

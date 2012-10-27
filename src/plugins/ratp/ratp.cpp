@@ -201,7 +201,8 @@ QStringList Ratp::capabilities() const
 
 void Ratp::retrieveCopyright(const QString &request)
 {
-    QString copyright = tr("RATP - Tous droits réservés");
+    QString copyright = tr("This provider uses wap.ratp.fr.") + "\n"
+                        + QString::fromUtf8("RATP - Tous droits réservés");
     emit copyrightRetrieved(request, copyright);
 }
 

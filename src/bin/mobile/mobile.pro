@@ -16,6 +16,7 @@ LIBS += -L../../lib/ -l$${NAME}
 
 HEADERS +=      xmlconversionhelper.h \
                 backendmodel.h \
+                backendcopyrightmanager.h \
                 searchstationmodel.h \
                 journeysfromstationmodel.h \
                 waitingtimemodel.h \
@@ -26,6 +27,7 @@ HEADERS +=      xmlconversionhelper.h \
 SOURCES +=      main.cpp \
                 xmlconversionhelper.cpp \
                 backendmodel.cpp \
+                backendcopyrightmanager.cpp \
                 searchstationmodel.cpp \
                 journeysfromstationmodel.cpp \
                 waitingtimemodel.cpp \
@@ -47,6 +49,7 @@ OTHER_FILES +=  main.qml \
                 JourneysFromStationPage.qml \
                 WaitingTimePage.qml \
                 AboutPage.qml \
+    BackendInfoSheet.qml
 
 DATA_FILES +=   publictransportation-big.png
 

@@ -59,6 +59,8 @@ AbstractPage {
                 onChecked: {
                     if (checked) {
                         BackendModelInstance.runBackend(model.identifier)
+                        BackendCopyrightManagerInstance.setBackend(model.identifier)
+                        backendInfoSheet.open()
                     } else {
                         BackendModelInstance.stopBackend(model.identifier)
                     }
@@ -68,7 +70,9 @@ AbstractPage {
     }
 
 
-
+    BackendInfoSheet {
+        id: backendInfoSheet
+    }
 
     Sheet {
         id: countrySelectorSheet
