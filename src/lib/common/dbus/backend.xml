@@ -91,5 +91,28 @@
             <arg name="request" type="s" direction="in" />
             <arg name="waitingTimeList" type="a(ia{sv})" direction="in" />
         </method>
+
+        <!-- List of stations for a given journey -->
+        <signal name="stationsFromJourneyRequested">
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In1"
+                        value="const PublicTransportation::Company &amp;"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In2"
+                        value="const PublicTransportation::Line &amp;"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In3"
+                        value="const PublicTransportation::Journey &amp;"/>
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In4"
+                        value="const PublicTransportation::Station &amp;"/>
+            <arg name="request" type="s" direction="out" />
+            <arg name="company" type="(a{sv}sa{sv})" direction="out" />
+            <arg name="line" type="(a{sv}sa{sv})" direction="out" />
+            <arg name="journey" type="(a{sv}sa{sv})" direction="out" />
+            <arg name="station" type="(a{sv}sa{sv})" direction="out" />
+        </signal>
+        <method name="registerStationsFromJourney">
+            <annotation name="org.qtproject.QtDBus.QtTypeName.In1"
+                        value="const QList&lt;PublicTransportation::Station&gt; &amp;"/>
+            <arg name="request" type="s" direction="in" />
+            <arg name="stationList" type="a(a{sv}sa{sv})" direction="in" />
+        </method>
     </interface>
 </node>

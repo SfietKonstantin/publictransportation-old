@@ -165,6 +165,18 @@ bool ProviderPluginDBusWrapper::load(const QString &plugin)
     connect(d->provider, SIGNAL(waitingTimeRetrieved(QString,
                                                      QList<PublicTransportation::WaitingTime>)),
             d->proxy, SLOT(registerWaitingTime(QString,QList<PublicTransportation::WaitingTime>)));
+    connect(d->proxy, SIGNAL(stationsFromJourneyRequested(QString,PublicTransportation::Company,
+                                                          PublicTransportation::Line,
+                                                          PublicTransportation::Journey,
+                                                          PublicTransportation::Station)),
+            d->provider, SLOT(retrieveStationsFromJourney(QString,PublicTransportation::Company,
+                                                          PublicTransportation::Line,
+                                                          PublicTransportation::Journey,
+                                                          PublicTransportation::Station)));
+    connect(d->provider,
+            SIGNAL(stationsFromJourneyRetrieved(QString,QList<PublicTransportation::Station>)),
+            d->proxy,
+            SLOT(registerStationsFromJourney(QString,QList<PublicTransportation::Station>)));
 
     // Register
     debug("provider-wrapper") << "Registration from backend with pid"

@@ -99,12 +99,14 @@ class AbstractBackendWrapperPrivate;
  * - registerSuggestedStations()
  * - registerJourneysFromStation()
  * - registerWaitingTime()
+ * - registerStationsFromJourney()
  *
  * - errorRegistered()
  * - copyrightRegistered()
  * - suggestedStationsRegistered()
  * - journeysFromStationRegistered()
  * - waitingTimeRegistered()
+ * - stationsFromJourneyRegistered()
  *
  * This class also provides interfaces for implementing some capabilities
  * of the providers, that should be implemented in subclasses. They are all
@@ -113,6 +115,7 @@ class AbstractBackendWrapperPrivate;
  * - requestSuggestStations()
  * - requestJourneysFromStation()
  * - requestWaitingTime()
+ * - requestStationsFromJourney()
  *
  * All these requests returns a request identifier, and all responses will
  * provide the same identifier, in order to identify the request more easily.
@@ -186,7 +189,11 @@ public:
         /**
          * @short Request waiting time
          */
-        WaitingTimeType
+        WaitingTimeType,
+        /**
+         * @short Request stations from a journey
+         */
+        StationsFromJourneyType
     };
 
     /**
@@ -264,6 +271,16 @@ public:
      */
     virtual QString requestWaitingTime(const Company &company, const Line &line,
                                        const Journey &journey, const Station &station) = 0;
+    /**
+     * @brief Request stations from journey
+     * @param company company.
+     * @param line line for which the stations should be queried.
+     * @param journey journey for which the stations should be queried.
+     * @param station station for which the stations should be queried.
+     * @return request identifier.
+     */
+    virtual QString requestStationsFromJourney(const Company &company, const Line &line,
+                                               const Journey &journey, const Station &station) = 0;
 public Q_SLOTS:
     /**
      * @brief Launch the backend
@@ -376,6 +393,16 @@ public Q_SLOTS:
      */
     void registerWaitingTime(const QString &request,
                              const QList<PublicTransportation::WaitingTime> &waitingTimeList);
+    /**
+     * @brief Register stations from journey
+     *
+     * This method is used to register the list stations for the requested journey.
+     *
+     * @param request request request identifier.
+     * @param stationList a list of stations.
+     */
+    void registerStationsFromJourney(const QString &request,
+                                     const QList<PublicTransportation::Station> &stationList);
 Q_SIGNALS:
     /**
      * @brief Status changed
@@ -445,6 +472,16 @@ Q_SIGNALS:
      */
     void waitingTimeRegistered(const QString &request,
                                const QList<PublicTransportation::WaitingTime> &waitimgTimeList);
+    /**
+     * @brief Stations from journey registered
+     *
+     * This signal is used to relay registered stations.
+     *
+     * @param request request identifier.
+     * @param stationList a list of stations.
+     */
+    void stationsFromJourneyRegistered(const QString &request,
+                                       const QList<PublicTransportation::Station> &stationList);
 protected:
     /**
      * @brief D-pointer based constructor

@@ -63,6 +63,7 @@ class WaitingTime;
  * - retrieveJourneysFromStation()
  * - retrieveJourneysAndWaitingTimesFromStation()
  * - retrieveWaitingTime()
+ * - retrieveStationsFromJourney()
  *
  * These methods are already implemented by default, but do nothing.
  * In order to perform a task, a backend should implement some
@@ -81,6 +82,7 @@ class WaitingTime;
  * - journeysFromStationRetrieved()
  * - journeysAndWaitingTimesFromStationRetrieved()
  * - waitingTimeRetrieved()
+ * - stationsFromJourneyRetrieved()
  *
  * A specific signal, errorRetrieved() can also be sent in order
  * to inform that there were an error. Error categories can be found
@@ -143,6 +145,19 @@ public Q_SLOTS:
                                      const PublicTransportation::Line &line,
                                      const PublicTransportation::Journey &journey,
                                      const PublicTransportation::Station &station);
+    /**
+     * @brief Retrieve stations from journey
+     * @param request request identifier.
+     * @param company company.
+     * @param line line for which the stations should be queried.
+     * @param journey journey for which the stations should be queried.
+     * @param station station for which the stations should be queried.
+     */
+    virtual void retrieveStationsFromJourney(const QString &request,
+                                             const PublicTransportation::Company &company,
+                                             const PublicTransportation::Line &line,
+                                             const PublicTransportation::Journey &journey,
+                                             const PublicTransportation::Station &station);
 Q_SIGNALS:
     /**
      * @brief Error retrieved
@@ -185,6 +200,13 @@ Q_SIGNALS:
      */
     void waitingTimeRetrieved(const QString &request,
                               const QList<PublicTransportation::WaitingTime> &waitingTimeList);
+    /**
+     * @brief Stations from journey
+     * @param request request identifier.
+     * @param stationList a list of stations.
+     */
+    void stationsFromJourneyRetrieved(const QString &request,
+                                      const QList<PublicTransportation::Station> &stationList);
 };
 
 }

@@ -102,6 +102,19 @@ public:
                                      const PublicTransportation::Line &line,
                                      const PublicTransportation::Journey &journey,
                                      const PublicTransportation::Station &station) = 0;
+    /**
+     * @brief Retrieve stations from journey
+     * @param request request identifier.
+     * @param company company.
+     * @param line line for which the stations should be queried.
+     * @param journey journey for which the stations should be queried.
+     * @param station station for which the stations should be queried.
+     */
+    virtual void retrieveStationsFromJourney(const QString &request,
+                                             const PublicTransportation::Company &company,
+                                             const PublicTransportation::Line &line,
+                                             const PublicTransportation::Journey &journey,
+                                             const PublicTransportation::Station &station) = 0;
 };
 
 }

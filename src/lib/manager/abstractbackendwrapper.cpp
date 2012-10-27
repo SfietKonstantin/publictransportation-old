@@ -117,7 +117,7 @@ void AbstractBackendWrapper::registerCopyright(const QString &request, const QSt
         }
 
         debug("abs-backend-wrapper") << "Copyright registered";
-        debug("abs-backend-wrapper") << "(Request" << request << ")";
+        debug("abs-backend-wrapper") << "Request" << request;
         debug("abs-backend-wrapper") << copyright;
 
         delete d->requests.take(request);
@@ -136,7 +136,7 @@ void AbstractBackendWrapper::registerSuggestedStations(const QString & request,
         }
 
         debug("abs-backend-wrapper") << "Suggested stations registered";
-        debug("abs-backend-wrapper") << "(Request" << request << ")";
+        debug("abs-backend-wrapper") << "Request" << request;
         debug("abs-backend-wrapper") << "list of suggested stations";
         foreach (Station station, suggestedStationList) {
             debug("abs-backend-wrapper") << station.name();
@@ -158,7 +158,7 @@ void AbstractBackendWrapper::registerJourneysFromStation(const QString &request,
         }
 
         debug("abs-backend-wrapper") << "Journeys from station registered";
-        debug("abs-backend-wrapper") << "(Request" << request << ")";
+        debug("abs-backend-wrapper") << "Request" << request;
         debug("abs-backend-wrapper") << "list of lines";
         foreach (InfoJourneys infoJourneys, infoJourneyList) {
             debug("abs-backend-wrapper") << infoJourneys.line().name();
@@ -181,7 +181,7 @@ void AbstractBackendWrapper::registerJourneysAndWaitingTimesFromStation(const QS
         }
 
         debug("abs-backend-wrapper") << "Journeys and waiting times from station registered";
-        debug("abs-backend-wrapper") << "(Request" << request << ")";
+        debug("abs-backend-wrapper") << "Request" << request;
         debug("abs-backend-wrapper") << "list of lines";
         foreach (InfoJourneyWaitingTime infoJourneyAndWaitingTime, infoJourneyWaitingTimeList) {
             debug("abs-backend-wrapper") << infoJourneyAndWaitingTime.line().name();
@@ -203,7 +203,7 @@ void AbstractBackendWrapper::registerWaitingTime(const QString &request,
         }
 
         debug("abs-backend-wrapper") << "Waiting time registered";
-        debug("abs-backend-wrapper") << "(Request" << request << ")";
+        debug("abs-backend-wrapper") << "Request" << request;
         debug("abs-backend-wrapper") << "list of waiting time";
         foreach (WaitingTime waitingTime, waitingTimeList) {
             debug("abs-backend-wrapper") << waitingTime.waitingTime();
@@ -211,6 +211,28 @@ void AbstractBackendWrapper::registerWaitingTime(const QString &request,
 
         delete d->requests.take(request);
         emit waitingTimeRegistered(request, waitingTimeList);
+    }
+}
+
+void AbstractBackendWrapper::registerStationsFromJourney(const QString &request,
+                                                         const QList<Station> &stationList)
+{
+    Q_D(AbstractBackendWrapper);
+    if (d->requests.contains(request)) {
+        if (d->requests.value(request)->type != AbstractBackendWrapper::StationsFromJourneyType) {
+            registerError(request, INVALID_REQUEST_TYPE, "Invalid request type");
+            return;
+        }
+
+        debug("abs-backend-wrapper") << "Stations from journeys registered";
+        debug("abs-backend-wrapper") << "Request" << request;
+        debug("abs-backend-wrapper") << "list of stations";
+        foreach (Station station, stationList) {
+            debug("abs-backend-wrapper") << station.name();
+        }
+
+        delete d->requests.take(request);
+        emit stationsFromJourneyRegistered(request, stationList);
     }
 }
 

@@ -163,6 +163,7 @@ QStringList TransportLausannois::capabilities() const
     capabilities.append(SUGGEST_STATIONS);
     capabilities.append(JOURNEYS_FROM_STATION);
     capabilities.append(WAITING_TIME);
+    capabilities.append(STATIONS_FROM_JOURNEY);
     return capabilities;
 }
 
@@ -324,6 +325,13 @@ void TransportLausannois::retrieveWaitingTime(const QString &request, const Comp
     QNetworkReply *reply = d->nam->get(QNetworkRequest(QUrl(urlString)));
     d->waitTimeRequestMap.insert(reply, request);
     connect(reply, SIGNAL(finished()), this, SLOT(slotWaitingTimeFinished()));
+}
+
+void TransportLausannois::retrieveStationsFromJourney(const QString &request,
+                                                      const Company &company,
+                                                      const Line &line, const Journey &journey,
+                                                      const Station &station)
+{
 }
 
 }

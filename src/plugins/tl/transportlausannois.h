@@ -42,6 +42,9 @@ public Q_SLOTS:
     virtual void retrieveWaitingTime(const QString &request, const Company &company,
                                      const Line &line, const Journey &journey,
                                      const Station &station);
+    virtual void retrieveStationsFromJourney(const QString &request, const Company &company,
+                                             const Line &line, const Journey &journey,
+                                             const Station &station);
 protected:
     QScopedPointer<TransportLausannoisPrivate> d_ptr;
 private:

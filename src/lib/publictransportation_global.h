@@ -386,6 +386,31 @@
  * - s \e request Request identifier.
  * - a\ref waitingTime "(ia{sv})" \e waitingTimeList A list of waiting time.
  *
+ * \subsection stationsFromJourneyRequested stationsFromJourneyRequested
+ *
+ * This signal is used to notify that the backend should provide a list of station for a given
+ * journey, providing a station from which the journey starts as well as a company and a line.
+ *
+ * \b Parameters
+ * - s \e request Request identifier.
+ * - \ref transportationObject "(a{sv}sa{sv})" \e company Company.
+ * - \ref transportationObject "(a{sv}sa{sv})" \e line Line for which the stations should
+ *   be queried.
+ * - \ref transportationObject "(a{sv}sa{sv})" \e journey Journey for which stations should
+ *   be queried.
+ * - \ref transportationObject "(a{sv}sa{sv})" \e station Station for which the stations should
+ *   be queried.
+ *
+ * \subsection registerStationsFromJourney registerStationsFromJourney
+ *
+ * This method is used to register the list of stations, in order to respond to
+ * \ref stationsFromJourneyRequested.
+ *
+ * \b Parameters
+ * - s \e request Request identifier.
+ * - a\ref transportationObject "(a{sv}sa{sv})" \e stationList A list of stations.
+ *
+ *
  * \section cppApi C++ API
  *
  * The C++ API is basically an interface (actually a QObject) that should be subclassed and

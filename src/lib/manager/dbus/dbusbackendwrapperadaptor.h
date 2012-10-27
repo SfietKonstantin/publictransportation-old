@@ -9,8 +9,8 @@
  * before re-generating it.
  */
 
-#ifndef DBUSBACKENDWRAPPERADAPTOR_H_1351094110
-#define DBUSBACKENDWRAPPERADAPTOR_H_1351094110
+#ifndef DBUSBACKENDWRAPPERADAPTOR_H_1351333619
+#define DBUSBACKENDWRAPPERADAPTOR_H_1351333619
 
 #include <QtCore/QObject>
 #include <QtDBus/QtDBus>
@@ -81,7 +81,7 @@ class PublictransportationAdaptor: public QDBusAbstractAdaptor
 "    <method name=\"registerJourneysAndWaitingTimesFromStation\">\n"
 "      <annotation value=\"const QList&lt;PublicTransportation::InfoJourneyWaitingTime> &amp;\" name=\"org.qtproject.QtDBus.QtTypeName.In1\"/>\n"
 "      <arg direction=\"in\" type=\"s\" name=\"request\"/>\n"
-"      <arg direction=\"in\" type=\"a((a{sv}sa{sv})(a{sv}sa{sv})(a{sv}sa{sv})(a{sv}sa{sv}))\" name=\"infoJourneyWaitingTimeList\"/>\n"
+"      <arg direction=\"in\" type=\"a((a{sv}sa{sv})(a{sv}sa{sv})(a{sv}sa{sv})(a{sv}sa{sv})(ia{sv}))\" name=\"infoJourneyWaitingTimeList\"/>\n"
 "    </method>\n"
 "    <!-- Waiting time for a journey -->\n"
 "    <signal name=\"waitingTimeRequested\">\n"
@@ -100,6 +100,23 @@ class PublictransportationAdaptor: public QDBusAbstractAdaptor
 "      <arg direction=\"in\" type=\"s\" name=\"request\"/>\n"
 "      <arg direction=\"in\" type=\"a(ia{sv})\" name=\"waitingTimeList\"/>\n"
 "    </method>\n"
+"    <!-- List of stations for a given journey -->\n"
+"    <signal name=\"stationsFromJourneyRequested\">\n"
+"      <annotation value=\"const PublicTransportation::Company &amp;\" name=\"org.qtproject.QtDBus.QtTypeName.In1\"/>\n"
+"      <annotation value=\"const PublicTransportation::Line &amp;\" name=\"org.qtproject.QtDBus.QtTypeName.In2\"/>\n"
+"      <annotation value=\"const PublicTransportation::Journey &amp;\" name=\"org.qtproject.QtDBus.QtTypeName.In3\"/>\n"
+"      <annotation value=\"const PublicTransportation::Station &amp;\" name=\"org.qtproject.QtDBus.QtTypeName.In4\"/>\n"
+"      <arg direction=\"out\" type=\"s\" name=\"request\"/>\n"
+"      <arg direction=\"out\" type=\"(a{sv}sa{sv})\" name=\"company\"/>\n"
+"      <arg direction=\"out\" type=\"(a{sv}sa{sv})\" name=\"line\"/>\n"
+"      <arg direction=\"out\" type=\"(a{sv}sa{sv})\" name=\"journey\"/>\n"
+"      <arg direction=\"out\" type=\"(a{sv}sa{sv})\" name=\"station\"/>\n"
+"    </signal>\n"
+"    <method name=\"registerStationsFromJourney\">\n"
+"      <annotation value=\"const QList&lt;PublicTransportation::Station> &amp;\" name=\"org.qtproject.QtDBus.QtTypeName.In1\"/>\n"
+"      <arg direction=\"in\" type=\"s\" name=\"request\"/>\n"
+"      <arg direction=\"in\" type=\"a(a{sv}sa{sv})\" name=\"stationList\"/>\n"
+"    </method>\n"
 "  </interface>\n"
         "")
 public:
@@ -116,12 +133,14 @@ public Q_SLOTS: // METHODS
     void registerError(const QString &request, const QString &errorId, const QString &error);
     void registerJourneysAndWaitingTimesFromStation(const QString &request, const QList<PublicTransportation::InfoJourneyWaitingTime> & infoJourneyWaitingTimeList);
     void registerJourneysFromStation(const QString &request, const QList<PublicTransportation::InfoJourneys> & infoJourneysList);
+    void registerStationsFromJourney(const QString &request, const QList<PublicTransportation::Station> & stationList);
     void registerSuggestedStations(const QString &request, const QList<PublicTransportation::Station> & suggestedStationList);
     void registerWaitingTime(const QString &request, const QList<PublicTransportation::WaitingTime> & waitingTimeList);
 Q_SIGNALS: // SIGNALS
     void copyrightRequested(const QString &request);
     void journeysAndWaitingTimesFromStationRequested(const QString &request, const PublicTransportation::Station & station, int limit);
     void journeysFromStationRequested(const QString &request, const PublicTransportation::Station & station, int limit);
+    void stationsFromJourneyRequested(const QString &request, const PublicTransportation::Company & company, const PublicTransportation::Line & line, const PublicTransportation::Journey & journey, const PublicTransportation::Station & station);
     void suggestStationsRequested(const QString &request, const QString &partialStation);
     void waitingTimeRequested(const QString &request, const PublicTransportation::Company & company, const PublicTransportation::Line & line, const PublicTransportation::Journey & journey, const PublicTransportation::Station & station);
 };

@@ -63,6 +63,12 @@ void PublictransportationAdaptor::registerJourneysFromStation(const QString &req
     parent()->registerJourneysFromStation(request, infoJourneysList);
 }
 
+void PublictransportationAdaptor::registerStationsFromJourney(const QString &request, const QList<PublicTransportation::Station> & stationList)
+{
+    // handle method call org.SfietKonstantin.publictransportation.registerStationsFromJourney
+    parent()->registerStationsFromJourney(request, stationList);
+}
+
 void PublictransportationAdaptor::registerSuggestedStations(const QString &request, const QList<PublicTransportation::Station> & suggestedStationList)
 {
     // handle method call org.SfietKonstantin.publictransportation.registerSuggestedStations

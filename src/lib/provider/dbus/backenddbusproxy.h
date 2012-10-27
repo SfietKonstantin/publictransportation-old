@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef BACKENDDBUSPROXY_H_1351094110
-#define BACKENDDBUSPROXY_H_1351094110
+#ifndef BACKENDDBUSPROXY_H_1351333619
+#define BACKENDDBUSPROXY_H_1351333619
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -78,6 +78,13 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("registerJourneysFromStation"), argumentList);
     }
 
+    inline QDBusPendingReply<> registerStationsFromJourney(const QString &request, const QList<PublicTransportation::Station> & stationList)
+    {
+        QList<QVariant> argumentList;
+        argumentList << QVariant::fromValue(request) << QVariant::fromValue(stationList);
+        return asyncCallWithArgumentList(QLatin1String("registerStationsFromJourney"), argumentList);
+    }
+
     inline QDBusPendingReply<> registerSuggestedStations(const QString &request, const QList<PublicTransportation::Station> & suggestedStationList)
     {
         QList<QVariant> argumentList;
@@ -96,6 +103,7 @@ Q_SIGNALS: // SIGNALS
     void copyrightRequested(const QString &request);
     void journeysAndWaitingTimesFromStationRequested(const QString &request, const PublicTransportation::Station & station, int limit);
     void journeysFromStationRequested(const QString &request, const PublicTransportation::Station & station, int limit);
+    void stationsFromJourneyRequested(const QString &request, const PublicTransportation::Company & company, const PublicTransportation::Line & line, const PublicTransportation::Journey & journey, const PublicTransportation::Station & station);
     void suggestStationsRequested(const QString &request, const QString &partialStation);
     void waitingTimeRequested(const QString &request, const PublicTransportation::Company & company, const PublicTransportation::Line & line, const PublicTransportation::Journey & journey, const PublicTransportation::Station & station);
 };
