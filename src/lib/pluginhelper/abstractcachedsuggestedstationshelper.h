@@ -14,42 +14,41 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_PROVIDER_RATP_H
-#define PUBLICTRANSPORTATION_PROVIDER_RATP_H
+#ifndef PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTCACHEDSUGGESTEDSTATIONSHELPER_H
+#define PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTCACHEDSUGGESTEDSTATIONSHELPER_H
 
-#include <QtCore/QObject>
-#include "provider/providerpluginobject.h"
+#include "publictransportationpluginhelper_global.h"
+#include "abstractsuggestedstationshelper.h"
 
 namespace PublicTransportation
 {
 
-namespace Provider
+namespace PluginHelper
 {
 
-class RatpPrivate;
-class Ratp : public ProviderPluginObject
+class AbstractCachedSuggestedStationsHelperPrivate;
+class PUBLICTRANSPORTATIONPLUGINHELPER_EXPORT AbstractCachedSuggestedStationsHelper:
+        public AbstractSuggestedStationsHelper
 {
     Q_OBJECT
-    Q_INTERFACES(PublicTransportation::ProviderPluginInterface)
 public:
-    explicit Ratp(QObject *parent = 0);
-    virtual QStringList capabilities() const;
-public Q_SLOTS:
-    virtual void retrieveCopyright(const QString &request);
-    virtual void retrieveSuggestedStations(const QString &request, const QString &partialStation);
-    virtual void retrieveJourneysFromStation(const QString &request, const Station &station,
-                                             int limit);
-    virtual void retrieveWaitingTime(const QString &request, const Company &company,
-                                     const Line &line, const Journey &journey,
-                                     const Station &station);
+    explicit AbstractCachedSuggestedStationsHelper(QNetworkAccessManager *networkAccessManager,
+                                                   QObject *parent = 0);
+    virtual ~AbstractCachedSuggestedStationsHelper();
+    void suggestGet(const QString &request, const QNetworkRequest &networkRequest,
+                    const QString &partialStation);
+    void suggestPost(const QString &request, const QNetworkRequest &networkRequest,
+                     const QByteArray &data, const QString &partialStation);
 protected:
-    QScopedPointer<RatpPrivate> d_ptr;
+    virtual QList<Station> processData(QIODevice *input, bool *ok = 0,
+                                       QString *errorMessage = 0) = 0;
 private:
-    Q_DECLARE_PRIVATE(Ratp)
+    Q_DECLARE_PRIVATE(AbstractCachedSuggestedStationsHelper)
+
 };
 
 }
 
 }
 
-#endif // PUBLICTRANSPORTATION_PROVIDER_RATP_H
+#endif // PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTCACHEDSUGGESTEDSTATIONSHELPER_H

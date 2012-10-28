@@ -14,42 +14,37 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_PROVIDER_RATP_H
-#define PUBLICTRANSPORTATION_PROVIDER_RATP_H
+#ifndef PUBLICTRANSPORTATION_PLUGINHELPER_OFFLINEXMLJOURNEYSFROMSTATIONHELPER_H
+#define PUBLICTRANSPORTATION_PLUGINHELPER_OFFLINEXMLJOURNEYSFROMSTATIONHELPER_H
 
-#include <QtCore/QObject>
-#include "provider/providerpluginobject.h"
+#include "publictransportationpluginhelper_global.h"
+
+#include <QtCore/QList>
+#include <QtCore/QVariantMap>
 
 namespace PublicTransportation
 {
 
-namespace Provider
+class Company;
+class Line;
+class Station;
+class InfoJourneys;
+namespace PluginHelper
 {
 
-class RatpPrivate;
-class Ratp : public ProviderPluginObject
+class PUBLICTRANSPORTATIONPLUGINHELPER_EXPORT OfflineXmlJourneysFromStationHelper
 {
-    Q_OBJECT
-    Q_INTERFACES(PublicTransportation::ProviderPluginInterface)
 public:
-    explicit Ratp(QObject *parent = 0);
-    virtual QStringList capabilities() const;
-public Q_SLOTS:
-    virtual void retrieveCopyright(const QString &request);
-    virtual void retrieveSuggestedStations(const QString &request, const QString &partialStation);
-    virtual void retrieveJourneysFromStation(const QString &request, const Station &station,
-                                             int limit);
-    virtual void retrieveWaitingTime(const QString &request, const Company &company,
-                                     const Line &line, const Journey &journey,
-                                     const Station &station);
-protected:
-    QScopedPointer<RatpPrivate> d_ptr;
-private:
-    Q_DECLARE_PRIVATE(Ratp)
+    static QList<InfoJourneys> journeysFromStation(const QString &xmlFile,
+                                                   const Station &station,
+                                                   const QVariantMap &disambiguation,
+                                                   const Company &company,
+                                                   bool *ok = 0,
+                                                   QString *errorMessage = 0);
 };
 
 }
 
 }
 
-#endif // PUBLICTRANSPORTATION_PROVIDER_RATP_H
+#endif // PUBLICTRANSPORTATION_PLUGINHELPER_OFFLINEXMLJOURNEYSFROMSTATIONHELPER_H

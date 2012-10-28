@@ -4,10 +4,10 @@ TARGET = ratp
 TEMPLATE = lib
 QT = core network xml
 CONFIG += plugin
-INCLUDEPATH += ../../lib/
-#INCLUDEPATH += ../../3rdparty/qjson/src
-LIBS += -L../../lib/ -l$${NAME}
-#LIBS += -L../../3rdparty/qjson/ -lqjson
+INCLUDEPATH += ../../lib/base/
+INCLUDEPATH += ../../lib/pluginhelper
+LIBS += -L../../lib/base -l$${NAME}
+LIBS += -L../../lib/pluginhelper -l$${NAME}pluginhelper
 
 HEADERS +=      ratp.h \
 

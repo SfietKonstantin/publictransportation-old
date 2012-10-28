@@ -4,9 +4,11 @@ TARGET = tl
 TEMPLATE = lib
 QT = core network xml
 CONFIG += plugin
-INCLUDEPATH += ../../lib/
+INCLUDEPATH += ../../lib/base/
+INCLUDEPATH += ../../lib/pluginhelper/
 INCLUDEPATH += ../../3rdparty/qjson/src
-LIBS += -L../../lib/ -l$${NAME}
+LIBS += -L../../lib/base -l$${NAME}
+LIBS += -L../../lib/pluginhelper/ -l$${NAME}pluginhelper
 LIBS += -L../../3rdparty/qjson/ -lqjson
 
 HEADERS +=      transportlausannois.h \

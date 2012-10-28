@@ -10,8 +10,8 @@ DEFINES += 'I18N_FOLDER=\'\"$${I18N_FOLDER}/\"\''
 
 QT = core gui xml declarative
 
-INCLUDEPATH += ../../lib/
-LIBS += -L../../lib/ -l$${NAME}
+INCLUDEPATH += ../../lib/base/
+LIBS += -L../../lib/base/ -l$${NAME}
 
 
 HEADERS +=      xmlconversionhelper.h \

@@ -46,7 +46,6 @@ protected:
     QScopedPointer<SibraPrivate> d_ptr;
 private:
     Q_DECLARE_PRIVATE(Sibra)
-    Q_PRIVATE_SLOT(d_func(), void slotSuggestedStationsFinished())
     Q_PRIVATE_SLOT(d_func(), void slotJourneysOrWaitingTimeFinished())
 };
 

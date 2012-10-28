@@ -4,8 +4,8 @@ TEMPLATE = app
 TARGET = $${NAME}-provider
 
 QT = core dbus
-INCLUDEPATH += ../../lib/
-LIBS += -L../../lib/ -l$${NAME}
+INCLUDEPATH += ../../lib/base/
+LIBS += -L../../lib/base/ -l$${NAME}
 
 HEADERS +=  \
 

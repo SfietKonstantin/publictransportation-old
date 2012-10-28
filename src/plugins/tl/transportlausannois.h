@@ -49,7 +49,6 @@ protected:
     QScopedPointer<TransportLausannoisPrivate> d_ptr;
 private:
     Q_DECLARE_PRIVATE(TransportLausannois)
-    Q_PRIVATE_SLOT(d_func(), void slotWaitingTimeFinished())
 };
 
 }

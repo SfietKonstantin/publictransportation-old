@@ -14,42 +14,43 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_PROVIDER_RATP_H
-#define PUBLICTRANSPORTATION_PROVIDER_RATP_H
+#ifndef PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTSUGGESTEDSTATIONSHELPER_P_H
+#define PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTSUGGESTEDSTATIONSHELPER_P_H
 
-#include <QtCore/QObject>
-#include "provider/providerpluginobject.h"
+#include "abstractsuggestedstationshelper.h"
 
+// Warning
+//
+// This file exists for the convenience
+// of other publictransportation classes.
+// This header file may change from version
+// to version without notice or even be removed.
+
+class QNetworkReply;
 namespace PublicTransportation
 {
 
-namespace Provider
+namespace PluginHelper
 {
 
-class RatpPrivate;
-class Ratp : public ProviderPluginObject
+class AbstractSuggestedStationsHelperPrivate
 {
-    Q_OBJECT
-    Q_INTERFACES(PublicTransportation::ProviderPluginInterface)
 public:
-    explicit Ratp(QObject *parent = 0);
-    virtual QStringList capabilities() const;
-public Q_SLOTS:
-    virtual void retrieveCopyright(const QString &request);
-    virtual void retrieveSuggestedStations(const QString &request, const QString &partialStation);
-    virtual void retrieveJourneysFromStation(const QString &request, const Station &station,
-                                             int limit);
-    virtual void retrieveWaitingTime(const QString &request, const Company &company,
-                                     const Line &line, const Journey &journey,
-                                     const Station &station);
+    AbstractSuggestedStationsHelperPrivate(AbstractSuggestedStationsHelper *q);
+    virtual ~AbstractSuggestedStationsHelperPrivate();
+    virtual void slotFinished();
+    QNetworkAccessManager *networkAccessManager;
+    QNetworkReply *reply;
+    QString request;
+    QString partialStation;
 protected:
-    QScopedPointer<RatpPrivate> d_ptr;
+    AbstractSuggestedStationsHelper * const q_ptr;
 private:
-    Q_DECLARE_PRIVATE(Ratp)
+    Q_DECLARE_PUBLIC(AbstractSuggestedStationsHelper)
 };
 
 }
 
 }
 
-#endif // PUBLICTRANSPORTATION_PROVIDER_RATP_H
+#endif // PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTSUGGESTEDSTATIONSHELPER_P_H

@@ -14,42 +14,20 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_PROVIDER_RATP_H
-#define PUBLICTRANSPORTATION_PROVIDER_RATP_H
+#ifndef PUBLICTRANSPORTATIONPLUGINHELPER_GLOBAL_H
+#define PUBLICTRANSPORTATIONPLUGINHELPER_GLOBAL_H
 
-#include <QtCore/QObject>
-#include "provider/providerpluginobject.h"
+#include <QtCore/qglobal.h>
 
-namespace PublicTransportation
-{
+/**
+ * \def PUBLICTRANSPORTATIONPLUGINHELPER_EXPORT
+ * @short Library export or import
+ */
 
-namespace Provider
-{
+#if defined(PUBLICTRANSPORTATIONPLUGINHELPER_LIBRARY)
+#  define PUBLICTRANSPORTATIONPLUGINHELPER_EXPORT Q_DECL_EXPORT
+#else
+#  define PUBLICTRANSPORTATIONPLUGINHELPER_EXPORT Q_DECL_IMPORT
+#endif
 
-class RatpPrivate;
-class Ratp : public ProviderPluginObject
-{
-    Q_OBJECT
-    Q_INTERFACES(PublicTransportation::ProviderPluginInterface)
-public:
-    explicit Ratp(QObject *parent = 0);
-    virtual QStringList capabilities() const;
-public Q_SLOTS:
-    virtual void retrieveCopyright(const QString &request);
-    virtual void retrieveSuggestedStations(const QString &request, const QString &partialStation);
-    virtual void retrieveJourneysFromStation(const QString &request, const Station &station,
-                                             int limit);
-    virtual void retrieveWaitingTime(const QString &request, const Company &company,
-                                     const Line &line, const Journey &journey,
-                                     const Station &station);
-protected:
-    QScopedPointer<RatpPrivate> d_ptr;
-private:
-    Q_DECLARE_PRIVATE(Ratp)
-};
-
-}
-
-}
-
-#endif // PUBLICTRANSPORTATION_PROVIDER_RATP_H
+#endif // PUBLICTRANSPORTATIONPLUGINHELPER_GLOBAL_H

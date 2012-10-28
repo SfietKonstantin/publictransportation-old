@@ -32,17 +32,30 @@
 #include "common/infojourneys.h"
 #include "common/journeyandwaitingtime.h"
 
+#include "abstractcachedsuggestedstationshelper.h"
+
 static const char *USER_AGENT = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) \
 AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16";
 static const char *JOURNEYS_REGEXP = "<span class=\"picto-arret-ligne picto-arret-l[^\"]\"><span>\
 ([^<]*)</span></span><span class=\"horaire\">Prochain bus à <strong>([^<]*)[^D]*Direction <strong>\
 ([^<]*)";
 
+using namespace PublicTransportation::PluginHelper;
+
 namespace PublicTransportation
 {
 
 namespace Provider
 {
+
+class SibraSuggestedStationHelper: public AbstractCachedSuggestedStationsHelper
+{
+public:
+    explicit SibraSuggestedStationHelper(QNetworkAccessManager *networkAccessManager,
+                                         QObject *parent = 0);
+protected:
+    virtual QList<Station> processData(QIODevice *input, bool *ok, QString *errorMessage);
+};
 
 class SibraPrivate
 {
@@ -60,55 +73,38 @@ public:
     void createJourneysFromStation();
     void createWaitingTime();
     QNetworkAccessManager *nam;
-    QNetworkReply *suggestedStationsReply;
-    QString suggestedStationsRequest;
-    QString suggestedStationsPartialStation;
     QNetworkReply *journeysOrWaitingTimeReply;
     OperationType journeysOrWaitingTimeOperation;
     QString journeysOrWaitingTimeRequest;
     Journey journeysOrWaitingTimeJourney;
     Station journeysOrWaitingTimeStation;
     QString journeysOrWaitingTimeJourneyName;
-    QList<Station> stations;
+    SibraSuggestedStationHelper *suggestedStationsHelper;
 
 private:
     Sibra * const q_ptr;
     Q_DECLARE_PUBLIC(Sibra)
 };
 
-SibraPrivate::SibraPrivate(Sibra *q):
-    q_ptr(q)
+SibraSuggestedStationHelper
+    ::SibraSuggestedStationHelper(QNetworkAccessManager *networkAccessManager, QObject *parent):
+    AbstractCachedSuggestedStationsHelper(networkAccessManager, parent)
 {
-    suggestedStationsReply = 0;
-    journeysOrWaitingTimeReply = 0;
-    journeysOrWaitingTimeOperation = Nothing;
 }
 
-QString SibraPrivate::unaccent(const QString &string)
+QList<Station> SibraSuggestedStationHelper::processData(QIODevice *input, bool *ok,
+                                                        QString *errorMessage)
 {
-    QString canonicalForm = string.toLower().normalized(QString::NormalizationForm_D);
-    QString returnedString;
-    foreach (QChar c, canonicalForm) {
-        if (c.category() != QChar::Mark_NonSpacing &&
-            c.category() != QChar::Mark_SpacingCombining) {
-              returnedString.append(c);
-         }
-    }
-
-    return returnedString;
-}
-
-void SibraPrivate::slotSuggestedStationsFinished()
-{
-    debug("sibra-plugin") << "Data retrieved from url" << suggestedStationsReply->url().toString();
-
     QRegExp stationRegExp
             = QRegExp("<li><a class=\"lien_arret[^\"]*\" href=\"([^\"]*)\"><span>([^<]*)<");
 
     QVariantMap disambiguation;
     disambiguation.insert("id", "org.SfietKonstantin.publictransportation.sibra");
-    while (!suggestedStationsReply->atEnd()) {
-        QString data = suggestedStationsReply->readLine();
+
+    QList<Station> stations;
+
+    while (!input->atEnd()) {
+        QString data = input->readLine();
         if (data.indexOf(stationRegExp) != -1) {
             Station station;
             QString name = stationRegExp.cap(2).toLower();
@@ -126,11 +122,36 @@ void SibraPrivate::slotSuggestedStationsFinished()
         }
     }
 
-    emitSuggestedStationsRetrieved(suggestedStationsRequest, suggestedStationsPartialStation);
-    suggestedStationsRequest = QString();
-    suggestedStationsPartialStation = QString();
-    suggestedStationsReply->deleteLater();
-    suggestedStationsReply = 0;
+    if (ok) {
+        *ok = true;
+    }
+
+    if (errorMessage) {
+        *errorMessage = QString();
+    }
+
+    return stations;
+}
+
+SibraPrivate::SibraPrivate(Sibra *q):
+    q_ptr(q)
+{
+    journeysOrWaitingTimeReply = 0;
+    journeysOrWaitingTimeOperation = Nothing;
+}
+
+QString SibraPrivate::unaccent(const QString &string)
+{
+    QString canonicalForm = string.toLower().normalized(QString::NormalizationForm_D);
+    QString returnedString;
+    foreach (QChar c, canonicalForm) {
+        if (c.category() != QChar::Mark_NonSpacing &&
+            c.category() != QChar::Mark_SpacingCombining) {
+              returnedString.append(c);
+         }
+    }
+
+    return returnedString;
 }
 
 void SibraPrivate::slotJourneysOrWaitingTimeFinished()
@@ -155,25 +176,6 @@ void SibraPrivate::slotJourneysOrWaitingTimeFinished()
     journeysOrWaitingTimeStation = Station();
     journeysOrWaitingTimeReply->deleteLater();
     journeysOrWaitingTimeReply = 0;
-}
-
-void SibraPrivate::emitSuggestedStationsRetrieved(const QString &request,
-                                                  const QString &partialStation)
-{
-    Q_Q(Sibra);
-    QList<Station> suggestedStations;
-    foreach (Station station, stations) {
-        if (unaccent(station.name()).startsWith(unaccent(partialStation))) {
-            suggestedStations.append(station);
-        }
-    }
-    foreach (Station station, stations) {
-        if (unaccent(station.name()).contains(unaccent(partialStation))
-            && !suggestedStations.contains(station)) {
-            suggestedStations.append(station);
-        }
-    }
-    emit q->suggestedStationsRetrieved(request, suggestedStations);
 }
 
 void SibraPrivate::createJourneysFromStation()
@@ -299,6 +301,13 @@ Sibra::Sibra(QObject *parent) :
 {
     Q_D(Sibra);
     d->nam = new QNetworkAccessManager(this);
+    d->suggestedStationsHelper = new SibraSuggestedStationHelper(d->nam, this);
+
+    connect(d->suggestedStationsHelper, SIGNAL(errorRetrieved(QString,QString,QString)),
+            this, SIGNAL(errorRetrieved(QString,QString,QString)));
+    connect(d->suggestedStationsHelper,
+            SIGNAL(suggestedStationsRetrieved(QString,QList<PublicTransportation::Station>)),
+            this, SIGNAL(suggestedStationsRetrieved(QString,QList<PublicTransportation::Station>)));
 }
 
 QStringList Sibra::capabilities() const
@@ -327,28 +336,12 @@ void Sibra::retrieveSuggestedStations(const QString &request, const QString &par
         return;
     }
 
-    if (d->stations.isEmpty()) {
-        QString urlString = "http://m.sibra.fr/temps-reel-mobile";
+    QString urlString = "http://m.sibra.fr/temps-reel-mobile";
+    QNetworkRequest networkRequest;
+    networkRequest.setUrl(QUrl(urlString));
+    networkRequest.setRawHeader("User-Agent", USER_AGENT);
 
-        if (d->suggestedStationsReply) {
-            if (!d->suggestedStationsReply->isFinished()) {
-                d->suggestedStationsReply->abort();
-            }
-            d->suggestedStationsReply->deleteLater();
-        }
-
-        QNetworkRequest networkRequest;
-        networkRequest.setUrl(QUrl(urlString));
-        networkRequest.setRawHeader("User-Agent", USER_AGENT);
-
-        d->suggestedStationsRequest = request;
-        d->suggestedStationsPartialStation = partialStation;
-        d->suggestedStationsReply = d->nam->get(networkRequest);
-        connect(d->suggestedStationsReply, SIGNAL(finished()),
-                this, SLOT(slotSuggestedStationsFinished()));
-    } else {
-        d->emitSuggestedStationsRetrieved(request, partialStation);
-    }
+    d->suggestedStationsHelper->suggestGet(request, networkRequest, partialStation);
 }
 
 void Sibra::retrieveJourneysFromStation(const QString &request, const Station &station, int limit)

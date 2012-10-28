@@ -4,8 +4,10 @@ TARGET = sibra
 TEMPLATE = lib
 QT = core network
 CONFIG += plugin
-INCLUDEPATH += ../../lib/
-LIBS += -L../../lib/ -l$${NAME}
+INCLUDEPATH += ../../lib/base/
+INCLUDEPATH += ../../lib/pluginhelper/
+LIBS += -L../../lib/base -l$${NAME}
+LIBS += -L../../lib/pluginhelper/ -l$${NAME}pluginhelper
 
 HEADERS +=      sibra.h \
 
