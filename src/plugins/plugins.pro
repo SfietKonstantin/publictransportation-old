@@ -1,3 +1,9 @@
 TEMPLATE = subdirs
-SUBDIRS += tl opendatach sibra transpole ratp hsl
+SUBDIRS += tl ratp
+
+#SUBDIRS += sibra transpole
+
+#SUBDIRS += hsl
+
+#SUBDIRS += opendatach
 

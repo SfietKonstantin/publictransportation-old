@@ -37,6 +37,7 @@ class Journey;
 class Station;
 class WaitingTime;
 class InfoJourneys;
+class JourneyAndWaitingTime;
 class InfoJourneyWaitingTime;
 class AbstractBackendWrapperPrivate;
 
@@ -386,13 +387,13 @@ public Q_SLOTS:
      * @brief Register waiting time
      *
      * This method is used to register the list of waiting time,as a list of
-     * PublicTransportation::WaitingTime.
+     * PublicTransportation::JourneyAndWaitingTime.
      *
      * @param request request request identifier.
-     * @param waitingTimeList a list of waiting time.
+     * @param journeyAndWaitingTimeList a list of journeys and waiting time.
      */
     void registerWaitingTime(const QString &request,
-                             const QList<PublicTransportation::WaitingTime> &waitingTimeList);
+                             const QList<JourneyAndWaitingTime> &journeyAndWaitingTimeList);
     /**
      * @brief Register stations from journey
      *
@@ -468,10 +469,10 @@ Q_SIGNALS:
      * This signal is used to relay registered waiting time.
      *
      * @param request request identifier.
-     * @param waitimgTimeList a list of waiting time.
+     * @param journeyAndWaitingTimeList a list of journeys and waiting time.
      */
     void waitingTimeRegistered(const QString &request,
-                               const QList<PublicTransportation::WaitingTime> &waitimgTimeList);
+               const QList<PublicTransportation::JourneyAndWaitingTime> &journeyAndWaitingTimeList);
     /**
      * @brief Stations from journey registered
      *

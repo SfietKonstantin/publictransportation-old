@@ -75,9 +75,9 @@ void PublictransportationAdaptor::registerSuggestedStations(const QString &reque
     parent()->registerSuggestedStations(request, suggestedStationList);
 }
 
-void PublictransportationAdaptor::registerWaitingTime(const QString &request, const QList<PublicTransportation::WaitingTime> & waitingTimeList)
+void PublictransportationAdaptor::registerWaitingTime(const QString &request, const QList<PublicTransportation::JourneyAndWaitingTime> & journeyAndWaitingTimeList)
 {
     // handle method call org.SfietKonstantin.publictransportation.registerWaitingTime
-    parent()->registerWaitingTime(request, waitingTimeList);
+    parent()->registerWaitingTime(request, journeyAndWaitingTimeList);
 }
 

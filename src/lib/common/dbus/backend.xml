@@ -87,9 +87,9 @@
         </signal>
         <method name="registerWaitingTime">
             <annotation name="org.qtproject.QtDBus.QtTypeName.In1"
-                        value="const QList&lt;PublicTransportation::WaitingTime&gt; &amp;"/>
+                        value="const QList&lt;PublicTransportation::JourneyAndWaitingTime&gt; &amp;"/>
             <arg name="request" type="s" direction="in" />
-            <arg name="waitingTimeList" type="a(ia{sv})" direction="in" />
+            <arg name="journeyAndWaitingTimeList" type="a((a{sv}sa{sv})(ia{sv}))" direction="in" />
         </method>
 
         <!-- List of stations for a given journey -->

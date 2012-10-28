@@ -30,7 +30,7 @@
 #include "common/journey.h"
 #include "common/station.h"
 #include "common/infojourneys.h"
-#include "common/waitingtime.h"
+#include "common/journeyandwaitingtime.h"
 
 static const char *USER_AGENT = "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) \
 AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16";
@@ -66,6 +66,7 @@ public:
     QNetworkReply *journeysOrWaitingTimeReply;
     OperationType journeysOrWaitingTimeOperation;
     QString journeysOrWaitingTimeRequest;
+    Journey journeysOrWaitingTimeJourney;
     Station journeysOrWaitingTimeStation;
     QString journeysOrWaitingTimeJourneyName;
     QList<Station> stations;
@@ -150,6 +151,7 @@ void SibraPrivate::slotJourneysOrWaitingTimeFinished()
     }
 
     journeysOrWaitingTimeRequest = QString();
+    journeysOrWaitingTimeJourney = Journey();
     journeysOrWaitingTimeStation = Station();
     journeysOrWaitingTimeReply->deleteLater();
     journeysOrWaitingTimeReply = 0;
@@ -266,7 +268,7 @@ void SibraPrivate::createWaitingTime()
     disambiguation.insert("id", "org.SfietKonstantin.publictransportation.sibra");
 
     QTime currentTime = QTime::currentTime();
-    QList<WaitingTime> waitingTimeList;
+    QList<JourneyAndWaitingTime> journeyAndWaitingTimeList;
 
     while (!journeysOrWaitingTimeReply->atEnd()) {
         QString data = journeysOrWaitingTimeReply->readLine();
@@ -280,12 +282,13 @@ void SibraPrivate::createWaitingTime()
                 WaitingTime waitingTime;
                 waitingTime.setProperties(properties);
                 waitingTime.setWaitingTime(minutes);
-                waitingTimeList.append(waitingTime);
+                journeyAndWaitingTimeList.append(JourneyAndWaitingTime(journeysOrWaitingTimeJourney,
+                                                                       waitingTime));
             }
         }
     }
 
-    emit q->waitingTimeRetrieved(journeysOrWaitingTimeRequest, waitingTimeList);
+    emit q->waitingTimeRetrieved(journeysOrWaitingTimeRequest, journeyAndWaitingTimeList);
     journeysOrWaitingTimeJourneyName = QString();
 }
 
@@ -399,6 +402,7 @@ void Sibra::retrieveWaitingTime(const QString &request, const Company &company,
 
         d->journeysOrWaitingTimeOperation = SibraPrivate::RetrieveWaitingTime;
         d->journeysOrWaitingTimeRequest = request;
+        d->journeysOrWaitingTimeJourney = journey;
         d->journeysOrWaitingTimeStation = station;
         d->journeysOrWaitingTimeReply = d->nam->get(networkRequest);
         connect(d->journeysOrWaitingTimeReply, SIGNAL(finished()),
@@ -409,16 +413,16 @@ void Sibra::retrieveWaitingTime(const QString &request, const Company &company,
     QVariantMap properties;
     properties.insert("destination", journey.name());
 
-    QList<WaitingTime> waitingTimeList;
+    QList<JourneyAndWaitingTime> journeyAndWaitingTimeList;
     for (int i = 0; i < station.properties().value("waitingTimeCount").toInt(); i++) {
         WaitingTime waitingTime;
         waitingTime.setProperties(properties);
         int minutes = station.properties().value(QString("waitingTime%1").arg(i)).toInt();
         waitingTime.setWaitingTime(minutes);
-        waitingTimeList.append(waitingTime);
+        journeyAndWaitingTimeList.append(JourneyAndWaitingTime(journey, waitingTime));
     }
 
-    emit waitingTimeRetrieved(request, waitingTimeList);
+    emit waitingTimeRetrieved(request, journeyAndWaitingTimeList);
 }
 
 }

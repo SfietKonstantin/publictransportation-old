@@ -30,7 +30,7 @@
 #include "common/journey.h"
 #include "common/station.h"
 #include "common/infojourneys.h"
-#include "common/waitingtime.h"
+#include "common/journeyandwaitingtime.h"
 
 namespace PublicTransportation
 {
@@ -59,7 +59,7 @@ public:
     Station waitingTimeStation;
     QString waitingTimeRan;
     QNetworkReply *waitingTimePhase2Reply;
-    QString waitingTimeDirection;
+    Journey waitingTimeJourney;
 
 
 private:
@@ -327,7 +327,7 @@ void TranspolePrivate::slotWaitingTimePhase2Finished()
     debug("transpole-plugin") << "Data retrieved from url"
                               << waitingTimePhase2Reply->url().toString();
 
-    QList<WaitingTime> waitingTimes;
+    QList<JourneyAndWaitingTime> journeysAndWaitingTimes;
     QRegExp timeRegExp ("<li data-theme=\".\" data-icon=\"false\">([^<]*)</li>");
     QRegExp timeFormaRegExp ("(\\d\\d).(\\d\\d)");
     QTime currentTime = QTime::currentTime();
@@ -337,7 +337,7 @@ void TranspolePrivate::slotWaitingTimePhase2Finished()
         if (data.indexOf(timeRegExp) != -1) {
             WaitingTime waitingTime;
             QVariantMap properties;
-            properties.insert("destination", waitingTimeDirection);
+            properties.insert("destination", waitingTimeJourney.name());
             QString time = timeRegExp.cap(1);
             if (time.contains("cours")) {
                 waitingTime.setWaitingTime(0);
@@ -358,11 +358,11 @@ void TranspolePrivate::slotWaitingTimePhase2Finished()
                 waitingTime.setWaitingTime(-1);
             }
             waitingTime.setProperties(properties);
-            waitingTimes.append(waitingTime);
+            journeysAndWaitingTimes.append(JourneyAndWaitingTime(waitingTimeJourney, waitingTime));
         }
     }
 
-    emit q->waitingTimeRetrieved(waitingTimeRequest, waitingTimes);
+    emit q->waitingTimeRetrieved(waitingTimeRequest, journeysAndWaitingTimes);
     waitingTimeRequest = QString();
     waitingTimePhase2Reply->deleteLater();
     waitingTimePhase2Reply = 0;
@@ -495,7 +495,7 @@ void Transpole::retrieveWaitingTime(const QString &request, const Company &compa
     networkRequest.setUrl(QUrl(urlString));
 
     d->waitingTimeStation = station;
-    d->waitingTimeDirection = journey.name();
+    d->waitingTimeJourney = journey;
     d->waitingTimeReply = d->nam->post(networkRequest, postData);
 
     connect(d->waitingTimeReply, SIGNAL(finished()),

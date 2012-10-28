@@ -19,6 +19,8 @@ HEADERS =   publictransportation_global.h \
             common/station.h \
             common/infojourneys.h \
             common/waitingtime.h \
+            common/journeyandwaitingtime.h \
+            common/infojourneywaitingtime.h \
             common/dbus/dbusconstants.h \
             manager/desktopfileparser_p.h \
             manager/backendinfo.h \
@@ -33,7 +35,6 @@ HEADERS =   publictransportation_global.h \
             provider/providerpluginobject.h \
             provider/dbus/backenddbusproxy.h \
             provider/dbus/providerplugindbuswrapper.h \
-    common/infojourneywaitingtime.h
 
 SOURCES +=  common/transportationobject.cpp \
             common/company.cpp \
@@ -42,6 +43,8 @@ SOURCES +=  common/transportationobject.cpp \
             common/station.cpp \
             common/infojourneys.cpp \
             common/waitingtime.cpp \
+            common/journeyandwaitingtime.cpp \
+            common/infojourneywaitingtime.cpp \
             common/dbus/dbushelper.cpp \
             manager/desktopfileparser_p.cpp \
             manager/backendinfo.cpp \
@@ -54,7 +57,6 @@ SOURCES +=  common/transportationobject.cpp \
             provider/providerpluginobject.cpp \
             provider/dbus/backenddbusproxy.cpp \
             provider/dbus/providerplugindbuswrapper.cpp \
-    common/infojourneywaitingtime.cpp
 
 # Deployment
 target.path = $${LIBDIR}

@@ -32,7 +32,7 @@
 #include "common/journey.h"
 #include "common/station.h"
 #include "common/infojourneys.h"
-#include "common/waitingtime.h"
+#include "common/journeyandwaitingtime.h"
 
 namespace PublicTransportation
 {
@@ -49,7 +49,9 @@ public:
     void slotWaitingTimeFinished();
     QStringList stations;
     QNetworkAccessManager *nam;
-    QMap<QNetworkReply *, QString> waitTimeRequestMap;
+    Journey waitingTimeJourney;
+    QNetworkReply *waitingTimeReply;
+    QString waitingTimeRequest;
 private:
     Ratp * const q_ptr;
     Q_DECLARE_PUBLIC(Ratp)
@@ -58,6 +60,8 @@ private:
 RatpPrivate::RatpPrivate(Ratp *q):
     q_ptr(q)
 {
+    waitingTimeReply = 0;
+
     QFile file (":/data/backward/stations.txt");
     if (!file.open(QIODevice::ReadOnly)) {
         debug("ratp-plugin") << "Failed to read" << file.fileName().constData();
@@ -129,29 +133,31 @@ QString RatpPrivate::unstripHtmlAccents(const QString &string)
 void RatpPrivate::slotWaitingTimeFinished()
 {
     Q_Q(Ratp);
-    QNetworkReply *reply = qobject_cast<QNetworkReply *>(q->sender());
-    QString waitTimeRequest = waitTimeRequestMap.value(reply);
+    debug("ratp-plugin") << "Data retrieved from url" << waitingTimeReply->url().toString();
 
-    debug("ratp-plugin") << "Data retrieved from url" << reply->url().toString();
-
-    QList<WaitingTime> waitingTimeList;
+    QList<JourneyAndWaitingTime> journeysAndWaitingTimeList;
 
     QTime currentTime = QTime::currentTime();
     QRegExp timeMetroRegExp ("&gt;&nbsp;([^<]*)</div><div[^>]*><b>([^<]*)");
     QRegExp timeRerRegExp ("&gt;&nbsp;([^<]*)</div><div[^>]*><a[^>]*>([^<]*)</a></div><div[^>]*>\
 <b>([^<]*)");
     QRegExp timeRegExp("(\\d\\d):(\\d\\d)");
-    while (!reply->atEnd()) {
+    while (!waitingTimeReply->atEnd()) {
+        QVariantMap journeyProperties = waitingTimeJourney.properties();
+
         QString minutesString;
         QVariantMap properties;
-        QString data = reply->readLine();
+        QString data = waitingTimeReply->readLine();
         if (data.indexOf(timeMetroRegExp) != -1) {
             QString destination = timeMetroRegExp.cap(1);
             properties.insert("destination", unstripHtmlAccents(destination));
             minutesString = timeMetroRegExp.cap(2);
         } else if (data.indexOf(timeRerRegExp) != -1) {
             QString destination = timeRerRegExp.cap(1);
-            properties.insert("destination", unstripHtmlAccents(destination));
+            destination = unstripHtmlAccents(destination);
+            properties.insert("destination", destination);
+            journeyProperties.insert("to", destination);
+            journeyProperties.insert("destination", destination);
             properties.insert("train", unstripHtmlAccents(timeRerRegExp.cap(2)));
             minutesString = timeRerRegExp.cap(3);
             debug("test") << minutesString;
@@ -169,16 +175,20 @@ void RatpPrivate::slotWaitingTimeFinished()
                 minutes = ((currentTime.secsTo(nextTime) / 60) + 1440) % 1440;
             }
 
+            Journey journey = waitingTimeJourney;
+            waitingTimeJourney.setProperties(journeyProperties);
+
             WaitingTime waitingTime;
             waitingTime.setProperties(properties);
             waitingTime.setWaitingTime(minutes);
-            waitingTimeList.append(waitingTime);
+            journeysAndWaitingTimeList.append(JourneyAndWaitingTime(journey,
+                                                                    waitingTime));
         }
     }
 
-    emit q->waitingTimeRetrieved(waitTimeRequest, waitingTimeList);
-    waitTimeRequestMap.remove(reply);
-    reply->deleteLater();
+    emit q->waitingTimeRetrieved(waitingTimeRequest, journeysAndWaitingTimeList);
+    waitingTimeReply->deleteLater();
+    waitingTimeJourney = Journey();
 }
 
 ////// End of private class //////
@@ -346,9 +356,10 @@ directionsens=%3&stationid=%4";
                                       journey.properties().value("id").toString(),
                                       station.properties().value("id").toString());
 
-    QNetworkReply *reply = d->nam->get(QNetworkRequest(QUrl(urlString)));
-    d->waitTimeRequestMap.insert(reply, request);
-    connect(reply, SIGNAL(finished()), this, SLOT(slotWaitingTimeFinished()));
+    d->waitingTimeRequest = request;
+    d->waitingTimeJourney = journey;
+    d->waitingTimeReply = d->nam->get(QNetworkRequest(QUrl(urlString)));
+    connect(d->waitingTimeReply, SIGNAL(finished()), this, SLOT(slotWaitingTimeFinished()));
 }
 
 }

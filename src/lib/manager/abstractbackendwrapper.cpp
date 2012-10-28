@@ -32,6 +32,7 @@
 #include "common/station.h"
 #include "common/waitingtime.h"
 #include "common/infojourneys.h"
+#include "common/journeyandwaitingtime.h"
 #include "common/infojourneywaitingtime.h"
 
 namespace PublicTransportation
@@ -193,7 +194,7 @@ void AbstractBackendWrapper::registerJourneysAndWaitingTimesFromStation(const QS
 }
 
 void AbstractBackendWrapper::registerWaitingTime(const QString &request,
-                                                 const QList<WaitingTime> &waitingTimeList)
+                                      const QList<JourneyAndWaitingTime> &journeyAndWaitingTimeList)
 {
     Q_D(AbstractBackendWrapper);
     if (d->requests.contains(request)) {
@@ -205,12 +206,12 @@ void AbstractBackendWrapper::registerWaitingTime(const QString &request,
         debug("abs-backend-wrapper") << "Waiting time registered";
         debug("abs-backend-wrapper") << "Request" << request;
         debug("abs-backend-wrapper") << "list of waiting time";
-        foreach (WaitingTime waitingTime, waitingTimeList) {
-            debug("abs-backend-wrapper") << waitingTime.waitingTime();
+        foreach (JourneyAndWaitingTime journeyAndWaitingTime, journeyAndWaitingTimeList) {
+            debug("abs-backend-wrapper") << journeyAndWaitingTime.waitingTime().waitingTime();
         }
 
         delete d->requests.take(request);
-        emit waitingTimeRegistered(request, waitingTimeList);
+        emit waitingTimeRegistered(request, journeyAndWaitingTimeList);
     }
 }
 

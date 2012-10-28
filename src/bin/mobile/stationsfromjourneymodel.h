@@ -14,12 +14,12 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_GUI_WAITINGTIMEMODEL_H
-#define PUBLICTRANSPORTATION_GUI_WAITINGTIMEMODEL_H
+#ifndef PUBLICTRANSPORTATION_GUI_STATIONSFROMJOUNREYMODEL_H
+#define PUBLICTRANSPORTATION_GUI_STATIONSFROMJOUNREYMODEL_H
 
 /**
- * @file waitingtimemodel.h
- * @short Definition of PublicTransportation::Gui::WaitingTimeModel
+ * @file stationsfromjourneymodel.h
+ * @short Definition of PublicTransportation::Gui::StationsFromJourneyModel
  */
 
 #include <QtCore/QAbstractListModel>
@@ -37,14 +37,16 @@ class Station;
 namespace Gui
 {
 
-class WaitingTimeModelPrivate;
+class StationsFromJourneyModelPrivate;
+
 /**
- * @brief A model for waiting time
+ * @brief A model for stations from a journey
  *
- * This class provides a model for QML that contains
- * a list of waiting time.
+ * This model displays all the stations from a journey, most
+ * of the time as a scheme indicating the different stations
+ * that this journey goes through.
  */
-class WaitingTimeModel : public QAbstractListModel
+class StationsFromJourneyModel : public QAbstractListModel
 {
     Q_OBJECT
     /**
@@ -59,26 +61,21 @@ public:
     /**
      * @short Model roles
      */
-    enum WaitingTimeModelRole {
+    enum StationsFromJourneyRole {
         /**
-         * @short Name role
+         * @short Station role
          */
-        WaitingTimeRole = Qt::UserRole + 1,
-        /**
-         * @short Direction role
-         */
-        DestinationRole,
-        SupportStationsFromJourneyRole
+        StationRole = Qt::UserRole + 1
     };
     /**
      * @short Default constructor
      * @param parent parent object.
      */
-    explicit WaitingTimeModel(QObject *parent = 0);
+    explicit StationsFromJourneyModel(QObject *parent = 0);
     /**
      * @short Destructor
      */
-    virtual ~WaitingTimeModel();
+    virtual ~StationsFromJourneyModel();
     /**
      * @brief Set backend manager
      * @param backendManager backend manager to set.
@@ -125,15 +122,6 @@ public Q_SLOTS:
               const PublicTransportation::Journey &journey,
               const PublicTransportation::Station &station);
     /**
-     * @brief Reload
-     */
-    void reload();
-    /**
-     * @brief Request stations from journey
-     * @param index index index of the waiting time.
-     */
-    void requestStationsFromJourney(int index);
-    /**
      * @brief Clear
      */
     void clear();
@@ -146,33 +134,19 @@ Q_SIGNALS:
      * @short Count changed
      */
     void countChanged();
-    /**
-     * @brief Stations from journey requested
-     * @param backend backend answering the request.
-     * @param request request identifier.
-     * @param company company.
-     * @param line line.
-     * @param journey journey.
-     * @param station station.
-     */
-    void stationsFromJourneyRequested(AbstractBackendWrapper *backend, const QString &request,
-                                      const PublicTransportation::Company &company,
-                                      const PublicTransportation::Line &line,
-                                      const PublicTransportation::Journey &journey,
-                                      const PublicTransportation::Station &station);
 protected:
     /**
      * @short D-pointer
      */
-    const QScopedPointer<WaitingTimeModelPrivate> d_ptr;
+    const QScopedPointer<StationsFromJourneyModelPrivate> d_ptr;
 private:
-    Q_DECLARE_PRIVATE(WaitingTimeModel)
+    Q_DECLARE_PRIVATE(StationsFromJourneyModel)
     Q_PRIVATE_SLOT(d_func(),
-         void slotWaitingTimeRegistered(QString,QList<PublicTransportation::JourneyAndWaitingTime>))
+               void slotStationsFromJourneyRegistered(QString,QList<PublicTransportation::Station>))
 };
 
 }
 
 }
 
-#endif // PUBLICTRANSPORTATION_GUI_WAITINGTIMEMODEL_H
+#endif // PUBLICTRANSPORTATION_GUI_STATIONSFROMJOUNREYMODEL_H

@@ -151,7 +151,7 @@ Q_SIGNALS:
     /**
      * @brief Journeys from station requested
      * @param backend backend answering the request.
-     * @param request request id.
+     * @param request request identifier.
      * @param station station.
      */
     void journeysFromStationRequested(AbstractBackendWrapper *backend,

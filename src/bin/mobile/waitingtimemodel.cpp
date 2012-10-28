@@ -21,11 +21,12 @@
 
 #include "waitingtimemodel.h"
 
+#include "common/capabilitiesconstants.h"
 #include "common/company.h"
 #include "common/line.h"
 #include "common/journey.h"
 #include "common/station.h"
-#include "common/waitingtime.h"
+#include "common/journeyandwaitingtime.h"
 #include "manager/abstractbackendmanager.h"
 #include "manager/abstractbackendwrapper.h"
 #include "debug.h"
@@ -44,9 +45,19 @@ struct WaitingTimeModelItem
 {
     /**
      * @internal
+     * @brief Journey
+     */
+    Journey journey;
+    /**
+     * @internal
      * @brief Waiting time
      */
     WaitingTime waitingTime;
+    /**
+     * @internal
+     * @brief If the backend support stations from journey
+     */
+    bool supportStationsFromJourney;
 };
 
 /**
@@ -65,10 +76,10 @@ public:
     /**
      * @brief Slot waiting time registered
      * @param request request.
-     * @param waitingTimeList waiting time list.
+     * @param journeyAndWaitingTimeList journeys and waiting time list.
      */
     void slotWaitingTimeRegistered(const QString &request,
-                                   const QList<PublicTransportation::WaitingTime> &waitingTimeList);
+                                   const QList<JourneyAndWaitingTime> &journeyAndWaitingTimeList);
     /**
      * @internal
      * @brief Backend list manager
@@ -125,18 +136,26 @@ WaitingTimeModelPrivate::WaitingTimeModelPrivate(WaitingTimeModel *q):
 }
 
 void WaitingTimeModelPrivate::slotWaitingTimeRegistered(const QString &request,
-                                                        const QList<WaitingTime> &waitingTimeList)
+                                      const QList<JourneyAndWaitingTime> &journeyAndWaitingTimeList)
 {
     Q_Q(WaitingTimeModel);
     if (currentRequest != request) {
         return;
     }
 
+    AbstractBackendWrapper *backend = qobject_cast<AbstractBackendWrapper *>(q->sender());
+    if (!backend) {
+        return;
+    }
+
     q->clear();
 
-    foreach (WaitingTime waitingTime, waitingTimeList) {
+    foreach (JourneyAndWaitingTime journeyAndWaitingTime, journeyAndWaitingTimeList) {
         WaitingTimeModelItem * dataItem = new WaitingTimeModelItem;
-        dataItem->waitingTime = waitingTime;
+        dataItem->journey = journeyAndWaitingTime.journey();
+        dataItem->waitingTime = journeyAndWaitingTime.waitingTime();
+        dataItem->supportStationsFromJourney
+                = backend->capabilities().contains(STATIONS_FROM_JOURNEY);
         data.append(dataItem);
     }
 
@@ -159,6 +178,7 @@ WaitingTimeModel::WaitingTimeModel(QObject *parent):
     QHash <int, QByteArray> roles;
     roles.insert(WaitingTimeRole, "waitingTime");
     roles.insert(DestinationRole, "destination");
+    roles.insert(SupportStationsFromJourneyRole, "supportStationsFromJourney");
     setRoleNames(roles);
 }
 
@@ -207,6 +227,9 @@ QVariant WaitingTimeModel::data(const QModelIndex &index, int role) const
     case DestinationRole:
         return data->waitingTime.properties().value("destination");
         break;
+    case SupportStationsFromJourneyRole:
+        return data->supportStationsFromJourney;
+        break;
     default:
         return QVariant();
         break;
@@ -219,9 +242,9 @@ void WaitingTimeModel::load(AbstractBackendWrapper *backend, const QString &requ
 {
     Q_D(WaitingTimeModel);
     connect(backend,
-            SIGNAL(waitingTimeRegistered(QString,QList<PublicTransportation::WaitingTime>)),
+          SIGNAL(waitingTimeRegistered(QString,QList<PublicTransportation::JourneyAndWaitingTime>)),
             this,
-            SLOT(slotWaitingTimeRegistered(QString,QList<PublicTransportation::WaitingTime>)));
+       SLOT(slotWaitingTimeRegistered(QString,QList<PublicTransportation::JourneyAndWaitingTime>)));
     d->backendIdentifier = backend->identifier();
     d->company = company;
     d->line = line;
@@ -249,6 +272,36 @@ void WaitingTimeModel::reload()
 
     d->currentRequest = backend->requestWaitingTime(d->company, d->line, d->journey, d->station);
     emit loadingChanged();
+}
+
+void WaitingTimeModel::requestStationsFromJourney(int index)
+{
+    Q_D(WaitingTimeModel);
+    if (index < 0 || index >= rowCount()) {
+        return;
+    }
+
+    WaitingTimeModelItem *data = d->data.at(index);
+
+    if (!data->supportStationsFromJourney) {
+        return;
+    }
+
+    if (!d->backendManager) {
+        return;
+    }
+
+    QString backendIdentifier = d->backendIdentifier;
+    if (!d->backendManager->contains(backendIdentifier)) {
+        return;
+    }
+
+    AbstractBackendWrapper *backend = d->backendManager->backend(backendIdentifier);
+
+    QString request = backend->requestStationsFromJourney(d->company, d->line,
+                                                          data->journey, d->station);
+    emit stationsFromJourneyRequested(backend, request, d->company, d->line, data->journey,
+                                      d->station);
 }
 
 void WaitingTimeModel::clear()

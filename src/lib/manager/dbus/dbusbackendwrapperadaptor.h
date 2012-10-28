@@ -9,8 +9,8 @@
  * before re-generating it.
  */
 
-#ifndef DBUSBACKENDWRAPPERADAPTOR_H_1351333619
-#define DBUSBACKENDWRAPPERADAPTOR_H_1351333619
+#ifndef DBUSBACKENDWRAPPERADAPTOR_H_1351415096
+#define DBUSBACKENDWRAPPERADAPTOR_H_1351415096
 
 #include <QtCore/QObject>
 #include <QtDBus/QtDBus>
@@ -96,9 +96,9 @@ class PublictransportationAdaptor: public QDBusAbstractAdaptor
 "      <arg direction=\"out\" type=\"(a{sv}sa{sv})\" name=\"station\"/>\n"
 "    </signal>\n"
 "    <method name=\"registerWaitingTime\">\n"
-"      <annotation value=\"const QList&lt;PublicTransportation::WaitingTime> &amp;\" name=\"org.qtproject.QtDBus.QtTypeName.In1\"/>\n"
+"      <annotation value=\"const QList&lt;PublicTransportation::JourneyAndWaitingTime> &amp;\" name=\"org.qtproject.QtDBus.QtTypeName.In1\"/>\n"
 "      <arg direction=\"in\" type=\"s\" name=\"request\"/>\n"
-"      <arg direction=\"in\" type=\"a(ia{sv})\" name=\"waitingTimeList\"/>\n"
+"      <arg direction=\"in\" type=\"a((a{sv}sa{sv})(ia{sv}))\" name=\"journeyAndWaitingTimeList\"/>\n"
 "    </method>\n"
 "    <!-- List of stations for a given journey -->\n"
 "    <signal name=\"stationsFromJourneyRequested\">\n"
@@ -135,7 +135,7 @@ public Q_SLOTS: // METHODS
     void registerJourneysFromStation(const QString &request, const QList<PublicTransportation::InfoJourneys> & infoJourneysList);
     void registerStationsFromJourney(const QString &request, const QList<PublicTransportation::Station> & stationList);
     void registerSuggestedStations(const QString &request, const QList<PublicTransportation::Station> & suggestedStationList);
-    void registerWaitingTime(const QString &request, const QList<PublicTransportation::WaitingTime> & waitingTimeList);
+    void registerWaitingTime(const QString &request, const QList<PublicTransportation::JourneyAndWaitingTime> & journeyAndWaitingTimeList);
 Q_SIGNALS: // SIGNALS
     void copyrightRequested(const QString &request);
     void journeysAndWaitingTimesFromStationRequested(const QString &request, const PublicTransportation::Station & station, int limit);

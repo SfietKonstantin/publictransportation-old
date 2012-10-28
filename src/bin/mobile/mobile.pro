@@ -15,23 +15,25 @@ LIBS += -L../../lib/ -l$${NAME}
 
 
 HEADERS +=      xmlconversionhelper.h \
+                favouritemanager.h \
                 backendmodel.h \
                 backendcopyrightmanager.h \
                 searchstationmodel.h \
                 journeysfromstationmodel.h \
                 waitingtimemodel.h \
-                favouritemanager.h \
+                stationsfromjourneymodel.h \
                 support/countriesmodel.h \
 
 
 SOURCES +=      main.cpp \
                 xmlconversionhelper.cpp \
+                favouritemanager.cpp \
                 backendmodel.cpp \
                 backendcopyrightmanager.cpp \
                 searchstationmodel.cpp \
                 journeysfromstationmodel.cpp \
                 waitingtimemodel.cpp \
-                favouritemanager.cpp \
+                stationsfromjourneymodel.cpp \
                 support/countriesmodel.cpp \
 
 OTHER_FILES +=  main.qml \
@@ -43,13 +45,13 @@ OTHER_FILES +=  main.qml \
                 AbstractNavigationPage.qml \
                 ClickableEntry.qml \
                 MainPage.qml \
+                BackendInfoSheet.qml \
                 BackendEntry.qml \
                 BackendSelectorPage.qml \
                 SearchStationPage.qml \
                 JourneysFromStationPage.qml \
                 WaitingTimePage.qml \
                 AboutPage.qml \
-    BackendInfoSheet.qml
 
 DATA_FILES +=   publictransportation-big.png
 

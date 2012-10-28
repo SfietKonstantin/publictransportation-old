@@ -56,8 +56,8 @@ bool InfoJourneyWaitingTime::operator==(const InfoJourneyWaitingTime &other) con
     Q_D(const InfoJourneyWaitingTime);
     return (d->company == other.company())
             && (d->line == other.line())
-            && (d->journey == other.journey()
-            && (d->station == other.station()));
+            && (d->journey == other.journey())
+            && (d->station == other.station());
 }
 
 bool InfoJourneyWaitingTime::isNull() const

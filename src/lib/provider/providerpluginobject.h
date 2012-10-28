@@ -32,6 +32,7 @@ namespace PublicTransportation
 {
 
 class InfoJourneys;
+class JourneyAndWaitingTime;
 class InfoJourneyWaitingTime;
 class WaitingTime;
 /**
@@ -196,10 +197,10 @@ Q_SIGNALS:
     /**
      * @brief Waiting time retrieved
      * @param request request identifier.
-     * @param waitingTimeList a list of waiting time.
+     * @param journeyAndWaitingTimeList a list of journeys and waiting time.
      */
     void waitingTimeRetrieved(const QString &request,
-                              const QList<PublicTransportation::WaitingTime> &waitingTimeList);
+               const QList<PublicTransportation::JourneyAndWaitingTime> &journeyAndWaitingTimeList);
     /**
      * @brief Stations from journey
      * @param request request identifier.

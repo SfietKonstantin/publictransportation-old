@@ -78,9 +78,16 @@ AbstractPage {
             clip: true
             model: WaitingTimeModelInstance
             delegate: ClickableEntry {
-                enabled: false
+                enabled: model.supportStationsFromJourney
                 preText: model.waitingTime
                 text: model.destination
+
+                onClicked: {
+                    WaitingTimeModelInstance.requestStationsFromJourney(model.index)
+//                    journeysFromStationPage.station = model.name
+//                    journeysFromStationPage.provider = model.providerName
+//                    window.pageStack.push(journeysFromStationPage)
+                }
             }
 
             UpdateHeader {

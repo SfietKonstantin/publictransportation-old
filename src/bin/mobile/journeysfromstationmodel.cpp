@@ -43,7 +43,7 @@ namespace Gui
  * @internal
  * @brief Private class used in PublicTransportation::Gui::JourneysFromStationModel
  */
-struct JourneysFromStationsModelData
+struct JourneysFromStationsModelItem
 {
     /**
      * @internal
@@ -132,7 +132,7 @@ public:
      * @internal
      * @brief Data
      */
-    QList<JourneysFromStationsModelData *> data;
+    QList<JourneysFromStationsModelItem *> data;
 private:
     /**
      * @internal
@@ -184,7 +184,7 @@ void JourneysFromStationModelPrivate::slotJourneysRegistered(const QString &requ
         Company company = info.company();
         QPair<Journey, Station> journeyStation;
         foreach (journeyStation, info.journeysAndStations()) {
-            JourneysFromStationsModelData * dataItem = new JourneysFromStationsModelData;
+            JourneysFromStationsModelItem * dataItem = new JourneysFromStationsModelItem;
             dataItem->company = company;
             dataItem->line = line;
             dataItem->journey = journeyStation.first;
@@ -270,7 +270,7 @@ QVariant JourneysFromStationModel::data(const QModelIndex &index, int role) cons
     if (index.row() < 0 or index.row() >= rowCount()) {
         return QVariant();
     }
-    JourneysFromStationsModelData *data = d->data.at(index.row());
+    JourneysFromStationsModelItem *data = d->data.at(index.row());
 
     switch(role) {
     case NameRole:
@@ -352,7 +352,7 @@ void JourneysFromStationModel::requestWaitingTime(int index)
         return;
     }
 
-    JourneysFromStationsModelData *data = d->data.at(index);
+    JourneysFromStationsModelItem *data = d->data.at(index);
 
     if (!data->supportWaitingTime) {
         return;
