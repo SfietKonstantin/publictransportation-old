@@ -1,7 +1,6 @@
 TEMPLATE = subdirs
 SUBDIRS += tl ratp
-
-#SUBDIRS += sibra transpole
+SUBDIRS += sibra transpole
 
 #SUBDIRS += hsl
 
