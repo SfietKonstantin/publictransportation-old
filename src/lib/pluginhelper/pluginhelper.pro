@@ -13,19 +13,26 @@ DEFINES += PUBLICTRANSPORTATIONPLUGINHELPER_LIBRARY
 
 HEADERS +=      publictransportationpluginhelper_global.h \
                 languagehelper.h \
+                abstractonlinehelper.h \
+                abstractonlinehelper_p.h \
                 abstractsuggestedstationshelper.h \
                 abstractsuggestedstationshelper_p.h \
                 abstractcachedsuggestedstationshelper.h \
+                abstractjourneysfromstationhelper.h \
+                abstractwaitingtimehelper.h \
                 offlinesuggestedstationshelper.h \
                 offlinexmljourneysfromstationhelper.h \
-                abstractwaitingtimehelper.h \
+    abstractjourneysfromstationhelper_p.h \
+    abstractwaitingtimehelper_p.h
 
 SOURCES +=      languagehelper.cpp \
+                abstractonlinehelper.cpp \
                 abstractsuggestedstationshelper.cpp \
                 abstractcachedsuggestedstationshelper.cpp \
+                abstractjourneysfromstationhelper.cpp \
+                abstractwaitingtimehelper.cpp \
                 offlinesuggestedstationshelper.cpp \
                 offlinexmljourneysfromstationhelper.cpp \
-                abstractwaitingtimehelper.cpp \
 
 # Deployment
 target.path = $${LIBDIR}

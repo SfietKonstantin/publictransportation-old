@@ -18,27 +18,17 @@
 
 #include <QtCore/QFile>
 #include <QtCore/QtPlugin>
-#include <QtCore/QTime>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkRequest>
-#include <QtNetwork/QNetworkReply>
-#include <QtXml/QDomDocument>
-#include <parser.h>
-
 
 #include "debug.h"
 #include "common/errorid.h"
 #include "common/capabilitiesconstants.h"
-#include "common/company.h"
-#include "common/line.h"
-#include "common/journey.h"
-#include "common/station.h"
 #include "common/infojourneys.h"
-#include "common/journeyandwaitingtime.h"
 
 #include "offlinesuggestedstationshelper.h"
 #include "offlinexmljourneysfromstationhelper.h"
-#include "abstractwaitingtimehelper.h"
+#include "transportlausannoiswaitingtimehelper.h"
 
 using namespace PublicTransportation::PluginHelper;
 
@@ -48,16 +38,6 @@ namespace PublicTransportation
 namespace Provider
 {
 
-class TransportLausannoisTimeHelper: public AbstractWaitingTimeHelper
-{
-public:
-    explicit TransportLausannoisTimeHelper(QNetworkAccessManager *networkAccessManager,
-                                           QObject *parent = 0);
-protected:
-    virtual QList<JourneyAndWaitingTime> processData(QIODevice *input, bool *ok,
-                                                     QString *errorMessage);
-};
-
 class TransportLausannoisPrivate
 {
 public:
@@ -65,90 +45,11 @@ public:
     void slotWaitingTimeFinished();
     QStringList stations;
     QNetworkAccessManager *nam;
-    TransportLausannoisTimeHelper *waitingTimeHelper;
+    TransportLausannoisWaitingTimeHelper *waitingTimeHelper;
 private:
     TransportLausannois * const q_ptr;
     Q_DECLARE_PUBLIC(TransportLausannois)
 };
-
-TransportLausannoisTimeHelper
-    ::TransportLausannoisTimeHelper(QNetworkAccessManager *networkAccessManager, QObject *parent):
-    AbstractWaitingTimeHelper(networkAccessManager, parent)
-{
-}
-
-QList<JourneyAndWaitingTime> TransportLausannoisTimeHelper::processData(QIODevice *input,
-                                                                        bool *ok,
-                                                                        QString *errorMessage)
-{
-    QJson::Parser parser;
-
-    QList<JourneyAndWaitingTime> journeysAndWaitingTimes;
-    QVariant parsedValue = parser.parse(input);
-    if (!parsedValue.isValid()) {
-        if (ok) {
-            *ok = false;
-        }
-        if (errorMessage) {
-            *errorMessage = "Failed to get information from TL website";
-        }
-        return journeysAndWaitingTimes;
-    }
-
-    QVariantList waitTimeList = parsedValue.toList();
-    QTime currentTime = QTime::currentTime();
-
-    foreach (QVariant waitTimeEntry, waitTimeList) {
-        QVariantMap waitTimeMap = waitTimeEntry.toMap();
-        QString destination = waitTimeMap.value("destination").toString();
-
-        QString time = waitTimeMap.value("time").toString();
-        debug("tl-plugin") << time;
-
-        Journey newJourney = journey();
-        QVariantMap journeyProperties = newJourney.properties();
-        journeyProperties.insert("to", destination);
-        journeyProperties.insert("destination", destination);
-        newJourney.setProperties(journeyProperties);
-
-        QVariantMap properties;
-        properties.insert("destination", destination);
-
-        WaitingTime waitingTime;
-
-
-        QRegExp timeRegExp("(\\d\\d):(\\d\\d)");
-        QRegExp realtimeRegExp("(\\d+)");
-        if (time.indexOf(timeRegExp) != -1) {
-            QTime nextTime = QTime(timeRegExp.capturedTexts().at(1).toInt(),
-                                   timeRegExp.capturedTexts().at(2).toInt());
-            int minutes = ((currentTime.secsTo(nextTime) / 60) + 1440) % 1440;
-            waitingTime.setWaitingTime(minutes);
-            properties.insert("type", "timetable");
-            waitingTime.setProperties(properties);
-        } else if (time.indexOf(realtimeRegExp) != -1) {
-            int minutes = realtimeRegExp.capturedTexts().at(1).toInt();
-            waitingTime.setWaitingTime(minutes);
-            properties.insert("type", "realtime");
-            waitingTime.setProperties(properties);
-        } else if (time.contains("now")) {
-            waitingTime.setWaitingTime(0);
-            properties.insert("type", "realtime");
-            waitingTime.setProperties(properties);
-        }
-        journeysAndWaitingTimes.append(JourneyAndWaitingTime(newJourney, waitingTime));
-    }
-
-    if (ok) {
-        *ok = true;
-    }
-
-    if (errorMessage) {
-        *errorMessage = QString();
-    }
-
-    return journeysAndWaitingTimes;
-}
 
 TransportLausannoisPrivate::TransportLausannoisPrivate(TransportLausannois *q):
     q_ptr(q)
@@ -176,7 +77,7 @@ TransportLausannois::TransportLausannois(QObject *parent) :
 {
     Q_D(TransportLausannois);
     d->nam = new QNetworkAccessManager(this);
-    d->waitingTimeHelper = new TransportLausannoisTimeHelper(d->nam, this);
+    d->waitingTimeHelper = new TransportLausannoisWaitingTimeHelper(d->nam, this);
     connect(d->waitingTimeHelper, SIGNAL(errorRetrieved(QString,QString,QString)),
             this, SIGNAL(errorRetrieved(QString,QString,QString)));
     connect(d->waitingTimeHelper,
@@ -265,7 +166,8 @@ void TransportLausannois::retrieveWaitingTime(const QString &request, const Comp
     urlString = urlString.arg(station.properties().value("id").toString(),
                               line.properties().value("id").toString());
 
-    d->waitingTimeHelper->get(request, urlString, company, line, journey, station);
+    d->waitingTimeHelper->setData(company, line, journey, station);
+    d->waitingTimeHelper->get(request, QNetworkRequest(urlString));
 }
 
 void TransportLausannois::retrieveStationsFromJourney(const QString &request,

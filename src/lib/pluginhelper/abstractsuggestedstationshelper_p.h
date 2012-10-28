@@ -18,6 +18,7 @@
 #define PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTSUGGESTEDSTATIONSHELPER_P_H
 
 #include "abstractsuggestedstationshelper.h"
+#include "abstractonlinehelper_p.h"
 
 // Warning
 //
@@ -33,18 +34,13 @@ namespace PublicTransportation
 namespace PluginHelper
 {
 
-class AbstractSuggestedStationsHelperPrivate
+class AbstractSuggestedStationsHelperPrivate: public AbstractOnlineHelperPrivate
 {
 public:
     AbstractSuggestedStationsHelperPrivate(AbstractSuggestedStationsHelper *q);
-    virtual ~AbstractSuggestedStationsHelperPrivate();
-    virtual void slotFinished();
-    QNetworkAccessManager *networkAccessManager;
-    QNetworkReply *reply;
-    QString request;
+    virtual void processReply(QNetworkReply *reply);
+    virtual void cleanup();
     QString partialStation;
-protected:
-    AbstractSuggestedStationsHelper * const q_ptr;
 private:
     Q_DECLARE_PUBLIC(AbstractSuggestedStationsHelper)
 };

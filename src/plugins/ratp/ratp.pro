@@ -10,8 +10,10 @@ LIBS += -L../../lib/base -l$${NAME}
 LIBS += -L../../lib/pluginhelper -l$${NAME}pluginhelper
 
 HEADERS +=      ratp.h \
+                ratpwaitingtimehelper.h
 
 SOURCES +=      ratp.cpp \
+                ratpwaitingtimehelper.cpp
 
 RESOURCES +=    res.qrc
 

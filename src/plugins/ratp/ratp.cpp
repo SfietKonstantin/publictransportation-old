@@ -18,26 +18,17 @@
 
 #include <QtCore/QFile>
 #include <QtCore/QtPlugin>
-#include <QtCore/QTime>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkRequest>
-#include <QtNetwork/QNetworkReply>
-#include <QtXml/QDomDocument>
 
 #include "debug.h"
 #include "common/errorid.h"
 #include "common/capabilitiesconstants.h"
-#include "common/company.h"
-#include "common/line.h"
-#include "common/journey.h"
-#include "common/station.h"
 #include "common/infojourneys.h"
-#include "common/journeyandwaitingtime.h"
 
-#include "languagehelper.h"
+#include "ratpwaitingtimehelper.h"
 #include "offlinesuggestedstationshelper.h"
 #include "offlinexmljourneysfromstationhelper.h"
-#include "abstractwaitingtimehelper.h"
 
 using namespace PublicTransportation::PluginHelper;
 
@@ -47,103 +38,21 @@ namespace PublicTransportation
 namespace Provider
 {
 
-class RatpWaitingTimeHelper: public AbstractWaitingTimeHelper
-{
-public:
-    explicit RatpWaitingTimeHelper(QNetworkAccessManager *networkAccessManager,
-                                   QObject *parent = 0);
-protected:
-    virtual QList<JourneyAndWaitingTime> processData(QIODevice *input, bool *ok,
-                                                     QString *errorMessage);
-};
-
 class RatpPrivate
 {
 public:
     RatpPrivate(Ratp *q);
     QStringList stations;
     QNetworkAccessManager *nam;
-    RatpWaitingTimeHelper *timeDownloaderHelper;
+    RatpWaitingTimeHelper *waitingTimeHelper;
 private:
     Ratp * const q_ptr;
     Q_DECLARE_PUBLIC(Ratp)
 };
 
-RatpWaitingTimeHelper::RatpWaitingTimeHelper(QNetworkAccessManager *networkAccessManager,
-                                             QObject *parent):
-    AbstractWaitingTimeHelper(networkAccessManager, parent)
-{
-}
-
-QList<JourneyAndWaitingTime> RatpWaitingTimeHelper::processData(QIODevice *input, bool *ok,
-                                                                QString *errorMessage)
-{
-    QList<JourneyAndWaitingTime> journeysAndWaitingTimeList;
-
-    QTime currentTime = QTime::currentTime();
-    QRegExp timeMetroRegExp ("&gt;&nbsp;([^<]*)</div><div[^>]*><b>([^<]*)");
-    QRegExp timeRerRegExp ("&gt;&nbsp;([^<]*)</div><div[^>]*><a[^>]*>([^<]*)</a></div><div[^>]*>\
-<b>([^<]*)");
-    QRegExp timeRegExp("(\\d\\d):(\\d\\d)");
-    while (!input->atEnd()) {
-        QVariantMap journeyProperties = journey().properties();
-
-        QString minutesString;
-        QVariantMap properties;
-        QString data = input->readLine();
-        if (data.indexOf(timeMetroRegExp) != -1) {
-            QString destination = timeMetroRegExp.cap(1);
-            properties.insert("destination", LanguageHelper::unstripHtmlAccents(destination));
-            minutesString = timeMetroRegExp.cap(2);
-        } else if (data.indexOf(timeRerRegExp) != -1) {
-            QString destination = timeRerRegExp.cap(1);
-            destination = LanguageHelper::unstripHtmlAccents(destination);
-            properties.insert("destination", destination);
-            journeyProperties.insert("to", destination);
-            journeyProperties.insert("destination", destination);
-            properties.insert("train", LanguageHelper::unstripHtmlAccents(timeRerRegExp.cap(2)));
-            minutesString = timeRerRegExp.cap(3);
-            debug("test") << minutesString;
-        }
-
-        if (!minutesString.isEmpty()) {
-            int minutes = -1;
-            if (minutesString.contains("Train")) {
-                minutes = 0;
-            } else if (minutesString.contains("mn")) {
-                minutes = minutesString.remove("mn").trimmed().toInt();
-            } else if (minutesString.indexOf(timeRegExp) != -1) {
-                QTime nextTime = QTime(timeRegExp.capturedTexts().at(1).toInt(),
-                                       timeRegExp.capturedTexts().at(2).toInt());
-                minutes = ((currentTime.secsTo(nextTime) / 60) + 1440) % 1440;
-            }
-
-            Journey newJourney = journey();
-            newJourney.setProperties(journeyProperties);
-
-            WaitingTime waitingTime;
-            waitingTime.setProperties(properties);
-            waitingTime.setWaitingTime(minutes);
-            journeysAndWaitingTimeList.append(JourneyAndWaitingTime(newJourney, waitingTime));
-        }
-    }
-
-    if (ok) {
-        *ok = true;
-    }
-
-    if (errorMessage) {
-        *errorMessage = QString();
-    }
-
-    return journeysAndWaitingTimeList;
-}
-
 RatpPrivate::RatpPrivate(Ratp *q):
     q_ptr(q)
 {
-//    waitingTimeReply = 0;
-
     QFile file (":/data/backward/stations.txt");
     if (!file.open(QIODevice::ReadOnly)) {
         debug("ratp-plugin") << "Failed to read" << file.fileName().constData();
@@ -168,10 +77,10 @@ Ratp::Ratp(QObject *parent) :
 {
     Q_D(Ratp);
     d->nam = new QNetworkAccessManager(this);
-    d->timeDownloaderHelper = new RatpWaitingTimeHelper(d->nam, this);
-    connect(d->timeDownloaderHelper, SIGNAL(errorRetrieved(QString,QString,QString)),
+    d->waitingTimeHelper = new RatpWaitingTimeHelper(d->nam, this);
+    connect(d->waitingTimeHelper, SIGNAL(errorRetrieved(QString,QString,QString)),
             this, SIGNAL(errorRetrieved(QString,QString,QString)));
-    connect(d->timeDownloaderHelper,
+    connect(d->waitingTimeHelper,
            SIGNAL(waitingTimeRetrieved(QString,QList<PublicTransportation::JourneyAndWaitingTime>)),
             this,
           SIGNAL(waitingTimeRetrieved(QString,QList<PublicTransportation::JourneyAndWaitingTime>)));
@@ -254,7 +163,8 @@ directionsens=%3&stationid=%4";
                               line.properties().value("id").toString(),
                               journey.properties().value("id").toString(),
                               station.properties().value("id").toString());
-    d->timeDownloaderHelper->get(request, urlString, company, line, journey, station);
+    d->waitingTimeHelper->setData(company, line, journey, station);
+    d->waitingTimeHelper->get(request, QNetworkRequest(urlString));
 }
 
 }

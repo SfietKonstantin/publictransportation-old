@@ -35,8 +35,8 @@ class AbstractCachedSuggestedStationsHelperPrivate: public AbstractSuggestedStat
 {
 public:
     AbstractCachedSuggestedStationsHelperPrivate(AbstractCachedSuggestedStationsHelper *q);
-    void provideSuggestedStations(const QString &partialStation);
-    virtual void slotFinished();
+    void provideSuggestedStations(const QString &request, const QString &partialStation);
+    virtual void processReply(QNetworkReply *reply);
     bool cached;
     QList<Station> stations;
 private:
@@ -50,10 +50,11 @@ AbstractCachedSuggestedStationsHelperPrivate
     cached = false;
 }
 
-void AbstractCachedSuggestedStationsHelperPrivate::slotFinished()
+void AbstractCachedSuggestedStationsHelperPrivate::processReply(QNetworkReply *reply)
 {
     Q_Q(AbstractCachedSuggestedStationsHelper);
-    debug("helper-cachedsuggestedstations") << "Data retrieved from url" << reply->url().toString();
+
+    QString request = repliesAndRequests.value(reply);
 
     bool ok;
     QString errorMessage;
@@ -63,7 +64,7 @@ void AbstractCachedSuggestedStationsHelperPrivate::slotFinished()
     } else {
         stations = processedStations;
         cached = true;
-        provideSuggestedStations(partialStation);
+        provideSuggestedStations(request, partialStation);
     }
     reply->deleteLater();
     reply = 0;
@@ -72,7 +73,7 @@ void AbstractCachedSuggestedStationsHelperPrivate::slotFinished()
 }
 
 void AbstractCachedSuggestedStationsHelperPrivate
-    ::provideSuggestedStations(const QString &partialStation)
+    ::provideSuggestedStations(const QString &request, const QString &partialStation)
 {
     Q_Q(AbstractCachedSuggestedStationsHelper);
     QList<Station> suggestedStations;
@@ -111,9 +112,10 @@ void AbstractCachedSuggestedStationsHelper::suggestGet(const QString &request,
 {
     Q_D(AbstractCachedSuggestedStationsHelper);
     if (!d->cached) {
-        get(request, networkRequest, partialStation);
+        setData(partialStation);
+        get(request, networkRequest);
     } else {
-        d->provideSuggestedStations(partialStation);
+        d->provideSuggestedStations(request, partialStation);
     }
 }
 
@@ -124,9 +126,10 @@ void AbstractCachedSuggestedStationsHelper::suggestPost(const QString &request,
 {
     Q_D(AbstractCachedSuggestedStationsHelper);
     if (!d->cached) {
-        post(request, networkRequest, data, partialStation);
+        setData(partialStation);
+        post(request, networkRequest, data);
     } else {
-        d->provideSuggestedStations(partialStation);
+        d->provideSuggestedStations(request, partialStation);
     }
 }
 

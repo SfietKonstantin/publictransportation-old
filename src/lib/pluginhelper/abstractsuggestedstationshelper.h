@@ -18,12 +18,9 @@
 #define PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTSUGGESTEDSTATIONSHELPER_H
 
 #include "publictransportationpluginhelper_global.h"
-
-#include <QtCore/QObject>
+#include "abstractonlinehelper.h"
 
 class QIODevice;
-class QNetworkAccessManager;
-class QNetworkRequest;
 namespace PublicTransportation
 {
 
@@ -32,19 +29,15 @@ namespace PluginHelper
 {
 
 class AbstractSuggestedStationsHelperPrivate;
-class PUBLICTRANSPORTATIONPLUGINHELPER_EXPORT AbstractSuggestedStationsHelper : public QObject
+class PUBLICTRANSPORTATIONPLUGINHELPER_EXPORT AbstractSuggestedStationsHelper:
+        public AbstractOnlineHelper
 {
     Q_OBJECT
 public:
     explicit AbstractSuggestedStationsHelper(QNetworkAccessManager *networkAccessManager,
                                              QObject *parent = 0);
-    virtual ~AbstractSuggestedStationsHelper();
-    void get(const QString &request, const QNetworkRequest &networkRequest,
-             const QString &partialStation);
-    void post(const QString &request, const QNetworkRequest &networkRequest,const QByteArray &data,
-              const QString &partialStation);
+    void setData(const QString &partialStation);
 Q_SIGNALS:
-    void errorRetrieved(const QString &request, const QString &errorId, const QString &error);
     void suggestedStationsRetrieved(const QString &request,
                                    const QList<PublicTransportation::Station> suggestedStationList);
 protected:
@@ -53,10 +46,8 @@ protected:
     QString partialStation() const;
     virtual QList<Station> processData(QIODevice *input, bool *ok = 0,
                                        QString *errorMessage = 0) = 0;
-    QScopedPointer<AbstractSuggestedStationsHelperPrivate> d_ptr;
 private:
     Q_DECLARE_PRIVATE(AbstractSuggestedStationsHelper)
-    Q_PRIVATE_SLOT(d_func(), void slotFinished())
 
 };
 

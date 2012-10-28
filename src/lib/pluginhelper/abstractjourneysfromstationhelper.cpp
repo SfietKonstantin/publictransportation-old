@@ -14,14 +14,14 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#include "abstractwaitingtimehelper.h"
-#include "abstractwaitingtimehelper_p.h"
+#include "abstractjourneysfromstationhelper.h"
+#include "abstractjourneysfromstationhelper_p.h"
 
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 
 #include "common/errorid.h"
-#include "common/journeyandwaitingtime.h"
+#include "common/infojourneys.h"
 #include "debug.h"
 
 namespace PublicTransportation
@@ -30,91 +30,74 @@ namespace PublicTransportation
 namespace PluginHelper
 {
 
-AbstractWaitingTimeHelperPrivate
-    ::AbstractWaitingTimeHelperPrivate(AbstractWaitingTimeHelper *q):
+AbstractJourneysFromStationHelperPrivate
+    ::AbstractJourneysFromStationHelperPrivate(AbstractJourneysFromStationHelper *q):
     AbstractOnlineHelperPrivate(q)
 {
 }
 
-void AbstractWaitingTimeHelperPrivate::processReply(QNetworkReply *reply)
+void AbstractJourneysFromStationHelperPrivate::processReply(QNetworkReply *reply)
 {
-    Q_Q(AbstractWaitingTimeHelper);
+    Q_Q(AbstractJourneysFromStationHelper);
 
     QString request = repliesAndRequests.value(reply);
 
     bool ok;
     QString errorMessage;
-    QList<JourneyAndWaitingTime> journeysAndWaitingTimes = q->processData(reply, &ok,
-                                                                          &errorMessage);
+    QList<InfoJourneys> infoJourneysList = q->processData(reply, &ok, &errorMessage);
     if (!ok) {
         emit q->errorRetrieved(request, BACKEND_WARNING, errorMessage);
     } else {
-        emit q->waitingTimeRetrieved(request, journeysAndWaitingTimes);
+        emit q->journeysFromStationRetrieved(request, infoJourneysList);
     }
 }
 
-void AbstractWaitingTimeHelperPrivate::cleanup()
+void AbstractJourneysFromStationHelperPrivate::cleanup()
 {
-    company = Company();
-    line = Line();
-    journey = Journey();
     station = Station();
-
+    limit = -1;
     AbstractOnlineHelperPrivate::cleanup();
 }
 
 ////// End of private class //////
 
-AbstractWaitingTimeHelper::AbstractWaitingTimeHelper(QNetworkAccessManager *networkAccessManager,
-                                                     QObject *parent):
-    AbstractOnlineHelper(*(new AbstractWaitingTimeHelperPrivate(this)), parent)
+AbstractJourneysFromStationHelper
+    ::AbstractJourneysFromStationHelper(QNetworkAccessManager *networkAccessManager,
+                                        QObject *parent):
+    AbstractOnlineHelper(*(new AbstractJourneysFromStationHelperPrivate(this)), parent)
 {
-    Q_D(AbstractWaitingTimeHelper);
+    Q_D(AbstractJourneysFromStationHelper);
     d->networkAccessManager = networkAccessManager;
 }
 
-AbstractWaitingTimeHelper::AbstractWaitingTimeHelper(AbstractWaitingTimeHelperPrivate &dd,
-                                                     QObject *parent):
+AbstractJourneysFromStationHelper
+    ::AbstractJourneysFromStationHelper(AbstractJourneysFromStationHelperPrivate &dd,
+                                        QObject *parent):
     AbstractOnlineHelper(dd, parent)
 {
 }
 
-void AbstractWaitingTimeHelper::setData(const Company &company, const Line &line,
-                                        const Journey &journey, const Station &station)
+void AbstractJourneysFromStationHelper::setData(const Station &station, int limit)
 {
-    Q_D(AbstractWaitingTimeHelper);
-    d->company = company;
-    d->line = line;
-    d->journey = journey;
+    Q_D(AbstractJourneysFromStationHelper);
     d->station = station;
+    d->limit = limit;
 }
 
-Company AbstractWaitingTimeHelper::company() const
+Station AbstractJourneysFromStationHelper::station() const
 {
-    Q_D(const AbstractWaitingTimeHelper);
-    return d->company;
-}
-
-Line AbstractWaitingTimeHelper::line() const
-{
-    Q_D(const AbstractWaitingTimeHelper);
-    return d->line;
-}
-
-Journey AbstractWaitingTimeHelper::journey() const
-{
-    Q_D(const AbstractWaitingTimeHelper);
-    return d->journey;
-}
-
-Station AbstractWaitingTimeHelper::station() const
-{
-    Q_D(const AbstractWaitingTimeHelper);
+    Q_D(const AbstractJourneysFromStationHelper);
     return d->station;
 }
 
+int AbstractJourneysFromStationHelper::limit() const
+{
+    Q_D(const AbstractJourneysFromStationHelper);
+    return d->limit;
 }
 
 }
 
-#include "moc_abstractwaitingtimehelper.cpp"
+}
+
+#include "moc_abstractsuggestedstationshelper.cpp"

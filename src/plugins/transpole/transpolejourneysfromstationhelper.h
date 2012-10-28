@@ -14,11 +14,10 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_PROVIDER_TRANSPOLE_H
-#define PUBLICTRANSPORTATION_PROVIDER_TRANSPOLE_H
+#ifndef PUBLICTRANSPORTATION_PROVIDER_TRANSPOLEJOURNEYSFROMSTATIONHELPER_H
+#define PUBLICTRANSPORTATION_PROVIDER_TRANSPOLEJOURNEYSFROMSTATIONHELPER_H
 
-#include <QtCore/QObject>
-#include "provider/providerpluginobject.h"
+#include "abstractjourneysfromstationhelper.h"
 
 namespace PublicTransportation
 {
@@ -26,30 +25,18 @@ namespace PublicTransportation
 namespace Provider
 {
 
-class TranspolePrivate;
-class Transpole : public ProviderPluginObject
+class TranspoleJourneysFromStationHelper: public PluginHelper::AbstractJourneysFromStationHelper
 {
-    Q_OBJECT
-    Q_INTERFACES(PublicTransportation::ProviderPluginInterface)
 public:
-    explicit Transpole(QObject *parent = 0);
-    virtual QStringList capabilities() const;
-public Q_SLOTS:
-    virtual void retrieveCopyright(const QString &request);
-    virtual void retrieveSuggestedStations(const QString &request, const QString &partialStation);
-    virtual void retrieveJourneysFromStation(const QString &request, const Station &station,
-                                             int limit);
-    virtual void retrieveWaitingTime(const QString &request, const Company &company,
-                                     const Line &line, const Journey &journey,
-                                     const Station &station);
+    explicit TranspoleJourneysFromStationHelper(QNetworkAccessManager *networkAccessManager,
+                                                QObject *parent = 0);
 protected:
-    QScopedPointer<TranspolePrivate> d_ptr;
-private:
-    Q_DECLARE_PRIVATE(Transpole)
+    virtual QList<InfoJourneys> processData(QIODevice *input, bool *ok, QString *errorMessage);
 };
 
-}
 
 }
 
-#endif // PUBLICTRANSPORTATION_PROVIDER_TRANSPOLE_H
+}
+
+#endif // PUBLICTRANSPORTATION_PROVIDER_TRANSPOLEJOURNEYSFROMSTATIONHELPER_H

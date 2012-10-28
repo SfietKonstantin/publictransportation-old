@@ -14,11 +14,10 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_PROVIDER_TRANSPOLE_H
-#define PUBLICTRANSPORTATION_PROVIDER_TRANSPOLE_H
+#ifndef PUBLICTRANSPORTATION_PROVIDER_TRANSPOLEWAITINGTIMEHELPER_H
+#define PUBLICTRANSPORTATION_PROVIDER_TRANSPOLEWAITINGTIMEHELPER_H
 
-#include <QtCore/QObject>
-#include "provider/providerpluginobject.h"
+#include "abstractwaitingtimehelper.h"
 
 namespace PublicTransportation
 {
@@ -26,30 +25,24 @@ namespace PublicTransportation
 namespace Provider
 {
 
-class TranspolePrivate;
-class Transpole : public ProviderPluginObject
+class TranspoleWaitingTimeHelperPrivate;
+class TranspoleWaitingTimeHelper: public PluginHelper::AbstractWaitingTimeHelper
 {
-    Q_OBJECT
-    Q_INTERFACES(PublicTransportation::ProviderPluginInterface)
 public:
-    explicit Transpole(QObject *parent = 0);
-    virtual QStringList capabilities() const;
-public Q_SLOTS:
-    virtual void retrieveCopyright(const QString &request);
-    virtual void retrieveSuggestedStations(const QString &request, const QString &partialStation);
-    virtual void retrieveJourneysFromStation(const QString &request, const Station &station,
-                                             int limit);
-    virtual void retrieveWaitingTime(const QString &request, const Company &company,
-                                     const Line &line, const Journey &journey,
-                                     const Station &station);
+    explicit TranspoleWaitingTimeHelper(QNetworkAccessManager *networkAccessManager,
+                                        QObject *parent = 0);
+    void checkRan(const Company &companyToCheck, const Line &lineToCheck,
+                  const Journey &journeyToCheck, const Station &stationToCheck);
+    void load(const QString &request);
 protected:
-    QScopedPointer<TranspolePrivate> d_ptr;
+    virtual QList<JourneyAndWaitingTime> processData(QIODevice *input, bool *ok,
+                                                     QString *errorMessage);
 private:
-    Q_DECLARE_PRIVATE(Transpole)
+    Q_DECLARE_PRIVATE(TranspoleWaitingTimeHelper)
 };
 
 }
 
 }
 
-#endif // PUBLICTRANSPORTATION_PROVIDER_TRANSPOLE_H
+#endif // PUBLICTRANSPORTATION_PROVIDER_TRANSPOLEWAITINGTIMEHELPER_H

@@ -32,19 +32,15 @@ namespace PluginHelper
 
 AbstractSuggestedStationsHelperPrivate
     ::AbstractSuggestedStationsHelperPrivate(AbstractSuggestedStationsHelper *q):
-    q_ptr(q)
-{
-    reply = 0;
-}
-
-AbstractSuggestedStationsHelperPrivate::~AbstractSuggestedStationsHelperPrivate()
+    AbstractOnlineHelperPrivate(q)
 {
 }
 
-void AbstractSuggestedStationsHelperPrivate::slotFinished()
+void AbstractSuggestedStationsHelperPrivate::processReply(QNetworkReply *reply)
 {
     Q_Q(AbstractSuggestedStationsHelper);
-    debug("helper-abssuggestedstations") << "Data retrieved from url" << reply->url().toString();
+
+    QString request = repliesAndRequests.value(reply);
 
     bool ok;
     QString errorMessage;
@@ -54,17 +50,19 @@ void AbstractSuggestedStationsHelperPrivate::slotFinished()
     } else {
         emit q->suggestedStationsRetrieved(request, suggestedStations);
     }
-    reply->deleteLater();
-    reply = 0;
-    request = QString();
+}
+
+void AbstractSuggestedStationsHelperPrivate::cleanup()
+{
     partialStation = QString();
+    AbstractOnlineHelperPrivate::cleanup();
 }
 
 ////// End of private class //////
 
 AbstractSuggestedStationsHelper
     ::AbstractSuggestedStationsHelper(QNetworkAccessManager *networkAccessManager, QObject *parent):
-    QObject(parent), d_ptr(new AbstractSuggestedStationsHelperPrivate(this))
+    AbstractOnlineHelper(*(new AbstractSuggestedStationsHelperPrivate(this)), parent)
 {
     Q_D(AbstractSuggestedStationsHelper);
     d->networkAccessManager = networkAccessManager;
@@ -72,59 +70,14 @@ AbstractSuggestedStationsHelper
 
 AbstractSuggestedStationsHelper
     ::AbstractSuggestedStationsHelper(AbstractSuggestedStationsHelperPrivate &dd, QObject *parent):
-    QObject(parent), d_ptr(&dd)
+    AbstractOnlineHelper(dd, parent)
 {
 }
 
-AbstractSuggestedStationsHelper::~AbstractSuggestedStationsHelper()
-{
-}
-
-void AbstractSuggestedStationsHelper::get(const QString &request,
-                                          const QNetworkRequest &networkRequest,
-                                          const QString &partialStation)
+void AbstractSuggestedStationsHelper::setData(const QString &partialStation)
 {
     Q_D(AbstractSuggestedStationsHelper);
-    if (!d->networkAccessManager) {
-        return;
-    }
-
-    if (d->reply) {
-        if (!d->reply->isFinished()) {
-            d->reply->abort();
-        }
-        d->reply->deleteLater();
-    }
-
-    d->request = request;
     d->partialStation = partialStation;
-
-
-    d->reply = d->networkAccessManager->get(networkRequest);
-    connect(d->reply, SIGNAL(finished()), this, SLOT(slotFinished()));
-}
-
-void AbstractSuggestedStationsHelper::post(const QString &request,
-                                           const QNetworkRequest &networkRequest,
-                                           const QByteArray &data, const QString &partialStation)
-{
-    Q_D(AbstractSuggestedStationsHelper);
-    if (!d->networkAccessManager) {
-        return;
-    }
-
-    if (d->reply) {
-        if (!d->reply->isFinished()) {
-            d->reply->abort();
-        }
-        d->reply->deleteLater();
-    }
-
-    d->request = request;
-    d->partialStation = partialStation;
-
-    d->reply = d->networkAccessManager->post(networkRequest, data);
-    connect(d->reply, SIGNAL(finished()), this, SLOT(slotFinished()));
 }
 
 QString AbstractSuggestedStationsHelper::partialStation() const
@@ -136,5 +89,3 @@ QString AbstractSuggestedStationsHelper::partialStation() const
 }
 
 }
-
-#include "moc_abstractsuggestedstationshelper.cpp"

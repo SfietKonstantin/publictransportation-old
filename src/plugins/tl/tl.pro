@@ -12,8 +12,10 @@ LIBS += -L../../lib/pluginhelper/ -l$${NAME}pluginhelper
 LIBS += -L../../3rdparty/qjson/ -lqjson
 
 HEADERS +=      transportlausannois.h \
+                transportlausannoiswaitingtimehelper.h
 
 SOURCES +=      transportlausannois.cpp \
+                transportlausannoiswaitingtimehelper.cpp
 
 RESOURCES +=    res.qrc
 

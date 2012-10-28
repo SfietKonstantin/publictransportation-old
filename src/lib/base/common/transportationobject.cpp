@@ -49,6 +49,11 @@ bool TransportationObject::operator==(const TransportationObject &other) const
     return (d->name == other.name()) && (d->disambiguation == other.disambiguation());
 }
 
+bool TransportationObject::operator!=(const TransportationObject &other) const
+{
+    return !(*this == other);
+}
+
 bool TransportationObject::operator<(const TransportationObject &other) const
 {
     Q_D(const TransportationObject);

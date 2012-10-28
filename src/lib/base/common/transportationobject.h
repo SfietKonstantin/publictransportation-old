@@ -111,6 +111,12 @@ public:
     bool operator==(const TransportationObject &other) const;
     /**
      * @brief Inequality
+     * @param other transportation object to compare to.
+     * @return if the two transportation objects are not equal.
+     */
+    bool operator!=(const TransportationObject &other) const;
+    /**
+     * @brief Inequality
      *
      * This method compares a transportation object to another
      * sorting them with name. This transportation object will

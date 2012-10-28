@@ -14,42 +14,42 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_PROVIDER_TRANSPOLE_H
-#define PUBLICTRANSPORTATION_PROVIDER_TRANSPOLE_H
+#ifndef PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTJOURNEYSFROMSTATIONHELPER_P_H
+#define PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTJOURNEYSFROMSTATIONHELPER_P_H
 
-#include <QtCore/QObject>
-#include "provider/providerpluginobject.h"
+#include "abstractjourneysfromstationhelper.h"
+#include "abstractonlinehelper_p.h"
 
+#include "common/station.h"
+
+// Warning
+//
+// This file exists for the convenience
+// of other publictransportation classes.
+// This header file may change from version
+// to version without notice or even be removed.
+
+class QNetworkReply;
 namespace PublicTransportation
 {
 
-namespace Provider
+namespace PluginHelper
 {
 
-class TranspolePrivate;
-class Transpole : public ProviderPluginObject
+class AbstractJourneysFromStationHelperPrivate: public AbstractOnlineHelperPrivate
 {
-    Q_OBJECT
-    Q_INTERFACES(PublicTransportation::ProviderPluginInterface)
 public:
-    explicit Transpole(QObject *parent = 0);
-    virtual QStringList capabilities() const;
-public Q_SLOTS:
-    virtual void retrieveCopyright(const QString &request);
-    virtual void retrieveSuggestedStations(const QString &request, const QString &partialStation);
-    virtual void retrieveJourneysFromStation(const QString &request, const Station &station,
-                                             int limit);
-    virtual void retrieveWaitingTime(const QString &request, const Company &company,
-                                     const Line &line, const Journey &journey,
-                                     const Station &station);
-protected:
-    QScopedPointer<TranspolePrivate> d_ptr;
+    AbstractJourneysFromStationHelperPrivate(AbstractJourneysFromStationHelper *q);
+    virtual void processReply(QNetworkReply *reply);
+    virtual void cleanup();
+    Station station;
+    int limit;
 private:
-    Q_DECLARE_PRIVATE(Transpole)
+    Q_DECLARE_PUBLIC(AbstractJourneysFromStationHelper)
 };
 
 }
 
 }
 
-#endif // PUBLICTRANSPORTATION_PROVIDER_TRANSPOLE_H
+#endif // PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTJOURNEYSFROMSTATIONHELPER_P_H

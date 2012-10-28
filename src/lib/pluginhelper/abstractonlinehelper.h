@@ -14,42 +14,44 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_PROVIDER_TRANSPOLE_H
-#define PUBLICTRANSPORTATION_PROVIDER_TRANSPOLE_H
+#ifndef PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTONLINEHELPER_H
+#define PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTONLINEHELPER_H
+
+#include "publictransportationpluginhelper_global.h"
 
 #include <QtCore/QObject>
-#include "provider/providerpluginobject.h"
 
+class QNetworkAccessManager;
+class QNetworkRequest;
 namespace PublicTransportation
 {
 
-namespace Provider
+class Station;
+namespace PluginHelper
 {
 
-class TranspolePrivate;
-class Transpole : public ProviderPluginObject
+class AbstractOnlineHelperPrivate;
+class PUBLICTRANSPORTATIONPLUGINHELPER_EXPORT AbstractOnlineHelper : public QObject
 {
     Q_OBJECT
-    Q_INTERFACES(PublicTransportation::ProviderPluginInterface)
 public:
-    explicit Transpole(QObject *parent = 0);
-    virtual QStringList capabilities() const;
-public Q_SLOTS:
-    virtual void retrieveCopyright(const QString &request);
-    virtual void retrieveSuggestedStations(const QString &request, const QString &partialStation);
-    virtual void retrieveJourneysFromStation(const QString &request, const Station &station,
-                                             int limit);
-    virtual void retrieveWaitingTime(const QString &request, const Company &company,
-                                     const Line &line, const Journey &journey,
-                                     const Station &station);
+    virtual ~AbstractOnlineHelper();
+    void get(const QString &request, const QNetworkRequest &networkRequest);
+    void post(const QString &request, const QNetworkRequest &networkRequest,const QByteArray &data);
+Q_SIGNALS:
+    void errorRetrieved(const QString &request, const QString &errorId, const QString &error);
 protected:
-    QScopedPointer<TranspolePrivate> d_ptr;
+    explicit AbstractOnlineHelper(AbstractOnlineHelperPrivate &dd, QObject *parent);
+    QScopedPointer<AbstractOnlineHelperPrivate> d_ptr;
 private:
-    Q_DECLARE_PRIVATE(Transpole)
+    Q_DECLARE_PRIVATE(AbstractOnlineHelper)
+    Q_PRIVATE_SLOT(d_func(), void slotFinished())
+    Q_PRIVATE_SLOT(d_func(), void slotError(QNetworkReply::NetworkError))
+
 };
 
 }
 
 }
 
-#endif // PUBLICTRANSPORTATION_PROVIDER_TRANSPOLE_H
+#endif // PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTSUGGESTEDSTATIONSHELPER_H

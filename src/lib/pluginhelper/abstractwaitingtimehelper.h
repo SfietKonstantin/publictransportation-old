@@ -18,8 +18,7 @@
 #define PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTWAITINGTIMEHELPER_H
 
 #include "publictransportationpluginhelper_global.h"
-
-#include <QtCore/QObject>
+#include "abstractonlinehelper.h"
 
 class QIODevice;
 class QNetworkAccessManager;
@@ -35,33 +34,28 @@ namespace PluginHelper
 {
 
 class AbstractWaitingTimeHelperPrivate;
-class PUBLICTRANSPORTATIONPLUGINHELPER_EXPORT AbstractWaitingTimeHelper : public QObject
+class PUBLICTRANSPORTATIONPLUGINHELPER_EXPORT AbstractWaitingTimeHelper:
+        public AbstractOnlineHelper
 {
     Q_OBJECT
 public:
     explicit AbstractWaitingTimeHelper(QNetworkAccessManager *networkAccessManager,
-                                                 QObject *parent = 0);
-    virtual ~AbstractWaitingTimeHelper();
-    void get(const QString &request, const QString &url, const Company &company, const Line &line,
-             const Journey &journey, const Station &station);
-    void post(const QString &request, const QString &url, const QByteArray &data,
-              const Company &company, const Line &line, const Journey &journey,
-              const Station &station);
+                                       QObject *parent = 0);
+    void setData(const Company &company, const Line &line,
+                 const Journey &journey, const Station &station);
 Q_SIGNALS:
-    void errorRetrieved(const QString &request, const QString &errorId, const QString &error);
     void waitingTimeRetrieved(const QString &request,
                   const QList<PublicTransportation::JourneyAndWaitingTime> journeysAndWaitingTimes);
 protected:
+    explicit AbstractWaitingTimeHelper(AbstractWaitingTimeHelperPrivate &dd, QObject *parent);
     Company company() const;
     Line line() const;
     Journey journey() const;
     Station station() const;
     virtual QList<JourneyAndWaitingTime> processData(QIODevice *input, bool *ok = 0,
                                                      QString *errorMessage = 0) = 0;
-    QScopedPointer<AbstractWaitingTimeHelperPrivate> d_ptr;
 private:
     Q_DECLARE_PRIVATE(AbstractWaitingTimeHelper)
-    Q_PRIVATE_SLOT(d_func(), void slotFinished())
 };
 
 }

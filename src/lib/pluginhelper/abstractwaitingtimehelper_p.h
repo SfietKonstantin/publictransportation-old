@@ -14,42 +14,46 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef PUBLICTRANSPORTATION_PROVIDER_TRANSPOLE_H
-#define PUBLICTRANSPORTATION_PROVIDER_TRANSPOLE_H
+#ifndef PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTWAITINGTIMEHELPER_P_H
+#define PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTWAITINGTIMEHELPER_P_H
 
-#include <QtCore/QObject>
-#include "provider/providerpluginobject.h"
+// Warning
+//
+// This file exists for the convenience
+// of other publictransportation classes.
+// This header file may change from version
+// to version without notice or even be removed.
+
+#include "abstractwaitingtimehelper.h"
+#include "abstractonlinehelper_p.h"
+
+#include "common/company.h"
+#include "common/line.h"
+#include "common/journey.h"
+#include "common/station.h"
 
 namespace PublicTransportation
 {
 
-namespace Provider
+namespace PluginHelper
 {
 
-class TranspolePrivate;
-class Transpole : public ProviderPluginObject
+class AbstractWaitingTimeHelperPrivate: public AbstractOnlineHelperPrivate
 {
-    Q_OBJECT
-    Q_INTERFACES(PublicTransportation::ProviderPluginInterface)
 public:
-    explicit Transpole(QObject *parent = 0);
-    virtual QStringList capabilities() const;
-public Q_SLOTS:
-    virtual void retrieveCopyright(const QString &request);
-    virtual void retrieveSuggestedStations(const QString &request, const QString &partialStation);
-    virtual void retrieveJourneysFromStation(const QString &request, const Station &station,
-                                             int limit);
-    virtual void retrieveWaitingTime(const QString &request, const Company &company,
-                                     const Line &line, const Journey &journey,
-                                     const Station &station);
-protected:
-    QScopedPointer<TranspolePrivate> d_ptr;
+    AbstractWaitingTimeHelperPrivate(AbstractWaitingTimeHelper *q);
+    virtual void processReply(QNetworkReply *reply);
+    virtual void cleanup();
+    Company company;
+    Line line;
+    Journey journey;
+    Station station;
 private:
-    Q_DECLARE_PRIVATE(Transpole)
+    Q_DECLARE_PUBLIC(AbstractWaitingTimeHelper)
 };
 
 }
 
 }
 
-#endif // PUBLICTRANSPORTATION_PROVIDER_TRANSPOLE_H
+#endif // PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTWAITINGTIMEHELPER_P_H
