@@ -30,6 +30,7 @@
 #include "debug.h"
 #include "manager/dbus/dbusbackendmanager.h"
 #include "support/countriesmodel.h"
+#include "settingshelper.h"
 #include "backendcopyrightmanager.h"
 #include "favouritemanager.h"
 #include "backendmodel.h"
@@ -43,9 +44,9 @@ namespace PublicTransportation
 {
 
 /**
+ * @namespace Gui
  * @short Namespce for GUI
  */
-namespace Gui {}
 
 }
 
@@ -139,6 +140,8 @@ int main(int argc, char **argv)
                                                           PublicTransportation::Journey,
                                                           PublicTransportation::Station)));
 
+    // Settings helper
+    Gui::SettingsHelper settingsHelper;
 
     // Load backend list
     backendModel.reload();
@@ -164,6 +167,7 @@ int main(int argc, char **argv)
     view.rootContext()->setContextProperty("ICON_FILE", QVariant(ICON_FILE));
     view.rootContext()->setContextProperty("VERSION", QVariant(version));
     view.rootContext()->setContextProperty("BACKEND_FIRST_TIME", QVariant(backendFirstTime));
+    view.rootContext()->setContextProperty("SettingsHelper", &settingsHelper);
     view.rootContext()->setContextProperty("CountriesModelInstance", &countriesModel);
     view.rootContext()->setContextProperty("BackendCopyrightManagerInstance",
                                            &backendCopyrightManager);

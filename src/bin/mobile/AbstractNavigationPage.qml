@@ -32,6 +32,7 @@ AbstractPage {
             clip: true
             delegate: ClickableEntry {
                 text: qsTranslate(container.translationContext, model.text)
+                subText: qsTranslate(container.translationContext, model.subText)
                 onClicked: container.show(model.identifier)
             }
         }

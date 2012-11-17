@@ -23,6 +23,7 @@ HEADERS +=      xmlconversionhelper.h \
                 waitingtimemodel.h \
                 stationsfromjourneymodel.h \
                 support/countriesmodel.h \
+    settingshelper.h
 
 
 SOURCES +=      main.cpp \
@@ -35,6 +36,7 @@ SOURCES +=      main.cpp \
                 waitingtimemodel.cpp \
                 stationsfromjourneymodel.cpp \
                 support/countriesmodel.cpp \
+    settingshelper.cpp
 
 OTHER_FILES +=  main.qml \
                 UiConstants.js \

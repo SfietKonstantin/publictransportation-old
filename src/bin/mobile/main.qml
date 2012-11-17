@@ -25,6 +25,12 @@ PageStackWindow {
         if (BACKEND_FIRST_TIME) {
             firstTimeConfigureDialog.open()
         }
+        theme.inverted = SettingsHelper.themeInverted
+    }
+
+    Connections {
+        target: SettingsHelper
+        onThemeInvertedChanged: theme.inverted = SettingsHelper.themeInverted
     }
 
     MainPage {id: mainPage}

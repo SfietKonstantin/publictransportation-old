@@ -43,6 +43,17 @@ AbstractNavigationPage {
         ListElement {
             identifier: "showSearchStation"
             text: QT_TR_NOOP("Search station")
+            subText: ""
+        }
+        ListElement {
+            identifier: "showRouting"
+            text: QT_TR_NOOP("Routing")
+            subText: "Available soon"
+        }
+        ListElement {
+            identifier: "showMaps"
+            text: QT_TR_NOOP("Maps")
+            subText: "Available soon"
         }
     }
 
@@ -60,7 +71,7 @@ AbstractNavigationPage {
             }
             MenuItem {
                 text: qsTr("Switch color theme")
-                onClicked: theme.inverted = !theme.inverted
+                onClicked: SettingsHelper.themeInverted = !SettingsHelper.themeInverted
             }
             MenuItem {
                 text: qsTr("About")
