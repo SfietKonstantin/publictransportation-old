@@ -80,7 +80,7 @@ QList<Station> TranspoleSuggestedStationsHelper::processData(QIODevice *input, b
                 station.setName(LanguageHelper::unstripHtmlAccents(lineNameRegExp.cap(1)));
                 QVariantMap properties;
                 properties.insert("code", currentId);
-                properties.insert("providerName", "Transpole");
+                properties.insert("backendName", "Transpole");
                 station.setProperties(properties);
                 suggestedStations.append(station);
 
