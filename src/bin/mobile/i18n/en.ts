@@ -19,17 +19,17 @@
     <message>
         <location filename="../BackendInfoSheet.qml" line="22"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Close</translation>
     </message>
     <message>
         <location filename="../BackendInfoSheet.qml" line="33"/>
         <source>Copyright</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright</translation>
     </message>
     <message>
         <location filename="../BackendInfoSheet.qml" line="47"/>
         <source>Provider capabilities</source>
-        <translation type="unfinished"></translation>
+        <translation>Provider capabilities</translation>
     </message>
 </context>
 <context>
@@ -63,17 +63,17 @@
         <translation>Provided by</translation>
     </message>
     <message>
-        <location filename="../JourneysFromStationPage.qml" line="108"/>
+        <location filename="../JourneysFromStationPage.qml" line="116"/>
         <source>Line</source>
         <translation>Line</translation>
     </message>
     <message>
-        <location filename="../JourneysFromStationPage.qml" line="141"/>
+        <location filename="../JourneysFromStationPage.qml" line="150"/>
         <source>Hide categories</source>
         <translation>Hide categories</translation>
     </message>
     <message>
-        <location filename="../JourneysFromStationPage.qml" line="141"/>
+        <location filename="../JourneysFromStationPage.qml" line="150"/>
         <source>Display categories</source>
         <translation>Display categories</translation>
     </message>
@@ -109,19 +109,19 @@
 <context>
     <name>PublicTransportation::Gui::BackendCopyrightManager</name>
     <message>
-        <location filename="../backendcopyrightmanager.cpp" line="73"/>
+        <location filename="../backendcopyrightmanager.cpp" line="122"/>
         <source>Search for a station</source>
-        <translation type="unfinished">Search for a station</translation>
+        <translation>Search for a station</translation>
     </message>
     <message>
-        <location filename="../backendcopyrightmanager.cpp" line="76"/>
+        <location filename="../backendcopyrightmanager.cpp" line="125"/>
         <source>List journeys from a station</source>
-        <translation type="unfinished"></translation>
+        <translation>List journeys from a station</translation>
     </message>
     <message>
-        <location filename="../backendcopyrightmanager.cpp" line="79"/>
+        <location filename="../backendcopyrightmanager.cpp" line="128"/>
         <source>Give waiting time at a station</source>
-        <translation type="unfinished"></translation>
+        <translation>Give waiting time at a station</translation>
     </message>
 </context>
 <context>
@@ -134,33 +134,33 @@
 <context>
     <name>PublicTransportation::Provider::Ratp</name>
     <message>
-        <location filename="../../../plugins/ratp/ratp.cpp" line="204"/>
+        <location filename="../../../plugins/ratp/ratp.cpp" line="100"/>
         <source>This provider uses wap.ratp.fr.</source>
-        <translation type="unfinished"></translation>
+        <translation>This provider uses wap.ratp.fr.</translation>
     </message>
 </context>
 <context>
     <name>PublicTransportation::Provider::Sibra</name>
     <message>
-        <location filename="../../../plugins/sibra/sibra.cpp" line="312"/>
+        <location filename="../../../plugins/sibra/sibra.cpp" line="324"/>
         <source>This provider uses m.sibra.fr.</source>
-        <translation type="unfinished"></translation>
+        <translation>This provider uses m.sibra.fr.</translation>
     </message>
 </context>
 <context>
     <name>PublicTransportation::Provider::Transpole</name>
     <message>
-        <location filename="../../../plugins/transpole/transpole.cpp" line="391"/>
+        <location filename="../../../plugins/transpole/transpole.cpp" line="106"/>
         <source>This provider uses www.transpole.mobi/.</source>
-        <translation type="unfinished"></translation>
+        <translation>This provider uses www.transpole.mobi/.</translation>
     </message>
 </context>
 <context>
     <name>PublicTransportation::Provider::TransportLausannois</name>
     <message>
-        <location filename="../../../plugins/tl/transportlausannois.cpp" line="171"/>
+        <location filename="../../../plugins/tl/transportlausannois.cpp" line="101"/>
         <source>This provider uses tl live website.</source>
-        <translation type="unfinished"></translation>
+        <translation>This provider uses tl live website.</translation>
     </message>
 </context>
 <context>

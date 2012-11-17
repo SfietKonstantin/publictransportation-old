@@ -17,17 +17,17 @@
     <message>
         <location filename="../BackendInfoSheet.qml" line="22"/>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>Chiudi</translation>
     </message>
     <message>
         <location filename="../BackendInfoSheet.qml" line="33"/>
         <source>Copyright</source>
-        <translation type="unfinished"/>
+        <translation>Copyright</translation>
     </message>
     <message>
         <location filename="../BackendInfoSheet.qml" line="47"/>
         <source>Provider capabilities</source>
-        <translation type="unfinished"/>
+        <translation>Contenuti del gestore</translation>
     </message>
 </context>
 <context>
@@ -109,17 +109,17 @@
     <message>
         <location filename="../backendcopyrightmanager.cpp" line="73"/>
         <source>Search for a station</source>
-        <translation type="unfinished"/>
+        <translation>Cerca una stazione</translation>
     </message>
     <message>
         <location filename="../backendcopyrightmanager.cpp" line="76"/>
         <source>List journeys from a station</source>
-        <translation type="unfinished"/>
+        <translation>Elenca linee da una stazione</translation>
     </message>
     <message>
         <location filename="../backendcopyrightmanager.cpp" line="79"/>
         <source>Give waiting time at a station</source>
-        <translation type="unfinished"/>
+        <translation>Mostra tempi d&apos;attesa alla stazione</translation>
     </message>
 </context>
 <context>
@@ -134,7 +134,7 @@
     <message>
         <location filename="../../../plugins/ratp/ratp.cpp" line="204"/>
         <source>This provider uses wap.ratp.fr.</source>
-        <translation type="unfinished"/>
+        <translation>Questo servizio usa wap.ratp.fr.</translation>
     </message>
 </context>
 <context>
@@ -142,7 +142,7 @@
     <message>
         <location filename="../../../plugins/sibra/sibra.cpp" line="312"/>
         <source>This provider uses m.sibra.fr.</source>
-        <translation type="unfinished"/>
+        <translation>Questo servizio usa m.sibra.fr.</translation>
     </message>
 </context>
 <context>
@@ -150,7 +150,7 @@
     <message>
         <location filename="../../../plugins/transpole/transpole.cpp" line="391"/>
         <source>This provider uses www.transpole.mobi/.</source>
-        <translation type="unfinished"/>
+        <translation>Questo servizio usa www.transpole.mobi/.</translation>
     </message>
 </context>
 <context>
@@ -158,7 +158,7 @@
     <message>
         <location filename="../../../plugins/tl/transportlausannois.cpp" line="171"/>
         <source>This provider uses tl live website.</source>
-        <translation type="unfinished"/>
+        <translation>Questo servizio usa tl live website.</translation>
     </message>
 </context>
 <context>
@@ -166,7 +166,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="112"/>
         <source>All countries</source>
-        <translation>Tutte le naazioni</translation>
+        <translation>Tutte le nazioni</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="117"/>
@@ -246,7 +246,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="177"/>
         <source>Azerbaijan</source>
-        <translation>Azerbaigian</translation>
+        <translation>Azerbaijan</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="181"/>
@@ -526,7 +526,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="401"/>
         <source>Fiji</source>
-        <translation>Figi</translation>
+        <translation>Fiji</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="405"/>
@@ -1291,7 +1291,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="1013"/>
         <source>Turks and Caicos Islands</source>
-        <translation>Turks e Caicos</translation>
+        <translation>Isole Turks e Caicos</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="1017"/>
@@ -1407,7 +1407,7 @@
     <message>
         <location filename="../UpdateHeader.qml" line="58"/>
         <source>Pull down to update</source>
-        <translation>Trascina in basso per aggiornare</translation>
+        <translation>Tira per aggiornare</translation>
     </message>
     <message>
         <location filename="../UpdateHeader.qml" line="59"/>
@@ -1425,7 +1425,7 @@
     <message>
         <location filename="../main.qml" line="35"/>
         <source>Do you want to configure the information sources now? Informations sources are used to provide informations about the public transport you are using.</source>
-        <translation>Vuoi configurare una sorgente d&apos;informazione ora? Le sorgenti d&apos;informazione vengono usate per fornire informazioni sul trasporto pubblico che stai usando.</translation>
+        <translation>Vuoi configurare le sorgenti d&apos;informazione ora? Le sorgenti d&apos;informazione vengono usate per fornire informazioni sul trasporto pubblico che stai usando.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="37"/>

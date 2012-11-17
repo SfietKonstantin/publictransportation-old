@@ -4,12 +4,12 @@
     <message>
         <location filename="../AboutPage.qml" line="25"/>
         <source>About</source>
-        <translation type="unfinished"/>
+        <translation>Tietoja</translation>
     </message>
     <message>
         <location filename="../AboutPage.qml" line="66"/>
         <source>publictransportation is an attempt to give the user the best transportation application. Instead of multiple clients that do not share anything in common (no consistency in UI, in navigation etc.), publictransportation brings an unified UI for different information sources about different transportation companies.</source>
-        <translation type="unfinished"/>
+        <translation>Publictransportation on yritys tarjota käyttäjälle paras mahdollinen reittiopassovelluksen. Sen sijaan että tarjotaan monta erillistä jotka eivät omaa yhtäläisyyksiä (epäjohdonmukainen UI, navigoinnissa jne. ). Publictransportation tuo yhtenäinen käyttöliittymä  monelle joukkoliikenteen tietolähdettä tarjoaville yrityksille.</translation>
     </message>
 </context>
 <context>
@@ -17,17 +17,17 @@
     <message>
         <location filename="../BackendInfoSheet.qml" line="22"/>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>Sulje</translation>
     </message>
     <message>
         <location filename="../BackendInfoSheet.qml" line="33"/>
         <source>Copyright</source>
-        <translation type="unfinished"/>
+        <translation>Tekijänoikeus</translation>
     </message>
     <message>
         <location filename="../BackendInfoSheet.qml" line="47"/>
         <source>Provider capabilities</source>
-        <translation type="unfinished"/>
+        <translation>Palveluita tarjolla</translation>
     </message>
 </context>
 <context>
@@ -35,17 +35,17 @@
     <message>
         <location filename="../BackendSelectorPage.qml" line="24"/>
         <source>Manage information sources</source>
-        <translation type="unfinished"/>
+        <translation>Hallita tietolähteet</translation>
     </message>
     <message>
         <location filename="../BackendSelectorPage.qml" line="79"/>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>Peruuta</translation>
     </message>
     <message>
         <location filename="../BackendSelectorPage.qml" line="94"/>
         <source>Filter countries</source>
-        <translation type="unfinished"/>
+        <translation>Suodata maat</translation>
     </message>
 </context>
 <context>
@@ -53,27 +53,27 @@
     <message>
         <location filename="../JourneysFromStationPage.qml" line="28"/>
         <source>Journeys</source>
-        <translation type="unfinished"/>
+        <translation>Matkat</translation>
     </message>
     <message>
         <location filename="../JourneysFromStationPage.qml" line="72"/>
         <source>Provided by</source>
-        <translation type="unfinished"/>
+        <translation>Palvelun tarjoaa</translation>
     </message>
     <message>
         <location filename="../JourneysFromStationPage.qml" line="108"/>
         <source>Line</source>
-        <translation type="unfinished"/>
+        <translation>Linja</translation>
     </message>
     <message>
         <location filename="../JourneysFromStationPage.qml" line="141"/>
         <source>Hide categories</source>
-        <translation type="unfinished"/>
+        <translation>Piilota kategoriat</translation>
     </message>
     <message>
         <location filename="../JourneysFromStationPage.qml" line="141"/>
         <source>Display categories</source>
-        <translation type="unfinished"/>
+        <translation>Näytä kategoriat</translation>
     </message>
 </context>
 <context>
@@ -81,27 +81,27 @@
     <message>
         <location filename="../MainPage.qml" line="28"/>
         <source>Public transportation</source>
-        <translation type="unfinished"/>
+        <translation>Joukkoliikenne</translation>
     </message>
     <message>
         <location filename="../MainPage.qml" line="45"/>
         <source>Search station</source>
-        <translation type="unfinished"/>
+        <translation>Etsi asemia</translation>
     </message>
     <message>
         <location filename="../MainPage.qml" line="55"/>
         <source>Manage information source</source>
-        <translation type="unfinished"/>
+        <translation>Hallita tietolähteet</translation>
     </message>
     <message>
         <location filename="../MainPage.qml" line="62"/>
         <source>Switch color theme</source>
-        <translation type="unfinished"/>
+        <translation>Vaihda väriteema</translation>
     </message>
     <message>
         <location filename="../MainPage.qml" line="66"/>
         <source>About</source>
-        <translation type="unfinished"/>
+        <translation>Tietoja</translation>
     </message>
 </context>
 <context>
@@ -109,17 +109,17 @@
     <message>
         <location filename="../backendcopyrightmanager.cpp" line="73"/>
         <source>Search for a station</source>
-        <translation type="unfinished"/>
+        <translation>Etsi asemaa</translation>
     </message>
     <message>
         <location filename="../backendcopyrightmanager.cpp" line="76"/>
         <source>List journeys from a station</source>
-        <translation type="unfinished"/>
+        <translation>Lista matkat asemasta</translation>
     </message>
     <message>
         <location filename="../backendcopyrightmanager.cpp" line="79"/>
         <source>Give waiting time at a station</source>
-        <translation type="unfinished"/>
+        <translation>Näytä odotusaika asemalla</translation>
     </message>
 </context>
 <context>
@@ -134,7 +134,7 @@
     <message>
         <location filename="../../../plugins/ratp/ratp.cpp" line="204"/>
         <source>This provider uses wap.ratp.fr.</source>
-        <translation type="unfinished"/>
+        <translation>Tämä tarjoaja käyttää wap.ratp.fr.</translation>
     </message>
 </context>
 <context>
@@ -142,7 +142,7 @@
     <message>
         <location filename="../../../plugins/sibra/sibra.cpp" line="312"/>
         <source>This provider uses m.sibra.fr.</source>
-        <translation type="unfinished"/>
+        <translation>Tämä tarjoaja käyttää m.sibra.fr.</translation>
     </message>
 </context>
 <context>
@@ -150,7 +150,7 @@
     <message>
         <location filename="../../../plugins/transpole/transpole.cpp" line="391"/>
         <source>This provider uses www.transpole.mobi/.</source>
-        <translation type="unfinished"/>
+        <translation>Tämä tarjoaja käyttää ww.transpole.mobi/.</translation>
     </message>
 </context>
 <context>
@@ -158,7 +158,7 @@
     <message>
         <location filename="../../../plugins/tl/transportlausannois.cpp" line="171"/>
         <source>This provider uses tl live website.</source>
-        <translation type="unfinished"/>
+        <translation>Tämä tarjoaja käyttää tl live sivustoa.</translation>
     </message>
 </context>
 <context>
@@ -166,7 +166,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="112"/>
         <source>All countries</source>
-        <translation type="unfinished"/>
+        <translation>Kaikki maat</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="117"/>
@@ -176,7 +176,7 @@
     <message utf8="true">
         <location filename="../support/countriesmodel.cpp" line="121"/>
         <source>Åland Islands</source>
-        <translation type="unfinished"/>
+        <translation>Ahvenanmaa</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="125"/>
@@ -436,7 +436,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="329"/>
         <source>Cote D&apos;ivoire</source>
-        <translation type="unfinished"/>
+        <translation>Norsunluurannikon Tasavalta</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="333"/>
@@ -746,7 +746,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="577"/>
         <source>Korea, Democratic People&apos;s Republic of</source>
-        <translation type="unfinished"/>
+        <translation>Korean Demokraattinen Kansantasavalta</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="581"/>
@@ -766,7 +766,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="593"/>
         <source>Lao People&apos;s Democratic Republic</source>
-        <translation type="unfinished"/>
+        <translation>Laosin Demokraattinen Kansantasavalta</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="597"/>
@@ -1011,7 +1011,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="789"/>
         <source>Palestinian Territory, Occupied</source>
-        <translation type="unfinished"/>
+        <translation>Palestiinan miehitetty alue</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="793"/>
@@ -1066,7 +1066,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="833"/>
         <source>Reunion</source>
-        <translation type="unfinished"/>
+        <translation>Reunion</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="837"/>
@@ -1121,7 +1121,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="877"/>
         <source>Sao Tome and Principe</source>
-        <translation type="unfinished"/>
+        <translation>São Tomé ja Príncipe</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="881"/>
@@ -1394,12 +1394,12 @@
     <message>
         <location filename="../SearchStationPage.qml" line="26"/>
         <source>Search stations</source>
-        <translation type="unfinished"/>
+        <translation>Etsi asemia</translation>
     </message>
     <message>
         <location filename="../SearchStationPage.qml" line="52"/>
         <source>Search for a station</source>
-        <translation type="unfinished"/>
+        <translation>Etsi asemaa</translation>
     </message>
 </context>
 <context>
@@ -1407,12 +1407,12 @@
     <message>
         <location filename="../UpdateHeader.qml" line="58"/>
         <source>Pull down to update</source>
-        <translation type="unfinished"/>
+        <translation>Vedä alas päivittääksesi</translation>
     </message>
     <message>
         <location filename="../UpdateHeader.qml" line="59"/>
         <source>Release to update</source>
-        <translation type="unfinished"/>
+        <translation>Päästä irti jotta näkymä päivittyy</translation>
     </message>
 </context>
 <context>
@@ -1420,22 +1420,22 @@
     <message>
         <location filename="../main.qml" line="34"/>
         <source>Configure information sources</source>
-        <translation type="unfinished"/>
+        <translation>Määritä tietolähteet</translation>
     </message>
     <message>
         <location filename="../main.qml" line="35"/>
         <source>Do you want to configure the information sources now? Informations sources are used to provide informations about the public transport you are using.</source>
-        <translation type="unfinished"/>
+        <translation>Haluatko määritä tietolähteitä nyt? Tietolähteitä käytetään tarjotakseen tietoja sinun käyttämästä joukkoliikenteestä.</translation>
     </message>
     <message>
         <location filename="../main.qml" line="37"/>
         <source>Yes</source>
-        <translation type="unfinished"/>
+        <translation>Kyllä</translation>
     </message>
     <message>
         <location filename="../main.qml" line="38"/>
         <source>No</source>
-        <translation type="unfinished"/>
+        <translation>Ei</translation>
     </message>
 </context>
 </TS>

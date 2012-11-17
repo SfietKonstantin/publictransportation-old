@@ -17,17 +17,17 @@
     <message>
         <location filename="../BackendInfoSheet.qml" line="22"/>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>Schließen</translation>
     </message>
     <message>
         <location filename="../BackendInfoSheet.qml" line="33"/>
         <source>Copyright</source>
-        <translation type="unfinished"/>
+        <translation>Copyright</translation>
     </message>
     <message>
         <location filename="../BackendInfoSheet.qml" line="47"/>
         <source>Provider capabilities</source>
-        <translation type="unfinished"/>
+        <translation>Verfügbare Anbietermerkmale</translation>
     </message>
 </context>
 <context>
@@ -40,12 +40,12 @@
     <message>
         <location filename="../BackendSelectorPage.qml" line="79"/>
         <source>Cancel</source>
-        <translation type="unfinished"/>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <location filename="../BackendSelectorPage.qml" line="94"/>
         <source>Filter countries</source>
-        <translation type="unfinished"/>
+        <translation>Länder filtern</translation>
     </message>
 </context>
 <context>
@@ -109,17 +109,17 @@
     <message>
         <location filename="../backendcopyrightmanager.cpp" line="73"/>
         <source>Search for a station</source>
-        <translation type="unfinished"/>
+        <translation>Suche eine Station</translation>
     </message>
     <message>
         <location filename="../backendcopyrightmanager.cpp" line="76"/>
         <source>List journeys from a station</source>
-        <translation type="unfinished"/>
+        <translation>Zeige Fahrten</translation>
     </message>
     <message>
         <location filename="../backendcopyrightmanager.cpp" line="79"/>
         <source>Give waiting time at a station</source>
-        <translation type="unfinished"/>
+        <translation>Wartezeit für Station angeben</translation>
     </message>
 </context>
 <context>
@@ -134,7 +134,7 @@
     <message>
         <location filename="../../../plugins/ratp/ratp.cpp" line="204"/>
         <source>This provider uses wap.ratp.fr.</source>
-        <translation type="unfinished"/>
+        <translation>Dieser Anbieter nutzt wap.ratp.fr.</translation>
     </message>
 </context>
 <context>
@@ -142,7 +142,7 @@
     <message>
         <location filename="../../../plugins/sibra/sibra.cpp" line="312"/>
         <source>This provider uses m.sibra.fr.</source>
-        <translation type="unfinished"/>
+        <translation>Dieser Anbieter nutzt m.sibra.fr.</translation>
     </message>
 </context>
 <context>
@@ -150,7 +150,7 @@
     <message>
         <location filename="../../../plugins/transpole/transpole.cpp" line="391"/>
         <source>This provider uses www.transpole.mobi/.</source>
-        <translation type="unfinished"/>
+        <translation>Dieser Anbieter nutzt www.transpole.mobi/.</translation>
     </message>
 </context>
 <context>
@@ -158,7 +158,7 @@
     <message>
         <location filename="../../../plugins/tl/transportlausannois.cpp" line="171"/>
         <source>This provider uses tl live website.</source>
-        <translation type="unfinished"/>
+        <translation>Dieser Anbieter nutzt tl live website.</translation>
     </message>
 </context>
 <context>
@@ -166,7 +166,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="112"/>
         <source>All countries</source>
-        <translation type="unfinished"/>
+        <translation>Alle Länder</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="117"/>
@@ -176,7 +176,7 @@
     <message utf8="true">
         <location filename="../support/countriesmodel.cpp" line="121"/>
         <source>Åland Islands</source>
-        <translation type="unfinished"/>
+        <translation>Åland Inseln</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="125"/>
@@ -436,7 +436,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="329"/>
         <source>Cote D&apos;ivoire</source>
-        <translation type="unfinished"/>
+        <translation>Elfenbeinküste</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="333"/>
@@ -746,7 +746,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="577"/>
         <source>Korea, Democratic People&apos;s Republic of</source>
-        <translation type="unfinished"/>
+        <translation>Nordkorea</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="581"/>
@@ -766,7 +766,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="593"/>
         <source>Lao People&apos;s Democratic Republic</source>
-        <translation type="unfinished"/>
+        <translation>Laos</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="597"/>
@@ -1011,7 +1011,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="789"/>
         <source>Palestinian Territory, Occupied</source>
-        <translation type="unfinished"/>
+        <translation>Palestina</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="793"/>
@@ -1121,7 +1121,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="877"/>
         <source>Sao Tome and Principe</source>
-        <translation type="unfinished"/>
+        <translation>São Tomé und Príncipe</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="881"/>
@@ -1206,7 +1206,7 @@
     <message>
         <location filename="../support/countriesmodel.cpp" line="945"/>
         <source>Svalbard and Jan Mayen</source>
-        <translation type="unfinished"/>
+        <translation>Spitzbergen</translation>
     </message>
     <message>
         <location filename="../support/countriesmodel.cpp" line="949"/>
