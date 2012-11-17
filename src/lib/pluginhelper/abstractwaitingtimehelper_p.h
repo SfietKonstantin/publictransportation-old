@@ -24,6 +24,12 @@
 // This header file may change from version
 // to version without notice or even be removed.
 
+/**
+ * @internal
+ * @file abstractwaitingtimehelper_p.h
+ * @short Definition of PublicTransportation::PluginHelper::AbstractWaitingTimeHelperPrivate
+ */
+
 #include "abstractwaitingtimehelper.h"
 #include "abstractonlinehelper_p.h"
 
@@ -38,15 +44,50 @@ namespace PublicTransportation
 namespace PluginHelper
 {
 
+/**
+ * @internal
+ * @brief Private class used in PublicTransportation::PluginHelper::AbstractWaitingTimeHelper
+ */
 class AbstractWaitingTimeHelperPrivate: public AbstractOnlineHelperPrivate
 {
 public:
+    /**
+     * @internal
+     * @brief Constructor
+     * @param q Q-pointer
+     */
     AbstractWaitingTimeHelperPrivate(AbstractWaitingTimeHelper *q);
+    /**
+     * @internal
+     * @brief Implementation of AbstractOnlineHelperPrivate::processReply()
+     *
+     * @param reply Network reply.
+     */
     virtual void processReply(QNetworkReply *reply);
+    /**
+     * @internal
+     * @brief Implementation of AbstractOnlineHelperPrivate::cleanup()
+     */
     virtual void cleanup();
+    /**
+     * @internal
+     * @brief Company
+     */
     Company company;
+    /**
+     * @internal
+     * @brief Line
+     */
     Line line;
+    /**
+     * @internal
+     * @brief Journey
+     */
     Journey journey;
+    /**
+     * @internal
+     * @brief Station
+     */
     Station station;
 private:
     Q_DECLARE_PUBLIC(AbstractWaitingTimeHelper)

@@ -14,6 +14,12 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+/**
+ * @file offlinexmljourneysfromstationhelper.cpp
+ * @short Implementation of PublicTransportation::PluginHelper::OfflineXmlJourneysFromStationHelper
+ */
+
+
 #include "offlinexmljourneysfromstationhelper.h"
 
 #include <QtCore/QFile>

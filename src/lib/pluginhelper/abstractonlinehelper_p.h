@@ -68,6 +68,7 @@ public:
     /**
      * @internal
      * @brief Slot error
+     * @param networkError network error.
      */
     void slotError(QNetworkReply::NetworkError networkError);
     /**

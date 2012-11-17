@@ -64,7 +64,7 @@ public:
     explicit AbstractJourneysFromStationHelper(QNetworkAccessManager *networkAccessManager,
                                                QObject *parent = 0);
     /**
-     * @brief setData
+     * @brief Set data
      * @param station station.
      * @param limit limit.
      */

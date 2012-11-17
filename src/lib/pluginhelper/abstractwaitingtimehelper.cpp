@@ -14,6 +14,11 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+/**
+ * @file abstractwaitingtimehelper.cpp
+ * @short Implementation of PublicTransportation::PluginHelper::AbstractWaitingTimeHelper
+ */
+
 #include "abstractwaitingtimehelper.h"
 #include "abstractwaitingtimehelper_p.h"
 

@@ -59,7 +59,7 @@ public:
     explicit AbstractSuggestedStationsHelper(QNetworkAccessManager *networkAccessManager,
                                              QObject *parent = 0);
     /**
-     * @brief setData
+     * @brief Set data
      * @param partialStation partial station.
      */
     void setData(const QString &partialStation);

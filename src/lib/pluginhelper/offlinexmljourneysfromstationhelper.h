@@ -17,6 +17,12 @@
 #ifndef PUBLICTRANSPORTATION_PLUGINHELPER_OFFLINEXMLJOURNEYSFROMSTATIONHELPER_H
 #define PUBLICTRANSPORTATION_PLUGINHELPER_OFFLINEXMLJOURNEYSFROMSTATIONHELPER_H
 
+/**
+ * @file offlinexmljourneysfromstationhelper.h
+ * @short Definition of PublicTransportation::PluginHelper::OfflineXmlJourneysFromStationHelper
+ */
+
+
 #include "publictransportationpluginhelper_global.h"
 
 #include <QtCore/QList>
@@ -32,9 +38,47 @@ class InfoJourneys;
 namespace PluginHelper
 {
 
+/**
+ * @brief Offline journeys from station helper using XML
+ *
+ * This class provide a method to make the creation
+ * of journeys from station easy, if the journeys from station
+ * are provided using a specific format.
+ *
+ * The format is as follow:
+ * \code{xml}
+<stations>
+    <station name="Name of a station">
+        <line name="Name of the line" property1="Some property" property2="Some other property">
+            <journey name="Name of the journey" property1="Some property"
+                     property2="Some other property"/>
+            <journey name="Name of another journey" property1="Some property"
+                     property2="Some other property"/>
+        </line>
+    </station>
+    ...
+</stations>
+ * \endcode
+ */
 class PUBLICTRANSPORTATIONPLUGINHELPER_EXPORT OfflineXmlJourneysFromStationHelper
 {
 public:
+    /**
+     * @brief Generate a list of informations about a journey
+     *
+     * This method is used to create a list of journeys
+     * from station based on an XML file, the station, and
+     * a set of parameters, like the company, and the
+     * disambiguation parameter.
+     *
+     * @param xmlFile XML file.
+     * @param station station.
+     * @param disambiguation disambiguation.
+     * @param company company.
+     * @param ok if the file were correctly processed.
+     * @param errorMessage an error message.
+     * @return a list of informations about a journey.
+     */
     static QList<InfoJourneys> journeysFromStation(const QString &xmlFile,
                                                    const Station &station,
                                                    const QVariantMap &disambiguation,
