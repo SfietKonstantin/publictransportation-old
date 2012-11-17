@@ -17,6 +17,11 @@
 #ifndef PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTCACHEDSUGGESTEDSTATIONSHELPER_H
 #define PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTCACHEDSUGGESTEDSTATIONSHELPER_H
 
+/**
+ * @file abstractcachedsuggestedstationshelper.h
+ * @short Definition of PublicTransportation::PluginHelper::AbstractCachedSuggestedStationsHelper
+ */
+
 #include "publictransportationpluginhelper_global.h"
 #include "abstractsuggestedstationshelper.h"
 
@@ -27,21 +32,55 @@ namespace PluginHelper
 {
 
 class AbstractCachedSuggestedStationsHelperPrivate;
+
+/**
+ * @brief A class used to support suggested stations that can be cached
+ *
+ * This class provides an interface for suggesting stations, that can
+ * be retrived at the first time and cached. In order to use that class
+ * you need to reimplement processData(), and send the
+ * suggestedStationsRetrieved() signal.
+ *
+ * Instead of calling AbstractOnlineHelper::get() or AbstractOnlineHelper::post(),
+ * you should call a wrapper around these methods, that are suggestGet() and
+ * suggestPost(), that will either perform the network operation, or
+ * directly get the information from the cache if they are available.
+ * These methods also perform the AbstractSuggestedStationsHelper::setData() for you
+ * if needed.
+ */
 class PUBLICTRANSPORTATIONPLUGINHELPER_EXPORT AbstractCachedSuggestedStationsHelper:
         public AbstractSuggestedStationsHelper
 {
     Q_OBJECT
 public:
+    /**
+     * @brief Default constructor
+     * @param networkAccessManager network access manager.
+     * @param parent parent object.
+     */
     explicit AbstractCachedSuggestedStationsHelper(QNetworkAccessManager *networkAccessManager,
                                                    QObject *parent = 0);
+    /**
+     * @brief Destructor
+     */
     virtual ~AbstractCachedSuggestedStationsHelper();
+    /**
+     * @brief GET request with a suggest feature
+     * @param request request.
+     * @param networkRequest network request.
+     * @param partialStation partial station.
+     */
     void suggestGet(const QString &request, const QNetworkRequest &networkRequest,
                     const QString &partialStation);
+    /**
+     * @brief POST request with a suggest feature
+     * @param request request.
+     * @param networkRequest network request.
+     * @param data data used for the POST request.
+     * @param partialStation partial station.
+     */
     void suggestPost(const QString &request, const QNetworkRequest &networkRequest,
                      const QByteArray &data, const QString &partialStation);
-protected:
-    virtual QList<Station> processData(QIODevice *input, bool *ok = 0,
-                                       QString *errorMessage = 0) = 0;
 private:
     Q_DECLARE_PRIVATE(AbstractCachedSuggestedStationsHelper)
 

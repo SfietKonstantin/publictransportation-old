@@ -14,6 +14,11 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+/**
+ * @file languagehelper.cpp
+ * @short Implementation of PublicTransportation::PluginHelper::LanguageHelper
+ */
+
 #include "languagehelper.h"
 
 namespace PublicTransportation

@@ -14,6 +14,11 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+/**
+ * @file abstractsuggestedstationshelper.cpp
+ * @short Implementation of PublicTransportation::PluginHelper::AbstractSuggestedStationsHelper
+ */
+
 #include "abstractsuggestedstationshelper.h"
 #include "abstractsuggestedstationshelper_p.h"
 

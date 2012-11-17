@@ -19,11 +19,11 @@ HEADERS +=      publictransportationpluginhelper_global.h \
                 abstractsuggestedstationshelper_p.h \
                 abstractcachedsuggestedstationshelper.h \
                 abstractjourneysfromstationhelper.h \
+                abstractjourneysfromstationhelper_p.h \
                 abstractwaitingtimehelper.h \
+                abstractwaitingtimehelper_p.h \
                 offlinesuggestedstationshelper.h \
                 offlinexmljourneysfromstationhelper.h \
-    abstractjourneysfromstationhelper_p.h \
-    abstractwaitingtimehelper_p.h
 
 SOURCES +=      languagehelper.cpp \
                 abstractonlinehelper.cpp \

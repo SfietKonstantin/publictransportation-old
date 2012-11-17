@@ -124,8 +124,12 @@ QList<InfoJourneys> OfflineXmlJourneysFromStationHelper::journeysFromStation(con
                     }
                 }
             }
+
+
             Journey journey (disambiguation, journeyElement.attribute("name"), journeyProperties);
-            Station preciseStation = station;
+            Station preciseStation;
+            preciseStation.setName(station.name());
+            preciseStation.setDisambiguation(station.disambiguation());
             preciseStation.setProperties(stationProperties);
             journeysStations.append(QPair<Journey, Station>(journey, preciseStation));
 

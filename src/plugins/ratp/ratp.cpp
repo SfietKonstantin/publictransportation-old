@@ -148,7 +148,6 @@ void Ratp::retrieveJourneysFromStation(const QString &request, const Station &st
     }
 
     debug("ratp-plugin") << infoJourneysList.count();
-
     emit journeysFromStationRetrieved(request, infoJourneysList);
 }
 

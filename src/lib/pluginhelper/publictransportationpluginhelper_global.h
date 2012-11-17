@@ -17,6 +17,36 @@
 #ifndef PUBLICTRANSPORTATIONPLUGINHELPER_GLOBAL_H
 #define PUBLICTRANSPORTATIONPLUGINHELPER_GLOBAL_H
 
+/**
+ * @file publictransportationpluginhelper_global.h
+ * @short Global header for publictransportation helper library for plugins
+ */
+
+/**
+ * @page Helper library for plugins
+ *
+ * publictransportation ships a library that provides a lot of classes
+ * dealing with asynchronous methods, such as network retrieving.
+ *
+ * These classes can be used to hide the network reply management, and
+ * provide conveinent ways to deal with asynchronous data.
+ *
+ * A list of these classes:
+ * - PublicTransportation::PluginHelper::AbstractOnlineHelper
+ * - PublicTransportation::PluginHelper::AbstractSuggestedStationsHelper
+ * - PublicTransportation::PluginHelper::AbstractCachedSuggestedStationsHelper
+ * - PublicTransportation::PluginHelper::AbstractJourneysFromStationHelper
+ * - PublicTransportation::PluginHelper::AbstractWaitingTimeHelper
+ * - PublicTransportation::PluginHelper::OfflineSuggestedStationsHelper
+ * - PublicTransportation::PluginHelper::OfflineXmlJourneysFromStationHelper
+ */
+
+/**
+ * @namespace PublicTransportation::PluginHelper
+ * @short Namespace for publictransportation helper library for plugins
+ */
+
+
 #include <QtCore/qglobal.h>
 
 /**

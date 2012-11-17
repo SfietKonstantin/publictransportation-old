@@ -17,17 +17,23 @@
 #ifndef PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTJOURNEYSFROMSTATIONHELPER_P_H
 #define PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTJOURNEYSFROMSTATIONHELPER_P_H
 
-#include "abstractjourneysfromstationhelper.h"
-#include "abstractonlinehelper_p.h"
-
-#include "common/station.h"
-
 // Warning
 //
 // This file exists for the convenience
 // of other publictransportation classes.
 // This header file may change from version
 // to version without notice or even be removed.
+
+/**
+ * @internal
+ * @file abstractjourneysfromstationhelper_p.h
+ * @short Definition of PublicTransportation::PluginHelper::AbstractJourneysFromStationHelperPrivate
+ */
+
+#include "abstractjourneysfromstationhelper.h"
+#include "abstractonlinehelper_p.h"
+
+#include "common/station.h"
 
 class QNetworkReply;
 namespace PublicTransportation
@@ -36,13 +42,41 @@ namespace PublicTransportation
 namespace PluginHelper
 {
 
+/**
+ * @internal
+ * @brief Private class used in
+ * PublicTransportation::PluginHelper::AbstractJourneysFromStationHelper
+ */
 class AbstractJourneysFromStationHelperPrivate: public AbstractOnlineHelperPrivate
 {
 public:
+    /**
+     * @internal
+     * @brief Constructor
+     * @param q Q-pointer
+     */
     AbstractJourneysFromStationHelperPrivate(AbstractJourneysFromStationHelper *q);
+    /**
+     * @internal
+     * @brief Implementation of AbstractOnlineHelperPrivate::processReply()
+     *
+     * @param reply Network reply.
+     */
     virtual void processReply(QNetworkReply *reply);
+    /**
+     * @internal
+     * @brief Implementation of AbstractOnlineHelperPrivate::cleanup()
+     */
     virtual void cleanup();
+    /**
+     * @internal
+     * @brief Station
+     */
     Station station;
+    /**
+     * @internal
+     * @brief Limit
+     */
     int limit;
 private:
     Q_DECLARE_PUBLIC(AbstractJourneysFromStationHelper)

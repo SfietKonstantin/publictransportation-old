@@ -14,6 +14,12 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+/**
+ * @file abstractcachedsuggestedstationshelper.cpp
+ * @short Implementation of
+ * PublicTransportation::PluginHelper::AbstractCachedSuggestedStationsHelper
+ */
+
 #include "abstractcachedsuggestedstationshelper.h"
 #include "abstractsuggestedstationshelper_p.h"
 
@@ -31,13 +37,37 @@ namespace PublicTransportation
 namespace PluginHelper
 {
 
+/**
+ * @internal
+ * @brief Private class used in
+ * PublicTransportation::PluginHelper::AbstractCachedSuggestedStationsHelper
+ */
 class AbstractCachedSuggestedStationsHelperPrivate: public AbstractSuggestedStationsHelperPrivate
 {
 public:
+    /**
+     * @internal
+     * @brief Constructor
+     * @param q Q-pointer
+     */
     AbstractCachedSuggestedStationsHelperPrivate(AbstractCachedSuggestedStationsHelper *q);
+    /**
+     * @internal
+     * @brief Provide suggested stations
+     * @param request request.
+     * @param partialStation partial station.
+     */
     void provideSuggestedStations(const QString &request, const QString &partialStation);
     virtual void processReply(QNetworkReply *reply);
+    /**
+     * @internal
+     * @brief If cached data is available
+     */
     bool cached;
+    /**
+     * @internal
+     * @brief Cached stations
+     */
     QList<Station> stations;
 private:
     Q_DECLARE_PUBLIC(AbstractCachedSuggestedStationsHelper)

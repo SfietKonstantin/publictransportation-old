@@ -14,6 +14,12 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+/**
+ * @file abstractonlinehelper.cpp
+ * @short Implementation of PublicTransportation::PluginHelper::AbstractOnlineHelper
+ */
+
+
 #include "abstractonlinehelper.h"
 #include "abstractonlinehelper_p.h"
 

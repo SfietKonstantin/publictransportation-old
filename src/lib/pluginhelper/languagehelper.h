@@ -17,6 +17,11 @@
 #ifndef PUBLICTRANSPORTATION_PLUGINHELPER_LANGUAGEHELPER_H
 #define PUBLICTRANSPORTATION_PLUGINHELPER_LANGUAGEHELPER_H
 
+/**
+ * @file languagehelper.h
+ * @short Definition of PublicTransportation::PluginHelper::LanguageHelper
+ */
+
 #include "publictransportationpluginhelper_global.h"
 
 #include <QtCore/QString>
@@ -27,10 +32,25 @@ namespace PublicTransportation
 namespace PluginHelper
 {
 
+/**
+ * @brief Language helper
+ *
+ * This class provide methods to help dealing with languages.
+ */
 class PUBLICTRANSPORTATIONPLUGINHELPER_EXPORT LanguageHelper
 {
 public:
+    /**
+     * @brief Remove accents
+     * @param string input string.
+     * @return string without accents.
+     */
     static QString unaccent(const QString &string);
+    /**
+     * @brief Unstrip HTML accents
+     * @param string string with stripped HTML accents.
+     * @return string with unstripped HTML accents.
+     */
     static QString unstripHtmlAccents(const QString &string);
 };
 

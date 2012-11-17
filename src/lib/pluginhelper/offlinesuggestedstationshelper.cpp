@@ -14,6 +14,11 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+/**
+ * @file offlinesuggestedstationshelper.cpp
+ * @short Implementation of PublicTransportation::PluginHelper::OfflineSuggestedStationsHelper
+ */
+
 #include "offlinesuggestedstationshelper.h"
 
 #include <QtCore/QString>

@@ -14,6 +14,11 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
+/**
+ * @file abstractjourneysfromstationhelper.cpp
+ * @short Implementation of PublicTransportation::PluginHelper::AbstractJourneysFromStationHelper
+ */
+
 #include "abstractjourneysfromstationhelper.h"
 #include "abstractjourneysfromstationhelper_p.h"
 

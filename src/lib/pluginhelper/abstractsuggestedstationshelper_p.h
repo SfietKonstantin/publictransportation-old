@@ -17,15 +17,21 @@
 #ifndef PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTSUGGESTEDSTATIONSHELPER_P_H
 #define PUBLICTRANSPORTATION_PLUGINHELPER_ABSTRACTSUGGESTEDSTATIONSHELPER_P_H
 
-#include "abstractsuggestedstationshelper.h"
-#include "abstractonlinehelper_p.h"
-
 // Warning
 //
 // This file exists for the convenience
 // of other publictransportation classes.
 // This header file may change from version
 // to version without notice or even be removed.
+
+/**
+ * @internal
+ * @file abstractsuggestedstationshelper_p.h
+ * @short Definition of PublicTransportation::PluginHelper::AbstractSuggestedStationsHelperPrivate
+ */
+
+#include "abstractsuggestedstationshelper.h"
+#include "abstractonlinehelper_p.h"
 
 class QNetworkReply;
 namespace PublicTransportation
@@ -34,12 +40,35 @@ namespace PublicTransportation
 namespace PluginHelper
 {
 
+/**
+ * @internal
+ * @brief Private class used in PublicTransportation::PluginHelper::AbstractSuggestedStationsHelper
+ */
 class AbstractSuggestedStationsHelperPrivate: public AbstractOnlineHelperPrivate
 {
 public:
+    /**
+     * @internal
+     * @brief Constructor
+     * @param q Q-pointer
+     */
     AbstractSuggestedStationsHelperPrivate(AbstractSuggestedStationsHelper *q);
+    /**
+     * @internal
+     * @brief Implementation of AbstractOnlineHelperPrivate::processReply()
+     *
+     * @param reply Network reply.
+     */
     virtual void processReply(QNetworkReply *reply);
+    /**
+     * @internal
+     * @brief Implementation of AbstractOnlineHelperPrivate::cleanup()
+     */
     virtual void cleanup();
+    /**
+     * @internal
+     * @brief Partial station
+     */
     QString partialStation;
 private:
     Q_DECLARE_PUBLIC(AbstractSuggestedStationsHelper)

@@ -25,6 +25,12 @@
 // This header file may change from version
 // to version without notice or even be removed.
 
+/**
+ * @internal
+ * @file abstractonlinehelper_p.h
+ * @short Definition of PublicTransportation::PluginHelper::AbstractOnlineHelperPrivate
+ */
+
 #include "abstractonlinehelper.h"
 #include <QtNetwork/QNetworkReply>
 
@@ -36,18 +42,69 @@ namespace PublicTransportation
 namespace PluginHelper
 {
 
+/**
+ * @internal
+ * @brief Private class used in PublicTransportation::PluginHelper::AbstractOnlineHelper
+ */
 class AbstractOnlineHelperPrivate
 {
 public:
+    /**
+     * @internal
+     * @brief Constructor
+     * @param q Q-pointer
+     */
     AbstractOnlineHelperPrivate(AbstractOnlineHelper *q);
+    /**
+     * @internal
+     * @brief Destructor
+     */
     virtual ~AbstractOnlineHelperPrivate();
+    /**
+     * @internal
+     * @brief Slot finished
+     */
     void slotFinished();
+    /**
+     * @internal
+     * @brief Slot error
+     */
     void slotError(QNetworkReply::NetworkError networkError);
+    /**
+     * @internal
+     * @brief Process reply
+     *
+     * This method is used to process a network reply.
+     * It should be reimplemented in order to perform
+     * tasks like retrieving downloaded information.
+     *
+     * @param reply Network reply.
+     */
     virtual void processReply(QNetworkReply *reply) = 0;
+    /**
+     * @internal
+     * @brief Cleanup
+     *
+     * This method is used to perform a cleanup when
+     * the process is finished. It cleans the network
+     * reply by default.
+     */
     virtual void cleanup();
+    /**
+     * @internal
+     * @brief Network access manager
+     */
     QNetworkAccessManager *networkAccessManager;
+    /**
+     * @internal
+     * @brief Replies and requests
+     */
     QMap<QNetworkReply *, QString> repliesAndRequests;
 protected:
+    /**
+     * @internal
+     * @brief Q-pointer
+     */
     AbstractOnlineHelper * const q_ptr;
 private:
     Q_DECLARE_PUBLIC(AbstractOnlineHelper)

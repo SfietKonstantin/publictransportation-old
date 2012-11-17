@@ -17,6 +17,11 @@
 #ifndef PUBLICTRANSPORTATION_PLUGINHELPER_OFFLINESUGGESTEDSTATIONSHELPER_H
 #define PUBLICTRANSPORTATION_PLUGINHELPER_OFFLINESUGGESTEDSTATIONSHELPER_H
 
+/**
+ * @file offlinesuggestedstationshelper.h
+ * @short Definition of PublicTransportation::PluginHelper::OfflineSuggestedStationsHelper
+ */
+
 #include "publictransportationpluginhelper_global.h"
 
 #include <QtCore/QList>
@@ -30,9 +35,30 @@ class Station;
 namespace PluginHelper
 {
 
+/**
+ * @brief Offline suggested stations helper
+ *
+ * This class provide a method to make the creation
+ * of suggested stations easy.
+ */
 class PUBLICTRANSPORTATIONPLUGINHELPER_EXPORT OfflineSuggestedStationsHelper
 {
 public:
+    /**
+     * @brief Generate a list of suggested stations
+     *
+     * This method is used to create a list of suggested
+     * stations, based on a list of name of these stations,
+     * and disambiguation parameters and properties that
+     * are shared between those stations, as well as a
+     * partial station to match.
+     *
+     * @param partialStation partial station.
+     * @param stations list of station names.
+     * @param disambiguation disambiguation.
+     * @param properties properties.
+     * @return a list of suggested stations.
+     */
     static QList<Station> suggestedStations(const QString &partialStation,
                                             const QList<QString> &stations,
                                             const QVariantMap &disambiguation,
