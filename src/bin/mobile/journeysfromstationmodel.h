@@ -86,7 +86,11 @@ public:
         /**
          * @short If the backend support waiting time
          */
-        SupportWaitingTimeRole
+        SupportWaitingTimeRole,
+        /**
+         * @short If the backend support stations from journey
+         */
+        SupportStationsFromJourneyRole
     };
     /**
      * @short Default constructor
@@ -161,6 +165,11 @@ public Q_SLOTS:
      */
     void requestWaitingTime(int index);
     /**
+     * @brief Request stations from journey
+     * @param index index index of the waiting time.
+     */
+    void requestStationsFromJourney(int index);
+    /**
      * @brief Clear
      */
     void clear();
@@ -191,6 +200,20 @@ Q_SIGNALS:
                               const PublicTransportation::Line &line,
                               const PublicTransportation::Journey &journey,
                               const PublicTransportation::Station &station);
+    /**
+     * @brief Stations from journey requested
+     * @param backend backend answering the request.
+     * @param request request identifier.
+     * @param company company.
+     * @param line line.
+     * @param journey journey.
+     * @param station station.
+     */
+    void stationsFromJourneyRequested(AbstractBackendWrapper *backend, const QString &request,
+                                      const PublicTransportation::Company &company,
+                                      const PublicTransportation::Line &line,
+                                      const PublicTransportation::Journey &journey,
+                                      const PublicTransportation::Station &station);
 protected:
     /**
      * @short D-pointer

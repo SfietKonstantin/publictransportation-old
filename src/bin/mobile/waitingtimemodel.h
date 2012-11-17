@@ -65,9 +65,16 @@ public:
          */
         WaitingTimeRole = Qt::UserRole + 1,
         /**
+         * @short Line role
+         */
+        LineRole,
+        /**
          * @short Direction role
          */
         DestinationRole,
+        /**
+         * @short If the backend support stations from journey
+         */
         SupportStationsFromJourneyRole
     };
     /**

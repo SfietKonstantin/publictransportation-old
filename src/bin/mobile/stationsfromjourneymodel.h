@@ -49,6 +49,7 @@ class StationsFromJourneyModelPrivate;
 class StationsFromJourneyModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_ENUMS(ConnectorType)
     /**
      * @short Loading
      */
@@ -59,13 +60,43 @@ class StationsFromJourneyModel : public QAbstractListModel
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 public:
     /**
+     * @brief Connector types
+     */
+    enum ConnectorType {
+        /**
+         * @short The connector is visible
+         */
+        ConnectorVisible,
+        /**
+         * @short The connector is fading
+         */
+        ConnectorFading,
+        /**
+         * @short The connector is not visible
+         */
+        ConnectorInvisible
+    };
+
+    /**
      * @short Model roles
      */
     enum StationsFromJourneyRole {
         /**
          * @short Station role
          */
-        StationRole = Qt::UserRole + 1
+        StationRole = Qt::UserRole + 1,
+        /**
+         * @short Terminus role
+         */
+        TerminusRole,
+        /**
+         * @short Previous connector role
+         */
+        PreviousConnectorType,
+        /**
+         * @short Next connector role
+         */
+        NextConnectorType
     };
     /**
      * @short Default constructor

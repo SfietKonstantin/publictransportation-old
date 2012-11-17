@@ -92,14 +92,22 @@ AbstractPage {
             delegate: ClickableEntry {
                 preText: "<b>" + model.line + "</b>"
                 text: model.name
-                enabled: model.supportWaitingTime
+                enabled: model.supportWaitingTime || model.supportStationsFromJourney
                 onClicked: {
-                    JourneysFromStationModelInstance.requestWaitingTime(model.index)
-                    waitingTimePage.station = model.station
-                    waitingTimePage.company = model.company
-                    waitingTimePage.line = model.line
-                    waitingTimePage.journey = model.name
-                    window.pageStack.push(waitingTimePage)
+                    if (model.supportWaitingTime) {
+                        JourneysFromStationModelInstance.requestWaitingTime(model.index)
+                        waitingTimePage.station = model.station
+                        waitingTimePage.company = model.company
+                        waitingTimePage.line = model.line
+                        waitingTimePage.journey = model.name
+                        window.pageStack.push(waitingTimePage)
+                    } else {
+                        JourneysFromStationModelInstance.requestStationsFromJourney(model.index)
+                        stationsFromJourneyPage.company = model.company
+                        stationsFromJourneyPage.line = model.line
+                        stationsFromJourneyPage.destination = model.name
+                        window.pageStack.push(stationsFromJourneyPage)
+                    }
                 }
             }
             section.property: page.displayCategories ? "line" : ""
@@ -132,6 +140,7 @@ AbstractPage {
     }
 
     WaitingTimePage {id: waitingTimePage}
+    StationsFromJourneyPage {id: stationsFromJourneyPage}
 
     Menu {
         id: menu

@@ -20,13 +20,12 @@ import "UiConstants.js" as Ui
 
 AbstractPage {
     id: page
-    property string station
     property string line
-    property string journey
+    property string destination
     property string company
     headerColor: "#006E29"
     headerLabelColor: "white"
-    title: station
+    title: "<b>" + page.line + "</b>   " + page.destination
     tools: ToolBarLayout {
         ToolIcon {
             iconId: "toolbar-back"
@@ -40,22 +39,22 @@ AbstractPage {
         Item {
             id: labelItem
             anchors.top: parent.top; anchors.left: parent.left; anchors.right: parent.right
-            height: 2 * Ui.MARGIN_DEFAULT + Ui.MARGIN_SMALL + lineAndDirectionText.height
+            height: 2 * Ui.MARGIN_DEFAULT + Ui.MARGIN_SMALL + lineAndDestinationText.height
                     + companyText.height
 
             Label {
-                id: lineAndDirectionText
-                anchors.top: parent.top; anchors.topMargin: Ui.MARGIN_DEFAULT
+                id: lineAndDestinationText
+                anchors.top: parent.top; anchors.topMargin: Ui.MARGIN_SMALL
                 anchors.left: parent.left; anchors.leftMargin: Ui.MARGIN_DEFAULT
                 anchors.right: parent.right; anchors.rightMargin: Ui.MARGIN_DEFAULT
-                text: "<b>" + page.line + "</b>   " + page.journey
-                font.pixelSize: Ui.FONT_SIZE_DEFAULT
+                text: "<b>" + page.line + "</b>   " + page.destination
+                font.pixelSize: Ui.FONT_SIZE_XLARGE
                 color: !theme.inverted ? Ui.FONT_COLOR_PRIMARY : Ui.FONT_COLOR_INVERTED_PRIMARY
             }
 
             Label {
                 id: companyText
-                anchors.top: lineAndDirectionText.bottom; anchors.topMargin: Ui.MARGIN_DEFAULT
+                anchors.top: lineAndDestinationText.bottom; anchors.topMargin: Ui.MARGIN_DEFAULT
                 anchors.left: parent.left; anchors.leftMargin: Ui.MARGIN_DEFAULT
                 anchors.right: parent.right; anchors.rightMargin: Ui.MARGIN_DEFAULT
                 text: page.company
@@ -66,50 +65,31 @@ AbstractPage {
 
         HorizontalSeparator {
             id :horizontalSeparator
+            visible: !page.displayCategories
             anchors.top: labelItem.bottom
         }
 
         ListView {
             id: view
-            anchors.top: horizontalSeparator.bottom
+            anchors.top: horizontalSeparator.bottom//; anchors.topMargin: Ui.MARGIN_DEFAULT
             anchors.left: parent.left; anchors.right: parent.right
             anchors.bottom: parent.bottom
-            opacity: !WaitingTimeModelInstance.loading ? 1 : 0.5
+            opacity: !StationsFromJourneyModelInstance.loading ? 1 : 0.5
             clip: true
-            model: WaitingTimeModelInstance
-            delegate: ClickableEntry {
-                enabled: model.supportStationsFromJourney
-                preText: model.waitingTime
-                text: model.destination
-
-                onClicked: {
-                    WaitingTimeModelInstance.requestStationsFromJourney(model.index)
-                    stationsFromJourneyPage.company = page.company
-                    stationsFromJourneyPage.line = model.line
-                    stationsFromJourneyPage.destination = model.destination
-                    window.pageStack.push(stationsFromJourneyPage)
-                }
+            model: StationsFromJourneyModelInstance
+            delegate: StationEntry {
+                text: model.station
+                terminus: model.terminus
+                previousConnectorType: model.previousConnectorType
+                nextConnectorType: model.nextConnectorType
             }
-
-            UpdateHeader {
-                id: updateHeader
-                view: view
-            }
-
-            onMovingChanged: {
-                if (!moving && atXBeginning && updateHeader.needUpdate) {
-                    WaitingTimeModelInstance.reload()
-                }
-                updateHeader.needUpdate = false
-            }
-
             ScrollDecorator { flickableItem: parent }
         }
 
         BusyIndicator {
             anchors.centerIn: parent
-            visible: WaitingTimeModelInstance.loading && page.visible
-            running: WaitingTimeModelInstance.loading
+            visible: StationsFromJourneyModelInstance.loading && page.visible
+            running: StationsFromJourneyModelInstance.loading
             platformStyle: BusyIndicatorStyle {size: "large"}
         }
     }

@@ -118,15 +118,18 @@ public:
     /**
      * @brief Stop a backend
      * @param identifier identifier.
-     * @return if the stop is successful.
      */
-    bool stopBackend(const QString &identifier);
+    void stopBackend(const QString &identifier);
+    /**
+     * @brief Wait for backend to stop
+     * @param identifier identifier.
+     */
+    void waitForBackendToStop(const QString &identifier);
     /**
      * @brief Kill a backend
      * @param identifier identifier.
-     * @return if the kill is successful.
      */
-    bool killBackend(const QString &identifier);
+    void killBackend(const QString &identifier);
     /**
      * @brief Remove a backend
      * @param identifier identifier.

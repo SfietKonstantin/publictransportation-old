@@ -70,6 +70,12 @@ struct JourneysFromStationsModelItem
      * @brief If the backend support waiting time
      */
     bool supportWaitingTime;
+    /**
+     * @internal
+     * @brief If the backend support stations from journey
+     */
+    bool supportStationsFromJourney;
+
 };
 
 /**
@@ -190,6 +196,8 @@ void JourneysFromStationModelPrivate::slotJourneysRegistered(const QString &requ
             dataItem->journey = journeyStation.first;
             dataItem->station = journeyStation.second;
             dataItem->supportWaitingTime = backend->capabilities().contains(WAITING_TIME);
+            dataItem->supportStationsFromJourney
+                    = backend->capabilities().contains(STATIONS_FROM_JOURNEY);
             data.append(dataItem);
         }
     }
@@ -216,6 +224,7 @@ JourneysFromStationModel::JourneysFromStationModel(QObject *parent):
     roles.insert(CompanyRole, "company");
     roles.insert(StationRole, "station");
     roles.insert(SupportWaitingTimeRole, "supportWaitingTime");
+    roles.insert(SupportStationsFromJourneyRole, "supportStationsFromJourney");
     setRoleNames(roles);
 }
 
@@ -287,6 +296,9 @@ QVariant JourneysFromStationModel::data(const QModelIndex &index, int role) cons
         break;
     case SupportWaitingTimeRole:
         return data->supportWaitingTime;
+        break;
+    case SupportStationsFromJourneyRole:
+        return data->supportStationsFromJourney;
         break;
     default:
         return QVariant();
@@ -373,6 +385,36 @@ void JourneysFromStationModel::requestWaitingTime(int index)
                                                   data->journey, data->station);
     emit waitingTimeRequested(backend, request, data->company, data->line, data->journey,
                               data->station);
+}
+
+void JourneysFromStationModel::requestStationsFromJourney(int index)
+{
+    Q_D(JourneysFromStationModel);
+    if (index < 0 || index >= rowCount()) {
+        return;
+    }
+
+    JourneysFromStationsModelItem *data = d->data.at(index);
+
+    if (!data->supportStationsFromJourney) {
+        return;
+    }
+
+    if (!d->backendManager) {
+        return;
+    }
+
+    QString backendIdentifier = d->backendIdentifier;
+    if (!d->backendManager->contains(backendIdentifier)) {
+        return;
+    }
+
+    AbstractBackendWrapper *backend = d->backendManager->backend(backendIdentifier);
+
+    QString request = backend->requestStationsFromJourney(data->company, data->line,
+                                                          data->journey, data->station);
+    emit stationsFromJourneyRequested(backend, request, data->company, data->line, data->journey,
+                                      data->station);
 }
 
 void JourneysFromStationModel::clear()

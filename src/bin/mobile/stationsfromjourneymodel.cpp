@@ -47,6 +47,16 @@ struct StationsFromJourneyModelItem
      * @brief Station
      */
     Station station;
+    /**
+     * @internal
+     * @brief Previous connector
+     */
+    StationsFromJourneyModel::ConnectorType previousConnector;
+    /**
+     * @internal
+     * @brief Next connector
+     */
+    StationsFromJourneyModel::ConnectorType nextConnector;
 };
 
 /**
@@ -137,8 +147,30 @@ void StationsFromJourneyModelPrivate::slotStationsFromJourneyRegistered(const QS
     foreach (Station station, stationList) {
         StationsFromJourneyModelItem * dataItem = new StationsFromJourneyModelItem;
         dataItem->station = station;
+        if (station.properties().value("previousConnectorFading").toBool()) {
+            dataItem->nextConnector = StationsFromJourneyModel::ConnectorFading;
+        } else {
+            dataItem->previousConnector = StationsFromJourneyModel::ConnectorVisible;
+        }
+        if (station.properties().value("nextConnectorFading").toBool()) {
+            dataItem->nextConnector = StationsFromJourneyModel::ConnectorFading;
+        } else {
+            dataItem->nextConnector = StationsFromJourneyModel::ConnectorVisible;
+        }
         data.append(dataItem);
     }
+
+    // Check connectors
+    if (!data.isEmpty()) {
+        if (data.first()->previousConnector != StationsFromJourneyModel::ConnectorFading) {
+            data.first()->previousConnector = StationsFromJourneyModel::ConnectorInvisible;
+        }
+
+        if (data.last()->nextConnector != StationsFromJourneyModel::ConnectorFading) {
+            data.last()->nextConnector = StationsFromJourneyModel::ConnectorInvisible;
+        }
+    }
+
 
     q->beginInsertRows(QModelIndex(), 0, data.count() - 1);
     emit q->countChanged();
@@ -158,6 +190,9 @@ StationsFromJourneyModel::StationsFromJourneyModel(QObject *parent):
     // Definition of roles
     QHash <int, QByteArray> roles;
     roles.insert(StationRole, "station");
+    roles.insert(TerminusRole, "terminus");
+    roles.insert(PreviousConnectorType, "previousConnectorType");
+    roles.insert(NextConnectorType, "nextConnectorType");
     setRoleNames(roles);
 }
 
@@ -202,6 +237,15 @@ QVariant StationsFromJourneyModel::data(const QModelIndex &index, int role) cons
     switch(role) {
     case StationRole:
         return data->station.name();
+        break;
+    case TerminusRole:
+        return data->station.properties().value("terminus", false).toBool();
+        break;
+    case PreviousConnectorType:
+        return data->previousConnector;
+        break;
+    case NextConnectorType:
+        return data->nextConnector;
         break;
     default:
         return QVariant();

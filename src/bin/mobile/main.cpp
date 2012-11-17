@@ -116,6 +116,17 @@ int main(int argc, char **argv)
                                                   PublicTransportation::Line,
                                                   PublicTransportation::Journey,
                                                   PublicTransportation::Station)));
+    QObject::connect(&journeysFromStationModel,
+                     SIGNAL(stationsFromJourneyRequested(AbstractBackendWrapper*,QString,
+                                                         PublicTransportation::Company,
+                                                         PublicTransportation::Line,
+                                                         PublicTransportation::Journey,
+                                                         PublicTransportation::Station)),
+                     &stationsFromJourneyModel, SLOT(load(AbstractBackendWrapper*,QString,
+                                                          PublicTransportation::Company,
+                                                          PublicTransportation::Line,
+                                                          PublicTransportation::Journey,
+                                                          PublicTransportation::Station)));
     QObject::connect(&waitingTimeModel,
                      SIGNAL(stationsFromJourneyRequested(AbstractBackendWrapper*,QString,
                                                          PublicTransportation::Company,
@@ -136,6 +147,9 @@ int main(int argc, char **argv)
     qmlRegisterUncreatableType<Gui::BackendModel>("org.SfietKonstantin.publictransportation",
                                                   1, 0, "BackendModel",
                                                  "BackendModel cannot be created");
+    qmlRegisterUncreatableType<Gui::StationsFromJourneyModel>
+            ("org.SfietKonstantin.publictransportation", 1, 0, "StationsFromJourneyModel",
+             "StationsFromJourneyModel cannot be created");
 
     QSettings settings;
     bool backendFirstTime = !settings.contains("backend/firstTime");

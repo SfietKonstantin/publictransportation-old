@@ -177,6 +177,7 @@ WaitingTimeModel::WaitingTimeModel(QObject *parent):
     // Definition of roles
     QHash <int, QByteArray> roles;
     roles.insert(WaitingTimeRole, "waitingTime");
+    roles.insert(LineRole, "line");
     roles.insert(DestinationRole, "destination");
     roles.insert(SupportStationsFromJourneyRole, "supportStationsFromJourney");
     setRoleNames(roles);
@@ -223,6 +224,9 @@ QVariant WaitingTimeModel::data(const QModelIndex &index, int role) const
     switch(role) {
     case WaitingTimeRole:
         return data->waitingTime.waitingTime();
+        break;
+    case LineRole:
+        return d->line.name();
         break;
     case DestinationRole:
         return data->waitingTime.properties().value("destination");

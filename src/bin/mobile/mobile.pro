@@ -51,6 +51,8 @@ OTHER_FILES +=  main.qml \
                 SearchStationPage.qml \
                 JourneysFromStationPage.qml \
                 WaitingTimePage.qml \
+                StationEntry.qml \
+                StationsFromJourneyPage.qml \
                 AboutPage.qml \
 
 DATA_FILES +=   publictransportation-big.png

@@ -54,6 +54,8 @@ AbstractBackendManager::~AbstractBackendManager()
 {
     Q_D(AbstractBackendManager);
     foreach (QString key, d->backends.keys()) {
+        stopBackend(key);
+        waitForBackendToStop(key);
         killBackend(key);
     }
 }
@@ -112,20 +114,22 @@ bool AbstractBackendManager::launchBackend(const QString &identifier)
     return true;
 }
 
-bool AbstractBackendManager::stopBackend(const QString &identifier)
+void AbstractBackendManager::stopBackend(const QString &identifier)
 {
     AbstractBackendWrapper *stoppedBackend = backend(identifier);
     stoppedBackend->stop();
-
-    return true;
 }
 
-bool AbstractBackendManager::killBackend(const QString &identifier)
+void AbstractBackendManager::waitForBackendToStop(const QString &identifier)
+{
+    AbstractBackendWrapper *stoppedBackend = backend(identifier);
+    stoppedBackend->waitForStopped();
+}
+
+void AbstractBackendManager::killBackend(const QString &identifier)
 {
     AbstractBackendWrapper *killedBackend = backend(identifier);
     killedBackend->kill();
-
-    return true;
 }
 
 bool AbstractBackendManager::removeBackend(const QString &identifier)
