@@ -1,10 +1,11 @@
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
 "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node>
-    <interface name="org.SfietKonstantin.publictransportation">
+    <interface name="org.SfietKonstantin.pt2">
         <!-- Method for registration -->
         <method name="registerBackend">
             <arg name="capabilities" type="as" direction="in"/>
+            <arg name="copyright" type="s" direction="in"/>
         </method>
 
         <!-- Method used to transmit that something wrong happened -->
@@ -15,16 +16,16 @@
         </method>
 
         <!-- Copyright -->
-        <signal name="copyrightRequested">
+        <!--<signal name="copyrightRequested">
             <arg name="request" type="s" direction="out" />
         </signal>
         <method name="registerCopyright">
             <arg name="request" type="s" direction="in" />,
             <arg name="copyright" type="s" direction="in" />,
-        </method>
+        </method>-->
 
         <!-- Autocompletion for station search -->
-        <signal name="suggestStationsRequested">
+        <!--<signal name="suggestStationsRequested">
             <arg name="request" type="s" direction="out" />
             <arg name="partialStation" type="s" direction="out" />
         </signal>
@@ -33,10 +34,10 @@
                         value="const QList&lt;PublicTransportation::Station&gt; &amp;"/>
             <arg name="request" type="s" direction="in" />,
             <arg name="suggestedStationList" type="a(a{sv}sa{sv})" direction="in" />
-        </method>
+        </method>-->
 
         <!-- All journeys from a station -->
-        <signal name="journeysFromStationRequested">
+        <!--<signal name="journeysFromStationRequested">
             <annotation name="org.qtproject.QtDBus.QtTypeName.In1"
                         value="const PublicTransportation::Station &amp;"/>
             <arg name="request" type="s" direction="out" />
@@ -50,10 +51,10 @@
             <arg name="infoJourneysList"
                  type="a((a{sv}sa{sv})(a{sv}sa{sv})a((a{sv}sa{sv})(a{sv}sa{sv})))"
                  direction="in" />
-        </method>
+             </method>-->
 
         <!-- All journeys + waiting time from a station -->
-        <signal name="journeysAndWaitingTimesFromStationRequested">
+        <!--<signal name="journeysAndWaitingTimesFromStationRequested">
             <annotation name="org.qtproject.QtDBus.QtTypeName.In1"
                         value="const PublicTransportation::Station &amp;"/>
             <arg name="request" type="s" direction="out" />
@@ -67,10 +68,10 @@
             <arg name="infoJourneyWaitingTimeList"
                  type="a((a{sv}sa{sv})(a{sv}sa{sv})(a{sv}sa{sv})(a{sv}sa{sv})(ia{sv}))"
                  direction="in" />
-        </method>
+             </method>-->
 
         <!-- Waiting time for a journey -->
-        <signal name="waitingTimeRequested">
+        <!--<signal name="waitingTimeRequested">
             <annotation name="org.qtproject.QtDBus.QtTypeName.In1"
                         value="const PublicTransportation::Company &amp;"/>
             <annotation name="org.qtproject.QtDBus.QtTypeName.In2"
@@ -90,10 +91,10 @@
                         value="const QList&lt;PublicTransportation::JourneyAndWaitingTime&gt; &amp;"/>
             <arg name="request" type="s" direction="in" />
             <arg name="journeyAndWaitingTimeList" type="a((a{sv}sa{sv})(ia{sv}))" direction="in" />
-        </method>
+        </method>-->
 
         <!-- List of stations for a given journey -->
-        <signal name="stationsFromJourneyRequested">
+        <!--<signal name="stationsFromJourneyRequested">
             <annotation name="org.qtproject.QtDBus.QtTypeName.In1"
                         value="const PublicTransportation::Company &amp;"/>
             <annotation name="org.qtproject.QtDBus.QtTypeName.In2"
@@ -113,6 +114,6 @@
                         value="const QList&lt;PublicTransportation::Station&gt; &amp;"/>
             <arg name="request" type="s" direction="in" />
             <arg name="stationList" type="a(a{sv}sa{sv})" direction="in" />
-        </method>
+        </method>-->
     </interface>
 </node>

@@ -1,2 +1,2 @@
 TEMPLATE = subdirs
-SUBDIRS = base pluginhelper
+SUBDIRS = base #pluginhelper

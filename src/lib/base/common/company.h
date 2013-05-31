@@ -1,44 +1,54 @@
-/****************************************************************************************
- * Copyright (C) 2012 Lucien XU <sfietkonstantin@free.fr>                               *
- *                                                                                      *
- * This program is free software; you can redistribute it and/or modify it under        *
- * the terms of the GNU General Public License as published by the Free Software        *
- * Foundation; either version 3 of the License, or (at your option) any later           *
- * version.                                                                             *
- *                                                                                      *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY      *
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A      *
- * PARTICULAR PURPOSE. See the GNU General Public License for more details.             *
- *                                                                                      *
- * You should have received a copy of the GNU General Public License along with         *
- * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
- ****************************************************************************************/
-
-#ifndef PUBLICTRANSPORTATION_COMPANY_H
-#define PUBLICTRANSPORTATION_COMPANY_H
+/*
+ * Copyright (C) 2013 Lucien XU <sfietkonstantin@free.fr>
+ *
+ * You may use this file under the terms of the BSD license as follows:
+ *
+ * "Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in
+ *     the documentation and/or other materials provided with the
+ *     distribution.
+ *   * The names of its contributors may not be used to endorse or promote
+ *     products derived from this software without specific prior written
+ *     permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
+ */
+#ifndef PT2_COMPANY_H
+#define PT2_COMPANY_H
 
 /**
  * @file company.h
- * @short Definition of PublicTransportation::Company
+ * @short Definition of PT2::Company
  */
 
-#include "publictransportation_global.h"
-#include "transportationobject.h"
+#include "pt2_global.h"
+#include "object.h"
 
-namespace PublicTransportation
+namespace PT2
 {
 
 /**
  * @brief A public transportation company
  *
  * This class is used to represent a public transportation
- * company. A company is a transportation entity that
- * have a name, that is the official name of the company,
- * a disambiguation parameter, and other properties.
- *
- * It is also stored in the properties of the company.
+ * company.
  */
-class PUBLICTRANSPORTATION_EXPORT Company: public TransportationObject
+class PT2_EXPORT Company: public Object
 {
 public:
     /**
@@ -47,19 +57,20 @@ public:
     explicit Company();
     /**
      * @brief Constructor
-     * @param disambiguation disambiguation.
+     * @param identifier identifier.
+     * @param internal internal.
      * @param name name.
      * @param properties properties.
      */
-    explicit Company(const QVariantMap &disambiguation, const QString &name,
+    explicit Company(const QString &identifier, const QVariantMap &internal, const QString &name,
                      const QVariantMap &properties);
 private:
-    Q_DECLARE_PRIVATE(TransportationObject)
+    Q_DECLARE_PRIVATE(Object)
 };
 
 }
 
-Q_DECLARE_METATYPE(PublicTransportation::Company)
-Q_DECLARE_METATYPE(QList<PublicTransportation::Company>)
+Q_DECLARE_METATYPE(PT2::Company)
+Q_DECLARE_METATYPE(QList<PT2::Company>)
 
-#endif // PUBLICTRANSPORTATION_COMPANY_H
+#endif // PT2_COMPANY_H
