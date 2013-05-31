@@ -1,3 +1,3 @@
 TEMPLATE = subdirs
-SUBDIRS += data
+SUBDIRS += data desktop_file
 #SUBDIRS += helpers tests

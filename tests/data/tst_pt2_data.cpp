@@ -48,36 +48,36 @@ private slots:
         o1.setName(name);
         o1.setProperties(properties);
 
-        QCOMPARE(o1.identifier() == identifier, true);
-        QCOMPARE(o1.internal() == internal, true);
-        QCOMPARE(o1.name() == name, true);
-        QCOMPARE(o1.properties() == properties, true);
+        QCOMPARE(o1.identifier(), identifier);
+        QCOMPARE(o1.internal(), internal);
+        QCOMPARE(o1.name(), name);
+        QCOMPARE(o1.properties(), properties);
 
-        QCOMPARE(o1 == o2, true);
-        QCOMPARE(o1 == o3, true);
-        QCOMPARE(o1.identifier() == o2.identifier(), true);
-        QCOMPARE(o1.identifier() == o3.identifier(), true);
-        QCOMPARE(o1.internal() == o2.internal(), true);
-        QCOMPARE(o1.internal() == o3.internal(), true);
-        QCOMPARE(o1.name() == o2.name(), true);
-        QCOMPARE(o1.name() == o3.name(), true);
-        QCOMPARE(o1.properties() == o2.properties(), true);
-        QCOMPARE(o1.properties() == o3.properties(), true);
+        QCOMPARE(o1, o2);
+        QCOMPARE(o1, o3);
+        QCOMPARE(o1.identifier(), o2.identifier());
+        QCOMPARE(o1.identifier(), o3.identifier());
+        QCOMPARE(o1.internal(), o2.internal());
+        QCOMPARE(o1.internal(), o3.internal());
+        QCOMPARE(o1.name(), o2.name());
+        QCOMPARE(o1.name(), o3.name());
+        QCOMPARE(o1.properties(), o2.properties());
+        QCOMPARE(o1.properties(), o3.properties());
 
 
 
         PT2::Object o4 (o1);
         PT2::Object o5 = o1;
-        QCOMPARE(o1 == o4, true);
-        QCOMPARE(o1 == o5, true);
-        QCOMPARE(o1.identifier() == o4.identifier(), true);
-        QCOMPARE(o1.identifier() == o5.identifier(), true);
-        QCOMPARE(o1.internal() == o4.internal(), true);
-        QCOMPARE(o1.internal() == o5.internal(), true);
-        QCOMPARE(o1.name() == o4.name(), true);
-        QCOMPARE(o1.name() == o5.name(), true);
-        QCOMPARE(o1.properties() == o4.properties(), true);
-        QCOMPARE(o1.properties() == o5.properties(), true);
+        QCOMPARE(o1, o4);
+        QCOMPARE(o1, o5);
+        QCOMPARE(o1.identifier(), o4.identifier());
+        QCOMPARE(o1.identifier(), o5.identifier());
+        QCOMPARE(o1.internal(), o4.internal());
+        QCOMPARE(o1.internal(), o5.internal());
+        QCOMPARE(o1.name(), o4.name());
+        QCOMPARE(o1.name(), o5.name());
+        QCOMPARE(o1.properties(), o4.properties());
+        QCOMPARE(o1.properties(), o5.properties());
 
         // Test explicit sharing capabilities of WaitingTime
 //        WaitingTime wT1;
@@ -86,17 +86,17 @@ private slots:
 
 //        wT1.setWaitingTime(Generator::generateRandomNumber());
 //        o1.setProperties(Generator::generateRandomVariantMap());
-//        QCOMPARE(wT1.waitingTime() == wT2.waitingTime(), true);
-//        QCOMPARE(wT1.properties() == wT2.properties(), true);
-//        QCOMPARE(wT1.waitingTime() == wT3.waitingTime(), true);
-//        QCOMPARE(wT1.properties() == wT3.properties(), true);
+//        QCOMPARE(wT1.waitingTime(), wT2.waitingTime());
+//        QCOMPARE(wT1.properties(), wT2.properties());
+//        QCOMPARE(wT1.waitingTime(), wT3.waitingTime());
+//        QCOMPARE(wT1.properties(), wT3.properties());
 
 //        WaitingTime wT4 (wT1);
 //        WaitingTime wT5 = wT1;
-//        QCOMPARE(wT1.waitingTime() == wT4.waitingTime(), true);
-//        QCOMPARE(wT1.properties() == wT4.properties(), true);
-//        QCOMPARE(wT1.waitingTime() == wT5.waitingTime(), true);
-//        QCOMPARE(wT1.properties() == wT5.properties(), true);
+//        QCOMPARE(wT1.waitingTime(), wT4.waitingTime());
+//        QCOMPARE(wT1.properties(), wT4.properties());
+//        QCOMPARE(wT1.waitingTime(), wT5.waitingTime());
+//        QCOMPARE(wT1.properties(), wT5.properties());
     }
     void testAdvancedEntitiesConstructor()
     {
@@ -105,25 +105,25 @@ private slots:
         QString name = Generator::generateRandomString();
         QVariantMap properties = Generator::generateRandomVariantMap();
         PT2::Company c (identifier, internal, name, properties);
-        QCOMPARE(c.identifier() == identifier, true);
-        QCOMPARE(c.internal() == internal, true);
-        QCOMPARE(c.name() == name, true);
-        QCOMPARE(c.properties() == properties, true);
+        QCOMPARE(c.identifier(), identifier);
+        QCOMPARE(c.internal(), internal);
+        QCOMPARE(c.name(), name);
+        QCOMPARE(c.properties(), properties);
         PT2::Line l (identifier, internal, name, properties);
-        QCOMPARE(l.identifier() == identifier, true);
-        QCOMPARE(l.internal() == internal, true);
-        QCOMPARE(l.name() == name, true);
-        QCOMPARE(l.properties() == properties, true);
+        QCOMPARE(l.identifier(), identifier);
+        QCOMPARE(l.internal(), internal);
+        QCOMPARE(l.name(), name);
+        QCOMPARE(l.properties(), properties);
         PT2::Ride r (identifier, internal, name, properties);
-        QCOMPARE(r.identifier() == identifier, true);
-        QCOMPARE(r.internal() == internal, true);
-        QCOMPARE(r.name() == name, true);
-        QCOMPARE(r.properties() == properties, true);
+        QCOMPARE(r.identifier(), identifier);
+        QCOMPARE(r.internal(), internal);
+        QCOMPARE(r.name(), name);
+        QCOMPARE(r.properties(), properties);
         PT2::Station s (identifier, internal, name, properties);
-        QCOMPARE(s.identifier() == identifier, true);
-        QCOMPARE(s.internal() == internal, true);
-        QCOMPARE(s.name() == name, true);
-        QCOMPARE(s.properties() == properties, true);
+        QCOMPARE(s.identifier(), identifier);
+        QCOMPARE(s.internal(), internal);
+        QCOMPARE(s.name(), name);
+        QCOMPARE(s.properties(), properties);
     }
 };
 

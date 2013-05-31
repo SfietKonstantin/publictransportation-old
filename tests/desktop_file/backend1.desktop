@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=A backend
+Comment=Comment about a backend
+Icon=/path/to/an/icon.png
+Type=Service
+Exec=$PROVIDER backend.so
+X-PublicTransportation-BackendInfo-Id=org.SfietKonstantin.backend
+X-PublicTransportation-BackendInfo-Country=FR
+X-PublicTransportation-BackendInfo-Cities=Paris,Lyon,Strasbourg
+X-PublicTransportation-BackendInfo-Author=Lucien XU
+X-PublicTransportation-BackendInfo-Email=my.email@provider.com
+X-PublicTransportation-BackendInfo-Website=http://mywebsite.com
+X-PublicTransportation-BackendInfo-Version=1.0.0

@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>a.desktop</file>
+        <file>backend1.desktop</file>
+        <file>backend2.desktop</file>
+    </qresource>
+</RCC>

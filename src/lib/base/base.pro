@@ -22,8 +22,8 @@ HEADERS =   pt2_global.h \
 #            common/journeyandwaitingtime.h \
 #            common/infojourneywaitingtime.h \
 #            common/dbus/dbusconstants.h \
-#            manager/desktopfileparser_p.h \
-#            manager/backendinfo.h \
+            manager/desktopfileparser_p.h \
+            manager/backendinfo.h \
 #            manager/abstractbackendwrapper.h \
 #            manager/abstractbackendwrapper_p.h \
 #            manager/abstractbackendmanager.h \
@@ -46,8 +46,8 @@ SOURCES +=  common/object.cpp \
 #            common/journeyandwaitingtime.cpp \
 #            common/infojourneywaitingtime.cpp \
 #            common/dbus/dbushelper.cpp \
-#            manager/desktopfileparser_p.cpp \
-#            manager/backendinfo.cpp \
+            manager/desktopfileparser_p.cpp \
+            manager/backendinfo.cpp \
 #            manager/abstractbackendwrapper.cpp \
 #            manager/abstractbackendmanager.cpp \
 #            manager/backendlistmanager.cpp \

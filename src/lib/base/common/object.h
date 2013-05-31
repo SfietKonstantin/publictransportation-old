@@ -50,7 +50,7 @@ namespace PT2
  * @brief Private class for PT2::Object
  *
  * This class is used to store the explicitly shared
- * data for PT2::TransportationObject.
+ * data for PT2::Object.
  */
 struct ObjectPrivate: public QSharedData
 {
