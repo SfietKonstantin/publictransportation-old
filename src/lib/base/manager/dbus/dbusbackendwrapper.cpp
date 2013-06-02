@@ -32,7 +32,7 @@
 #include "common/capabilitiesconstants.h"
 #include "dbusbackendwrapperadaptor.h"
 
-namespace PublicTransportation
+namespace PT2
 {
 
 /**
@@ -72,6 +72,13 @@ public:
     void slotFinished(int code);
     /**
      * @internal
+     * @brief Progress
+     *
+     * Loading progress.
+     */
+    int progress;
+    /**
+     * @internal
      * @brief Process
      */
     QProcess *process;
@@ -91,7 +98,7 @@ private:
 };
 
 DBusBackendWrapperPrivate::DBusBackendWrapperPrivate(DBusBackendWrapper *q):
-    AbstractBackendWrapperPrivate(), q_ptr(q)
+    AbstractBackendWrapperPrivate(), progress(0),process(0), q_ptr(q)
 {
 }
 
@@ -114,8 +121,11 @@ void DBusBackendWrapperPrivate::slotReadStandardError()
 void DBusBackendWrapperPrivate::slotProcessError(QProcess::ProcessError error)
 {
     Q_Q(DBusBackendWrapper);
-    debug("backend") << "Child process send the error" << error;
-    debug("backend") << process->errorString();
+    if (status == DBusBackendWrapper::Stopping) {
+        return;
+    }
+    debug("abs-backend-wrapper backend") << "Child process send the error" << error;
+    debug("abs-backend-wrapper backend") << process->errorString();
     QString lastError = QString("Child process send the error :\"%1\"").arg(process->errorString());
     q->setLastError(lastError);
     q->setStatus(DBusBackendWrapper::Invalid);
@@ -124,8 +134,9 @@ void DBusBackendWrapperPrivate::slotProcessError(QProcess::ProcessError error)
 void DBusBackendWrapperPrivate::slotFinished(int code)
 {
     Q_Q(DBusBackendWrapper);
-    debug("backend") << "Finished with code" << code;
-    debug("backend") << "Unregister DBus object" << dbusObjectPath.toAscii().constData();
+    debug("abs-backend-wrapper backend") << "Finished with code" << code;
+    debug("abs-backend-wrapper backend") << "Unregister DBus object"
+                                         << dbusObjectPath.toAscii().constData();
     QDBusConnection::sessionBus().unregisterObject(dbusObjectPath, QDBusConnection::UnregisterTree);
     q->setStatus(AbstractBackendWrapper::Stopped);
 }
@@ -133,7 +144,7 @@ void DBusBackendWrapperPrivate::slotFinished(int code)
 ////// End of private class //////
 
 DBusBackendWrapper::DBusBackendWrapper(const QString &identifier, const QString &executable,
-                                       const QMap<QString, QString> &arguments, QObject *parent):
+                                       QObject *parent):
     AbstractBackendWrapper(*(new DBusBackendWrapperPrivate(this)), parent)
 {
     Q_D(DBusBackendWrapper);
@@ -141,7 +152,6 @@ DBusBackendWrapper::DBusBackendWrapper(const QString &identifier, const QString 
 
     d->identifier = identifier;
     d->executable = executable;
-    d->arguments = arguments;
 
     d->process = new QProcess(this);
     connect(d->process, SIGNAL(readyReadStandardOutput()), this, SLOT(slotReadStandardOutput()));
@@ -154,6 +164,12 @@ DBusBackendWrapper::DBusBackendWrapper(const QString &identifier, const QString 
 DBusBackendWrapper::~DBusBackendWrapper()
 {
     kill();
+}
+
+int DBusBackendWrapper::progress() const
+{
+    Q_D(const DBusBackendWrapper);
+    return d->progress;
 }
 
 void DBusBackendWrapper::launch()
@@ -173,7 +189,7 @@ void DBusBackendWrapper::launch()
     d->dbusObjectPath = DBUS_BACKEND_PATH_PREFIX;
     d->dbusObjectPath.append(dbusIdentifier);
 
-    new PublictransportationAdaptor(this);
+    new Pt2Adaptor(this);
     if (!QDBusConnection::sessionBus().registerObject(d->dbusObjectPath, this)) {
         setLastError(QString("Failed to register object on path %1").arg(d->dbusObjectPath));
         setStatus(Invalid);
@@ -187,6 +203,7 @@ void DBusBackendWrapper::launch()
     trueExecutable.replace("$PROVIDER", QString(PROVIDER_PATH) + " --plugin ");
     trueExecutable.append(QString(" --identifier %1 ").arg(dbusIdentifier));
 
+    debug("abs-backend-wrapper") << "Starting" << trueExecutable;
     d->process->start(trueExecutable);
 }
 
@@ -225,7 +242,7 @@ void DBusBackendWrapper::kill()
     setStatus(Stopped);
 }
 
-void DBusBackendWrapper::registerBackend(const QStringList &capabilities)
+void DBusBackendWrapper::registerBackendStart()
 {
     Q_D(DBusBackendWrapper);
     debug("dbus-backend-wrapper") << "Begin registration of backend for"
@@ -240,7 +257,7 @@ void DBusBackendWrapper::registerBackend(const QStringList &capabilities)
         return;
     }
 
-    if (status() == Launched) {
+    if (status() == Loading || status() == Running) {
         warning("dbus-backend-wrapper") << "Backend for" << d->dbusObjectPath.toAscii().constData()
                                         << "is registering twice";
         kill();
@@ -251,66 +268,111 @@ void DBusBackendWrapper::registerBackend(const QStringList &capabilities)
 
     if (d->status == Invalid) {
         warning("dbus-backend-wrapper") << "Backend for" << d->dbusObjectPath.toAscii().constData()
-                                        << "is registering more than twice";
+                                        << "is already in an invalid state";
         return;
     }
 
     debug("dbus-backend-wrapper") << "End registration of backend for"
                                   << d->dbusObjectPath.toAscii().constData();
+    debug("dbus-backend-wrapper") << "Waiting for capabilities and copyright";
+
+    setStatus(Loading);
+}
+
+void DBusBackendWrapper::registerBackendProgress(int progress)
+{
+    Q_D(DBusBackendWrapper);
+    if (d->progress != progress) {
+        d->progress = progress;
+        emit progressChanged();
+    }
+}
+
+void DBusBackendWrapper::registerBackendReady(const QStringList &capabilities,
+                                              const QString &copyright)
+{
+    Q_D(DBusBackendWrapper);
+    if (status() == Stopping || status() == Stopped) {
+        warning("dbus-backend-wrapper") << "Backend for" << d->dbusObjectPath.toAscii().constData()
+                                        << "is registering while not yet launched";
+        kill();
+        setLastError("Backend is registering while not yet launched");
+        setStatus(Invalid);
+        return;
+    }
+
+    if (status() == Loading || status() == Running) {
+        warning("dbus-backend-wrapper") << "Backend for" << d->dbusObjectPath.toAscii().constData()
+                                        << "is registering twice";
+        kill();
+        setLastError("Backend is registering twice");
+        setStatus(Invalid);
+        return;
+    }
+
+    if (d->status == Invalid) {
+        warning("dbus-backend-wrapper") << "Backend for" << d->dbusObjectPath.toAscii().constData()
+                                        << "is already in an invalid state";
+        return;
+    }
+
+    debug("dbus-backend-wrapper") << "End loading of backend for"
+                                  << d->dbusObjectPath.toAscii().constData();
     debug("dbus-backend-wrapper") << "Capabilities of backend retrieved for"
                                   << d->dbusObjectPath.toAscii().constData();
     debug("dbus-backend-wrapper") << "List of capabilities:";
     debug("dbus-backend-wrapper") << capabilities;
-
     setCapabilities(capabilities);
-    setStatus(Launched);
+    setCopyright(copyright);
+
+    setStatus(Running);
 }
 
-QString DBusBackendWrapper::requestCopyright()
-{
-    QString request = createRequest(CopyrightType);
-    emit copyrightRequested(request);
-    return request;
-}
+//QString DBusBackendWrapper::requestCopyright()
+//{
+//    QString request = createRequest(CopyrightType);
+//    emit copyrightRequested(request);
+//    return request;
+//}
 
-QString DBusBackendWrapper::requestSuggestStations(const QString &partialStation)
-{
-    QString request = createRequest(SuggestStationType);
-    emit suggestStationsRequested(request, partialStation);
-    return request;
-}
+//QString DBusBackendWrapper::requestSuggestStations(const QString &partialStation)
+//{
+//    QString request = createRequest(SuggestStationType);
+//    emit suggestStationsRequested(request, partialStation);
+//    return request;
+//}
 
-QString DBusBackendWrapper::requestJourneysFromStation(const Station &station, int limit)
-{
-    QString request = createRequest(JourneysFromStationType);
-    emit journeysFromStationRequested(request, station, limit);
-    return request;
-}
+//QString DBusBackendWrapper::requestJourneysFromStation(const Station &station, int limit)
+//{
+//    QString request = createRequest(JourneysFromStationType);
+//    emit journeysFromStationRequested(request, station, limit);
+//    return request;
+//}
 
-QString DBusBackendWrapper::requestJourneysAndWaitingTimesFromStation(const Station &station,
-                                                                      int limit)
-{
-    QString request = createRequest(JourneysAndWaitingTimesFromStationType);
-    emit journeysAndWaitingTimesFromStationRequested(request, station, limit);
-    return request;
-}
+//QString DBusBackendWrapper::requestJourneysAndWaitingTimesFromStation(const Station &station,
+//                                                                      int limit)
+//{
+//    QString request = createRequest(JourneysAndWaitingTimesFromStationType);
+//    emit journeysAndWaitingTimesFromStationRequested(request, station, limit);
+//    return request;
+//}
 
-QString DBusBackendWrapper::requestWaitingTime(const Company &company, const Line &line,
-                                               const Journey &journey, const Station &station)
-{
-    QString request = createRequest(WaitingTimeType);
-    emit waitingTimeRequested(request, company, line, journey, station);
-    return request;
-}
+//QString DBusBackendWrapper::requestWaitingTime(const Company &company, const Line &line,
+//                                               const Journey &journey, const Station &station)
+//{
+//    QString request = createRequest(WaitingTimeType);
+//    emit waitingTimeRequested(request, company, line, journey, station);
+//    return request;
+//}
 
-QString DBusBackendWrapper::requestStationsFromJourney(const Company &company, const Line &line,
-                                                       const Journey &journey,
-                                                       const Station &station)
-{
-    QString request = createRequest(StationsFromJourneyType);
-    emit stationsFromJourneyRequested(request, company, line, journey, station);
-    return request;
-}
+//QString DBusBackendWrapper::requestStationsFromJourney(const Company &company, const Line &line,
+//                                                       const Journey &journey,
+//                                                       const Station &station)
+//{
+//    QString request = createRequest(StationsFromJourneyType);
+//    emit stationsFromJourneyRequested(request, company, line, journey, station);
+//    return request;
+//}
 
 }
 

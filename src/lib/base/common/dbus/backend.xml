@@ -2,13 +2,17 @@
 "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node>
     <interface name="org.SfietKonstantin.pt2">
-        <!-- Method for registration -->
-        <method name="registerBackend">
+        <!-- Methods for registration -->
+        <method name="registerBackendStart" />
+        <method name="registerBackendProgress">
+            <arg name="progress" type="i" direction="in" />
+        </method>
+        <method name="registerBackendReady">
             <arg name="capabilities" type="as" direction="in"/>
             <arg name="copyright" type="s" direction="in"/>
         </method>
 
-        <!-- Method used to transmit that something wrong happened -->
+        <!-- Method used to transmit errors -->
         <method name="registerError">
             <arg name="request" type="s" direction="in" />
             <arg name="errorId" type="s" direction="in" />

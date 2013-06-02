@@ -63,6 +63,7 @@ maemo5|contains(MEEGO_EDITION,harmattan):{
 
 # Test folder
 TEST_FOLDER = $${SHAREDIR}/tests/
+TEST_HELPER_FOLDER = $${SHAREDIR}/tests/helpers
 
 # QML include folder
 QML_PLUGIN_BASE_PATH = $${IMPORTDIR}/org/SfietKonstantin/

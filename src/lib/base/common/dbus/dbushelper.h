@@ -1,21 +1,35 @@
-/****************************************************************************************
- * Copyright (C) 2012 Lucien XU <sfietkonstantin@free.fr>                               *
- *                                                                                      *
- * This program is free software; you can redistribute it and/or modify it under        *
- * the terms of the GNU General Public License as published by the Free Software        *
- * Foundation; either version 3 of the License, or (at your option) any later           *
- * version.                                                                             *
- *                                                                                      *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY      *
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A      *
- * PARTICULAR PURPOSE. See the GNU General Public License for more details.             *
- *                                                                                      *
- * You should have received a copy of the GNU General Public License along with         *
- * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
- ****************************************************************************************/
-
-#ifndef PUBLICTRANSPORTATION_DBUSHELPER_H
-#define PUBLICTRANSPORTATION_DBUSHELPER_H
+/*
+ * Copyright (C) 2013 Lucien XU <sfietkonstantin@free.fr>
+ *
+ * You may use this file under the terms of the BSD license as follows:
+ *
+ * "Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in
+ *     the documentation and/or other materials provided with the
+ *     distribution.
+ *   * The names of its contributors may not be used to endorse or promote
+ *     products derived from this software without specific prior written
+ *     permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
+ */
+#ifndef PT2_DBUSHELPER_H
+#define PT2_DBUSHELPER_H
 
 /**
  * @file dbushelper.h
@@ -23,65 +37,65 @@
  */
 
 #include <QtCore/QList>
-#include <QtCore/QPair>
+//#include <QtCore/QPair>
 #include <QtCore/QMetaType>
 
-#include "common/journey.h"
-#include "common/station.h"
+//#include "common/ride.h"
+//#include "common/station.h"
 
 class QDBusArgument;
 
-namespace PublicTransportation
+namespace PT2
 {
 
-class TransportationObject;
+class Object;
 class Company;
 class Line;
-class WaitingTime;
-class InfoJourneys;
-class JourneyAndWaitingTime;
-class InfoJourneyWaitingTime;
+class Ride;
+class Station;
+//class WaitingTime;
+//class InfoJourneys;
+//class JourneyAndWaitingTime;
+//class InfoJourneyWaitingTime;
 
 
 
 /**
  * @brief A pair with a journey and a station
  */
-typedef QPair<Journey, Station> JourneyAndStation;
+//typedef QPair<Journey, Station> JourneyAndStation;
 /**
  * @brief Marshall a transportation object to a DBus argument
  *
  * This method is used to marshall a transportation object
  * to a DBus argument, making it transportable through DBus.
  *
- * A transportation object is marshalled as (a{sv}sa{sv}), where
- * the first map contains the disambiguation parametrs, the string
- * contains the name, and the second variant map contains the
- * properties.
+ * A transportation object is marshalled as (sa{sv}sa{sv}), where
+ * the first string contains the identifier, the first map contains
+ * the internal parametrs, the second string contains the name,
+ * and the second variant map contains the properties.
  *
  * @param[out] argument DBus argument.
- * @param[in] transportationObject transportation object.
+ * @param[in] object transportation object.
  * @return DBus argument containing the transportation object.
  */
-QDBusArgument & transportationObjectToDBus(QDBusArgument &argument,
-                                           const TransportationObject &transportationObject);
+QDBusArgument & objectToDBus(QDBusArgument &argument, const Object &object);
 /**
  * @brief Demarshall a transportation object from a DBus argument
  *
  * This method is used to demarshall a transportation object
  * from a DBus argument.
  *
- * A transportation object is demarshalled from (a{sv}sa{sv}), where
- * the first map contains the disambiguation parametrs, the string
- * contains the name, and the second variant map contains the
- * properties.
+ * A transportation object is marshalled as (sa{sv}sa{sv}), where
+ * the first string contains the identifier, the first map contains
+ * the internal parametrs, the second string contains the name,
+ * and the second variant map contains the properties.
  *
  * @param[in] argument DBus argument.
- * @param[out] transportationObject transportation object.
+ * @param[out] object transportation object.
  * @return DBus argument without the transportation object.
  */
-const QDBusArgument & transportationObjectFromDBus(const QDBusArgument &argument,
-                                                   TransportationObject &transportationObject);
+const QDBusArgument & objectFromDBus(const QDBusArgument &argument, Object &object);
 
 /**
  * @brief Marshall a company
@@ -112,19 +126,19 @@ QDBusArgument & operator<<(QDBusArgument &argument, const Line &line);
  */
 const QDBusArgument & operator>>(const QDBusArgument &argument, Line &line);
 /**
- * @brief Marshall a journey
+ * @brief Marshall a ride
  * @param[out] argument DBus argument.
- * @param[in] journey journey.
- * @return DBus argument containing the journey.
+ * @param[in] ride ride.
+ * @return DBus argument containing the ride.
  */
-QDBusArgument & operator<<(QDBusArgument &argument, const Journey &journey);
+QDBusArgument & operator<<(QDBusArgument &argument, const Ride &ride);
 /**
- * @brief Demarshall a journey
+ * @brief Demarshall a ride
  * @param[in] argument DBus argument.
- * @param[out] journey journey.
- * @return DBus argument without the journey.
+ * @param[out] ride ride.
+ * @return DBus argument without the ride.
  */
-const QDBusArgument & operator>>(const QDBusArgument &argument, Journey &journey);
+const QDBusArgument & operator>>(const QDBusArgument &argument, Ride &ride);
 /**
  * @brief Marshall a station
  * @param[out] argument DBus argument.
@@ -145,75 +159,75 @@ const QDBusArgument & operator>>(const QDBusArgument &argument, Station &station
  * @param[in] waitingTime waiting time.
  * @return DBus argument containing the waiting thme.
  */
-QDBusArgument & operator<<(QDBusArgument &argument, const WaitingTime &waitingTime);
+//QDBusArgument & operator<<(QDBusArgument &argument, const WaitingTime &waitingTime);
 /**
  * @brief Demarshall a waiting time
  * @param[in] argument DBus argument.
  * @param[out] waitingTime waiting time.
  * @return DBus argument without the waiting thme.
  */
-const QDBusArgument & operator>>(const QDBusArgument &argument, WaitingTime &waitingTime);
+//const QDBusArgument & operator>>(const QDBusArgument &argument, WaitingTime &waitingTime);
 /**
  * @brief Marshall a journey and a station
  * @param[out] argument DBus argument.
  * @param[in] journeyAndStation a journey and a station.
  * @return DBus argument containing the journey and station.
  */
-QDBusArgument & operator<<(QDBusArgument &argument, const JourneyAndStation &journeyAndStation);
+//QDBusArgument & operator<<(QDBusArgument &argument, const JourneyAndStation &journeyAndStation);
 /**
  * @brief Demarshall a journey and a station
  * @param[in] argument DBus argument.
  * @param[out] journeyAndStation a journey and a station.
  * @return DBus argument without the journey and station.
  */
-const QDBusArgument & operator>>(const QDBusArgument &argument,
-                                 JourneyAndStation &journeyAndStation);
+//const QDBusArgument & operator>>(const QDBusArgument &argument,
+//                                 JourneyAndStation &journeyAndStation);
 /**
  * @brief Marshall an informations about journeys
  * @param[out] argument DBus argument.
  * @param[in] infoJourneys an informations about journeys.
  * @return DBus argument containing the informations about journeys.
  */
-QDBusArgument & operator<<(QDBusArgument &argument, const InfoJourneys &infoJourneys);
+//QDBusArgument & operator<<(QDBusArgument &argument, const InfoJourneys &infoJourneys);
 /**
  * @brief Demarshall an informations about journeys
  * @param[out] argument DBus argument.
  * @param[in] infoJourneys an informations about journeys.
  * @return DBus argument without the informations about journeys.
  */
-const QDBusArgument & operator>>(const QDBusArgument &argument, InfoJourneys &infoJourneys);
+//const QDBusArgument & operator>>(const QDBusArgument &argument, InfoJourneys &infoJourneys);
 /**
  * @brief Marshall a journey and waiting time
  * @param[out] argument DBus argument.
  * @param[in] journeyAndWaitingTime a journey and waiting time.
  * @return DBus argument containing the journey and waiting time.
  */
-QDBusArgument & operator<<(QDBusArgument &argument,
-                           const JourneyAndWaitingTime &journeyAndWaitingTime);
+//QDBusArgument & operator<<(QDBusArgument &argument,
+//                           const JourneyAndWaitingTime &journeyAndWaitingTime);
 /**
  * @brief Demarshall a journey and waiting time
  * @param[out] argument DBus argument.
  * @param[in] journeyAndWaitingTime a journey and waiting time.
  * @return DBus argument without the journey and waiting time.
  */
-const QDBusArgument & operator>>(const QDBusArgument &argument,
-                                 JourneyAndWaitingTime &journeyAndWaitingTime);
+//const QDBusArgument & operator>>(const QDBusArgument &argument,
+//                                 JourneyAndWaitingTime &journeyAndWaitingTime);
 /**
  * @brief Marshall an informations about journeys
  * @param[out] argument DBus argument.
  * @param[in] infoJourneyWaitingTime an informations about journey and waiting time.
  * @return DBus argument containing the informations about journey and waiting time.
  */
-QDBusArgument & operator<<(QDBusArgument &argument,
-                           const InfoJourneyWaitingTime &infoJourneyWaitingTime);
+//QDBusArgument & operator<<(QDBusArgument &argument,
+//                           const InfoJourneyWaitingTime &infoJourneyWaitingTime);
 /**
  * @brief Demarshall an informations about journeys
  * @param[out] argument DBus argument.
  * @param[in] infoJourneyWaitingTime an informations about journey and waiting time.
  * @return DBus argument without the informations about journey and waiting time.
  */
-const QDBusArgument & operator>>(const QDBusArgument &argument,
-                                 InfoJourneyWaitingTime &infoJourneyWaitingTime);
+//const QDBusArgument & operator>>(const QDBusArgument &argument,
+//                                 InfoJourneyWaitingTime &infoJourneyWaitingTime);
 
 /**
  * @brief Register DBus types
@@ -226,7 +240,7 @@ void registerDBusTypes();
 
 }
 
-Q_DECLARE_METATYPE(PublicTransportation::JourneyAndStation)
-Q_DECLARE_METATYPE(QList<PublicTransportation::JourneyAndStation>)
+//Q_DECLARE_METATYPE(PublicTransportation::JourneyAndStation)
+//Q_DECLARE_METATYPE(QList<PublicTransportation::JourneyAndStation>)
 
-#endif // PUBLICTRANSPORTATION_DBUSHELPER_H
+#endif // PT2_DBUSHELPER_H

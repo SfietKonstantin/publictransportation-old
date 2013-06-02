@@ -1,139 +1,62 @@
-/****************************************************************************************
- * Copyright (C) 2012 Lucien XU <sfietkonstantin@free.fr>                               *
- *                                                                                      *
- * This program is free software; you can redistribute it and/or modify it under        *
- * the terms of the GNU General Public License as published by the Free Software        *
- * Foundation; either version 3 of the License, or (at your option) any later           *
- * version.                                                                             *
- *                                                                                      *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY      *
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A      *
- * PARTICULAR PURPOSE. See the GNU General Public License for more details.             *
- *                                                                                      *
- * You should have received a copy of the GNU General Public License along with         *
- * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
- ****************************************************************************************/
+/*
+ * Copyright (C) 2013 Lucien XU <sfietkonstantin@free.fr>
+ *
+ * You may use this file under the terms of the BSD license as follows:
+ *
+ * "Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are
+ * met:
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *   * Redistributions in binary form must reproduce the above copyright
+ *     notice, this list of conditions and the following disclaimer in
+ *     the documentation and/or other materials provided with the
+ *     distribution.
+ *   * The names of its contributors may not be used to endorse or promote
+ *     products derived from this software without specific prior written
+ *     permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
+ */
 
-#ifndef PUBLICTRANSPORTATION_ABSTRACTBACKENDWRAPPER_H
-#define PUBLICTRANSPORTATION_ABSTRACTBACKENDWRAPPER_H
+#ifndef PT2_ABSTRACTBACKENDWRAPPER_H
+#define PT2_ABSTRACTBACKENDWRAPPER_H
 
 /**
  * @file abstractbackendwrapper.h
- * @short Definition of PublicTransportation::AbstractBackendWrapper
+ * @short Definition of PT2::AbstractBackendWrapper
  */
 
 
-#include "publictransportation_global.h"
+#include "pt2_global.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QStringList>
 
-namespace PublicTransportation
+namespace PT2
 {
 
 class Company;
 class Line;
-class Journey;
+class Ride;
 class Station;
-class WaitingTime;
-class InfoJourneys;
-class JourneyAndWaitingTime;
-class InfoJourneyWaitingTime;
+//class WaitingTime;
+//class InfoJourneys;
+//class JourneyAndWaitingTime;
+//class InfoJourneyWaitingTime;
 class AbstractBackendWrapperPrivate;
 
-/**
- * @brief Base class for a backend wrapper
- *
- * This class provides a base for any backend wrapper.
- * A backend wrapper is an interface between a backend
- * that is usually a process that is spawned, and that is
- * used to perform specific tasks in an asynchronous ways.
- *
- * This class is used to perform the interface between the
- * spawned backend and the applications that is used to
- * display informations.
- *
- * In order to do that, the backend wrapper provides methods
- * like launch(), stop() and kill() that should be implemented,
- * as well as a set of properties, like status(), that is used
- * to get the current backend status.
- *
- * In order to be managed more easily, all backend wrappers have
- * an identifier, that is passed in the constructor, and that
- * should be unique for each backend. This identifier can also
- * be passed to the backend if needed.
- *
- * @section capabilities Capabilities
- *
- * A backend have capabilities that might vary from backend to
- * backend. Those capabilities provides what the backend can
- * deliver. A sane application should never call methods that
- * are related to a capability that is not provided by the backend,
- * as the behaviour might be unknown.
- *
- * @section managingBackend Managing backend
- *
- * The backend wrapper is used to manage backend and provide
- * a neat interface of the backend to the application. When
- * a backend is launched, the status should be set to
- * AbstractBackendWrapper::Launching. When it is being stopped,
- * it should be set to AbstractBackendWrapper::Stopping. While the
- * backend ping the wrapper back, it should also register its
- * capabilities. While an error occur in the backend (like failing
- * to register a DBus service, for example), the
- * AbstractBackendWrapper::Invalid status should be set.
- *
- * Three helper methods are used to help implementing backend wrapper:
- * - setStatus()
- * - setCapabilities()
- * - setLastError()
- *
- * @section relayingReplies Relaying replies
- *
- * This class is also used to relay replies from the backend,
- * using specific combinaison of signals and slots. When the
- * backend replied, a slot like \b registerAbc should be called.
- * This signal will emit \b abcRegistered. Here is the list of
- * signals / slots used for the relay
- * - registerError()
- * - registerCopyright()
- * - registerSuggestedStations()
- * - registerJourneysFromStation()
- * - registerWaitingTime()
- * - registerStationsFromJourney()
- *
- * - errorRegistered()
- * - copyrightRegistered()
- * - suggestedStationsRegistered()
- * - journeysFromStationRegistered()
- * - waitingTimeRegistered()
- * - stationsFromJourneyRegistered()
- *
- * This class also provides interfaces for implementing some capabilities
- * of the providers, that should be implemented in subclasses. They are all
- * of the form \b requestAbc.
- * - requestCopyright()
- * - requestSuggestStations()
- * - requestJourneysFromStation()
- * - requestWaitingTime()
- * - requestStationsFromJourney()
- *
- * All these requests returns a request identifier, and all responses will
- * provide the same identifier, in order to identify the request more easily.
- *
- * Implementing requests can be done by calling createRequest(). This method
- * provides a request identifier, and register the request as pending. When
- * requests are answered, they are removed. The abstract backend wrapper can
- * then takes care of request tracking.
- *
- * Remark that there is no request for capabilities. It is because
- * registering capabilities is something that backends should do
- * automatically, in order to be validated. Subclasses should implement
- * a method to perform this registration (that should use setCapabilities())
- * and that should set the status to AbstractBackendWrapper::Launched.
- *
- */
-class PUBLICTRANSPORTATION_EXPORT AbstractBackendWrapper: public QObject
+class PT2_EXPORT AbstractBackendWrapper: public QObject
 {
     Q_OBJECT
     /**
@@ -147,18 +70,36 @@ public:
     enum Status {
         /**
          * @short The backend is stopped
+         *
+         * The backend is not running.
          */
         Stopped,
         /**
          * @short The backend is launching
+         *
+         * The backend is launching. The process associated
+         * to the backend is starting, and the backend did not
+         * notified that it has started
          */
         Launching,
         /**
-         * @short The backend is launched
+         * @short The backend is loading
+         *
+         * The backend has notified that it is started, but
+         * it is loading information. It cannot be used yet.
          */
-        Launched,
+        Loading,
+        /**
+         * @short The backend is running
+         *
+         * The backend is ready to be used.
+         */
+        Running,
         /**
          * @short The backend is stopping
+         *
+         * The backend is stopping. The stop signal has been
+         * sent, but the process is not yet finished.
          */
         Stopping,
         /**
@@ -171,30 +112,30 @@ public:
      * @brief Enumeration describing request types
      */
     enum RequestType {
-        /**
-         * @short Request copyright
-         */
-        CopyrightType,
-        /**
-         * @short Request suggested stations
-         */
-        SuggestStationType,
-        /**
-         * @short Request journeys from a station
-         */
-        JourneysFromStationType,
-        /**
-         * @short Request journeys and waiting times from a station
-         */
-        JourneysAndWaitingTimesFromStationType,
-        /**
-         * @short Request waiting time
-         */
-        WaitingTimeType,
-        /**
-         * @short Request stations from a journey
-         */
-        StationsFromJourneyType
+//        /**
+//         * @short Request copyright
+//         */
+//        CopyrightType,
+//        /**
+//         * @short Request suggested stations
+//         */
+//        SuggestStationType,
+//        /**
+//         * @short Request journeys from a station
+//         */
+//        JourneysFromStationType,
+//        /**
+//         * @short Request journeys and waiting times from a station
+//         */
+//        JourneysAndWaitingTimesFromStationType,
+//        /**
+//         * @short Request waiting time
+//         */
+//        WaitingTimeType,
+//        /**
+//         * @short Request stations from a journey
+//         */
+//        StationsFromJourneyType
     };
 
     /**
@@ -211,7 +152,7 @@ public:
      * @param parent parent object.
      */
     explicit AbstractBackendWrapper(const QString &identifier, const QString &executable,
-                                    const QMap<QString, QString> &arguments, QObject *parent = 0);
+                                    QObject *parent = 0);
     /**
      * @brief Destructor
      */
@@ -237,31 +178,36 @@ public:
      */
     QStringList capabilities() const;
     /**
+     * @brief Copyright
+     * @return copyright
+     */
+    QString copyright() const;
+    /**
      * @brief Request copyright
      * @return request identifier.
      */
-    virtual QString requestCopyright() = 0;
+//    virtual QString requestCopyright() = 0;
     /**
      * @brief Request suggested stations
      * @param partialStation partial station name.
      * @return request identifier.
      */
-    virtual QString requestSuggestStations(const QString &partialStation) = 0;
+//    virtual QString requestSuggestStations(const QString &partialStation) = 0;
     /**
      * @brief Request journeys from a given station
      * @param station station to query.
      * @param limit limit of the number of journeys.
      * @return request identifier.
      */
-    virtual QString requestJourneysFromStation(const Station &station, int limit) = 0;
+//    virtual QString requestJourneysFromStation(const Station &station, int limit) = 0;
     /**
      * @brief Request journeys and waiting times from a given station
      * @param station station to query.
      * @param limit limit of the number of journeys.
      * @return request identifier.
      */
-    virtual QString requestJourneysAndWaitingTimesFromStation(const Station &station,
-                                                              int limit) = 0;
+//    virtual QString requestJourneysAndWaitingTimesFromStation(const Station &station,
+//                                                              int limit) = 0;
     /**
      * @brief Request waiting time
      * @param company company.
@@ -270,8 +216,8 @@ public:
      * @param station station for which the waiting time should be queried.
      * @return request identifier.
      */
-    virtual QString requestWaitingTime(const Company &company, const Line &line,
-                                       const Journey &journey, const Station &station) = 0;
+//    virtual QString requestWaitingTime(const Company &company, const Line &line,
+//                                       const Journey &journey, const Station &station) = 0;
     /**
      * @brief Request stations from journey
      * @param company company.
@@ -280,8 +226,8 @@ public:
      * @param station station for which the stations should be queried.
      * @return request identifier.
      */
-    virtual QString requestStationsFromJourney(const Company &company, const Line &line,
-                                               const Journey &journey, const Station &station) = 0;
+//    virtual QString requestStationsFromJourney(const Company &company, const Line &line,
+//                                               const Journey &journey, const Station &station) = 0;
 public Q_SLOTS:
     /**
      * @brief Launch the backend
@@ -336,7 +282,7 @@ public Q_SLOTS:
      * @param request request identifier.
      * @param copyright copyright and other legal informations.
      */
-    void registerCopyright(const QString &request, const QString &copyright);
+//    void registerCopyright(const QString &request, const QString &copyright);
     /**
      * @brief Register suggested stations
      *
@@ -349,8 +295,8 @@ public Q_SLOTS:
      * @param request request request identifier.
      * @param suggestedStationList suggested stations, as a list of stations.
      */
-    void registerSuggestedStations(const QString &request,
-                                  const QList<PublicTransportation::Station> &suggestedStationList);
+//    void registerSuggestedStations(const QString &request,
+//                                  const QList<PublicTransportation::Station> &suggestedStationList);
     /**
      * @brief Register journeys from station
      *
@@ -366,8 +312,8 @@ public Q_SLOTS:
      * @param request request request identifier.
      * @param infoJourneyList a list of informations about journeys.
      */
-    void registerJourneysFromStation(const QString &request,
-                                  const QList<PublicTransportation::InfoJourneys> &infoJourneyList);
+//    void registerJourneysFromStation(const QString &request,
+//                                  const QList<PublicTransportation::InfoJourneys> &infoJourneyList);
     /**
      * @brief Register journeys and waiting times from station
      *
@@ -381,8 +327,8 @@ public Q_SLOTS:
      * @param request request request identifier.
      * @param infoJourneyWaitingTimeList a list of informations about journeys and waiting times.
      */
-    void registerJourneysAndWaitingTimesFromStation(const QString &request,
-             const QList<PublicTransportation::InfoJourneyWaitingTime> &infoJourneyWaitingTimeList);
+//    void registerJourneysAndWaitingTimesFromStation(const QString &request,
+//             const QList<PublicTransportation::InfoJourneyWaitingTime> &infoJourneyWaitingTimeList);
     /**
      * @brief Register waiting time
      *
@@ -392,8 +338,8 @@ public Q_SLOTS:
      * @param request request request identifier.
      * @param journeyAndWaitingTimeList a list of journeys and waiting time.
      */
-    void registerWaitingTime(const QString &request,
-                             const QList<JourneyAndWaitingTime> &journeyAndWaitingTimeList);
+//    void registerWaitingTime(const QString &request,
+//                             const QList<JourneyAndWaitingTime> &journeyAndWaitingTimeList);
     /**
      * @brief Register stations from journey
      *
@@ -402,8 +348,8 @@ public Q_SLOTS:
      * @param request request request identifier.
      * @param stationList a list of stations.
      */
-    void registerStationsFromJourney(const QString &request,
-                                     const QList<PublicTransportation::Station> &stationList);
+//    void registerStationsFromJourney(const QString &request,
+//                                     const QList<PublicTransportation::Station> &stationList);
 Q_SIGNALS:
     /**
      * @brief Status changed
@@ -413,6 +359,10 @@ Q_SIGNALS:
      * @brief Capabilities changed
      */
     void capabilitiesChanged();
+    /**
+     * @brief Copyright changed
+     */
+    void copyrightChanged();
     /**
      * @brief Error registered
      *
@@ -431,7 +381,7 @@ Q_SIGNALS:
      * @param request request identifier.
      * @param copyright copyright and other legal informations.
      */
-    void copyrightRegistered(const QString &request, const QString &copyright);
+//    void copyrightRegistered(const QString &request, const QString &copyright);
     /**
      * @brief Suggested stations registered
      *
@@ -440,8 +390,8 @@ Q_SIGNALS:
      * @param request request identifier.
      * @param suggestedStations suggested stations, as a list of stations.
      */
-    void suggestedStationsRegistered(const QString & request,
-                                     const QList<PublicTransportation::Station> &suggestedStations);
+//    void suggestedStationsRegistered(const QString & request,
+//                                     const QList<PublicTransportation::Station> &suggestedStations);
     /**
      * @brief Journeys from station registered
      *
@@ -450,8 +400,8 @@ Q_SIGNALS:
      * @param request request identifier.
      * @param infoJourneys a list of informations about journeys.
      */
-    void journeysFromStationRegistered(const QString &request,
-                                     const QList<PublicTransportation::InfoJourneys> &infoJourneys);
+//    void journeysFromStationRegistered(const QString &request,
+//                                     const QList<PublicTransportation::InfoJourneys> &infoJourneys);
     /**
      * @brief Journeys and waiting times from station registered
      *
@@ -461,8 +411,8 @@ Q_SIGNALS:
      * @param request request identifier.
      * @param infoJourneyAndWaitingTimes a list of informations about journeys and waiting times.
      */
-    void journeysAndWaitingTimesFromStationRegistered(const QString &request,
-             const QList<PublicTransportation::InfoJourneyWaitingTime> &infoJourneyAndWaitingTimes);
+//    void journeysAndWaitingTimesFromStationRegistered(const QString &request,
+//             const QList<PublicTransportation::InfoJourneyWaitingTime> &infoJourneyAndWaitingTimes);
     /**
      * @brief Waiting time registered
      *
@@ -471,8 +421,8 @@ Q_SIGNALS:
      * @param request request identifier.
      * @param journeyAndWaitingTimeList a list of journeys and waiting time.
      */
-    void waitingTimeRegistered(const QString &request,
-               const QList<PublicTransportation::JourneyAndWaitingTime> &journeyAndWaitingTimeList);
+//    void waitingTimeRegistered(const QString &request,
+//               const QList<PublicTransportation::JourneyAndWaitingTime> &journeyAndWaitingTimeList);
     /**
      * @brief Stations from journey registered
      *
@@ -481,8 +431,8 @@ Q_SIGNALS:
      * @param request request identifier.
      * @param stationList a list of stations.
      */
-    void stationsFromJourneyRegistered(const QString &request,
-                                       const QList<PublicTransportation::Station> &stationList);
+//    void stationsFromJourneyRegistered(const QString &request,
+//                                       const QList<PublicTransportation::Station> &stationList);
 protected:
     /**
      * @brief D-pointer based constructor
@@ -495,11 +445,6 @@ protected:
      * @return executable.
      */
     QString executable() const;
-    /**
-     * @brief Arguments
-     * @return arguments.
-     */
-    QMap<QString, QString> arguments() const;
     /**
      * @brief Set status
      * @param status status to set.
@@ -515,6 +460,11 @@ protected:
      * @param capabilities capabilities to set.
      */
     void setCapabilities(const QStringList &capabilities);
+    /**
+     * @brief Set copyright
+     * @param copyright copyright to set.
+     */
+    void setCopyright(const QString &copyright);
     /**
      * @brief Create request
      *
@@ -537,4 +487,4 @@ private:
 
 }
 
-#endif // PUBLICTRANSPORTATION_ABSTRACTBACKENDWRAPPER_H
+#endif // PT2_ABSTRACTBACKENDWRAPPER_H
